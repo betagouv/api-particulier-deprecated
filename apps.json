@@ -1,0 +1,9 @@
+{
+  "apps": [{
+    "name": "api-particulier",
+    "script": "bin/www",
+    "log_date_format": "YYYY-MM-DD HH:mm:ss",
+    "watch": "."
+  }
+]
+}
