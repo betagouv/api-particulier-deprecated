@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
-var request = require('request');
 var serverTest = require('./utils/server');
+
 
 describe('System API', function () {
   var server = serverTest();
