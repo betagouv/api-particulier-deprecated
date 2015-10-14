@@ -25,7 +25,8 @@ module.exports = function(){
 
 
   var api = function () {
-    return supertest.agent('http://localhost:' + server.getPort());
+    return supertest
+      .agent('http://localhost:' + server.getPort());
   };
   return {
     api : api

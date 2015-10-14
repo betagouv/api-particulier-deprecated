@@ -22,4 +22,14 @@ describe('System API', function () {
         .expect(404,done)
     });
   });
+
+
+  describe("When requesting a route with a bad token", function () {
+    it('replies 403', function (done) {
+      api()
+        .get('/api/ping')
+        .set('X-API-Key', 'token-nok')
+        .expect(401,done)
+    });
+  });
 });

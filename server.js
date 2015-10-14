@@ -5,8 +5,10 @@ var S = require('string');
 var emptylogger = require('bunyan-blackhole');
 var expressBunyanLogger = require("express-bunyan-logger");
 var routes = require('./routes');
+var authorizedTokens = require('./authorized-tokens')
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var _ = require('lodash');
 
 var extend = require('extend');
 
@@ -39,6 +41,20 @@ function Server (options) {
     logger: logger
   }));
 
+  app.use(function isAuthorized(req, res, next) {
+    var token = req.get('X-API-Key') || ""
+    if(_.includes(authorizedTokens, token)) {
+      logger.debug({
+        event: 'authorization'
+      }, 'authorized');
+      next()
+    } else {
+      logger.debug({
+        event: 'authorization'
+      }, 'not authorized');
+      next(new StandardError('You are not authorized to use the api', {code: 401}));
+    }
+  })
 
   routes.configure(app, options);
 
