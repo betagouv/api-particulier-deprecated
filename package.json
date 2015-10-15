@@ -15,10 +15,9 @@
     "chai": "^2.2.0",
     "istanbul": "^0.3.13",
     "mocha": "^2.2.1",
-    "nock": "^1.4.0",
+    "nock": "^2.15.0",
     "node-mocks-http": "^1.4.4",
     "proxyquire": "^1.4.0",
-    "request": "^2.55.0",
     "sinon": "^1.14.1",
     "supertest": "^0.15.0"
   },
@@ -37,10 +36,11 @@
     "moment": "^2.10.2",
     "nconf": "^0.7.1",
     "optimist": "^0.6.1",
+    "request": "^2.55.0",
     "stackup": "^1.0.0",
     "standard-error": "^1.1.0",
     "string": "^3.1.1",
-    "url-assembler": "^1.2.2",
-    "svair-api": "~0.1.8"
+    "svair-api": "~0.1.8",
+    "url-assembler": "^1.2.2"
   }
 }

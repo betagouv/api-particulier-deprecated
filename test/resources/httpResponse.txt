@@ -1,0 +1,39 @@
+--MIMEBoundaryurn_uuid_2E9969D44833AC60541445434539162
+Content-ID: <0.urn:uuid:2E9969D44833AC60541445434539163@apache.org>
+Content-Type: application/xop+xml; charset=utf-8; type="text/xml"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><ns2:demanderDocumentWebResponse xmlns:ns2="http://v1.ws.wsdemandedocumentweb.cnaf/"><return><beanRetourDemandeDocumentWeb><codeRetour>0</codeRetour><fluxBinaire><xop:Include xmlns:xop="http://www.w3.org/2004/08/xop/include" href="cid:urn:uuid:2E9969D44833AC60541445434539159@apache.org"/></fluxBinaire><libelleRetour>Votre demande est bien enregistrée. Un document vous sera adressé à votre domicile dans les prochains jours.</libelleRetour></beanRetourDemandeDocumentWeb></return></ns2:demanderDocumentWebResponse></soapenv:Body></soapenv:Envelope>
+
+--MIMEBoundaryurn_uuid_2E9969D44833AC60541445434539162
+Content-ID: <urn:uuid:2E9969D44833AC60541445434539159@apache.org>
+Content-Type: application/pdf
+
+%PDF-1.7
+%\E2\E3\CF\D3
+6 0 obj
+<< /Creator (HP Exstream Version 8.0.338 64-bit)
+/CreationDate (10/21/2015 15:35:34)
+/Author (Registered to: CERTICNA)
+/Title (COMDOC_VISU)
+>>
+endobj
+7 0 obj
+[/Separation /PANTONE#20293#20U /DeviceRGB <</FunctionType 2
+/N 1.0
+/Range [0.0 1.0 0.0 1.0 0.0 1.0]
+/C1 [0.13 0.37 0.67]
+/Domain [0 1]
+/C0 [0.0 0.0 0.0]
+>>]
+endobj
+8 0 obj
+[/Separation /PANTONE#20293#20C /DeviceRGB <</FunctionType 2
+0000073018 00000 n
+trailer<</Size 44/Info 6 0 R/Root 25 0 R
+>
+startxref
+73527
+%%EOF
+
+--MIMEBoundaryurn_uuid_2E9969D44833AC60541445434539162--

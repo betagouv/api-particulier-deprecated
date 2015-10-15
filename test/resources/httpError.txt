@@ -1,0 +1,8 @@
+--MIMEBoundaryurn_uuid_FB924C43B6528142FB1445590171948
+Content-ID: <0.urn:uuid:FB924C43B6528142FB1445590171949@apache.org>
+Content-Type: application/xop+xml; charset=utf-8; type="text/xml"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><ns2:demanderDocumentWebResponse xmlns:ns2="http://v1.ws.wsdemandedocumentweb.cnaf/"><return><beanRetourDemandeDocumentWeb><codeRetour>231</codeRetour><libelleRetour>Votre demande n'a pu aboutir en raison d'un incident technique lié à l'appel au service Trafic. Merci de renouveler votre demande ultérieurement.</libelleRetour></beanRetourDemandeDocumentWeb></return></ns2:demanderDocumentWebResponse></soapenv:Body></soapenv:Envelope>
+
+--MIMEBoundaryurn_uuid_FB924C43B6528142FB1445590171948--
