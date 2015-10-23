@@ -32,6 +32,7 @@ mhttp.on('stat', function (parsed, stats) {
 
 var server = new Server({
   port: nconf.get('port'),
+  cafHost: nconf.get('cafHost'),
   logger: logger,
   nconf: nconf
 });

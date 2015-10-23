@@ -8,7 +8,10 @@ var Server = require('../../server');
 
 module.exports = function(){
   var server;
-  var options = {};
+  var options = {
+    appname: 'api-particulier-test',
+    cafHost: 'https://pep-test.caf.fr',
+  };
   var serverPort = process.env['SERVER_PORT_TEST'];
   if(serverPort) {
     options.port = serverPort

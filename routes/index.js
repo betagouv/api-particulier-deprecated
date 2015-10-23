@@ -4,7 +4,8 @@ var CafController = require('../controllers/caf');
 
 exports.configure = function (app) {
   var options = {
-    logger: app.get('logger')
+    logger: app.get('logger'),
+    cafHost: app.get('cafHost')
   }
   var systemController = new SystemController();
   var impotsController = new ImpotsController();

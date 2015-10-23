@@ -6,11 +6,7 @@ var nock = require('nock');
 
 
 describe('Caf Service', function () {
-  var cafService;
-
-  beforeEach(function() {
-    var cafService = new CafService()
-  })
+  var cafService = new CafService({cafHost: 'https://pep-test.caf.fr'});
 
   var httpResponse = fs.readFileSync(__dirname + '/resources/httpResponse.txt','utf-8');
   var httpError = fs.readFileSync(__dirname + '/resources/httpError.txt','utf-8');
@@ -20,7 +16,7 @@ describe('Caf Service', function () {
 
     it('the complete pdf doc', function () {
 
-      var cafService = new CafService();
+
       var actual = cafService.getSecondPart(httpResponse);
       expect(actual).to.be.equal(pdf)
     });
@@ -35,7 +31,6 @@ describe('Caf Service', function () {
         })
         .reply(200, httpResponse);
 
-      var cafService = new CafService();
       var stream = fs.writeFileSync(__dirname + '/resources/out.pdf')
       var actual = cafService.attestation("toto", "tutu", function(err, data){
         if(err) return done(err)
@@ -54,7 +49,6 @@ describe('Caf Service', function () {
         .post('/sgmap/wswdd/v1')
         .reply(500, "");
 
-      var cafService = new CafService();
       var stream = fs.writeFileSync(__dirname + '/resources/out.pdf')
       var actual = cafService.attestation("toto", "tutu", function(err, data){
         cafCall.done();
@@ -71,7 +65,6 @@ describe('Caf Service', function () {
       var cafCall = nock('https://pep-test.caf.fr')
         .post('/sgmap/wswdd/v1')
         .reply(200, httpError);
-      var cafService = new CafService();
       var stream = fs.writeFileSync(__dirname + '/resources/out.pdf')
       var actual = cafService.attestation("toto", "tutu", function(err, data){
         cafCall.done();

@@ -9,6 +9,8 @@ var authorizedTokens = require('./authorized-tokens')
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var _ = require('lodash');
+var UrlAssembler = require('url-assembler')
+
 
 var extend = require('extend');
 
@@ -23,6 +25,7 @@ function Server (options) {
   app.set('port', options.port);
   app.set('json spaces', 2);
   app.set('logger', logger);
+  app.set('cafHost',  options.cafHost);
   app.disable('x-powered-by');
 
   app.use(bodyParser.json());
