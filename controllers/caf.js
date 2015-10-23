@@ -10,7 +10,9 @@ function CafController(options) {
 
   this.attestation = function(req, res, next) {
     res.append("Content-Type", "application/pdf")
-    cafService.attestation(function(err, data) {
+    var codeOrganisme = req.query.codeOrganisme || 148;
+    var numeroAllocataire = req.query.numeroAllocataire || 354;
+    cafService.attestation(codeOrganisme, numeroAllocataire, function(err, data) {
       logger.debug(err)
       if(err) return next(new StandardError("impossible de contacter la CAF", {code: 500}));
       res.send(data)
