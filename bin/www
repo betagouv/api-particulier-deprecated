@@ -33,6 +33,8 @@ mhttp.on('stat', function (parsed, stats) {
 var server = new Server({
   port: nconf.get('port'),
   cafHost: nconf.get('cafHost'),
+  cafSslCertificate: nconf.get('cafSslCertificate'),
+  cafSslKey: nconf.get('cafSslKey'),
   logger: logger,
   nconf: nconf
 });

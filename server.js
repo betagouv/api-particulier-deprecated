@@ -26,6 +26,8 @@ function Server (options) {
   app.set('json spaces', 2);
   app.set('logger', logger);
   app.set('cafHost',  options.cafHost);
+  app.set('cafSslCertificate',  options.cafSslCertificate);
+  app.set('cafSslKey',  options.cafSslKey);
   app.disable('x-powered-by');
 
   app.use(bodyParser.json());

@@ -11,6 +11,8 @@ module.exports = function(){
   var options = {
     appname: 'api-particulier-test',
     cafHost: 'https://pep-test.caf.fr',
+    cafSslCertificate: __dirname + '/../resources/server.csr',
+    cafSslKey: __dirname + '/../resources/server.key'
   };
   var serverPort = process.env['SERVER_PORT_TEST'];
   if(serverPort) {

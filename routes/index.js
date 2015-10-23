@@ -5,7 +5,9 @@ var CafController = require('../controllers/caf');
 exports.configure = function (app) {
   var options = {
     logger: app.get('logger'),
-    cafHost: app.get('cafHost')
+    cafHost: app.get('cafHost'),
+    cafSslCertificate: app.get('cafSslCertificate'),
+    cafSslKey: app.get('cafSslKey'),
   }
   var systemController = new SystemController();
   var impotsController = new ImpotsController();

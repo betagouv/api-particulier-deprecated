@@ -6,7 +6,11 @@ var nock = require('nock');
 
 
 describe('Caf Service', function () {
-  var cafService = new CafService({cafHost: 'https://pep-test.caf.fr'});
+  var cafService = new CafService({
+    cafHost: 'https://pep-test.caf.fr',
+    cafSslCertificate: __dirname + '/resources/server.csr',
+    cafSslKey: __dirname + '/resources/server.key'
+  });
 
   var httpResponse = fs.readFileSync(__dirname + '/resources/httpResponse.txt','utf-8');
   var httpError = fs.readFileSync(__dirname + '/resources/httpError.txt','utf-8');
