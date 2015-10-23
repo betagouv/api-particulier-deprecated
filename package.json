@@ -1,16 +1,16 @@
 {
-  "name": "SG-vision360",
-  "version": "1.0.0",
-  "private": true,
-  "description": "vision 360 app for SG",
+  "name": "api-particulier",
+  "version": "0.0.1",
+  "private": false,
+  "description": "Api brocker for the french government",
   "repository": {
     "type": "git",
-    "url": "https://gitlab.octo.com/pboutruche/SG_vision360.git"
+    "url": "https://github.com/sgmap/api-particulier"
   },
   "scripts": {
     "test": "istanbul cover --print details _mocha -- -R spec test --timeout 10000"
   },
-  "author": "OCTO Technology",
+  "author": "SGMAP",
   "devDependencies": {
     "chai": "^2.2.0",
     "istanbul": "^0.3.13",
