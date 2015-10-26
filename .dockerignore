@@ -1,0 +1,9 @@
+.git
+node_module
+test
+coverage
+.gitignore
+.jshintignore
+.jshinrc
+LICENSE.AGPL.txt
+README.md
