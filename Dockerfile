@@ -15,4 +15,6 @@ ADD ./ /srv/apps
 
 WORKDIR /srv/apps
 
+RUN npm install
+
 CMD ["pm2", "start", "/srv/apps/apps.json", "--no-daemon"]
