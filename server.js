@@ -29,6 +29,7 @@ function Server (options) {
   app.set('cafSslCertificate',  options.cafSslCertificate);
   app.set('cafSslKey',  options.cafSslKey);
   app.disable('x-powered-by');
+  app.use(express.static('public'));
 
   app.use(bodyParser.json());
   var corsOptions = {
