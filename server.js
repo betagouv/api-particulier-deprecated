@@ -5,11 +5,12 @@ var S = require('string');
 var emptylogger = require('bunyan-blackhole');
 var expressBunyanLogger = require("express-bunyan-logger");
 var routes = require('./routes');
-var authorizedTokens = require('./authorized-tokens')
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var _ = require('lodash');
-var UrlAssembler = require('url-assembler')
+var UrlAssembler = require('url-assembler');
+var Redis = require('ioredis');
+
 
 
 var extend = require('extend');
@@ -28,7 +29,9 @@ function Server (options) {
   app.set('cafHost',  options.cafHost);
   app.set('cafSslCertificate',  options.cafSslCertificate);
   app.set('cafSslKey',  options.cafSslKey);
+  app.set('tokensAuthorizedName',  options.redis.tokensAuthorizedName);
   app.disable('x-powered-by');
+  var redis = new Redis(options.redis.port, options.redis.host);
   app.use(express.static('public'));
 
   app.use(bodyParser.json());
@@ -49,17 +52,28 @@ function Server (options) {
 
   app.use(function isAuthorized(req, res, next) {
     var token = req.get('X-API-Key') || ""
-    if(_.includes(authorizedTokens, token)) {
+
+    redis.lrange(options.redis.tokensAuthorizedName, 0, -1, function (err, results) {
+      if(err) {
+        logger.error(err);
+        return next(new StandardError("Impossible to connect to redis", {code: 500}))
+      }
       logger.debug({
         event: 'authorization'
-      }, 'authorized');
-      next()
-    } else {
-      logger.debug({
-        event: 'authorization'
-      }, 'not authorized');
-      next(new StandardError('You are not authorized to use the api', {code: 401}));
-    }
+      }, results);
+      if(_.includes(results, token)) {
+        logger.debug({
+          event: 'authorization'
+        }, 'authorized');
+        next()
+      } else {
+        logger.debug({
+          event: 'authorization'
+        }, 'not authorized');
+        next(new StandardError('You are not authorized to use the api', {code: 401}));
+      }
+    });
+
   })
 
   routes.configure(app, options);

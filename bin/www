@@ -36,7 +36,12 @@ var server = new Server({
   cafSslCertificate: nconf.get('cafSslCertificate'),
   cafSslKey: nconf.get('cafSslKey'),
   logger: logger,
-  nconf: nconf
+  nconf: nconf,
+  redis: {
+    host: nconf.get('redis:host'),
+    port: nconf.get('redis:port'),
+    tokensAuthorizedName: nconf.get('redis:tokensAuthorizedName')
+  }
 });
 
 server.start(function (err) {

@@ -33,6 +33,7 @@
     "extend": "^2.0.0",
     "handlebars": "^4.0.3",
     "http-measuring-client": "^0.3.6",
+    "ioredis": "^1.10.0",
     "lodash": "^3.9.3",
     "moment": "^2.10.2",
     "nconf": "^0.7.1",
