@@ -1,0 +1,76 @@
+FORMAT: 1A
+HOST: http://apiparticulier.sgmap.fr/
+
+# API Particulier
+
+Récupérez en ligne les informations de vos citoyens
+
+# Group Impots
+
+## Service de vérification de l'avis d'impôt sur le revenu [/api/impots/svair{?numeroFiscal}{?referenceAvis}]
+Le service permet de vérifier l'authenticité du justificatif d'impôt sur le revenu ou de l'avis d'impôt sur le revenu présenté par un usager
+
++ Parameters
+    + numeroFiscal (string) - numeroFiscal
+    + referenceAvis (string) - referenceAvis
+
+### Affiche une déclaration [GET]
+
++ Request 
+
+    + Headers 
+
+            X-API-Key: <api-key>
+
+
++ Response 200 (application/json)
+
+
+        {
+          "declarant1": {
+            "nom": "MARTIN",
+            "nomNaissance": "MARTIN",
+            "prenoms": "HENRI",
+            "dateNaissance": "29/05/1984"
+          },
+          "declarant2": {
+            "nom": "",
+            "nomNaissance": "",
+            "prenoms": "",
+            "dateNaissance": ""
+          },
+          "dateRecouvrement": "31/07/2015",
+          "dateEtablissement": "08/07/2015",
+          "nombreParts": 1,
+          "situationFamille": "Célibataire",
+          "nombrePersonnesCharge": 0,
+          "revenuBrutGlobal": 17580,
+          "revenuImposable": 17580,
+          "impotRevenuNetAvantCorrections": 1665,
+          "montantImpot": 1665,
+          "revenuFiscalReference": 17580,
+          "anneeImpots": "2015",
+          "anneeRevenus": "2014"
+        }
+        
+# Group Caf
+
+## Attestation de la Caf [/api/caf/attestation{?codeOrganisme}{?numeroAllocataire}]
+
+Permet de récupérer les attestations de CAF
+
++ Parameters
+    + codeOrganisme (string) - code la caisse de la caf
+    + numeroAllocataire (string) - numéro de l'allocataire
+
+### Affiche une déclaration [GET]
+
++ Request 
+
+    + Headers 
+
+            X-API-Key: <api-key>
+
+
++ Response 200 (application/pdf)
+
