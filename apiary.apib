@@ -1,80 +1,76 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: https://apiparticulier.sgmap.fr/
 
-# apiparticulier
+# API Particulier
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Récupérez en ligne les informations de vos citoyens
 
-## Questions Collection [/questions]
+# Group Impots
 
-### List All Questions [GET]
+## Service de vérification de l'avis d'impôt sur le revenu [/api/impots/svair{?numeroFiscal}{?referenceAvis}]
+Le service permet de vérifier l'authenticité du justificatif d'impôt sur le revenu ou de l'avis d'impôt sur le revenu présenté par un usager
+
++ Parameters
+    + numeroFiscal (string) - numeroFiscal
+    + referenceAvis (string) - referenceAvis
+
+### Affiche une déclaration [GET]
+
++ Request 
+
+    + Headers 
+
+            X-API-Key: <api-key>
+
 
 + Response 200 (application/json)
 
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
-
-+ Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+          "declarant1": {
+            "nom": "MARTIN",
+            "nomNaissance": "MARTIN",
+            "prenoms": "HENRI",
+            "dateNaissance": "29/05/1984"
+          },
+          "declarant2": {
+            "nom": "",
+            "nomNaissance": "",
+            "prenoms": "",
+            "dateNaissance": ""
+          },
+          "dateRecouvrement": "31/07/2015",
+          "dateEtablissement": "08/07/2015",
+          "nombreParts": 1,
+          "situationFamille": "Célibataire",
+          "nombrePersonnesCharge": 0,
+          "revenuBrutGlobal": 17580,
+          "revenuImposable": 17580,
+          "impotRevenuNetAvantCorrections": 1665,
+          "montantImpot": 1665,
+          "revenuFiscalReference": 17580,
+          "anneeImpots": "2015",
+          "anneeRevenus": "2014"
         }
+        
+# Group Caf
 
-+ Response 201 (application/json)
+## Attestation de la Caf [/api/caf/attestation{?codeOrganisme}{?numeroAllocataire}]
 
-    + Headers
+Permet de récupérer les attestations de CAF
 
-            Location: /questions/2
++ Parameters
+    + codeOrganisme (string) - code la caisse de la caf
+    + numeroAllocataire (string) - numéro de l'allocataire
 
-    + Body
+### Affiche une déclaration [GET]
 
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
++ Request 
+
+    + Headers 
+
+            X-API-Key: <api-key>
+
+
++ Response 200 (application/pdf)
+
