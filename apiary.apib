@@ -10,17 +10,20 @@ Récupérez en ligne les informations de vos citoyens
 ## Service de vérification de l'avis d'impôt sur le revenu [/api/impots/svair{?numeroFiscal}{?referenceAvis}]
 Le service permet de vérifier l'authenticité du justificatif d'impôt sur le revenu ou de l'avis d'impôt sur le revenu présenté par un usager
 
-+ Parameters
-    + numeroFiscal (string) - numeroFiscal
-    + referenceAvis (string) - referenceAvis
+
+
 
 ### Affiche une déclaration [GET]
-
-+ Request 
-
++ Parameters
+    + numeroFiscal: `475757686` (number, required) - Numéro fiscal
+    + referenceAvis: `768585` (number, required) - Référence d'avis
+    
++ Request
+    
     + Headers 
+    
+            X-API-Key: correct-key
 
-            X-API-Key: <api-key>
 
 
 + Response 200 (application/json)
@@ -53,6 +56,53 @@ Le service permet de vérifier l'authenticité du justificatif d'impôt sur le r
           "anneeRevenus": "2014"
         }
         
++ Request 
+
+    + Headers 
+
+            X-API-Key: badKey
+
+
++ Response 401 (application/json)
+
+
+        {
+          "error": "unauthorized",
+          "reason": "You are not authorized to use the api"
+        }
+        
++ Request
+    
+    + Headers 
+    
+            X-API-Key: correct-key
+
+
+
++ Response 404 (application/json)
+
+
+        {
+          "error": "not_found",
+          "reason": "Les paramètres fournis sont incorrects ou ne correspondent pas à un avis"
+        }
+
++ Request
+    
+    + Headers 
+    
+            X-API-Key: correct-key
+
+
+
++ Response 400 (application/json)
+
+
+        {
+          "error": "unauthorized",
+          "reason": "You are not authorized to use the api"
+        }
+
 # Group Caf
 
 ## Attestation de la Caf [/api/caf/attestation{?codeOrganisme}{?numeroAllocataire}]
@@ -60,8 +110,8 @@ Le service permet de vérifier l'authenticité du justificatif d'impôt sur le r
 Permet de récupérer les attestations de CAF
 
 + Parameters
-    + codeOrganisme (string) - code la caisse de la caf
-    + numeroAllocataire (string) - numéro de l'allocataire
+    + codeOrganisme: `toto` (string, required) - code la caisse de la caf
+    + numeroAllocataire: `475757686` (string, required) - numéro de l'allocataire
 
 ### Affiche une déclaration [GET]
 
@@ -73,4 +123,21 @@ Permet de récupérer les attestations de CAF
 
 
 + Response 200 (application/pdf)
+
+
++ Request 
+
+    + Headers 
+
+            X-API-Key: badKey
+
+
++ Response 401 (application/json)
+
+
+        {
+          "error": "unauthorized",
+          "reason": "You are not authorized to use the api"
+        }
+        
 
