@@ -24,7 +24,19 @@ describe('Admin API', function () {
         api()
           .get('/api/admin/users')
           .set('X-API-Key', 'adminToken')
-          .expect(200,done)
+          .expect(200,
+            [
+              {
+                name: 'admin',
+                token: 'adminToken',
+                role: 'admin'
+              },
+              {
+                name: 'test',
+                token: '',
+                role: 'user'
+              }
+            ], done)
       });
     })
   });

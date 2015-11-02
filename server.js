@@ -32,6 +32,8 @@ function Server (options) {
   app.set('tokensAuthorizedName',  options.redis.tokensAuthorizedName);
   app.disable('x-powered-by');
   var redis = new Redis(options.redis.port, options.redis.host);
+  app.set('redisClient', redis);
+  app.set('tokensAuthorizedName', options.redis.tokensAuthorizedName);
   app.use(express.static('public'));
 
   app.use(bodyParser.json());
