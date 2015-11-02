@@ -20,7 +20,7 @@ describe('Admin API', function () {
     })
 
     describe("when you are an admin", function () {
-      it('replies 200', function (done) {
+      it('replies 200 with the users', function (done) {
         api()
           .get('/api/admin/users')
           .set('X-API-Key', 'adminToken')

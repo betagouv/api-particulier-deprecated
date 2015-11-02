@@ -8,8 +8,7 @@ exports.configure = function (app) {
   var impotsController = new ImpotsController();
 
   var adminOptions = {
-    redisClient: app.get('redisClient'),
-    tokensAuthorizedName: app.get('tokensAuthorizedName'),
+    usersService: app.get('usersService'),
     logger: app.get('logger')
   }
   var adminController = new AdminController(adminOptions);

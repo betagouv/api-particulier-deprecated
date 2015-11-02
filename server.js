@@ -10,6 +10,7 @@ var cors = require('cors');
 var _ = require('lodash');
 var UrlAssembler = require('url-assembler');
 var Redis = require('ioredis');
+var UsersService = require('./lib/services/users')
 
 
 
@@ -31,10 +32,10 @@ function Server (options) {
   app.set('cafSslKey',  options.cafSslKey);
   app.set('tokensAuthorizedName',  options.redis.tokensAuthorizedName);
   app.disable('x-powered-by');
-  var redis = new Redis(options.redis.port, options.redis.host);
-  app.set('redisClient', redis);
-  app.set('tokensAuthorizedName', options.redis.tokensAuthorizedName);
   app.use(express.static('public'));
+  options
+  var usersService = new UsersService(options);
+  app.set('usersService', usersService)
 
   app.use(bodyParser.json());
   var corsOptions = {
@@ -55,30 +56,22 @@ function Server (options) {
   app.use(function isAuthorized(req, res, next) {
     var token = req.get('X-API-Key') || ""
 
-    redis.lrange(options.redis.tokensAuthorizedName, 0, -1, function (err, results) {
+    usersService.getUsers(function(err, results) {
       if(err) {
         logger.error(err);
-        return next(new StandardError("Impossible to connect to redis", {code: 500}))
+        return next(err)
       }
-      results = results.map(function(result) { return JSON.parse(result)})
-      logger.debug({
-        event: 'authorization'
-      }, JSON.stringify(results));
+      logger.debug({ event: 'authorization' }, JSON.stringify(results));
       var userConnected = _.find(results, {token: token})
       if(userConnected) {
-        logger.debug({
-          event: 'authorization'
-        }, userConnected.name + ' is authorized ('+ userConnected.role+')');
+        logger.debug({ event: 'authorization' }, userConnected.name + ' is authorized ('+ userConnected.role+')');
         req.userConnected = userConnected;
         next()
       } else {
-        logger.debug({
-          event: 'authorization'
-        }, 'not authorized');
+        logger.debug({ event: 'authorization' }, 'not authorized');
         next(new StandardError('You are not authorized to use the api', {code: 401}));
       }
-    });
-
+    })
   })
 
   routes.configure(app, options);
