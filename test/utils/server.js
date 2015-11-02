@@ -2,6 +2,7 @@ var async = require('async');
 var proxyquire = require('proxyquire');
 var supertest = require('supertest');
 var Redis = require('ioredis');
+var nock = require('nock')
 
 
 var Server = require('../../server');
@@ -25,6 +26,8 @@ module.exports = function(){
   if(serverPort) {
     options.port = serverPort
   }
+
+  nock.enableNetConnect('localhost');
 
 
   beforeEach(function (done) {
