@@ -25,6 +25,7 @@ exports.configure = function (app) {
   app.get('/api/impots/svair', impotsController.svair);
   app.get('/api/caf/attestation', cafController.attestation);
   app.get('/api/admin/users', adminController.getUsers);
+  app.post('/api/admin/users', adminController.createUsers);
 
 
 };

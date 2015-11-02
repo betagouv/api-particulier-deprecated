@@ -40,4 +40,50 @@ describe('Admin API', function () {
       });
     })
   });
+
+  describe("When creating the users", function () {
+
+    describe("when not admin", function () {
+      it('replies 403', function (done) {
+        api()
+          .post('/api/admin/users')
+          .expect(403,done)
+      });
+    })
+
+    describe("when you are an admin", function () {
+      it('replies 200 with the users', function (done) {
+
+        var user = {
+          name: 'tge',
+          token: 'wsdulfhsdhf',
+          role: 'user'
+        }
+        api()
+          .post('/api/admin/users')
+          .set('X-API-Key', 'adminToken')
+          .send(user)
+          .expect(201, function(err) {
+              if(err) return done(err);
+              api()
+                .get('/api/admin/users')
+                .set('X-API-Key', 'adminToken')
+                .expect(200,
+                  [
+                    user,
+                    {
+                      name: 'admin',
+                      token: 'adminToken',
+                      role: 'admin'
+                    },
+                    {
+                      name: 'test',
+                      token: '',
+                      role: 'user'
+                    }
+                  ], done)
+            })
+      });
+    })
+  });
 });
