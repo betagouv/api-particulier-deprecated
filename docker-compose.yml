@@ -1,7 +1,7 @@
 app:
   build: back
   ports:
-    - 8080:3004
+    - 3005:3004
   links:
     - redis:redis
   environment:
@@ -14,3 +14,12 @@ redis:
     - 6380:6379
   volumes:
     - ./redis-data:/data
+
+
+nginx:
+  build: nginx
+  ports:
+    - 8080:80
+    - 443:443
+  links:
+    - app:app
