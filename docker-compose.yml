@@ -14,12 +14,17 @@ redis:
     - 6380:6379
   volumes:
     - ./redis-data:/data
-
+    
+front:
+  build: front
 
 nginx:
   build: nginx
   ports:
     - 8080:80
     - 443:443
+  volumes_from:
+    - front
   links:
     - app:app
+    - front
