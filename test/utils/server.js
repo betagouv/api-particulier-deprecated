@@ -40,7 +40,15 @@ module.exports = function(){
         token: '',
         role: 'user'
       }
-      redis.lpush(options.redis.tokensAuthorizedName, JSON.stringify(user), done)
+      var admin = {
+        name: 'admin',
+        token: 'adminToken',
+        role: 'admin'
+      }
+      redis.lpush(options.redis.tokensAuthorizedName, JSON.stringify(user), function(err) {
+        if(err) return done(err);
+        redis.lpush(options.redis.tokensAuthorizedName, JSON.stringify(admin), done)
+      })
     });
   });
 

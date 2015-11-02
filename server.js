@@ -67,6 +67,7 @@ function Server (options) {
         logger.debug({
           event: 'authorization'
         }, userConnected.name + ' is authorized ('+ userConnected.role+')');
+        req.userConnected = userConnected;
         next()
       } else {
         logger.debug({
