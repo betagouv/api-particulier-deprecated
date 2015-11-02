@@ -35,7 +35,12 @@ module.exports = function(){
     redis = new Redis(options.redis.port, options.redis.host);
     server.start(function(err) {
       if(err) return done(err);
-      redis.lpush(options.redis.tokensAuthorizedName, '', done)
+      var user = {
+        name: 'test',
+        token: '',
+        role: 'user'
+      }
+      redis.lpush(options.redis.tokensAuthorizedName, JSON.stringify(user), done)
     });
   });
 

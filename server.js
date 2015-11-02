@@ -58,13 +58,15 @@ function Server (options) {
         logger.error(err);
         return next(new StandardError("Impossible to connect to redis", {code: 500}))
       }
+      results = results.map(function(result) { return JSON.parse(result)})
       logger.debug({
         event: 'authorization'
-      }, results);
-      if(_.includes(results, token)) {
+      }, JSON.stringify(results));
+      var userConnected = _.find(results, {token: token})
+      if(userConnected) {
         logger.debug({
           event: 'authorization'
-        }, 'authorized');
+        }, userConnected.name + ' is authorized ('+ userConnected.role+')');
         next()
       } else {
         logger.debug({
