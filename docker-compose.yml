@@ -1,5 +1,5 @@
 app:
-  build: .
+  build: back
   ports:
     - 8080:3004
   links:
