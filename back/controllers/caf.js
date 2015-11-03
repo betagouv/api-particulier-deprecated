@@ -1,5 +1,8 @@
 var StandardError = require('standard-error');
-var CafService = require('../lib/services/caf')
+var CafService = require('../lib/services/caf');
+var fs = require('fs')
+var iconv = require('iconv-lite');
+
 
 module.exports = CafController;
 
@@ -15,8 +18,7 @@ function CafController(options) {
     cafService.attestation(codeOrganisme, numeroAllocataire, function(err, data) {
       logger.debug(err)
       if(err) return next(new StandardError("impossible de contacter la CAF", {code: 500}));
-      res.send(data)
-      res.end()
+      res.send(data);
     })
   }
 }

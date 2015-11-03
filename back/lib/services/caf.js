@@ -1,7 +1,9 @@
 var request = require('request') ;
 var fs = require('fs') ;
 var Handlebars = require('handlebars');
-var UrlAssembler = require('url-assembler')
+var UrlAssembler = require('url-assembler');
+var iconv = require('iconv-lite');
+var Readable = require('stream').Readable
 
 // L'ordre des paramètres de la requêtes est important
 var query =`<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://v1.ws.wsdemandedocumentweb.cnaf/">
@@ -68,13 +70,20 @@ function CafService(options) {
             cert: sslCertificate,
             key: sslKey,
             rejectUnauthorized: false,
-            timeout: 10000
-        }, function(err, res, body) {
-          if(err) return callback(err);
-          if(res.statusCode !== 200) return callback(new Error("return code is " + res.statusCode))
-          if(hasBodyError(body)) return callback(new Error("The service has an error " + res.statusCode))
-          callback(null, self.getSecondPart(body))
+            timeout: 10000,
+            encoding: null
         })
+        .on('error', err => callback(err))
+        .on('response', res => {
+            if (res.statusCode !== 200) return callback(new Error('Request error'));
+            res.pipe(iconv.decodeStream('latin1')).collect(function(err, decodedBody) {
+              if(err) return callback(err)
+              if(hasBodyError(decodedBody)) return callback(new Error("The service has an error " + res.statusCode))
+              var pdfText = self.getSecondPart(decodedBody);
+              var pdfBuffer = iconv.encode(pdfText, 'latin1');
+              callback(null, pdfBuffer);
+            });
+        });
   }
 
 

@@ -15,6 +15,8 @@ describe('Caf Service', function () {
   var httpResponse = fs.readFileSync(__dirname + '/resources/httpResponse.txt','utf-8');
   var httpError = fs.readFileSync(__dirname + '/resources/httpError.txt','utf-8');
   var pdf = fs.readFileSync(__dirname + '/resources/response.pdf','utf-8');
+  var pdfBuffer = fs.readFileSync(__dirname + '/resources/response.pdf');
+
 
   describe("get second part of body", function () {
 
@@ -39,7 +41,7 @@ describe('Caf Service', function () {
       var actual = cafService.attestation("toto", "tutu", function(err, data){
         if(err) return done(err)
         cafCall.done();
-        expect(data).to.be.equal(pdf);
+        expect(data).to.deep.equal(pdfBuffer);
         nock.cleanAll();
         done()
       });
