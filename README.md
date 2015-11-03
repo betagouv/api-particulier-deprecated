@@ -3,22 +3,29 @@
 ## Prerequisites
 
 * [node.js](http://nodejs.org)
-  * [pm2](https://github.com/Unitech/pm2)
 * [redis](http://redis.io/)
 * [Docker](https://www.docker.com/)
   * [Docker-compose](https://docs.docker.com/compose/)
-
-`pm2` can be installed with `npm install -g pm2` (you might need to be root)
+* [Make](http://www.tutorialspoint.com/makefile/)
 
 ## Install
 
-    npm install
+    make install
 
 
 ## Test
 
-    npm test
+    make test
 
-## Run
+## Build
 
-    bin/www
+    make build
+
+## run
+
+    make run
+
+
+## clean
+
+    make clean
