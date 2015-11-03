@@ -14,4 +14,4 @@ RUN cp -r /root/front/dist/* /var/www/app/
 
 VOLUME /var/www/app
 
-CMD /usr/bin/tail -f /dev/null
+CMD sh
