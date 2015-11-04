@@ -1,18 +1,10 @@
 export default class AdminController {
-  constructor() {
-    this.users = [
-      {
-        name:"Lyon",
-        token: "<qpiodfsjpoqjjd",
-        role: "user"
-      },
-      {
-        name:"Admin",
-        token: "",
-        role: "admin"
-      }
-    ]
+  constructor(UserService) {
+    let self = this;
+    UserService.loadUsers().then(function(users) {
+      self.users = users;
+    })
   }
-
-
 }
+
+AdminController.$inject = ['UserService'];
