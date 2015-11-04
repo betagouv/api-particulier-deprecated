@@ -37,4 +37,24 @@ describe('Service: User', function() {
     })
     $httpBackend.flush();
   });
+
+  it('save the new user in the backend', (done) => {
+    var user =
+      {
+        name:"Lyon",
+        token: "<qpiodfsjpoqjjd",
+        role: "user"
+      };
+
+    $httpBackend.expectPOST("/api/admin/users", user).respond(201, user)
+    var promise = UserService.createUser(user);
+    promise.then((result) => {
+      expect(result).toEqual(user)
+      done();
+    }, (err) => {
+      expect("error" + err).toBeUndefined();
+      done(err);
+    })
+    $httpBackend.flush();
+  });
 });

@@ -19,6 +19,21 @@ class UserService {
     });
     return deferred.promise;
   }
+
+  createUser(user) {
+    let url = '/api/admin/users';
+    let deferred = this.$q.defer();
+    this.$http({
+      method: 'POST',
+      url: url,
+      data: user
+    }).then((response) => {
+      deferred.resolve(response.data)
+    }, (err) => {
+      deferred.reject(err)
+    });
+    return deferred.promise;
+  }
 }
 
 export default angular.module('app.user', [])

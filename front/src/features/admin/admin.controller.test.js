@@ -20,5 +20,26 @@ describe('Controller: Admin', function() {
     expect(ctrl.users).toEqual(["toto"])
   });
 
+  describe('creating an user', () => {
+    let user = {
+      name: 'toto',
+      token: 'totoToken',
+      role: 'user'
+    }
+
+    it('add call the service to create the user', () => {
+      let ctrl = $controller("AdminController");
+
+      spyOn(UserService, 'createUser').and.returnValue({
+      then(callback) {
+        callback({toto: 'toto'})
+      }});
+      ctrl.createUser({tutu: 'tutu'})
+
+      expect(ctrl.users).toEqual([{toto: 'toto'}])
+    });
+
+  })
+
 
 });
