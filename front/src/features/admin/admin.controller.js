@@ -1,7 +1,7 @@
 export default class AdminController {
   constructor(UserService) {
     let self = this;
-    UserService.loadUsers().then(function(users) {
+    UserService.loadUsers().then((users) => {
       self.users = users;
     })
   }

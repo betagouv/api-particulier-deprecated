@@ -6,13 +6,13 @@ describe('Service: User', function() {
 
   beforeEach(angular.mock.module(admin));
 
-  beforeEach(angular.mock.inject(function(_UserService_, _$httpBackend_) {
+  beforeEach(angular.mock.inject((_UserService_, _$httpBackend_) => {
     UserService = _UserService_;
     $httpBackend = _$httpBackend_;
   }));
 
 
-  it('load the users from the backend', function(done) {
+  it('load the users from the backend', (done) => {
     var users = [
       {
         name:"Lyon",
@@ -28,10 +28,10 @@ describe('Service: User', function() {
 
     $httpBackend.expectGET("/api/admin/users").respond(200, users)
     var promise = UserService.loadUsers();
-    promise.then(function(result) {
+    promise.then((result) => {
       expect(result).toEqual(users)
       done();
-    }, function(err) {
+    }, (err) => {
       expect("error" + err).toBeUndefined();
       done(err);
     })

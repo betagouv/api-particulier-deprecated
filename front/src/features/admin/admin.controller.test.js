@@ -6,14 +6,14 @@ describe('Controller: Admin', function() {
 
   beforeEach(angular.mock.module(admin));
 
-  beforeEach(angular.mock.inject(function(_UserService_, _$controller_) {
+  beforeEach(angular.mock.inject((_UserService_, _$controller_) => {
     UserService = _UserService_;
     $controller = _$controller_;
   }));
 
-  it('initialise with users', function() {
+  it('initialise with users', () => {
     spyOn(UserService, 'loadUsers').and.returnValue({
-    then: function(callback) {
+    then(callback) {
       callback(["toto"])
     }});
     let ctrl = $controller("AdminController");

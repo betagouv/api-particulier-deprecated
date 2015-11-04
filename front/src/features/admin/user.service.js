@@ -12,9 +12,9 @@ class UserService {
     this.$http({
       method: 'GET',
       url: url
-    }).then(function successCallback(response) {
+    }).then((response) => {
       deferred.resolve(response.data)
-    }, function errorCallback(err) {
+    }, (err) => {
       deferred.reject(err)
     });
     return deferred.promise;
