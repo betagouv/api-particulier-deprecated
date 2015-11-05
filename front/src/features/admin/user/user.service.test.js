@@ -1,4 +1,4 @@
-import admin from './index';
+import admin from './../index';
 
 describe('Service: User', function() {
   let UserService;

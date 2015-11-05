@@ -1,4 +1,4 @@
-export default class AdminController {
+export default class UserController {
   constructor(UserService) {
     let self = this;
     this.users = [];
@@ -25,4 +25,4 @@ export default class AdminController {
   }
 }
 
-AdminController.$inject = ['UserService'];
+UserController.$inject = ['UserService'];

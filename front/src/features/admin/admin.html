@@ -1,31 +1,11 @@
+
 <div class="container">
-  <h1>Users</h1>
-  <div>
-    <table class="table table-striped table-condensed">
-      <tr>
-          <th>Name</th>
-          <th>Token</th>
-          <th>Role</th>
-          <th></th>
-      </tr>
-      <tr ng-repeat="user in admin.users">
-          <td>{{user.name}}</td>
-          <td>{{user.token}}</td>
-          <td>{{user.role}}</td>
-          <td><button ng-click="admin.deleteUser(user.name)"><i class="fa fa-times"></i></button></td>
-      </tr>
-    </table>
-  </div>
+  <h1>Admin panel</h1>
+  <div ui-view>
+    <ul>
+      <li><a href="/admin/login">Login</a></li>
+      <li><a href="/admin/user">Add and Delete Users</a></li>
+    </ul>
 
-  <div>
-    <h2>Create new User</h2>
-    <form novalidate class="simple-form">
-    Name: <input type="text" ng-model="user.name" /><br />
-    Token: <input type="text" ng-model="user.token" /><br />
-    Role: <input type="radio" ng-model="user.role" value="admin" />Admin
-    <input type="radio" ng-model="user.role" value="user" />User<br />
-    <input type="submit" ng-click="admin.createUser(user)" value="Save" />
-  </form>
   </div>
-
 </div>

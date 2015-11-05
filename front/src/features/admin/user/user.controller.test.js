@@ -1,6 +1,6 @@
-import admin from './index';
+import admin from './../index';
 
-describe('Controller: Admin', function() {
+describe('Controller: User', function() {
   let $controller;
   let UserService;
 
@@ -16,7 +16,7 @@ describe('Controller: Admin', function() {
     then(callback) {
       callback(["toto"])
     }});
-    let ctrl = $controller("AdminController");
+    let ctrl = $controller("UserController");
     expect(ctrl.users).toEqual(["toto"])
   });
 
@@ -28,7 +28,7 @@ describe('Controller: Admin', function() {
     }
 
     it('add call the service to create the user', () => {
-      let ctrl = $controller("AdminController");
+      let ctrl = $controller("UserController");
 
       spyOn(UserService, 'createUser').and.returnValue({
       then(callback) {
@@ -49,7 +49,7 @@ describe('Controller: Admin', function() {
     }
 
     it('add call the service to delete the user', () => {
-      let ctrl = $controller("AdminController");
+      let ctrl = $controller("UserController");
       ctrl.users = [ user ]
       spyOn(UserService, 'deleteUser').and.returnValue({
       then(callback) {
