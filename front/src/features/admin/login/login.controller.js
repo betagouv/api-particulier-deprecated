@@ -1,12 +1,14 @@
 export default class LoginController {
-  constructor($cookies) {
+  constructor($cookies, $location) {
     this.$cookies = $cookies
+    this.$location = $location
   }
 
   login(user) {
     const token = this.hashCode(user.name+user.password);
     this.$cookies.put('API-TOKEN', token)
     console.log('API-TOKEN', token)
+    this.$location.path('/admin')
   }
 
   hashCode(input) {
@@ -21,4 +23,4 @@ export default class LoginController {
   }
 }
 
-LoginController.$inject = ["$cookies"];
+LoginController.$inject = ["$cookies", "$location"];
