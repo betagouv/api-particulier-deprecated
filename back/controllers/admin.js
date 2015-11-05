@@ -21,7 +21,7 @@ function CafController(options) {
     });
   }
 
-  this.createUsers = function(req, res, next) {
+  this.createUser = function(req, res, next) {
     if(isNotAdmin(req)) {
       return next(new StandardError('Vous n\'être pas administrateur', {code: 403}));
     }
@@ -33,6 +33,20 @@ function CafController(options) {
       }
       res.status(201);
       res.send(result)
+    });
+  }
+
+  this.deleteUser = function(req, res, next) {
+    if(isNotAdmin(req)) {
+      return next(new StandardError('Vous n\'être pas administrateur', {code: 403}));
+    }
+    options.usersService.deleteUser(req.params.name, function(err, result) {
+      if(err) {
+        logger.error(err);
+        return next(err)
+      }
+      res.status(204);
+      res.end();
     });
   }
 

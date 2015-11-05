@@ -1,16 +1,21 @@
+"use strict";
+
 var Redis = require('ioredis')
 
+class UserService {
 
-module.exports = function (options) {
-  this.redis = new Redis(options.redis.port, options.redis.host);
-  this.options = options;
-  logger = options.logger;
+  constructor(options) {
+    this.redis = new Redis(options.redis.port, options.redis.host);
+    this.options = options;
+    this.logger = options.logger;
+    this.key = options.redis.tokensAuthorizedName;
+  }
 
-  this.getUsers = function(callback) {
-    var self = this;
-    self.redis.lrange(self.options.redis.tokensAuthorizedName, 0, -1, function (err, results) {
+  getUsers(callback) {
+    const self = this;
+    self.redis.lrange(self.key, 0, -1, (err, results) => {
       if(err) {
-        self.options.logger.error(err);
+        self.logger.error(err);
         return callback(new StandardError("Impossible to connect to redis", {code: 500}))
       }
       results = results.map(function(result) { return JSON.parse(result)})
@@ -18,14 +23,47 @@ module.exports = function (options) {
     })
   }
 
-  this.createUser = function(user, callback) {
-    var self = this;
-    self.redis.lpush(self.options.redis.tokensAuthorizedName, user, function (err) {
+  createUser(user, callback) {
+    const self = this;
+    self.redis.lpush(self.key, user, (err) => {
       if(err) {
-        self.options.logger.error(err);
+        self.logger.error(err);
         return callback(new StandardError("Impossible to connect to redis", {code: 500}))
       }
       callback(null, user)
     })
   }
+
+  deleteUser(userName, callback) {
+    const self = this;
+    self.redis.lrange(self.key, 0, -1, (err, results) => {
+      if(err) {
+        self.logger.error(err);
+        return callback(new StandardError("Impossible to connect to redis", {code: 500}))
+      }
+      const names = results
+                  .map((result) => { return JSON.parse(result)})
+                  .map((user) => {user.name})
+      const index = names.indexOf(userName)
+      self.redis.lset(self.key, index, '{name:"deleted"}', (err) => {
+        if(err) {
+          self.logger.error(err);
+          return callback(new StandardError("Impossible to connect to redis", {code: 500}))
+        }
+        self.redis.lrem(self.key, 0, '{name:"deleted"}', (err, results) => {
+          if(err) {
+            self.logger.error(err);
+            return callback(new StandardError("Impossible to connect to redis", {code: 500}))
+          }
+          callback();
+        })
+      })
+
+
+      callback(null, results)
+    })
+  }
 }
+
+
+module.exports = UserService
