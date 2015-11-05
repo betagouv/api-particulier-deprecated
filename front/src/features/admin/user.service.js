@@ -34,6 +34,20 @@ class UserService {
     });
     return deferred.promise;
   }
+
+  deleteUser(userName) {
+    let url = '/api/admin/users/'+ userName;
+    let deferred = this.$q.defer();
+    this.$http({
+      method: 'DELETE',
+      url: url
+    }).then(() => {
+      deferred.resolve()
+    }, (err) => {
+      deferred.reject(err)
+    });
+    return deferred.promise;
+  }
 }
 
 export default angular.module('app.user', [])

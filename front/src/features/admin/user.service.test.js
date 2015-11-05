@@ -57,4 +57,16 @@ describe('Service: User', function() {
     })
     $httpBackend.flush();
   });
+
+  it('remove user in the backend given its name', (done) => {
+    $httpBackend.expectDELETE("/api/admin/users/toto").respond(204)
+    var promise = UserService.deleteUser("toto");
+    promise.then((result) => {
+      done();
+    }, (err) => {
+      expect("error" + err).toBeUndefined();
+      done(err);
+    })
+    $httpBackend.flush();
+  });
 });

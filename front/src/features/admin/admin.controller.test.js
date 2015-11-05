@@ -41,5 +41,26 @@ describe('Controller: Admin', function() {
 
   })
 
+  describe('deleting an user', () => {
+    let user = {
+      name: 'toto',
+      token: 'totoToken',
+      role: 'user'
+    }
+
+    it('add call the service to delete the user', () => {
+      let ctrl = $controller("AdminController");
+      ctrl.users = [ user ]
+      spyOn(UserService, 'deleteUser').and.returnValue({
+      then(callback) {
+        callback()
+      }});
+      ctrl.deleteUser(user.name)
+
+      expect(ctrl.users).toEqual([])
+    });
+
+  })
+
 
 });

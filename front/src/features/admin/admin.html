@@ -6,11 +6,13 @@
           <th>Name</th>
           <th>Token</th>
           <th>Role</th>
+          <th></th>
       </tr>
       <tr ng-repeat="user in admin.users">
           <td>{{user.name}}</td>
           <td>{{user.token}}</td>
           <td>{{user.role}}</td>
+          <td><button ng-click="admin.deleteUser(user.name)"><i class="fa fa-times"></i></button></td>
       </tr>
     </table>
   </div>

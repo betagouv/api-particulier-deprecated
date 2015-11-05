@@ -13,6 +13,16 @@ export default class AdminController {
       this.users.push(userReturned)
     })
   }
+
+  deleteUser(userName) {
+    console.log("calling delete user")
+    this.UserService.deleteUser(userName).then((userReturned) => {
+      console.log("delete user called")
+      _.remove(this.users, (user) => {
+        return user.name == userName;
+      });
+    })
+  }
 }
 
 AdminController.$inject = ['UserService'];
