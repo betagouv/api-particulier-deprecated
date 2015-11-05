@@ -1,9 +1,8 @@
-import angular from 'angular';
-
 class UserService {
-  constructor($http, $q) {
+  constructor($http, $q, $cookies) {
     this.$http = $http;
     this.$q = $q;
+    this.$cookies = $cookies
   }
 
   loadUsers() {
@@ -11,7 +10,10 @@ class UserService {
     let deferred = this.$q.defer();
     this.$http({
       method: 'GET',
-      url: url
+      url: url,
+      headers: {
+       'X-API-Key': this.getCurrentUserToken()
+      }
     }).then((response) => {
       deferred.resolve(response.data)
     }, (err) => {
@@ -26,6 +28,9 @@ class UserService {
     this.$http({
       method: 'POST',
       url: url,
+      headers: {
+       'X-API-Key': this.getCurrentUserToken()
+     },
       data: user
     }).then((response) => {
       deferred.resolve(response.data)
@@ -40,7 +45,10 @@ class UserService {
     let deferred = this.$q.defer();
     this.$http({
       method: 'DELETE',
-      url: url
+      url: url,
+      headers: {
+       'X-API-Key': this.getCurrentUserToken()
+      }
     }).then(() => {
       deferred.resolve()
     }, (err) => {
@@ -48,7 +56,14 @@ class UserService {
     });
     return deferred.promise;
   }
+
+  getCurrentUserToken() {
+    return this.$cookies.get("API-TOKEN")
+  }
 }
+
+UserService.$inject = ['$http', '$q', '$cookies'];
+
 
 export default angular.module('app.user', [])
   .service('UserService', UserService)

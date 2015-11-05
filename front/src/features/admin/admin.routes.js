@@ -4,10 +4,7 @@ export default function routes($stateProvider) {
   $stateProvider
     .state('admin', {
       url: '/admin',
-      template: require('./admin.html'),
-      resolve: {
-        token: () => {return $cookies.get('API-TOKEN')}
-      }
+      template: require('./admin.html')
     })
     .state('admin.user', {
       url: '/user',
