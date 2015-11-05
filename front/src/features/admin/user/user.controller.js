@@ -15,9 +15,7 @@ export default class UserController {
   }
 
   deleteUser(userName) {
-    console.log("calling delete user")
     this.UserService.deleteUser(userName).then((userReturned) => {
-      console.log("delete user called")
       _.remove(this.users, (user) => {
         return user.name == userName;
       });
