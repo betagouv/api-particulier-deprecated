@@ -23,3 +23,16 @@
 .logo {
   margin: 5px;
 }
+
+.btn-inverse {
+  background-color: transparent;
+  border: 1px solid whitesmoke;
+  color: whitesmoke;
+  padding: 20px 30px;
+  font-size: 2rem;
+}
+
+.btn-inverse:hover {
+  background-color: whitesmoke;
+  color: back;
+}

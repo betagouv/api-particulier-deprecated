@@ -26,7 +26,7 @@
                         <a href="#/#try-it">Essayez</a>
                     </li>
                     <li>
-                        <a href="#/#contact">Contactez-nous</a>
+                        <a href="mailto:apiparticulier@sgmap.fr">Contactez-nous</a>
                     </li>
                     <li>
                       <a href="http://docs.apiparticulier.apiary.io">
@@ -58,6 +58,14 @@
                         <h1>API PARTICULIER</h1>
                         <h3>Simplifiez vos démarches, ne demandez plus de justificatifs</h3>
                         <hr class="intro-divider">
+                        <ul class="list-inline intro-social-buttons">
+                            <li>
+                              <a class="btn btn-default btn-lg btn-inverse"
+                                  href="mailto:apiparticulier@sgmap.fr">
+                                Demander l'accès
+                              </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -128,16 +136,6 @@
                 </div>
                 <div class="col-lg-4 col-lg-offset-1 col-sm-3">
                     <img class="img-responsive" src="img/environmental-protection.jpg" alt="">
-                    <hr class="section-heading-spacer">
-                    <div class="clearfix"></div>
-                    <span class="col-centered">
-                      <a  name="contact"></a>
-                      <a class="btn btn-primary btn-lg"
-                          href="mailto:apiparticulier@sgmap.fr">
-                        <i class="fa fa-rocket"></i>
-                        <span>Demander un agrément</span>
-                      </a>
-                    </span>
                 </div>
             </div>
 
@@ -213,9 +211,12 @@
     --header "X-API-Key: correct-key" \
     'https://private-anon-977fd3e61-apiparticulier.apiary-mock.com/api/impots/svair?numeroFiscal=475757686&referenceAvis=768585'</code></pre>
                   <span class="center-block">
-                    <button type="button" class="btn btn-default btn-lg" ng-click="showResult = 'toto'">Essayer</button>
-                    <a href="http://docs.apiparticulier.apiary.io" class="btn btn-default btn-lg"><i class="fa fa-book fa-fw"></i> <span class="network-name">Documentation</span></a>
+                    <button type="button" class="btn btn-default" ng-click="showResult = 'toto'">Essayer</button>
+                    <a href="http://docs.apiparticulier.apiary.io" class="btn btn-default"><i class="fa fa-book fa-fw"></i> <span>Documentation</span></a>
+                    <a href="mailto:apiparticulier@sgmap.fr" class="btn btn-primary">Demander l'accès</a>
+
                   </span>
+
                 </div>
               </div>
           </div>
