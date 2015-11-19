@@ -1,7 +1,7 @@
 app:
   build: back
-  links:
-    - redis:redis
+  external_links:
+    - apiparticulier-redis:redis
   environment:
     - REDIS_PORT_HOST=redis
   entrypoint:
@@ -9,7 +9,3 @@ app:
     - test
   volumes:
    - ./back/node_modules_test:/srv/apps/node_modules
-
-
-redis:
-  image: redis:3.0.5

@@ -1,5 +1,6 @@
 app:
   build: back
+  container_name: apiparticulier-back
   ports:
     - 3005:3004
   links:
@@ -10,16 +11,18 @@ app:
 
 redis:
   image: redis:3.0.5
+  container_name: apiparticulier-redis
   ports:
     - 6380:6379
   volumes:
     - ./redis-data:/data
-    
+
 front:
   build: front
 
 nginx:
   build: nginx
+  container_name: apiparticulier-nginx
   ports:
     - 8080:80
     - 443:443
