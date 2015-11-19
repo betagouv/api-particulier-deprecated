@@ -14,4 +14,4 @@ RUN cp -r /root/front/dist/* /var/www/app/
 
 VOLUME /var/www/app
 
-ENTRYPOINT ["sh"]
+CMD ["sh"]
