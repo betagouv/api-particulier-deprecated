@@ -1,0 +1,7 @@
+front:
+  build: front
+  entrypoint:
+    - npm
+    - test
+  volumes:
+   - ./front/node_modules_test:/root/front/node_modules
