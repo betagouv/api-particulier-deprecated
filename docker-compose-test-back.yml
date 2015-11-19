@@ -7,6 +7,8 @@ app:
   entrypoint:
     - npm
     - test
+  volumes:
+   - ./back/node_modules_test:/srv/apps/node_modules
 
 
 redis:
