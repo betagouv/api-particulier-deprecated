@@ -23,8 +23,12 @@ module.exports = function(){
     }
   };
   var serverPort = process.env['SERVER_PORT_TEST'];
+  var redisHost = process.env['REDIS_PORT_HOST'];
   if(serverPort) {
     options.port = serverPort
+  }
+  if(redisHost) {
+    options.redis.host = redisHost
   }
 
   nock.enableNetConnect('localhost');

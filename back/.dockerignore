@@ -1,6 +1,5 @@
 .git
-node_module
-test
+node_modules
 coverage
 .gitignore
 .jshintignore

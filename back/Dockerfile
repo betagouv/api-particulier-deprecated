@@ -15,6 +15,6 @@ ADD ./ /srv/apps
 
 WORKDIR /srv/apps
 
-RUN npm install
+RUN npm install --production
 
-CMD ["pm2", "start", "/srv/apps/apps.json", "--no-daemon"]
+ENTRYPOINT ["pm2", "start", "/srv/apps/apps.json", "--no-daemon"]

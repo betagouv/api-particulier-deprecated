@@ -1,0 +1,13 @@
+app:
+  build: back
+  links:
+    - redis:redis
+  environment:
+    - REDIS_PORT_HOST=redis
+  entrypoint:
+    - npm
+    - test
+
+
+redis:
+  image: redis:3.0.5
