@@ -23,6 +23,16 @@ describe('System API', () => {
     });
   });
 
+  describe("when forcing the format in url", () => {
+    it('the response format is correct', (done) => {
+      api()
+        .get('/api/ping')
+        .query({'format': 'xml'})
+        .expect("content-type", /xml/)
+        .expect(200,/pong/,done)
+    })
+  })
+
   describe("When requesting a bad route", () => {
     it('replies 404', function (done) {
       api()

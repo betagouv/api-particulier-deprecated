@@ -14,7 +14,8 @@ var UrlAssembler = require('url-assembler');
 var Redis = require('ioredis');
 var UsersService = require('./lib/services/users');
 var js2xmlparser = require("js2xmlparser");
-
+var formatFromUrl = require('./lib/middlewares/formatFromUrl')
+var getApiKeyFromQueryParam = require('./lib/middlewares/getApiKeyFromQueryParam')
 
 
 var extend = require('extend');
@@ -56,13 +57,9 @@ function Server (options) {
     logger: logger
   }));
 
-  app.use(function getApiKeyFromQueryParam(req, res, next) {
-    if(req.query['API-Key'] && !req.get('X-API-Key')) {
-      console.log("TOOOOOO ", req.query['API-Key'])
-      req.headers['x-api-key'] =  req.query['API-Key']
-    }
-    next()
-  })
+  app.use(getApiKeyFromQueryParam)
+
+  app.use(formatFromUrl)
 
   app.use(function isAuthorized(req, res, next) {
     var token = req.get('X-API-Key') || ""
