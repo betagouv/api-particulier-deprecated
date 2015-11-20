@@ -8,11 +8,11 @@
           <th>Role</th>
           <th></th>
       </tr>
-      <tr ng-repeat="user in user.users">
-          <td>{{user.name}}</td>
-          <td>{{user.token}}</td>
-          <td>{{user.role}}</td>
-          <td><button ng-click="user.deleteUser(user.name)"><i class="fa fa-times"></i></button></td>
+      <tr ng-repeat="userModel in user.users">
+          <td>{{userModel.name}}</td>
+          <td>{{userModel.token}}</td>
+          <td>{{userModel.role}}</td>
+          <td><button ng-click="user.deleteUser(userModel.name)"><i class="fa fa-times"></i></button></td>
       </tr>
     </table>
   </div>
@@ -20,11 +20,11 @@
   <div>
     <h2>Create new User</h2>
     <form novalidate class="simple-form">
-    Name: <input type="text" ng-model="user.name" /><br />
-    Token: <input type="text" ng-model="user.token" /><br />
-    Role: <input type="radio" ng-model="user.role" value="admin" />Admin
-    <input type="radio" ng-model="user.role" value="user" />User<br />
-    <input type="submit" ng-click="user.createUser(user)" value="Save" />
+    Name: <input type="text" ng-model="newUser.name" /><br />
+    Token: <input type="text" ng-model="newUser.token" /><br />
+    Role: <input type="radio" ng-model="newUser.role" value="admin" />Admin
+    <input type="radio" ng-model="newUser.role" value="user" />User<br />
+    <input type="submit" ng-click="user.createUser(newUser)" value="Save" />
   </form>
   </div>
 
