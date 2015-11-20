@@ -33,11 +33,24 @@ describe('System API', () => {
 
 
   describe("When requesting a route with a bad token", () => {
-    it('replies 403', function (done) {
-      api()
-        .get('/api/ping')
-        .set('X-API-Key', 'token-nok')
-        .expect(401,done)
-    });
+
+    describe("in the http header", () => {
+      it('replies 403', function (done) {
+        api()
+          .get('/api/ping')
+          .set('X-API-Key', 'token-nok')
+          .expect(401,done)
+      });
+    })
+
+    describe("in the url", () => {
+      it('replies 403', function (done) {
+        api()
+          .get('/api/ping')
+          .query({'API-Key': 'token-nok'})
+          .expect(401,done)
+      });
+    })
+
   });
 });

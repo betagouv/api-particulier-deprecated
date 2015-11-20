@@ -56,6 +56,14 @@ function Server (options) {
     logger: logger
   }));
 
+  app.use(function getApiKeyFromQueryParam(req, res, next) {
+    if(req.query['API-Key'] && !req.get('X-API-Key')) {
+      console.log("TOOOOOO ", req.query['API-Key'])
+      req.headers['x-api-key'] =  req.query['API-Key']
+    }
+    next()
+  })
+
   app.use(function isAuthorized(req, res, next) {
     var token = req.get('X-API-Key') || ""
 
