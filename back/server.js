@@ -1,21 +1,21 @@
 "use strict";
 
-var http = require('http');
-var express = require('express');
-var StandardError = require('standard-error');
-var S = require('string');
-var emptylogger = require('bunyan-blackhole');
-var expressBunyanLogger = require("express-bunyan-logger");
-var routes = require('./routes');
-var bodyParser = require('body-parser');
-var cors = require('cors');
-var _ = require('lodash');
-var UrlAssembler = require('url-assembler');
-var Redis = require('ioredis');
-var UsersService = require('./lib/services/users');
-var js2xmlparser = require("js2xmlparser");
-var formatFromUrl = require('./lib/middlewares/formatFromUrl')
-var getApiKeyFromQueryParam = require('./lib/middlewares/getApiKeyFromQueryParam')
+const http = require('http');
+const express = require('express');
+const StandardError = require('standard-error');
+const emptylogger = require('bunyan-blackhole');
+const expressBunyanLogger = require("express-bunyan-logger");
+const routes = require('./routes');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const UrlAssembler = require('url-assembler');
+const Redis = require('ioredis');
+const js2xmlparser = require("js2xmlparser");
+const formatFromUrl = require('./lib/middlewares/formatFromUrl')
+const getApiKeyFromQueryParam = require('./lib/middlewares/getApiKeyFromQueryParam')
+const formatError = require('./lib/middlewares/formatError')
+const isAuthorized = require('./lib/middlewares/isAuthorized')
+const UsersService = require('./lib/services/users');
 
 
 var extend = require('extend');
@@ -37,7 +37,6 @@ function Server (options) {
   app.set('tokensAuthorizedName',  options.redis.tokensAuthorizedName);
   app.disable('x-powered-by');
   app.use(express.static('public'));
-  options
   var usersService = new UsersService(options);
   app.set('usersService', usersService)
 
@@ -57,30 +56,16 @@ function Server (options) {
     logger: logger
   }));
 
+  app.use((req, res, next) => {
+    req.logger = logger;
+    next();
+  })
+
   app.use(getApiKeyFromQueryParam)
 
   app.use(formatFromUrl)
 
-  app.use(function isAuthorized(req, res, next) {
-    var token = req.get('X-API-Key') || ""
-
-    usersService.getUsers(function(err, results) {
-      if(err) {
-        logger.error(err);
-        return next(err)
-      }
-      logger.debug({ event: 'authorization' }, JSON.stringify(results));
-      var userConnected = _.find(results, {token: token})
-      if(userConnected) {
-        logger.debug({ event: 'authorization' }, userConnected.name + ' is authorized ('+ userConnected.role+')');
-        req.userConnected = userConnected;
-        next()
-      } else {
-        logger.debug({ event: 'authorization' }, 'not authorized');
-        next(new StandardError('You are not authorized to use the api', {code: 401}));
-      }
-    })
-  })
+  app.use(isAuthorized(usersService))
 
   routes.configure(app, options);
 
@@ -90,34 +75,7 @@ function Server (options) {
     next(new StandardError('no route for URL ' + req.url, {code: 404}));
   });
 
-  app.use(function (err, req, res, next) {
-    req.log.error({error: err}, err.message);
-    if (err.code) {
-      if (err instanceof StandardError) {
-        let error = {
-          error: S(http.STATUS_CODES[err.code]).underscore().s,
-          reason: err.message
-        }
-        return res.format({
-          'application/json': function(){
-             res.status(err.code).json(error)
-          },
-
-          'application/xml': function(){
-            res
-                      .status(err.code)
-                      .send(js2xmlparser("error", error))
-          },
-          'default': function() {
-            res
-              .status(err.code)
-              .send(error.reason);
-          }
-        });
-      }
-    }
-    next(err);
-  });
+  app.use(formatError);
 
 
   this.getPort = function() {
