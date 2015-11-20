@@ -1,3 +1,5 @@
+"use strict";
+
 var http = require('http');
 var express = require('express');
 var StandardError = require('standard-error');
@@ -10,7 +12,8 @@ var cors = require('cors');
 var _ = require('lodash');
 var UrlAssembler = require('url-assembler');
 var Redis = require('ioredis');
-var UsersService = require('./lib/services/users')
+var UsersService = require('./lib/services/users');
+var js2xmlparser = require("js2xmlparser");
 
 
 
@@ -86,10 +89,26 @@ function Server (options) {
     req.log.error({error: err}, err.message);
     if (err.code) {
       if (err instanceof StandardError) {
-        return res.status(err.code).json({
+        let error = {
           error: S(http.STATUS_CODES[err.code]).underscore().s,
           reason: err.message
-        })
+        }
+        return res.format({
+          'application/json': function(){
+             res.status(err.code).json(error)
+          },
+
+          'application/xml': function(){
+            res
+                      .status(err.code)
+                      .send(js2xmlparser("error", error))
+          },
+          'default': function() {
+            res
+              .status(err.code)
+              .send(error.reason);
+          }
+        });
       }
     }
     next(err);

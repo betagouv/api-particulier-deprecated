@@ -8,7 +8,7 @@
     "url": "https://github.com/sgmap/api-particulier"
   },
   "scripts": {
-    "pretest" : "npm install",
+    "pretest": "npm install",
     "test": "istanbul cover --print details _mocha -- -R spec test"
   },
   "author": "SGMAP",
@@ -36,6 +36,7 @@
     "http-measuring-client": "^0.3.6",
     "iconv-lite": "^0.4.13",
     "ioredis": "^1.10.0",
+    "js2xmlparser": "1.0.0",
     "lodash": "^3.9.3",
     "moment": "^2.10.2",
     "nconf": "^0.7.1",
