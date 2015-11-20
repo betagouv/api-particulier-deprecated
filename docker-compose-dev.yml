@@ -1,0 +1,35 @@
+app:
+  image: registry.sgmap.fr/api-particulier/back:latest
+  container_name: apiparticulier-back
+  ports:
+    - 3005:3004
+  volumes:
+      - ./back/cert:/srv/apps/cert
+
+  links:
+    - redis:redis
+  environment:
+    - redis_host=redis
+
+
+redis:
+  image: redis:3.0.5
+  container_name: apiparticulier-redis
+  ports:
+    - 6380:6379
+  volumes:
+    - ./redis-data-dev:/data
+
+front:
+  image: registry.sgmap.fr/api-particulier/front:latest
+
+nginx:
+  image: registry.sgmap.fr/api-particulier/nginx:latest
+  container_name: apiparticulier-nginx
+  ports:
+    - 8088:80
+  volumes_from:
+    - front
+  links:
+    - app:app
+    - front
