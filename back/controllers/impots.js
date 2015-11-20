@@ -1,5 +1,6 @@
 var svair = require('svair-api')
 var StandardError = require('standard-error');
+var js2xmlparser = require("js2xmlparser");
 
 module.exports = SystemController;
 
@@ -18,10 +19,27 @@ function SystemController(options) {
             } else if (err) {
               next(new StandardError(err.message, {code: 500}));
             } else {
-                res.send(result);
+              return res.format({
+                'application/json': function(){
+                   res.json(result)
+                },
+
+                'application/xml': function(){
+                  res.send(js2xmlparser("result", result))
+                },
+                'default': function() {
+                  res.status(406).send('Not Acceptable');
+                }
+              });
             }
         });
     }
   }
 
 }
+
+/*
+
+
+
+*/

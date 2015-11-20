@@ -79,12 +79,9 @@ describe('Impots Controller', function () {
       var controller = new importController();
 
       //when
-      controller.svair( req, { send: function(result) {
-        expect(result).to.deep.equal({result:"tutu"});
-        done();
-      } }, null)
-
-
+      controller.svair( req, { format: callback  }, null)
+      expect(callback.calledOnce).to.be.true;
+      done()
     });
   });
 });
