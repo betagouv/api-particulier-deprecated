@@ -17,12 +17,13 @@ Le service permet de vérifier l'authenticité du justificatif d'impôt sur le r
 + Parameters
     + numeroFiscal: `475757686` (number, required) - Numéro fiscal
     + referenceAvis: `768585` (number, required) - Référence d'avis
-    
+
 + Request
-    
-    + Headers 
-    
+
+    + Headers
+
             X-API-Key: correct-key
+            Accept: application/json
 
 
 
@@ -55,10 +56,51 @@ Le service permet de vérifier l'authenticité du justificatif d'impôt sur le r
           "anneeImpots": "2015",
           "anneeRevenus": "2014"
         }
-        
-+ Request 
 
-    + Headers 
+
++ Request
+
+    + Headers
+
+            X-API-Key: correct-key
+            Accept: application/xml
+
+
+
++ Response 200 (text/xml)
+
+
+        <?xml version="1.0" encoding="UTF-8"?>
+        <result>
+        	<declarant1>
+        		<nom>MARTIN</nom>
+        		<nomNaissance>MARTIN</nomNaissance>
+        		<prenoms>HENRI</prenoms>
+        		<dateNaissance>29/05/1984</dateNaissance>
+        	</declarant1>
+        	<declarant2>
+        		<nom></nom>
+        		<nomNaissance></nomNaissance>
+        		<prenoms></prenoms>
+        		<dateNaissance></dateNaissance>
+        	</declarant2>
+        	<dateRecouvrement>31/07/2015</dateRecouvrement>
+        	<dateEtablissement>08/07/2015</dateEtablissement>
+        	<nombreParts>1</nombreParts>
+        	<situationFamille>Célibataire</situationFamille>
+        	<nombrePersonnesCharge>0</nombrePersonnesCharge>
+        	<revenuBrutGlobal>17580</revenuBrutGlobal>
+        	<revenuImposable>17580</revenuImposable>
+        	<impotRevenuNetAvantCorrections>1665</impotRevenuNetAvantCorrections>
+        	<montantImpot>1665</montantImpot>
+        	<revenuFiscalReference>17580</revenuFiscalReference>
+        	<anneeImpots>2015</anneeImpots>
+        	<anneeRevenus>2014</anneeRevenus>
+        </result>
+
++ Request
+
+    + Headers
 
             X-API-Key: badKey
 
@@ -70,11 +112,11 @@ Le service permet de vérifier l'authenticité du justificatif d'impôt sur le r
           "error": "unauthorized",
           "reason": "You are not authorized to use the api"
         }
-        
+
 + Request
-    
-    + Headers 
-    
+
+    + Headers
+
             X-API-Key: correct-key
 
 
@@ -87,21 +129,6 @@ Le service permet de vérifier l'authenticité du justificatif d'impôt sur le r
           "reason": "Les paramètres fournis sont incorrects ou ne correspondent pas à un avis"
         }
 
-+ Request
-    
-    + Headers 
-    
-            X-API-Key: correct-key
-
-
-
-+ Response 400 (application/json)
-
-
-        {
-          "error": "unauthorized",
-          "reason": "You are not authorized to use the api"
-        }
 
 # Group Caf
 
@@ -115,9 +142,9 @@ Permet de récupérer les attestations de CAF
 
 ### Affiche une déclaration [GET]
 
-+ Request 
++ Request
 
-    + Headers 
+    + Headers
 
             X-API-Key: <api-key>
 
@@ -125,9 +152,9 @@ Permet de récupérer les attestations de CAF
 + Response 200 (application/pdf)
 
 
-+ Request 
++ Request
 
-    + Headers 
+    + Headers
 
             X-API-Key: badKey
 
@@ -139,5 +166,3 @@ Permet de récupérer les attestations de CAF
           "error": "unauthorized",
           "reason": "You are not authorized to use the api"
         }
-        
-
