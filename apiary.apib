@@ -43,6 +43,10 @@ Le service permet de vérifier l'authenticité du justificatif d'impôt sur le r
             "prenoms": "",
             "dateNaissance": ""
           },
+          "foyerFiscal": {
+            "annee": 2015,
+            "adresse": "52 AVENUE DES CHAMPS ELYSEE 75009 PARIS"
+          },
           "dateRecouvrement": "31/07/2015",
           "dateEtablissement": "08/07/2015",
           "nombreParts": 1,
@@ -84,6 +88,10 @@ Le service permet de vérifier l'authenticité du justificatif d'impôt sur le r
         		<prenoms></prenoms>
         		<dateNaissance></dateNaissance>
         	</declarant2>
+          <foyerFiscal>
+            <annee>2015</annee>
+            <adresse>52 AVENUE DES CHAMPS ELYSEE 75009 PARIS</adresse>
+          </foyerFiscal>
         	<dateRecouvrement>31/07/2015</dateRecouvrement>
         	<dateEtablissement>08/07/2015</dateEtablissement>
         	<nombreParts>1</nombreParts>
@@ -103,6 +111,23 @@ Le service permet de vérifier l'authenticité du justificatif d'impôt sur le r
     + Headers
 
             X-API-Key: badKey
+            Accept: application/xml
+
+
++ Response 401 (text/xml)
+
+
+        <?xml version="1.0" encoding="UTF-8"?>
+        <error>
+          <error>unauthorized</error>
+          <reason>You are not authorized to use the api</reason>
+        </error>
+
++ Request
+
+    + Headers
+
+            X-API-Key: badKey
 
 
 + Response 401 (application/json)
@@ -112,6 +137,7 @@ Le service permet de vérifier l'authenticité du justificatif d'impôt sur le r
           "error": "unauthorized",
           "reason": "You are not authorized to use the api"
         }
+
 
 + Request
 
