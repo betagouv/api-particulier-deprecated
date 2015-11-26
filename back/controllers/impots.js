@@ -2,7 +2,6 @@
 
 var svair = require('svair-api')
 var StandardError = require('standard-error');
-var js2xmlparser = require("js2xmlparser");
 
 class ImpotController {
 

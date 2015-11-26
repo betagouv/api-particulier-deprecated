@@ -14,5 +14,8 @@ module.exports = {
     port:6379,
     host:'127.0.0.1',
     tokensAuthorizedName: 'token_authorized'
+  },
+  ban: {
+    host: 'http://api-adresse.data.gouv.fr'
   }
 };
