@@ -9,9 +9,7 @@ const fs = require('fs');
 
 describe('Ban Service', function () {
   const banService = new BanService({
-    ban: {
-      baseUrl: 'http://adresse.data.gouv.local'
-    }
+    banBaseUrl: 'http://adresse.data.gouv.local'
   });
 
   const banResponse = JSON.parse(fs.readFileSync(__dirname + '/resources/banResponse.json','utf-8'));
@@ -25,7 +23,7 @@ describe('Ban Service', function () {
                 .reply(200, banResponse);
 
 
-      banService.getAddress("8 bd du port", (err, data) => {
+      banService.getAdress("8 bd du port", (err, data) => {
         if(err) return done(err)
         banCall.done();
         expect(data).to.deep.equal(banExpected)

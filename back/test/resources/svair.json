@@ -1,0 +1,30 @@
+{
+  "declarant1": {
+    "nom": "MARTIN",
+    "nomNaissance": "MARTIN",
+    "prenoms": "JEAN",
+    "dateNaissance": "29/03/1956"
+  },
+  "declarant2": {
+    "nom": "",
+    "nomNaissance": "",
+    "prenoms": "",
+    "dateNaissance": ""
+  },
+  "foyerFiscal": {
+    "annee": 2015,
+    "adresse": "52 AVENUE DES CHAMPS ELYSEE 75009 PARIS"
+  },
+  "dateRecouvrement": "31/07/2015",
+  "dateEtablissement": "08/07/2015",
+  "nombreParts": 1,
+  "situationFamille": "Célibataire",
+  "nombrePersonnesCharge": 0,
+  "revenuBrutGlobal": 19580,
+  "revenuImposable": 19580,
+  "impotRevenuNetAvantCorrections": 965,
+  "montantImpot": 965,
+  "revenuFiscalReference": 19580,
+  "anneeImpots": "2015",
+  "anneeRevenus": "2014"
+}

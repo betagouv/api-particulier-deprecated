@@ -1,23 +1,26 @@
 "use strict";
 
-
-var request = require('request') ;
-var UrlAssembler = require('url-assembler')
+const request = require('request') ;
+const UrlAssembler = require('url-assembler')
+const StandardError = require('standard-error');
 
 class BanService {
 
   constructor(options) {
-    this.baseUrl = UrlAssembler(options.ban.baseUrl)
+    options = options || {}
+    const url = options.banBaseUrl || ''
+    this.baseUrl = UrlAssembler(url)
   }
 
-  getAddress(query, callback) {
+  getAdress(query, callback) {
+    console.log('baseUrl', JSON.stringify(this.baseUrl))
     var url = this.baseUrl.template('search')
                 .query({
                   q: query
                 })
                 .toString();
     request(url, (err, response) => {
-      if(err) callback(err);
+      if(err) return callback(err);
       const adresses = JSON.parse(response.body).features.map((item) => {
         let adresse = item.properties
         delete adresse.id
