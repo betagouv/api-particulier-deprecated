@@ -23,6 +23,7 @@ exports.configure = function (app) {
 
   app.get('/api/ping', systemController.ping);
   app.get('/api/impots/svair', impotsController.svair);
+  app.get('/api/impots/adress', impotsController.adress);
   app.get('/api/caf/attestation', cafController.attestation);
   app.get('/api/admin/users', adminController.getUsers);
   app.post('/api/admin/users', adminController.createUser);
