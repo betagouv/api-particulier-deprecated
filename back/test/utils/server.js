@@ -20,6 +20,9 @@ module.exports = function(){
       host: '127.0.0.1',
       port: 6379,
       tokensAuthorizedName: 'testTokenAuthorized'
+    },
+    ban: {
+      baseUrl: "http://adresse.data.gouv.local"
     }
   };
   var serverPort = process.env['SERVER_PORT_TEST'];

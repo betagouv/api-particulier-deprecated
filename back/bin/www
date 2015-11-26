@@ -41,6 +41,9 @@ var server = new Server({
     host: nconf.get('redis:host'),
     port: nconf.get('redis:port'),
     tokensAuthorizedName: nconf.get('redis:tokensAuthorizedName')
+  },
+  ban: {
+    baseUrl: nconf.get('ban:baseUrl')
   }
 });
 

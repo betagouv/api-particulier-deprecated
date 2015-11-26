@@ -5,13 +5,13 @@ var StandardError = require('standard-error');
 require("stackup")
 
 describe('Impots Controller', function () {
-  var importController;
+  var impotController;
 
 
   describe("When the svair doesn't return anything", function () {
 
     beforeEach(function(done) {
-      importController = proxyquire('../controllers/impots', {
+      impotController = proxyquire('../controllers/impots', {
         'svair-api': function svairApiFake(numeroFiscal, referenceAvis, done) {
           done({error: true,message: "Some message"}, "")
         }
@@ -24,7 +24,7 @@ describe('Impots Controller', function () {
       var callback = sinon.spy();
       var req =   {query: {numeroFiscal: "toto", referenceAvis: "titi"}}
       var res = {}
-      var controller = new importController();
+      var controller = new impotController();
 
       //when
       controller.svair( req, res, function(err) {
@@ -37,7 +37,7 @@ describe('Impots Controller', function () {
   describe("When the svair return Invalid credentials", function () {
 
     beforeEach(function(done) {
-      importController = proxyquire('../controllers/impots', {
+      impotController = proxyquire('../controllers/impots', {
         'svair-api': function svairApiFake(numeroFiscal, referenceAvis, done) {
           done({error: true, message: "Invalid credentials"}, "")
         }
@@ -50,7 +50,7 @@ describe('Impots Controller', function () {
       var callback = sinon.spy();
       var req =   {query: {numeroFiscal: "toto", referenceAvis: "titi"}}
       var res = {}
-      var controller = new importController();
+      var controller = new impotController();
 
       //when
       controller.svair( req, res, function(err) {

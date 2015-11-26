@@ -1,25 +1,39 @@
 "use strict";
 
-var svair = require('svair-api')
-var StandardError = require('standard-error');
+const svair = require('svair-api')
+const StandardError = require('standard-error');
+const SvairBanService = require('./../lib/services/svairBan')
 
-class ImpotController {
+function ImpotController(options) {
+    var options = options || {}
+    var svairBanService = new SvairBanService(options)
 
-  constructor(options) {
-    this.options = options || {}
-  }
-
-  adress(req, res, next) {
+  this.adress = function(req, res, next) {
     var numeroFiscal = req.query.numeroFiscal;
     var referenceAvis = req.query.referenceAvis;
     if (!numeroFiscal || !referenceAvis) {
       return next(new StandardError('Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.', {code: 400}));
     } else {
-      next()
+      svairBanService.getAdress(numeroFiscal, referenceAvis, (err, data) => {
+        if(err) return next(err)
+        return res.format({
+          'application/json': function(){
+             res.json(data)
+          },
+
+          'application/xml': function(){
+            res.send(js2xmlparser("result", data))
+          },
+          'default': function() {
+            res.status(406).send('Not Acceptable');
+          }
+        });
+      })
+
     }
   }
 
-  svair(req, res, next) {
+  this.svair = function(req, res, next) {
     var numeroFiscal = req.query.numeroFiscal;
     var referenceAvis = req.query.referenceAvis;
     if (!numeroFiscal || !referenceAvis) {

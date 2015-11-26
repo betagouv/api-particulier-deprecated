@@ -5,7 +5,12 @@ var AdminController = require ('../controllers/admin')
 exports.configure = function (app) {
 
   var systemController = new SystemController();
-  var impotsController = new ImpotsController();
+
+  var impotsOptions = {
+    banBaseUrl: app.get('banBaseUrl')
+  }
+
+  var impotsController = new ImpotsController(impotsOptions);
 
   var adminOptions = {
     usersService: app.get('usersService'),
