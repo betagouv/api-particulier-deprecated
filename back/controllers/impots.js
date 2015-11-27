@@ -3,6 +3,7 @@
 const svair = require('svair-api')
 const StandardError = require('standard-error');
 const SvairBanService = require('./../lib/services/svairBan')
+const js2xmlparser = require('js2xmlparser')
 
 function ImpotController(options) {
     var options = options || {}
