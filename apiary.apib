@@ -73,7 +73,6 @@ Le service permet de vérifier l'authenticité du justificatif d'impôt sur le r
 
 + Response 200 (text/xml)
 
-
         <?xml version="1.0" encoding="UTF-8"?>
         <result>
         	<declarant1>
@@ -116,7 +115,6 @@ Le service permet de vérifier l'authenticité du justificatif d'impôt sur le r
 
 + Response 401 (text/xml)
 
-
         <?xml version="1.0" encoding="UTF-8"?>
         <error>
           <error>unauthorized</error>
@@ -149,6 +147,172 @@ Le service permet de vérifier l'authenticité du justificatif d'impôt sur le r
 
 + Response 404 (application/json)
 
+
+        {
+          "error": "not_found",
+          "reason": "Les paramètres fournis sont incorrects ou ne correspondent pas à un avis"
+        }
+
+
+
+
+## Service de récupération du foyer fiscal [/api/impots/adress{?numeroFiscal}{?referenceAvis}]
+Le service permet de récupérer l'adresse fiscale déclaré au 1ier janvier de
+l'année de déclaration. Cette adresse est ensuite enrichie pour récupérer une
+adresse structurée avec ses coordonnées GPS
+
+
+
+
+### Affiche les adresses [GET]
++ Parameters
+    + numeroFiscal: `475757686` (number, required) - Numéro fiscal
+    + referenceAvis: `768585` (number, required) - Référence d'avis
+
++ Request
+
+    + Headers
+
+            X-API-Key: correct-key
+            Accept: application/json
+
+
+
++ Response 200 (application/json)
+
+
+        {
+          "adresses": [
+            {
+              "adresse": {
+                "name": "50 avenue des champs Elysée",
+                "city": "Paris",
+                "housenumber": "50",
+                "label": "50 avenue des champs Elysée",
+                "context": "75, Paris, Île-de-France",
+                "citycode": "75009",
+                "type": "housenumber",
+                "score": 0.9319545454545454,
+                "postcode": "75009"
+              },
+              "geometry": {
+                "coordinates": [
+                  2.293,
+                  48.759
+                ],
+                "type": "Point"
+              }
+            }
+          ],
+          "declarant1": {
+            "nom": "MARTIN",
+            "nomNaissance": "MARTIN",
+            "prenoms": "JEAN",
+            "dateNaissance": "29/03/1982"
+          },
+          "declarant2": {
+            "nom": "",
+            "nomNaissance": "",
+            "prenoms": "",
+            "dateNaissance": ""
+          },
+          "foyerFiscal": {
+            "annee": 2015,
+            "adresse": "50 avenue des champs Elysée"
+          }
+        }
+
+
++ Request
+
+    + Headers
+
+            X-API-Key: correct-key
+            Accept: application/xml
+
+
+
++ Response 200 (text/xml)
+
+          <?xml version="1.0" encoding="UTF-8"?>
+          <result>
+          	<adresses>
+          		<adresse>
+          			<name>50 avenue des champs Elysée</name>
+          			<city>Paris</city>
+          			<housenumber>50</housenumber>
+          			<label>50 avenue des champs Elysée</label>
+          			<context>75, Paris, Île-de-France</context>
+          			<citycode>75009</citycode>
+          			<type>housenumber</type>
+          			<score>0.9319545454545454</score>
+          			<postcode>75009</postcode>
+          		</adresse>
+          		<geometry>
+          			<coordinates>2.293</coordinates>
+          			<coordinates>48.759</coordinates>
+          			<type>Point</type>
+          		</geometry>
+          	</adresses>
+          	<declarant1>
+          		<nom>MARTIN</nom>
+          		<nomNaissance>MARTIN</nomNaissance>
+          		<prenoms>JEAN</prenoms>
+          		<dateNaissance>29/03/1982</dateNaissance>
+          	</declarant1>
+          	<declarant2>
+          		<nom></nom>
+          		<nomNaissance></nomNaissance>
+          		<prenoms></prenoms>
+          		<dateNaissance></dateNaissance>
+          	</declarant2>
+          	<foyerFiscal>
+          		<annee>2015</annee>
+          		<adresse>50 avenue des champs Elysée</adresse>
+          	</foyerFiscal>
+          </result>
+
++ Request
+
+    + Headers
+
+            X-API-Key: badKey
+            Accept: application/xml
+
+
++ Response 401 (text/xml)
+
+        <?xml version="1.0" encoding="UTF-8"?>
+        <error>
+          <error>unauthorized</error>
+          <reason>You are not authorized to use the api</reason>
+        </error>
+
++ Request
+
+    + Headers
+
+            X-API-Key: badKey
+
+
++ Response 401 (application/json)
+
+
+        {
+          "error": "unauthorized",
+          "reason": "You are not authorized to use the api"
+        }
+
+
++ Request
+
+    + Headers
+
+            X-API-Key: correct-key
+
+
+
++ Response 404 (application/json)
 
         {
           "error": "not_found",
