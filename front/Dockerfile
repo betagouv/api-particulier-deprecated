@@ -4,9 +4,13 @@ MAINTAINER  Thibaut Géry
 
 RUN mkdir -p /var/www/app && mkdir -p /root/front
 
-COPY ./ /root/front
+ADD package.json /root/front
 
 WORKDIR /root/front
+
+RUN npm install --production
+
+COPY ./ /root/front
 
 RUN npm install --production && npm run build
 

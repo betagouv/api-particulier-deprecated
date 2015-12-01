@@ -9,11 +9,11 @@ RUN pm2 dump
 # dump will start pm2 daemon and create everything needed
 
 EXPOSE 3004
+ADD package.json /srv/apps
+WORKDIR /srv/apps
+RUN npm install --production
 
 ADD ./ /srv/apps
-
-
-WORKDIR /srv/apps
 
 RUN npm install --production
 
