@@ -36,3 +36,15 @@
   background-color: whitesmoke;
   color: back;
 }
+
+.site-example h4 {
+  margin-bottom: 15px
+}
+
+.site-example img {
+  margin-bottom: 15px
+}
+
+.site-example p {
+  margin-bottom: 15px
+}
