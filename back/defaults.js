@@ -16,6 +16,6 @@ module.exports = {
     tokensAuthorizedName: 'token_authorized'
   },
   ban: {
-    baseUrl: 'http://api-adresse.data.gouv.fr'
+    baseUrl: 'https://api-adresse.data.gouv.fr'
   }
 };
