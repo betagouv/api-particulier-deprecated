@@ -24,19 +24,25 @@ describe('Admin API', function () {
         api()
           .get('/api/admin/users')
           .set('X-API-Key', 'adminToken')
-          .expect(200,
-            [
+          .expect(200, (err, result) => {
+            if(err) return done(err);
+            var body = result.body;
+            expect(body).to.include(
               {
                 name: 'test',
                 token: '',
                 role: 'user'
-              },
-              {
-                name: 'admin',
-                token: 'adminToken',
-                role: 'admin'
-              }
-            ], done)
+              })
+              expect(body).to.include(
+                {
+                  name: 'admin',
+                  token: 'adminToken',
+                  role: 'admin'
+                })
+
+            expect(body).to.have.length(2)
+            done()
+        })
       });
     })
   });
@@ -68,20 +74,13 @@ describe('Admin API', function () {
               api()
                 .get('/api/admin/users')
                 .set('X-API-Key', 'adminToken')
-                .expect(200,
-                  [
-                    user,
-                    {
-                      name: 'test',
-                      token: '',
-                      role: 'user'
-                    },
-                    {
-                      name: 'admin',
-                      token: 'adminToken',
-                      role: 'admin'
-                    }
-                  ], done)
+                .expect(200, (err, result) => {
+                  if(err) return done(err);
+                  var body = result.body;
+                  expect(body).to.include(user)
+                  expect(body).to.have.length(3)
+                  done()
+              })
             })
       });
     })
@@ -110,17 +109,13 @@ describe('Admin API', function () {
             api()
               .get('/api/admin/users')
               .set('X-API-Key', 'adminToken')
-              .expect(200, [
-                {
-                  name: 'test',
-                  token: '',
-                  role: 'user'
-                },
-                {
-                name: 'admin',
-                token: 'adminToken',
-                role: 'admin'
-              } ], done)
+              .expect(200, (err, result) => {
+                if(err) return done(err);
+                var body = result.body;
+                expect(body).to.not.include(user)
+                expect(body).to.have.length(2)
+                done()
+            })
           })
     });
 
