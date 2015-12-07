@@ -14,10 +14,10 @@ export default class UserController {
     })
   }
 
-  deleteUser(userName) {
-    this.UserService.deleteUser(userName).then((userReturned) => {
+  deleteUser(userToken) {
+    this.UserService.deleteUser(userToken).then((userReturned) => {
       _.remove(this.users, (user) => {
-        return user.name == userName;
+        return user.token == userToken;
       });
     })
   }

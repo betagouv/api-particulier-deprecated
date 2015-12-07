@@ -40,8 +40,8 @@ class UserService {
     return deferred.promise;
   }
 
-  deleteUser(userName) {
-    let url = '/api/admin/users/'+ userName;
+  deleteUser(userToken) {
+    let url = '/api/admin/users/'+ userToken;
     let deferred = this.$q.defer();
     this.$http({
       method: 'DELETE',

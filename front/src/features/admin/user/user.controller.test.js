@@ -55,7 +55,7 @@ describe('Controller: User', function() {
       then(callback) {
         callback()
       }});
-      ctrl.deleteUser(user.name)
+      ctrl.deleteUser(user.token)
 
       expect(ctrl.users).toEqual([])
     });
