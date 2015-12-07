@@ -19,7 +19,7 @@ module.exports = function(){
     redis: {
       host: '127.0.0.1',
       port: 6379,
-      tokensAuthorizedName: 'testTokenAuthorized'
+      tokensPrefix: 'testTokenAuthorized'
     },
     ban: {
       baseUrl: "http://adresse.data.gouv.local"
@@ -52,9 +52,9 @@ module.exports = function(){
         token: 'adminToken',
         role: 'admin'
       }
-      redis.lpush(options.redis.tokensAuthorizedName, JSON.stringify(user), function(err) {
+      redis.lpush(options.redis.tokensPrefix, JSON.stringify(user), function(err) {
         if(err) return done(err);
-        redis.lpush(options.redis.tokensAuthorizedName, JSON.stringify(admin), done)
+        redis.lpush(options.redis.tokensPrefix, JSON.stringify(admin), done)
       })
     });
   });
@@ -62,7 +62,7 @@ module.exports = function(){
   afterEach(function (done) {
     server.stop(function(err) {
       if(err) return done(err);
-      redis.del(options.redis.tokensAuthorizedName, done)
+      redis.del(options.redis.tokensPrefix, done)
     });
   });
 

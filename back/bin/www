@@ -40,7 +40,7 @@ var server = new Server({
   redis: {
     host: nconf.get('redis:host'),
     port: nconf.get('redis:port'),
-    tokensAuthorizedName: nconf.get('redis:tokensAuthorizedName')
+    tokensPrefix: nconf.get('redis:tokensPrefix')
   },
   ban: {
     baseUrl: nconf.get('ban:baseUrl')

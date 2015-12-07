@@ -8,7 +8,7 @@ class UserService {
     this.redis = new Redis(options.redis.port, options.redis.host);
     this.options = options;
     this.logger = options.logger;
-    this.key = options.redis.tokensAuthorizedName;
+    this.key = options.redis.tokensPrefix;
   }
 
   getUsers(callback) {
