@@ -54,7 +54,8 @@ function Server (options) {
 
   app.use(expressBunyanLogger({
     name: "requests",
-    logger: logger
+    logger: logger,
+    excludes: ['req', 'res']
   }));
 
   app.use((req, res, next) => {
