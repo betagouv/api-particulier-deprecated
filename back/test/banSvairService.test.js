@@ -33,7 +33,6 @@ describe('Svair Ban Service', function () {
       const svairBanService = new SvairBanService()
 
       //when
-      console.log('svairBanService', JSON.stringify(svairBanService))
       svairBanService.getAdress( 23, 34, function(err, data) {
         expect(err).to.not.exist
         expect(data).to.deep.equal(expectedResponse)

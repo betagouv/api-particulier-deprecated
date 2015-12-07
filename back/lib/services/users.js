@@ -1,6 +1,7 @@
 "use strict";
 
-var Redis = require('ioredis')
+const Redis = require('ioredis')
+const async = require('async')
 
 class UserService {
 
@@ -13,19 +14,41 @@ class UserService {
 
   getUsers(callback) {
     const self = this;
-    self.redis.lrange(self.key, 0, -1, (err, results) => {
+    self.redis.keys(self.key +'::*', (err, keys) => {
       if(err) {
         self.logger.error(err);
         return callback(new StandardError("Impossible to connect to redis", {code: 500}))
       }
-      results = results.map(function(result) { return JSON.parse(result)})
-      callback(null, results)
+      async.map(keys, (item, callback) => {
+        self.redis.get(item, (err, result) => {
+          if(err) return callback(err);
+          callback(null, (result))
+        } )
+      }, (err, results) => {
+        if(err) {
+          self.logger.error(err);
+          return callback(new StandardError("Impossible to connect to redis", {code: 500}))
+        }
+        callback(null, results.map(JSON.parse))
+      })
+
+    })
+  }
+
+  getUser(token, callback) {
+    const self = this;
+    self.redis.get(self.key + '::' + token, (err, result) => {
+      if(err) {
+        self.logger.error(err);
+        return callback(new StandardError("Impossible to connect to redis", {code: 500}))
+      }
+      callback(null, JSON.parse(result))
     })
   }
 
   createUser(user, callback) {
     const self = this;
-    self.redis.lpush(self.key, user, (err) => {
+    self.redis.set(self.key +'::'+ user.token, JSON.stringify(user), (err) => {
       if(err) {
         self.logger.error(err);
         return callback(new StandardError("Impossible to connect to redis", {code: 500}))
@@ -34,34 +57,16 @@ class UserService {
     })
   }
 
-  deleteUser(userName, callback) {
+  deleteUser(token, callback) {
     const self = this;
-    self.redis.lrange(self.key, 0, -1, (err, results) => {
+    self.redis.del(self.key + '::'+ token, (err, result) => {
       if(err) {
         self.logger.error(err);
         return callback(new StandardError("Impossible to connect to redis", {code: 500}))
       }
-      const names = results
-                  .map((result) => { return JSON.parse(result)})
-                  .map((user) => {user.name})
-      const index = names.indexOf(userName)
-      self.redis.lset(self.key, index, '{name:"deleted"}', (err) => {
-        if(err) {
-          self.logger.error(err);
-          return callback(new StandardError("Impossible to connect to redis", {code: 500}))
-        }
-        self.redis.lrem(self.key, 0, '{name:"deleted"}', (err, results) => {
-          if(err) {
-            self.logger.error(err);
-            return callback(new StandardError("Impossible to connect to redis", {code: 500}))
-          }
-          callback();
-        })
-      })
-
-
-      callback(null, results)
+      callback(null, result)
     })
+
   }
 }
 

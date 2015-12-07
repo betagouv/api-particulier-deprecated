@@ -52,9 +52,9 @@ module.exports = function(){
         token: 'adminToken',
         role: 'admin'
       }
-      redis.lpush(options.redis.tokensPrefix, JSON.stringify(user), function(err) {
+      redis.set(options.redis.tokensPrefix + '::' + user.token, JSON.stringify(user), function(err) {
         if(err) return done(err);
-        redis.lpush(options.redis.tokensPrefix, JSON.stringify(admin), done)
+        redis.set(options.redis.tokensPrefix  + '::' + admin.token, JSON.stringify(admin), done)
       })
     });
   });
@@ -62,7 +62,15 @@ module.exports = function(){
   afterEach(function (done) {
     server.stop(function(err) {
       if(err) return done(err);
-      redis.del(options.redis.tokensPrefix, done)
+      redis.keys(options.redis.tokensPrefix +'::*', (err, keys) => {
+        if(err) return done(err)
+        async.map(keys, (item, callback) => {
+          redis.del(item, callback )
+        }, (err) => {
+          done(err)
+        })
+
+      })
     });
   });
 

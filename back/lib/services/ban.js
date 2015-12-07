@@ -13,7 +13,6 @@ class BanService {
   }
 
   getAdress(query, callback) {
-    console.log('baseUrl', JSON.stringify(this.baseUrl))
     var url = this.baseUrl.template('search')
                 .query({
                   q: query

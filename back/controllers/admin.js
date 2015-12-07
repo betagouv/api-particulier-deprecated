@@ -26,7 +26,7 @@ function CafController(options) {
       return next(new StandardError('Vous n\'être pas administrateur', {code: 403}));
     }
     logger.debug('body = ' + JSON.stringify(req.body));
-    options.usersService.createUser(JSON.stringify(req.body), function(err, result) {
+    options.usersService.createUser(req.body, function(err, result) {
       if(err) {
         logger.error(err);
         return next(err)
@@ -45,7 +45,11 @@ function CafController(options) {
         logger.error(err);
         return next(err)
       }
-      res.status(204);
+      if(result) {
+        res.status(204);
+      } else {
+        res.status(404);
+      }
       res.end();
     });
   }

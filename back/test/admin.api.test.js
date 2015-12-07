@@ -27,14 +27,14 @@ describe('Admin API', function () {
           .expect(200,
             [
               {
-                name: 'admin',
-                token: 'adminToken',
-                role: 'admin'
-              },
-              {
                 name: 'test',
                 token: '',
                 role: 'user'
+              },
+              {
+                name: 'admin',
+                token: 'adminToken',
+                role: 'admin'
               }
             ], done)
       });
@@ -72,72 +72,57 @@ describe('Admin API', function () {
                   [
                     user,
                     {
-                      name: 'admin',
-                      token: 'adminToken',
-                      role: 'admin'
-                    },
-                    {
                       name: 'test',
                       token: '',
                       role: 'user'
+                    },
+                    {
+                      name: 'admin',
+                      token: 'adminToken',
+                      role: 'admin'
                     }
                   ], done)
             })
       });
     })
+  })
 
-    describe("when you create an user", function () {
-      it('replies 200 with the users', function (done) {
-
-        var user = {
-          name: 'tge',
-          token: 'wsdulfhsdhf',
-          role: 'user'
-        }
-        api()
-          .post('/api/admin/users')
-          .set('X-API-Key', 'adminToken')
-          .send(user)
-          .expect(201, function(err) {
-              if(err) return done(err);
-              api()
-                .get('/api/admin/users')
-                .set('X-API-Key', 'adminToken')
-                .expect(200,
-                  [
-                    user,
-                    {
-                      name: 'admin',
-                      token: 'adminToken',
-                      role: 'admin'
-                    },
-                    {
-                      name: 'test',
-                      token: '',
-                      role: 'user'
-                    }
-                  ], done)
-            })
-      });
+  describe("when you delete an user", function () {
+    var user = {
+      name: 'tge',
+      token: 'wsdulfhsdhf',
+      role: 'user'
+    }
+    beforeEach(function(done) {
+      api()
+        .post('/api/admin/users')
+        .set('X-API-Key', 'adminToken')
+        .send(user)
+        .expect(201, done)
     })
 
-    describe("when you delete an user", function () {
-      it('replies 204', function (done) {
-        api()
-          .delete('/api/admin/users/test')
-          .set('X-API-Key', 'adminToken')
-          .expect(204, function(err) {
-              if(err) return done(err);
-              api()
-                .get('/api/admin/users')
-                .set('X-API-Key', 'adminToken')
-                .expect(200, [ {
-                  name: 'admin',
-                  token: 'adminToken',
-                  role: 'admin'
-                } ], done)
-            })
-      });
-    })
+    it('replies 204', function (done) {
+      api()
+        .delete('/api/admin/users/'+ user.token)
+        .set('X-API-Key', 'adminToken')
+        .expect(204, function(err) {
+            if(err) return done(err);
+            api()
+              .get('/api/admin/users')
+              .set('X-API-Key', 'adminToken')
+              .expect(200, [
+                {
+                  name: 'test',
+                  token: '',
+                  role: 'user'
+                },
+                {
+                name: 'admin',
+                token: 'adminToken',
+                role: 'admin'
+              } ], done)
+          })
+    });
+
   });
 });

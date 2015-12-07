@@ -2,9 +2,6 @@
 
 
 const StandardError = require('standard-error');
-const _ = require('lodash');
-
-
 
 
 module.exports =
@@ -12,16 +9,14 @@ module.exports =
    return function isAuthorized(req, res, next) {
    var token = req.get('X-API-Key') || ""
 
-   usersService.getUsers(function(err, results) {
+   usersService.getUser(token, (err, result) => {
      if(err) {
        req.logger.error(err);
        return next(err)
      }
-     req.logger.debug({ event: 'authorization' }, JSON.stringify(results));
-     var userConnected = _.find(results, {token: token})
-     if(userConnected) {
-       req.logger.debug({ event: 'authorization' }, userConnected.name + ' is authorized ('+ userConnected.role+')');
-       req.userConnected = userConnected;
+     if(result) {
+       req.logger.debug({ event: 'authorization' }, result.name + ' is authorized ('+ result.role+')');
+       req.userConnected = result;
        next()
      } else {
        req.logger.debug({ event: 'authorization' }, 'not authorized');
