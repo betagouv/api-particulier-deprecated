@@ -17,4 +17,4 @@ ADD ./ /srv/apps
 
 RUN npm install --production
 
-CMD ["pm2", "start", "/srv/apps/apps.json", "--no-daemon"]
+CMD ./bin/www
