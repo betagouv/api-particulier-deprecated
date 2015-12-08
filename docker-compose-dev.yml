@@ -10,6 +10,7 @@ app:
     - redis:redis
   environment:
     - redis_host=redis
+    - log_format=bunyan
 
 
 redis:
