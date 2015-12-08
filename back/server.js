@@ -13,6 +13,8 @@ const Redis = require('ioredis');
 const js2xmlparser = require("js2xmlparser");
 const formatFromUrl = require('./lib/middlewares/formatFromUrl')
 const getApiKeyFromQueryParam = require('./lib/middlewares/getApiKeyFromQueryParam')
+const identifyUser = require('./lib/middlewares/identifyUser')
+const logger = require('./lib/middlewares/logger')
 const formatError = require('./lib/middlewares/formatError')
 const isAuthorized = require('./lib/middlewares/isAuthorized')
 const UsersService = require('./lib/services/users');
@@ -55,14 +57,8 @@ function Server (options) {
   app.use(expressBunyanLogger({
     name: "requests",
     logger: logger,
-    excludes: ['req', 'res', 'req-headers', 'res-headers', 'msg', 'url', 'short-body', 'body'],
-    includesFn: function(req, res) {
-      return {
-        correlationId: req.id,
-        consumer: {
-          organisation: req.consumer.name
-        }
-      }
+    excludes: logger.excludes,
+    includesFn: logger.includesFn
   }));
 
   app.use((req, res, next) => {
@@ -71,6 +67,7 @@ function Server (options) {
   })
 
   app.use(getApiKeyFromQueryParam)
+  app.use(identifyUser)
 
   app.use(formatFromUrl)
 

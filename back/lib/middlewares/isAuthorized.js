@@ -20,6 +20,7 @@ module.exports =
        next()
      } else {
        req.logger.debug({ event: 'authorization' }, 'not authorized');
+       req.consumer= {}
        next(new StandardError('You are not authorized to use the api', {code: 401}));
      }
    })
