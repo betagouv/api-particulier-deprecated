@@ -14,7 +14,7 @@ const js2xmlparser = require("js2xmlparser");
 const formatFromUrl = require('./lib/middlewares/formatFromUrl')
 const getApiKeyFromQueryParam = require('./lib/middlewares/getApiKeyFromQueryParam')
 const identifyUser = require('./lib/middlewares/identifyUser')
-const logger = require('./lib/middlewares/logger')
+const loggerProperties = require('./lib/middlewares/logger')
 const formatError = require('./lib/middlewares/formatError')
 const isAuthorized = require('./lib/middlewares/isAuthorized')
 const UsersService = require('./lib/services/users');
@@ -57,8 +57,8 @@ function Server (options) {
   app.use(expressBunyanLogger({
     name: "requests",
     logger: logger,
-    excludes: logger.excludes,
-    includesFn: logger.includesFn
+    excludes: loggerProperties.excludes,
+    includesFn: loggerProperties.includesFn
   }));
 
   app.use((req, res, next) => {
