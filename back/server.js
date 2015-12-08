@@ -58,7 +58,8 @@ function Server (options) {
     name: "requests",
     logger: logger,
     excludes: loggerProperties.excludes,
-    includesFn: loggerProperties.includesFn
+    includesFn: loggerProperties.includesFn,
+    format: '":remote-address :incoming :method HTTP/:http-version :status-code :res-headers[content-length] :referer :user-agent[family] :user-agent[major].:user-agent[minor] :user-agent[os] :response-time ms";'
   }));
 
   app.use((req, res, next) => {
