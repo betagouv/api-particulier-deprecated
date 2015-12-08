@@ -55,6 +55,6 @@ function CafController(options) {
   }
 
   function isNotAdmin(req) {
-    return req.userConnected.role && req.userConnected.role !== 'admin';
+    return req.consumer.role && req.consumer.role !== 'admin';
   }
 }

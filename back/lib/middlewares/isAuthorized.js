@@ -11,12 +11,12 @@ module.exports =
 
    usersService.getUser(token, (err, result) => {
      if(err) {
-       req.logger.error(err);
+       req.logger.warn(err);
        return next(err)
      }
      if(result) {
        req.logger.debug({ event: 'authorization' }, result.name + ' is authorized ('+ result.role+')');
-       req.userConnected = result;
+       req.consumer = result;
        next()
      } else {
        req.logger.debug({ event: 'authorization' }, 'not authorized');

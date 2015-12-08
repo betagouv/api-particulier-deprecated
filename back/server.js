@@ -55,7 +55,14 @@ function Server (options) {
   app.use(expressBunyanLogger({
     name: "requests",
     logger: logger,
-    excludes: ['req', 'res']
+    excludes: ['req', 'res', 'req-headers', 'res-headers', 'msg', 'url', 'short-body', 'body'],
+    includesFn: function(req, res) {
+      return {
+        correlationId: req.id,
+        consumer: {
+          organisation: req.consumer.name
+        }
+      }
   }));
 
   app.use((req, res, next) => {
