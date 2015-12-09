@@ -48,3 +48,11 @@
 .site-example p {
   margin-bottom: 15px
 }
+
+.site-example img {
+  opacity: 0.5
+}
+
+.site-example img:hover {
+  opacity: 0.9
+}
