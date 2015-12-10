@@ -5,8 +5,6 @@ var webpack = require('webpack');
 var autoprefixer = require('autoprefixer-core');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var ModernizrWebpackPlugin = require('modernizr-webpack-plugin');
-
 
 module.exports = function makeWebpackConfig (options) {
   /**
@@ -195,8 +193,7 @@ module.exports = function makeWebpackConfig (options) {
     // Disabled when in test mode or not in build mode
     new ExtractTextPlugin('[name].[hash].css', {
       disable: !BUILD || TEST
-    }),
-    new ModernizrWebpackPlugin()
+    })
   ];
 
   // Skip rendering index.html in test mode

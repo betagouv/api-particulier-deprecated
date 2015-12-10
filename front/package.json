@@ -37,7 +37,6 @@
     "html-webpack-plugin": "1.5.2",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
-    "modernizr-webpack-plugin": "1.0.5",
     "node-libs-browser": "^0.5.2",
     "postcss-loader": "^0.4.4",
     "raw-loader": "^0.5.1",
