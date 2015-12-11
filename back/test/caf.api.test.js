@@ -25,6 +25,20 @@ describe('Caf API', function () {
           .expect("content-type", /application\/pdf/)
           .expect(200,done)
       });
+
+      describe("ping", function() {
+        it('replies 200', function (done) {
+
+          nock('https://pep-test.caf.fr')
+            .post('/sgmap/wswdd/v1')
+            .reply(200, httpResponse);
+
+          api()
+            .get('/api/ping/caf')
+            .expect("content-type", /json/)
+            .expect(200,'"pong"', done)
+        });
+      })
     })
 
     describe("with  error", function() {

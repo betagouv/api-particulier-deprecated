@@ -26,6 +26,7 @@ exports.configure = function (app, options) {
   app.get('/api/ping/impots', impotsController.ping);
   app.get('/api/impots/adress', impotsController.adress);
   app.get('/api/caf/attestation', cafController.attestation);
+  app.get('/api/ping/caf', cafController.ping);
   app.get('/api/admin/users', adminController.getUsers);
   app.post('/api/admin/users', adminController.createUser);
   app.delete('/api/admin/users/:name', adminController.deleteUser);
