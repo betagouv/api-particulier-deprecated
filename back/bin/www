@@ -30,6 +30,10 @@ mhttp.on('stat', function (parsed, stats) {
   }, '%s %s took %dms (%d)', stats.method || 'GET', url.format(parsed), stats.totalTime, stats.statusCode);
 });
 
+var raven = {
+
+}
+
 var server = new Server({
   port: nconf.get('port'),
   cafHost: nconf.get('cafHost'),
@@ -37,6 +41,10 @@ var server = new Server({
   cafSslKey: nconf.get('cafSslKey'),
   logger: logger,
   nconf: nconf,
+  raven: {
+    activate: nconf.get('raven:activate'),
+    dsn: nconf.get('raven:dsn'),
+  },
   redis: {
     host: nconf.get('redis:host'),
     port: nconf.get('redis:port'),

@@ -21,6 +21,10 @@ module.exports = function(){
       port: 6379,
       tokensPrefix: 'testTokenAuthorized'
     },
+    raven: {
+      activate: false,
+      dsn:''
+    },
     ban: {
       baseUrl: "http://adresse.data.gouv.local"
     }

@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const UrlAssembler = require('url-assembler');
 const Redis = require('ioredis');
+const raven = require('raven')
 const js2xmlparser = require("js2xmlparser");
 const formatFromUrl = require('./lib/middlewares/formatFromUrl')
 const getApiKeyFromQueryParam = require('./lib/middlewares/getApiKeyFromQueryParam')
@@ -66,6 +67,10 @@ function Server (options) {
     req.logger = logger;
     next();
   })
+
+  if(options.raven.activate) {
+    app.use(raven.middleware.express(options.raven.dsn));
+  }
 
   app.use(getApiKeyFromQueryParam)
   app.use(identifyUser)
