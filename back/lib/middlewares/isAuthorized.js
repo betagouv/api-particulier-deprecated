@@ -2,11 +2,11 @@
 
 
 const StandardError = require('standard-error');
-
+const unless = require('express-unless')
 
 module.exports =
  function(usersService) {
-   return function isAuthorized(req, res, next) {
+   const middleware =  function isAuthorized(req, res, next) {
    var token = req.get('X-API-Key') || ""
 
    usersService.getUser(token, (err, result) => {
@@ -25,5 +25,6 @@ module.exports =
      }
    })
  }
-
+ middleware.unless = unless
+ return middleware;
 }

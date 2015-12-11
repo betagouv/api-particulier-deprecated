@@ -8,7 +8,7 @@ module.exports.includesFn = function(req, res) {
   return {
     correlationId: req.id,
     consumer: {
-      organisation: req.consumer.name,
+      organisation: (req.consumer || {}).name,
       user: req.user
     },
     host: req.headers.host,

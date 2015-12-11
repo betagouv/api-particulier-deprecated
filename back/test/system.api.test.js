@@ -47,7 +47,7 @@ describe('System API', () => {
     describe("in the http header", () => {
       it('replies 403', function (done) {
         api()
-          .get('/api/ping')
+          .get('/api/pingt')
           .set('X-API-Key', 'token-nok')
           .expect(401,done)
       });
@@ -56,7 +56,7 @@ describe('System API', () => {
     describe("in the url", () => {
       it('replies 403', function (done) {
         api()
-          .get('/api/ping')
+          .get('/api/pingt')
           .query({'API-Key': 'token-nok'})
           .expect(401,done)
       });
