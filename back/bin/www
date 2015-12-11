@@ -40,6 +40,8 @@ var server = new Server({
   cafSslCertificate: nconf.get('cafSslCertificate'),
   cafSslKey: nconf.get('cafSslKey'),
   logger: logger,
+  numeroFiscal: nconf.get('numeroFiscal'),
+  referenceAvis: nconf.get('referenceAvis'),
   nconf: nconf,
   raven: {
     activate: nconf.get('raven:activate'),

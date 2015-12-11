@@ -2,15 +2,10 @@ var SystemController = require('../controllers/system');
 var ImpotsController = require('../controllers/impots');
 var CafController = require('../controllers/caf');
 var AdminController = require ('../controllers/admin')
-exports.configure = function (app) {
+exports.configure = function (app, options) {
 
-  var systemController = new SystemController();
-
-  var impotsOptions = {
-    banBaseUrl: app.get('banBaseUrl')
-  }
-
-  var impotsController = new ImpotsController(impotsOptions);
+  var systemController = new SystemController(options);
+  var impotsController = new ImpotsController(options);
 
   var adminOptions = {
     usersService: app.get('usersService'),
@@ -28,6 +23,7 @@ exports.configure = function (app) {
 
   app.get('/api/ping', systemController.ping);
   app.get('/api/impots/svair', impotsController.svair);
+  app.get('/api/ping/impots', impotsController.ping);
   app.get('/api/impots/adress', impotsController.adress);
   app.get('/api/caf/attestation', cafController.attestation);
   app.get('/api/admin/users', adminController.getUsers);

@@ -10,6 +10,8 @@ module.exports = {
     level: 'debug',
     format: 'simple'
   },
+  referenceAvis: '',
+  numeroFiscal: '',
   raven: {
     activate: false,
     dsn:''
