@@ -7,8 +7,8 @@ module.exports= function(res, data) {
        res.json(data)
     },
     'application/xml': function(){
-      if(data instanceof String){
-        data = {data}
+      if(typeof data === 'string'){
+        data = {data: data}
       }
       res.send(js2xmlparser("result", data))
     },
