@@ -9,7 +9,9 @@ const fs = require('fs');
 
 describe('Ban Service', function () {
   const banService = new BanService({
-    banBaseUrl: 'http://adresse.data.gouv.local'
+    ban: {
+      baseUrl: 'http://adresse.data.gouv.local'
+    }
   });
 
   const banResponse = JSON.parse(fs.readFileSync(__dirname + '/resources/banResponse.json','utf-8'));
