@@ -68,6 +68,10 @@ function Server (options) {
     next();
   })
 
+  app.get('/api/onError', function mainHandler(req, res) {
+      throw new Error('Broke!');
+  });
+
   if(options.raven.activate) {
     app.use(raven.middleware.express(options.raven.dsn));
   }
