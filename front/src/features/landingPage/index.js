@@ -5,6 +5,8 @@ import './css/main.css';
 import './css/landingPage.css';
 require('font-awesome/css/font-awesome.css');
 
+require('./charte.pdf')
+
 require('highlight.js/styles/github.css')
 var hljs = require('highlight.js/lib/highlight')
 hljs.registerLanguage('bash', require('highlight.js/lib/languages/bash'));
