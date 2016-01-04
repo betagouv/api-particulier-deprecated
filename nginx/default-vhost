@@ -7,6 +7,10 @@ server {
         server_name apiparticulier.sgmap.fr;
 
 
+        location /docs {
+          root /var/www;
+        }
+
         location /api {
 
             proxy_set_header X-Real-IP  $remote_addr;

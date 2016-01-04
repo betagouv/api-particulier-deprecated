@@ -20,6 +20,9 @@ redis:
 front:
   build: front
 
+docs:
+  build: docs
+
 nginx:
   build: nginx
   container_name: apiparticulier-nginx
@@ -28,6 +31,7 @@ nginx:
     - 443:443
   volumes_from:
     - front
+    - docs
   links:
     - app:app
     - front

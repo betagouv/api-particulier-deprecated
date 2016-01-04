@@ -1,0 +1,20 @@
+{
+  "name": "api-particulier-docs",
+  "version": "0.1.0",
+  "description": "API PARTICULIER DOCS",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sgmap/api-particulier/tree/master/docs"
+  },
+  "keywords": [
+    "swagger"
+  ],
+  "author": "Thibaut Géry",
+  "license": "ISC",
+  "dependencies": {
+    "swagger-ui": "2.1.3"
+  }
+}
