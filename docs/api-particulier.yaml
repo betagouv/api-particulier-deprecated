@@ -56,7 +56,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /impots/address:
+  /impots/adress:
     get:
       summary: Service pour récupérer l'adresse du foyer fiscal
       description: |
