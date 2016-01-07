@@ -1,0 +1,433 @@
+swagger: '2.0'
+info:
+  title: API PARTICULIER
+  description: Simplification des échanges des données entres administrations
+  version: 1.0.0
+host: apiparticulier.sgmap.fr
+schemes:
+  - https
+basePath: /api
+produces:
+  - application/json
+  - application/xml
+paths:
+  /impots/svair:
+    get:
+      summary: Service de vérification de l'avis d'impôt sur le revenu
+      description: |
+        Le service permet de vérifier l'authenticité du justificatif d'impôt sur
+        le revenu ou de l'avis d'impôt sur le revenu présenté par un usager
+      parameters:
+        - name: numeroFiscal
+          in: query
+          description: Numéro fiscal
+          required: true
+          type: number
+          format: integer
+        - name: referenceAvis
+          in: query
+          description: Référence d'avis
+          required: true
+          type: string
+        - name: X-API-Key
+          in: header
+          description: Token d'identification de l'API
+          required: true
+          type: string
+          format: integer
+      tags:
+        - Impots
+      responses:
+        '200':
+          description: A declaration
+          schema:
+            $ref: '#/definitions/Declaration'
+        '401':
+          description: Le token ne vous permet d'accèder à l'API
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: 'Les paramètres fournis sont incorrects ou ne correspondent pas à un avis'
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /impots/adress:
+    get:
+      summary: Service pour récupérer l'adresse du foyer fiscal
+      description: |
+        permet de récupérer les possibles localisations du foyer fiscale
+        enrichie grace à la BAN
+      parameters:
+        - name: numeroFiscal
+          in: query
+          description: Numéro fiscal
+          required: true
+          type: number
+          format: integer
+        - name: referenceAvis
+          in: query
+          description: Référence d'avis
+          required: true
+          type: number
+          format: integer
+        - name: X-API-Key
+          in: header
+          description: Token d'identification de l'API
+          required: true
+          type: string
+          format: integer
+      tags:
+        - Impots
+      responses:
+        '200':
+          description: A declaration
+          schema:
+            $ref: '#/definitions/SvairAdresses'
+        '401':
+          description: Le token ne vous permet d'accèder à l'API
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: 'Les paramètres fournis sont incorrects ou ne correspondent pas à un avis'
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+  /caf/attestation:
+    get:
+      summary: Service de récupération de la CAD
+      description: |
+        permet de récupérer le PDF certifiant les attestations reçu par la CAF.
+        Il contient:
+        <ul>
+          <li>les identités des personnes recevant les allocations</li>
+          <li>les enfants</li>
+          <li>les allocations</li>
+          <li>le quotient familial</li>
+        </ul>
+
+      parameters:
+        - name: numeroAllocataire
+          in: query
+          description: Numéro d'allocataire
+          required: true
+          type: number
+          format: integer
+        - name: codeOrganisme
+          in: query
+          description: Code organisme de la CAF (un par code postal)
+          required: true
+          type: number
+          format: integer
+        - name: X-API-Key
+          in: header
+          description: Token d'identification de l'API
+          required: true
+          type: string
+          format: integer
+      tags:
+        - CAF
+      responses:
+        '200':
+          description: Un
+          schema:
+            type: file
+        '401':
+          description: Le token ne vous permet d'accèder à l'API
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: 'Les paramètres fournis sont incorrects ou ne correspondent pas à un avis'
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+definitions:
+  Declaration:
+    type: object
+    properties:
+      declarant1:
+        $ref: '#/definitions/Declarant'
+      foyerFiscal:
+        $ref: '#/definitions/Declarant'
+      declarant2:
+        $ref: '#/definitions/FoyerFiscal'
+      dateRecouvrement:
+        type: string
+        description: 'Date de recouvrement; format: JJ/MM/AAA'
+      dateEtablissement:
+        type: string
+        description: 'Date de recouvrement; format: JJ/MM/AAA'
+      nombreParts:
+        type: integer
+        description: 'Nombre de parts'
+      situationFamille:
+        type: string
+        description: Situation familiale (marié, célibataire...)
+      nombrePersonnesCharge:
+        type: integer
+        description: 'Nombre de personne à charge '
+      revenuBrutGlobal:
+        type: integer
+        description: 'Revenu brut global'
+      revenuImposable:
+        type: integer
+        description: 'Revenu imposable'
+      impotRevenuNetAvantCorrections:
+        type: integer
+        description: 'Revenu net avant correction'
+      montantImpot:
+        type: integer
+        description: 'Montant des impots'
+      revenuFiscalReference:
+        type: integer
+        description: 'Revenu fiscal de référence'
+      anneeImpots:
+        type: integer
+        description: 'Année format: AAAA'
+      anneeRevenus:
+        type: integer
+        description: 'Année format: AAAA'
+
+  SvairAdresses:
+    type: object
+    properties:
+      declarant1:
+        $ref: '#/definitions/Declarant'
+      foyerFiscal:
+        $ref: '#/definitions/Declarant'
+      declarant2:
+        $ref: '#/definitions/FoyerFiscal'
+      adresses:
+        type: array
+        items:
+          $ref: '#/definitions/Address'
+  Address:
+    type: object
+    properties:
+      adresse:
+        type: object
+        properties:
+          name:
+            type: string
+          city:
+            type: string
+          housenumber:
+            type: string
+          label:
+            type: string
+          context:
+            type: string
+          citycode:
+            type: string
+          type:
+            type: string
+          score:
+            type: number
+            format: double
+          postcode:
+            type: string
+      geometry:
+        type: object
+        properties:
+          type:
+            type: string
+          coordinates:
+            type: array
+            items:
+              type: number
+              format: double
+
+  Declarant:
+    type: object
+    properties:
+      nom:
+        type: string
+        description: nom du déclarant
+      nomNaissance:
+        type: string
+        description: nom de naissance du déclarant
+      prenoms:
+        type: string
+        description: prenoms du déclarant
+      dateNaissance:
+        type: string
+        description: dateNaissance du déclarant
+
+  FoyerFiscal:
+    type: object
+    properties:
+      annee:
+        type: integer
+        description: année
+      adresse:
+        type: string
+        description: adresse fiscale de l'année passée
+
+  Error:
+    type: object
+    properties:
+      message:
+        type: string
+      error:
+        type: string
+
+      tags:
+        - CAF
+      responses:
+        '200':
+          description: Un
+          schema:
+            type: file
+        '401':
+          description: Le token ne vous permet d'accèder à l'API
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: 'Les paramètres fournis sont incorrects ou ne correspondent pas à un avis'
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+definitions:
+  Declaration:
+    type: object
+    properties:
+      declarant1:
+        $ref: '#/definitions/Declarant'
+      foyerFiscal:
+        $ref: '#/definitions/Declarant'
+      declarant2:
+        $ref: '#/definitions/FoyerFiscal'
+      dateRecouvrement:
+        type: string
+        description: 'Date de recouvrement; format: JJ/MM/AAA'
+      dateEtablissement:
+        type: string
+        description: 'Date de recouvrement; format: JJ/MM/AAA'
+      nombreParts:
+        type: integer
+        description: 'Nombre de parts'
+      situationFamille:
+        type: string
+        description: Situation familiale (marié, célibataire...)
+      nombrePersonnesCharge:
+        type: integer
+        description: 'Nombre de personne à charge '
+      revenuBrutGlobal:
+        type: integer
+        description: 'Revenu brut global'
+      revenuImposable:
+        type: integer
+        description: 'Revenu imposable'
+      impotRevenuNetAvantCorrections:
+        type: integer
+        description: 'Revenu net avant correction'
+      montantImpot:
+        type: integer
+        description: 'Montant des impots'
+      revenuFiscalReference:
+        type: integer
+        description: 'Revenu fiscal de référence'
+      anneeImpots:
+        type: integer
+        description: 'Année format: AAAA'
+      anneeRevenus:
+        type: integer
+        description: 'Année format: AAAA'
+
+  SvairAdresses:
+    type: object
+    properties:
+      declarant1:
+        $ref: '#/definitions/Declarant'
+      foyerFiscal:
+        $ref: '#/definitions/Declarant'
+      declarant2:
+        $ref: '#/definitions/FoyerFiscal'
+      adresses:
+        type: array
+        items:
+          $ref: '#/definitions/Address'
+  Address:
+    type: object
+    properties:
+      adresse:
+        type: object
+        properties:
+          name:
+            type: string
+          city:
+            type: string
+          housenumber:
+            type: string
+          label:
+            type: string
+          context:
+            type: string
+          citycode:
+            type: string
+          type:
+            type: string
+          score:
+            type: number
+            format: double
+          postcode:
+            type: string
+      geometry:
+        type: object
+        properties:
+          type:
+            type: string
+          coordinates:
+            type: array
+            items:
+              type: number
+              format: double
+
+  Declarant:
+    type: object
+    properties:
+      nom:
+        type: string
+        description: nom du déclarant
+      nomNaissance:
+        type: string
+        description: nom de naissance du déclarant
+      prenoms:
+        type: string
+        description: prenoms du déclarant
+      dateNaissance:
+        type: string
+        description: dateNaissance du déclarant
+
+  FoyerFiscal:
+    type: object
+    properties:
+      annee:
+        type: integer
+        description: année
+      adresse:
+        type: string
+        description: adresse fiscale de l'année passée
+
+  Error:
+    type: object
+    properties:
+      message:
+        type: string
+      error:
+        type: string
