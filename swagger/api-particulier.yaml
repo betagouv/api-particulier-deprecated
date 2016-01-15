@@ -162,6 +162,22 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
+  /ping:
+    get:
+      summary: Service pour connaitre si l'application fonctionne correctement
+      tags:
+        - System
+      responses:
+        '200':
+          description: Un
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+
 definitions:
   Declaration:
     type: object
