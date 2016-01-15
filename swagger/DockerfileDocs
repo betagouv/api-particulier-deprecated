@@ -10,7 +10,7 @@ WORKDIR /var/www/docs
 
 RUN npm install --production
 
-COPY ./docs /var/www/docs/api-particulier.yaml
+COPY ./api-particulier.yaml /var/www/docs/api-particulier.yaml
 
 VOLUME /var/www/docs
 
