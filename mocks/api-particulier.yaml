@@ -3,9 +3,6 @@ info:
   title: API PARTICULIER
   description: Simplification des échanges des données entres administrations
   version: 1.0.0
-host: apiparticulier.sgmap.fr
-schemes:
-  - https
 basePath: /api
 produces:
   - application/json
@@ -34,7 +31,11 @@ paths:
           description: Token d'identification de l'API
           required: true
           type: string
-          format: integer
+        - name: X-User
+          in: header
+          description: Utilisateur final de l'API
+          required: false
+          type: string
       tags:
         - Impots
       responses:
@@ -72,14 +73,17 @@ paths:
           in: query
           description: Référence d'avis
           required: true
-          type: number
-          format: integer
+          type: string
         - name: X-API-Key
           in: header
           description: Token d'identification de l'API
           required: true
           type: string
-          format: integer
+        - name: X-User
+          in: header
+          description: Utilisateur final de l'API
+          required: false
+          type: string
       tags:
         - Impots
       responses:
@@ -131,7 +135,11 @@ paths:
           description: Token d'identification de l'API
           required: true
           type: string
-          format: integer
+        - name: X-User
+          in: header
+          description: Utilisateur final de l'API
+          required: false
+          type: string
       tags:
         - CAF
       responses:
@@ -308,9 +316,9 @@ definitions:
     properties:
       declarant1:
         $ref: '#/definitions/Declarant'
-      foyerFiscal:
-        $ref: '#/definitions/Declarant'
       declarant2:
+        $ref: '#/definitions/Declarant'
+      foyerFiscal:
         $ref: '#/definitions/FoyerFiscal'
       dateRecouvrement:
         type: string
@@ -355,9 +363,9 @@ definitions:
       declarant1:
         $ref: '#/definitions/Declarant'
       foyerFiscal:
-        $ref: '#/definitions/Declarant'
-      declarant2:
         $ref: '#/definitions/FoyerFiscal'
+      declarant2:
+        $ref: '#/definitions/Declarant'
       adresses:
         type: array
         items:
