@@ -4,19 +4,15 @@ server {
         root /var/www/app;
         index index.html;
 
-        server_name apiparticulier.sgmap.fr;
+        server_name apiparticulier-mock.sgmap.fr;
 
 
-        location /docs {
-          root /var/www;
-        }
-
-        location /api {
+        location / {
 
             proxy_set_header X-Real-IP  $remote_addr;
             proxy_set_header X-Forwarded-For $remote_addr;
             proxy_set_header Host $host;
-            proxy_pass http://app:3004;
+            proxy_pass http://mocks:3000;
 
          }
 

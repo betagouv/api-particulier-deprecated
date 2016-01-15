@@ -21,17 +21,23 @@ front:
   build: front
 
 docs:
-  build: docs
+  build: swagger
+  dockerfile: DockerfileDocs
+
+mocks:
+  build: swagger
+  dockerfile: DockerfileMocks
 
 nginx:
   build: nginx
   container_name: apiparticulier-nginx
   ports:
     - 8080:80
+    - 8081:8080
     - 443:443
   volumes_from:
     - front
     - docs
   links:
     - app:app
-    - front
+    - mocks:mocks
