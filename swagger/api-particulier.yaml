@@ -4,6 +4,8 @@ info:
   description: Simplification des échanges des données entres administrations
   version: 1.0.0
 basePath: /api
+schemes:
+  - https
 produces:
   - application/json
   - application/xml
