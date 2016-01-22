@@ -19,7 +19,7 @@ install-back:
 test: install test-front test-back
 
 test-front:
-	(cd front && npm test)
+	 docker-compose -f docker-compose-test.yml run front
 
 test-back:
-	(cd back && npm test)
+	 docker-compose -f docker-compose-test.yml run app
