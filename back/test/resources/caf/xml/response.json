@@ -1,0 +1,310 @@
+{
+    "FLUX_TRAFIC": {
+        "GENERALITES": [
+            {
+                "ORGANISME": [
+                    {
+                        "NUMORG": [
+                            "148"
+                        ],
+                        "TYPORG": [
+                            "CAF"
+                        ]
+                    }
+                ],
+                "DATEFLUX": [
+                    {
+                        "DTCREAFLUX": [
+                            "20012016"
+                        ],
+                        "HEUCREAFLUX": [
+                            "164317"
+                        ]
+                    }
+                ],
+                "ZONE_TECHNIQUE": [
+                    {
+                        "CDDOC": [
+                            "ATTDRT"
+                        ],
+                        "CDAPPLI": [
+                            "WAT"
+                        ]
+                    }
+                ]
+            }
+        ],
+        "DOCUMENT": [
+            {
+                "PUBLICATION": [
+                    {
+                        "$": {
+                            "traitementPapier": "false",
+                            "traitementMail": "false"
+                        },
+                        "NUMIDENTIFICATION": [
+                            "46558"
+                        ],
+                        "TYPEIDENTIFICATION": [
+                            "ALLOC"
+                        ],
+                        "IMPRESSION": [
+                            {
+                                "CODEPOS": [
+                                    "14360"
+                                ],
+                                "VILLE": [
+                                    "TROUVILLE SUR MER"
+                                ],
+                                "CODEPAYS": [
+                                    "FRA"
+                                ],
+                                "PAYS": [
+                                    "FRANCE"
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "ENTETE": [
+                    {
+                        "CONTACT": [
+                            {
+                                "IDUTI": [
+                                    ""
+                                ],
+                                "PSEUDOAGT": [
+                                    ""
+                                ],
+                                "NOMAGT": [
+                                    ""
+                                ],
+                                "PRENOMAGT": [
+                                    ""
+                                ],
+                                "LIBSERAGT": [
+                                    ""
+                                ],
+                                "CDAPPLI": [
+                                    "WAT"
+                                ]
+                            }
+                        ],
+                        "DESTINATAIRE": [
+                            {
+                                "NATDEST": [
+                                    "ALLOC"
+                                ],
+                                "MATRICULE": [
+                                    "46558"
+                                ],
+                                "LETCLE": [
+                                    "X"
+                                ],
+                                "CODGES": [
+                                    "03"
+                                ]
+                            }
+                        ],
+                        "ADRESSE": [
+                            {
+                                "LIBLIG1ADR": [
+                                    "Madame Marine Martin"
+                                ],
+                                "LIBLIG2ADR": [
+                                    ""
+                                ],
+                                "LIBLIG3ADR": [
+                                    ""
+                                ],
+                                "LIBLIG4ADR": [
+                                    "26 Rue Pasteur"
+                                ],
+                                "LIBLIG5ADR": [
+                                    ""
+                                ],
+                                "LIBLIG6ADR": [
+                                    "14360 TROUVILLE SUR MER"
+                                ],
+                                "LIBLIG7ADR": [
+                                    "FRANCE"
+                                ]
+                            }
+                        ],
+                        "DATECOMMANDE": [
+                            "20012016"
+                        ],
+                        "DOCUMENTCOMMANDE": [
+                            "ATTDRT"
+                        ],
+                        "DUMOIS": [
+                            "12"
+                        ],
+                        "DELANNEE": [
+                            "2015"
+                        ],
+                        "DUMOISFIN": [
+                            "12"
+                        ],
+                        "DELANNEEFIN": [
+                            "2015"
+                        ],
+                        "NOMALLOCATAIRE": [
+                            ""
+                        ]
+                    }
+                ],
+                "CORPS": [
+                    {
+                        "ATTPAIDRT": [
+                            {
+                                "IDENTITEPERSONNES": [
+                                    {
+                                        "UNEPERSONNE": [
+                                            {
+                                                "QUAL": [
+                                                    "Madame"
+                                                ],
+                                                "NOMPRENOM": [
+                                                    "Marine Martin"
+                                                ],
+                                                "DATNAISS": [
+                                                    "17111961"
+                                                ],
+                                                "SEXE": [
+                                                    "F"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "IDENTITEENFANTS": [
+                                    {
+                                        "UNENFANT": [
+                                            {
+                                                "TopENFRSA": [
+                                                    "N"
+                                                ],
+                                                "TopENFPPA": [
+                                                    "N"
+                                                ],
+                                                "NOMPRENOM": [
+                                                    "Marie Martin"
+                                                ],
+                                                "DATNAISS": [
+                                                    "18061996"
+                                                ],
+                                                "SEXE": [
+                                                    "F"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "QUOTIENTS": [
+                                    {
+                                        "QFMOIS": [
+                                            {
+                                                "DUMOIS": [
+                                                    "12"
+                                                ],
+                                                "DELANNEE": [
+                                                    "2015"
+                                                ],
+                                                "QUOTIENTF": [
+                                                    "345"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "PRESTATIONS": [
+                                    {
+                                        "NBMOIS": [
+                                            "1"
+                                        ],
+                                        "DUMOISANNEE": [
+                                            {
+                                                "DUMOIS": [
+                                                    "12"
+                                                ],
+                                                "DELANNEE": [
+                                                    "2015"
+                                                ],
+                                                "PRESTATIONSDUMOIS": [
+                                                    {
+                                                        "UNEPRESTATION": [
+                                                            {
+                                                                "NATURE": [
+                                                                    "Allocation de logement"
+                                                                ],
+                                                                "TITULAIRE": [
+                                                                    ""
+                                                                ],
+                                                                "MONTANT": [
+                                                                    "456,68"
+                                                                ],
+                                                                "topTIERS": [
+                                                                    "O"
+                                                                ],
+                                                                "IDENTTIERS": [
+                                                                    ""
+                                                                ],
+                                                                "topRSA": [
+                                                                    "N"
+                                                                ],
+                                                                "DETMTPAI": [
+                                                                    ""
+                                                                ],
+                                                                "DONTMTRSAACT": [
+                                                                    "0,00"
+                                                                ],
+                                                                "MTFORF": [
+                                                                    ""
+                                                                ],
+                                                                "MTREVACTI": [
+                                                                    ""
+                                                                ],
+                                                                "MTGARANTI": [
+                                                                    ""
+                                                                ],
+                                                                "TOPLIBGARANTIRSA": [
+                                                                    "N"
+                                                                ],
+                                                                "topNONDROIT": [
+                                                                    "N"
+                                                                ],
+                                                                "MOTIFNONDROIT": [
+                                                                    ""
+                                                                ],
+                                                                "topSUSPEN": [
+                                                                    "N"
+                                                                ],
+                                                                "topPPA": [
+                                                                    "N"
+                                                                ],
+                                                                "MTFORFPPA": [
+                                                                    ""
+                                                                ],
+                                                                "MTREVACTIPPA": [
+                                                                    ""
+                                                                ]
+                                                            }
+                                                        ],
+                                                        "MONTANTTOTAL": [
+                                                            "456,68"
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

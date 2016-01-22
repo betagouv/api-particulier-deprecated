@@ -48,6 +48,7 @@
     "standard-error": "^1.1.0",
     "string": "^3.1.1",
     "svair-api": "~0.2.1",
-    "url-assembler": "^1.2.2"
+    "url-assembler": "^1.2.2",
+    "xml2js": "0.4.16"
   }
 }

@@ -7,6 +7,7 @@ const Handlebars = require('handlebars');
 const UrlAssembler = require('url-assembler');
 const iconv = require('iconv-lite');
 const Readable = require('stream').Readable
+const parseString = require('xml2js').parseString;
 
 // L'ordre des paramètres de la requêtes est important
 const query =`<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://v1.ws.wsdemandedocumentweb.cnaf/">
@@ -84,7 +85,7 @@ class CafService {
             encoding: null
         })
         .on('error', err => callback(err))
-        .on('response', this.returnPdf(self,  callback));
+        .on('response', onSuccess);
   }
 
   returnPdf(self, callback) {
@@ -104,7 +105,12 @@ class CafService {
     return (res) => {
       if (res.statusCode !== 200) return callback(new Error('Request error'));
       res.pipe(iconv.decodeStream('latin1')).collect(function(err, decodedBody) {
-        callback(null, decodedBody);
+        parseString(decodedBody, (err, result) => {
+          const returnData = result["soapenv:Envelope"]["soapenv:Body"][0]["ns2:demanderDocumentWebResponse"][0]["return"][0]["beanRetourDemandeDocumentWeb"][0]
+          parseString(returnData["fluxRetour"][0], (err, result) => {
+            callback(err, result)
+          })
+        });
       });
     }
   }

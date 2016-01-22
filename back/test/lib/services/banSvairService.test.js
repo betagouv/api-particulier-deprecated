@@ -7,7 +7,6 @@ const StandardError = require('standard-error');
 const banResult = require('./../../resources/adresses');
 const svairResult = require('./../../resources/svair');
 const expectedResponse = require('./../../resources/adressesWithDeclarant');
-require("stackup")
 
 describe('Svair Ban Service', function () {
   let SvairBanService;

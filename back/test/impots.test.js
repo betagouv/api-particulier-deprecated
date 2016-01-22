@@ -2,7 +2,6 @@ var expect = require('chai').expect;
 var proxyquire = require('proxyquire');
 var sinon = require('sinon');
 var StandardError = require('standard-error');
-require("stackup")
 
 describe('Impots Controller', function () {
   var impotController;

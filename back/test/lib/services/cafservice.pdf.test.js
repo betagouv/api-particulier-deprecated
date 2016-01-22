@@ -1,9 +1,9 @@
 "use strict";
 
-var expect = require('chai').expect;
-var CafService = require('../../../lib/services/caf')
-var fs = require('fs');
-var nock = require('nock');
+const expect = require('chai').expect;
+const CafService = require('../../../lib/services/caf')
+const fs = require('fs');
+const nock = require('nock');
 
 
 
