@@ -8,7 +8,7 @@ var fs = require('fs');
 describe('Caf API', function () {
   const server = serverTest();
   const api = server.api;
-  const httpResponse = fs.readFileSync(__dirname + '/resources/httpResponse.txt','utf-8');
+  const httpResponse = fs.readFileSync(__dirname + '/resources/caf/pdf/httpResponse.txt','utf-8');
 
   describe("ping", () => {
     it('replies 200', (done) => {

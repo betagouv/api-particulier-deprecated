@@ -1,7 +1,7 @@
 "use strict";
 
 var expect = require('chai').expect;
-var CafService = require('../lib/services/caf')
+var CafService = require('../../../lib/services/caf')
 var fs = require('fs');
 var nock = require('nock');
 
@@ -10,14 +10,14 @@ var nock = require('nock');
 describe('Caf Service', function () {
   var cafService = new CafService({
     cafHost: 'https://pep-test.caf.fr',
-    cafSslCertificate: __dirname + '/resources/server.csr',
-    cafSslKey: __dirname + '/resources/server.key'
+    cafSslCertificate: __dirname + '/../../resources/server.csr',
+    cafSslKey: __dirname + '/../../resources/server.key'
   });
 
-  var httpResponse = fs.readFileSync(__dirname + '/resources/httpResponse.txt','utf-8');
-  var httpError = fs.readFileSync(__dirname + '/resources/httpError.txt','utf-8');
-  var pdf = fs.readFileSync(__dirname + '/resources/response.pdf','utf-8');
-  var pdfBuffer = fs.readFileSync(__dirname + '/resources/response.pdf');
+  var httpResponse = fs.readFileSync(__dirname + '/../../resources/caf/pdf/httpResponse.txt','utf-8');
+  var httpError = fs.readFileSync(__dirname + '/../../resources/caf/pdf/httpError.txt','utf-8');
+  var pdf = fs.readFileSync(__dirname + '/../../resources/caf/pdf/response.pdf','utf-8');
+  var pdfBuffer = fs.readFileSync(__dirname + '/../../resources/caf/pdf/response.pdf');
 
 
   describe("get second part of body", function () {
@@ -42,8 +42,8 @@ describe('Caf Service', function () {
       })
 
       it("return the pdf",(done) => {
-        const stream = fs.writeFileSync(__dirname + '/resources/out.pdf')
-        cafService.attestation("toto", "tutu", "qf",function(err, data){
+        const stream = fs.writeFileSync(__dirname + '/../../resources/out.pdf')
+        cafService.attestation("toto", "tutu", "qf", true, (err, data) => {
           if(err) return done(err)
           cafCall.done();
           expect(data).to.deep.equal(pdfBuffer);
@@ -61,8 +61,8 @@ describe('Caf Service', function () {
       })
 
       it("return an error", (done) => {
-        const stream = fs.writeFileSync(__dirname + '/resources/out.pdf')
-        cafService.attestation("toto", "tutu", "qf", function(err, data){
+        const stream = fs.writeFileSync(__dirname + '/../../resources/out.pdf')
+        cafService.attestation("toto", "tutu", "qf", true, (err, data) => {
           cafCall.done();
           nock.cleanAll();
           if(err) return done()
@@ -79,8 +79,8 @@ describe('Caf Service', function () {
       })
 
       it("return the pdf",(done) => {
-        const stream = fs.writeFileSync(__dirname + '/resources/out.pdf')
-        cafService.attestation("toto", "tutu", "qf", function(err, data){
+        const stream = fs.writeFileSync(__dirname + '/../../resources/out.pdf')
+        cafService.attestation("toto", "tutu", "qf", true, (err, data) => {
           cafCall.done();
           nock.cleanAll();
           if(err) return done()
@@ -105,8 +105,8 @@ describe('Caf Service', function () {
       })
 
       it("return the pdf",(done) => {
-        const stream = fs.writeFileSync(__dirname + '/resources/out.pdf')
-        cafService.attestation("toto", "tutu", "droits", function(err, data){
+        const stream = fs.writeFileSync(__dirname + '/../../resources/out.pdf')
+        cafService.attestation("toto", "tutu", "droits", true, (err, data) =>{
           if(err) return done(err)
           cafCall.done();
           expect(data).to.deep.equal(pdfBuffer);

@@ -4,9 +4,9 @@ const expect = require('chai').expect;
 const proxyquire = require('proxyquire').noCallThru();
 const sinon = require('sinon');
 const StandardError = require('standard-error');
-const banResult = require('./resources/adresses');
-const svairResult = require('./resources/svair');
-const expectedResponse = require('./resources/adressesWithDeclarant');
+const banResult = require('./../../resources/adresses');
+const svairResult = require('./../../resources/svair');
+const expectedResponse = require('./../../resources/adressesWithDeclarant');
 require("stackup")
 
 describe('Svair Ban Service', function () {
@@ -15,7 +15,7 @@ describe('Svair Ban Service', function () {
   describe("When everything works", () => {
 
     beforeEach(function(done) {
-      SvairBanService = proxyquire('../lib/services/svairBan', {
+      SvairBanService = proxyquire('../../../lib/services/svairBan', {
         'svair-api': function svairApiFake(numeroFiscal, referenceAvis, callback) {
           callback(null, svairResult)
         },
