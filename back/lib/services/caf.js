@@ -21,9 +21,6 @@ const query =`<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelop
                     <codeOrganisme>{{ codeOrganisme }}</codeOrganisme>
                     <codePrestation>AF</codePrestation>
                     <codeSituation>1</codeSituation>
-                    <dateDebutPeriode>01072015</dateDebutPeriode>
-                    <dateEnvironement>01082015</dateEnvironement>
-                    <dateFinPeriode>31072015</dateFinPeriode>
                     <matricule>{{numeroAllocataire}}</matricule>
                     <typeDocument>{{ typeDocument }}</typeDocument>
                     <typeEnvoi>{{ typeEnvoi }}</typeEnvoi>
