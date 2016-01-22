@@ -106,16 +106,15 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /caf/attestation:
+  /caf/attestation/qf:
     get:
-      summary: Service de récupération de la CAD
+      summary: Service de récupération de l'attestation du QF
       description: |
-        permet de récupérer le PDF certifiant les attestations reçu par la CAF.
+        permet de récupérer le PDF certifiant les attestations reçu par la CAF
+        du mois dernier
         Il contient:
         <ul>
-          <li>les identités des personnes recevant les allocations</li>
-          <li>les enfants</li>
-          <li>les allocations</li>
+          <li>l'adresse</li>
           <li>le quotient familial</li>
         </ul>
 
@@ -161,6 +160,64 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+
+  /caf/attestation/droits:
+      get:
+        summary: Service de récupération de l'attestation des droits
+        description: |
+          permet de récupérer le PDF certifiant les droits sociaux perçu par le
+          mandataire de la part de la CAF du mois dernier
+          Il contient:
+          <ul>
+            <li>les identités des personnes recevant les allocations</li>
+            <li>L'adresse</li>
+            <li>les enfants</li>
+            <li>les allocations</li>
+            <li>le quotient familial</li>
+          </ul>
+
+        parameters:
+          - name: numeroAllocataire
+            in: query
+            description: Numéro d'allocataire
+            required: true
+            type: number
+            format: integer
+          - name: codeOrganisme
+            in: query
+            description: Code organisme de la CAF (un par code postal)
+            required: true
+            type: number
+            format: integer
+          - name: X-API-Key
+            in: header
+            description: Token d'identification de l'API
+            required: true
+            type: string
+          - name: X-User
+            in: header
+            description: Utilisateur final de l'API
+            required: false
+            type: string
+        tags:
+          - CAF
+        responses:
+          '200':
+            description: Un
+            schema:
+              type: file
+          '401':
+            description: Le token ne vous permet d'accèder à l'API
+            schema:
+              $ref: '#/definitions/Error'
+          '404':
+            description: 'Les paramètres fournis sont incorrects ou ne correspondent pas à un avis'
+            schema:
+              $ref: '#/definitions/Error'
+          default:
+            description: Unexpected error
+            schema:
+              $ref: '#/definitions/Error'
 
   /ping:
     get:
