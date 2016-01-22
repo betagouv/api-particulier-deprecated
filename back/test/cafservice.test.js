@@ -43,7 +43,7 @@ describe('Caf Service', function () {
 
       it("return the pdf",(done) => {
         const stream = fs.writeFileSync(__dirname + '/resources/out.pdf')
-        cafService.attestation("toto", "tutu", function(err, data){
+        cafService.attestation("toto", "tutu", "qf",function(err, data){
           if(err) return done(err)
           cafCall.done();
           expect(data).to.deep.equal(pdfBuffer);
@@ -62,7 +62,7 @@ describe('Caf Service', function () {
 
       it("return an error", (done) => {
         const stream = fs.writeFileSync(__dirname + '/resources/out.pdf')
-        cafService.attestation("toto", "tutu", function(err, data){
+        cafService.attestation("toto", "tutu", "qf", function(err, data){
           cafCall.done();
           nock.cleanAll();
           if(err) return done()
@@ -80,11 +80,38 @@ describe('Caf Service', function () {
 
       it("return the pdf",(done) => {
         const stream = fs.writeFileSync(__dirname + '/resources/out.pdf')
-        cafService.attestation("toto", "tutu", function(err, data){
+        cafService.attestation("toto", "tutu", "qf", function(err, data){
           cafCall.done();
           nock.cleanAll();
           if(err) return done()
           done(new Error("Le service n'a pas retourné d'erreur"))
+        });
+      })
+    })
+  })
+
+  describe("when requesting the droits pdf", () => {
+    let cafCall
+    describe("when the WS return the correct data", () => {
+      beforeEach(() => {
+        cafCall = nock('https://pep-test.caf.fr')
+          .post('/sgmap/wswdd/v1', function(body){
+             return body.indexOf("<codeOrganisme>toto</codeOrganisme>") >= 0 &&
+             body.indexOf("<matricule>tutu</matricule>") >= 0 &&
+             body.indexOf("<typeEnvoi>3</typeEnvoi>") >= 0 &&
+              body.indexOf("<typeDocument>4</typeDocument>") >= 0
+          })
+          .reply(200, httpResponse);
+      })
+
+      it("return the pdf",(done) => {
+        const stream = fs.writeFileSync(__dirname + '/resources/out.pdf')
+        cafService.attestation("toto", "tutu", "droits", function(err, data){
+          if(err) return done(err)
+          cafCall.done();
+          expect(data).to.deep.equal(pdfBuffer);
+          nock.cleanAll();
+          done()
         });
       })
     })

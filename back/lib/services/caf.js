@@ -25,7 +25,7 @@ const query =`<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelop
                     <dateEnvironement>01082015</dateEnvironement>
                     <dateFinPeriode>31072015</dateFinPeriode>
                     <matricule>{{numeroAllocataire}}</matricule>
-                    <typeDocument>2</typeDocument>
+                    <typeDocument>{{ typeDocument }}</typeDocument>
                     <typeEnvoi>{{ typeEnvoi }}</typeEnvoi>
                 </beanEntreeDemandeDocumentWeb>
             </arg0>
@@ -33,8 +33,18 @@ const query =`<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelop
     </soap:Body>
 </soap:Envelope>`;
 
-// 3 pdf
-// 4 structuree
+
+const documentType = {
+  paiement: 0,
+  qf: 2,
+  allocataire: 3,
+  droits: 4
+}
+
+const returnType = {
+  pdf: 3,
+  structured: 4
+}
 
 class CafService {
 
@@ -45,15 +55,17 @@ class CafService {
     this.sslKey = fs.readFileSync(options.cafSslKey);
   }
 
-  attestation(codeOrganisme, numeroAllocataire, callback) {
+  attestation(codeOrganisme, numeroAllocataire, type, callback) {
     var self = this;
 
     const pdfRequired = true
-    const typeEnvoi = pdfRequired == true ? 3 : 4
+    const typeEnvoi = pdfRequired == true ? returnType.pdf : returnType.structured
+    const typeDocument =  documentType[type]
     const parameters = {
       typeEnvoi,
       codeOrganisme ,
-      numeroAllocataire
+      numeroAllocataire,
+      typeDocument
     }
     const queryWithParameters = this.queryTemplate(parameters);
     const url = UrlAssembler(this.options.cafHost)

@@ -17,7 +17,7 @@ function CafController(options) {
     res.append("Content-Type", "application/pdf")
     var codeOrganisme = req.query.codeOrganisme || 148;
     var numeroAllocataire = req.query.numeroAllocataire || 354;
-    cafService.attestation(codeOrganisme, numeroAllocataire, function(err, data) {
+    cafService.attestation(codeOrganisme, numeroAllocataire, "droits", function(err, data) {
       logger.debug(err)
       if(err) return next(new StandardError("impossible de contacter la CAF", {code: 500}));
       res.send(data);
@@ -25,7 +25,7 @@ function CafController(options) {
   }
 
   this.ping = function(req, res, next) {
-    cafService.attestation(148, 354, function(err, data) {
+    cafService.attestation(148, 354, "qf", function(err, data) {
       if(err) return next(new StandardError("impossible de contacter la CAF", {code: 500}));
       return format(res, 'pong')
     })
