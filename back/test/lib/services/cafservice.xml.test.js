@@ -41,7 +41,7 @@ describe('Caf Service', () => {
       })
 
       it("return the data",(done) => {
-        cafService.attestation("toto", "tutu", "droits", false, (err, data) =>{
+        cafService.getData("toto", "tutu", "droits", false, (err, data) => {
           if(err) return done(err)
           cafCall.done();
           expect(data).to.deep.equal(httpJson);

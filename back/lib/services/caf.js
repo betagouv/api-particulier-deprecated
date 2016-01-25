@@ -53,7 +53,11 @@ class CafService {
     this.sslKey = fs.readFileSync(options.cafSslKey);
   }
 
-  attestation(codeOrganisme, numeroAllocataire, type, pdfRequired, callback) {
+  getAttestation(codeOrganisme, numeroAllocataire, type, callback) {
+    return this.getData(codeOrganisme, numeroAllocataire, type, true, callback)
+  }
+
+  getData(codeOrganisme, numeroAllocataire, type, pdfRequired, callback) {
     var self = this;
 
     const typeEnvoi = pdfRequired == true ? returnType.pdf : returnType.structured
