@@ -27,6 +27,7 @@ exports.configure = function (app, options) {
   app.get('/api/impots/adress', impotsController.adress);
   app.get('/api/caf/attestation/qf', cafController.attestationQf);
   app.get('/api/caf/qf', cafController.getQf);
+  app.get('/api/caf/adresse', cafController.getAdress);
   app.get('/api/caf/attestation/droits', cafController.attestationDroits);
   app.get('/api/ping/caf', cafController.ping);
   app.get('/api/admin/users', adminController.getUsers);

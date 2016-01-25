@@ -267,6 +267,54 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
+  /caf/adresse:
+    get:
+      summary: Adresse des allocataire de la caf
+      description: |
+        Le service récupérer l'adresse, et les allocataires.
+      parameters:
+          - name: numeroAllocataire
+            in: query
+            description: Numéro d'allocataire
+            required: true
+            type: number
+            format: integer
+          - name: codeOrganisme
+            in: query
+            description: Code organisme de la CAF (un par code postal)
+            required: true
+            type: number
+            format: integer
+          - name: X-API-Key
+            in: header
+            description: Token d'identification de l'API
+            required: true
+            type: string
+          - name: X-User
+            in: header
+            description: Utilisateur final de l'API
+            required: false
+            type: string
+      tags:
+        - CAF
+      responses:
+        '200':
+          description: Le quotient familial
+          schema:
+            $ref: '#/definitions/CafAdresse'
+        '401':
+          description: Le token ne vous permet d'accèder à l'API
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: 'Les paramètres fournis sont incorrects ou ne correspondent pas à un allocataire CAF'
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
   /ping:
     get:
       summary: Service pour connaitre si l'application fonctionne correctement
@@ -412,6 +460,27 @@ definitions:
       quotientFamilial:
         type: integer
         description: Quotient familial
+      allocataires:
+        type: array
+        description: Noms et prénom des personnes allocataire de la CAF
+        items:
+          type: string
+      annee:
+        type: integer
+        description: Année du quotient familial
+      mois:
+        type: integer
+        description: Mois du quotient familial
+
+  CafAdresse:
+    type: object
+    description: L'adresse de la Caf
+    properties:
+      libelles:
+        type: array
+        description: champs en partie déstructurés contenant l'adresse de la personne
+        items:
+          type: string
       allocataires:
         type: array
         description: Noms et prénom des personnes allocataire de la CAF

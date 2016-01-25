@@ -114,4 +114,37 @@ describe('Caf API', function () {
       });
     })
   });
+
+  describe("When getting the adresses data", () => {
+    describe("without errors", () => {
+      it('replies 200', (done) => {
+
+        nock('https://pep-test.caf.fr')
+          .post('/sgmap/wswdd/v1')
+          .reply(200, xmlHttpResponse);
+
+        api()
+          .get('/api/caf/adresse')
+          .expect("content-type", /json/)
+          .expect(200, (err, res) => {
+            if(err) return done(err)
+            expect(res.body.libelles[0]).to.equal("Madame Marine Martin")
+            done()
+          })
+      });
+    })
+
+    describe("with  error", function() {
+      it('replies 400', function (done) {
+        nock('https://pep-test.caf.fr')
+          .post('/sgmap/wswdd/v1')
+          .reply(400, xmlHttpResponse);
+
+        api()
+          .get('/api/caf/adresse')
+          .query({ numeroFiscal: 'toto' })
+          .expect(500,done)
+      });
+    })
+  });
 });
