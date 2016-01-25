@@ -73,6 +73,32 @@ class CafService {
     })
   }
 
+  getAdress(codeOrganisme, numeroAllocataire, callback) {
+    this.getData(codeOrganisme, numeroAllocataire, "droits", false, (err, data) => {
+      if(err) return callback(err)
+      const doc = data["FLUX_TRAFIC"]["DOCUMENT"][0]
+      const header = doc["ENTETE"][0]
+      const body = doc["CORPS"][0]["ATTPAIDRT"][0]
+      const allocataires = body["IDENTITEPERSONNES"][0]["UNEPERSONNE"].map((item) => {
+        return item["NOMPRENOM"][0]
+      })
+      const adress = header["ADRESSE"][0]
+      const mois = Number.parseInt(header["DUMOIS"][0])
+      const annee = Number.parseInt(header["DELANNEE"][0])
+      const libelles = []
+      for (var i = 1; i <= 7; i++) {
+        libelles.push(adress["LIBLIG"+ i+"ADR"][0])
+      }
+      callback(null, {
+        libelles,
+        allocataires,
+        mois,
+        annee
+      })
+    })
+  }
+
+
   getAttestation(codeOrganisme, numeroAllocataire, type, callback) {
     return this.getData(codeOrganisme, numeroAllocataire, type, true, callback)
   }

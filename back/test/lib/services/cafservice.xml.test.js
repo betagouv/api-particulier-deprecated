@@ -50,12 +50,36 @@ describe('Caf Service', () => {
         });
       })
 
-      describe("when getting the quotient familiale data", () => {
+      describe("when getting the quotient familial data", () => {
         it("return the quotient familiale with the user and the date", (done) => {
           cafService.getQf("toto", "tutu", (err, data) => {
             if(err) return done(err)
             expect(data).to.deep.equal({
               quotientFamilial: 345,
+              mois: 12,
+              annee: 2015,
+              allocataires: ["Marine Martin", "Jean Martin"]
+            });
+            nock.cleanAll();
+            done()
+          });
+        })
+      })
+
+      describe("when getting the adress data", () => {
+        it("return the quotient familiale with the user and the date", (done) => {
+          cafService.getAdress("toto", "tutu", (err, data) => {
+            if(err) return done(err)
+            expect(data).to.deep.equal({
+              libelles: [
+                "Madame Marine Martin",
+                "",
+                "",
+                "26 Rue Pasteur",
+                "",
+                "14360 TROUVILLE SUR MER",
+                "FRANCE"
+              ],
               mois: 12,
               annee: 2015,
               allocataires: ["Marine Martin", "Jean Martin"]
