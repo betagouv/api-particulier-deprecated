@@ -1,6 +1,3 @@
---MIMEBoundaryurn_uuid_8B0A764C423F16ACC21453714612396
-Content-ID: <0.urn:uuid:8B0A764C423F16ACC21453714612397@apache.org>
-Content-Type: application/xop+xml; charset=utf-8; type="text/xml"
 
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
    <soapenv:Body>
@@ -127,11 +124,10 @@ Content-Type: application/xop+xml; charset=utf-8; type="text/xml"
         </CORPS>
     </DOCUMENT>
 </FLUX_TRAFIC>]]></fluxRetour>
-               <libelleRetour>Votre demande est bien enregistree. Un document vous sera adresse à votre domicile dans les prochains jours.</libelleRetour>
+               <libelleRetour>Votre demande est bien enregistree. Un document vous sera adresse Ã  votre domicile dans les prochains jours.</libelleRetour>
             </beanRetourDemandeDocumentWeb>
          </return>
       </ns2:demanderDocumentWebResponse>
    </soapenv:Body>
 </soapenv:Envelope>
 
---MIMEBoundaryurn_uuid_8B0A764C423F16ACC21453714612396--

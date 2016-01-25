@@ -72,6 +72,7 @@ class CafService {
     const onSuccess = pdfRequired ?
                         this.returnPdf(self, callback) :
                         this.returnStructuredData(self, callback)
+
     request
         .post({
             url: url,
@@ -105,7 +106,8 @@ class CafService {
     return (res) => {
       if (res.statusCode !== 200) return callback(new Error('Request error'));
       res.pipe(iconv.decodeStream('latin1')).collect(function(err, decodedBody) {
-        parseString(decodedBody, (err, result) => {
+        if(err) callback(err)
+        parseString(self.getFirstPart(decodedBody), (err, result) => {
           const returnData = result["soapenv:Envelope"]["soapenv:Body"][0]["ns2:demanderDocumentWebResponse"][0]["return"][0]["beanRetourDemandeDocumentWeb"][0]
           parseString(returnData["fluxRetour"][0], (err, result) => {
             callback(err, result)
@@ -120,6 +122,14 @@ class CafService {
   }
 
   getSecondPart(body) {
+    return this.getPart(2, body)
+  }
+
+  getFirstPart(body) {
+    return this.getPart(1, body)
+  }
+
+  getPart(part, body) {
     var lines = body.split('\n');
     var separatorFound= 0;
     var newBody ='';
@@ -128,7 +138,7 @@ class CafService {
         separatorFound++
         line += 2
       } else {
-        if(separatorFound === 2) {
+        if(separatorFound === part) {
           newBody += lines[line]+"\n"
         }
       }

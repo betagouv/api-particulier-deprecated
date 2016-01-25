@@ -8,7 +8,7 @@ const httpJson = require('./../../resources/caf/xml/response.json')
 
 
 
-describe('Caf Service', function () {
+describe('Caf Service', () => {
   var cafService = new CafService({
     cafHost: 'https://pep-test.caf.fr',
     cafSslCertificate: __dirname + '/../../resources/server.csr',
@@ -16,6 +16,15 @@ describe('Caf Service', function () {
   });
 
   const httpResponse = fs.readFileSync(__dirname + '/../../resources/caf/xml/httpResponse.txt','utf-8');
+  const xml = fs.readFileSync(__dirname + '/../../resources/caf/xml/httpResponse.xml','utf-8');
+
+
+  describe("get first part of body", () => {
+    it('the first xml', () => {
+      var actual = cafService.getFirstPart(httpResponse);
+      expect(actual).to.be.equal(xml)
+    });
+  });
 
   describe("when requesting the droits xml", () => {
     let cafCall
