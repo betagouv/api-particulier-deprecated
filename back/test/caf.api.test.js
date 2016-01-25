@@ -147,4 +147,36 @@ describe('Caf API', function () {
       });
     })
   });
+
+  describe("When getting the adresses data", () => {
+    describe("without errors", () => {
+      it('replies 200', (done) => {
+        nock('https://pep-test.caf.fr')
+          .post('/sgmap/wswdd/v1')
+          .reply(200, xmlHttpResponse);
+
+        api()
+          .get('/api/caf/famille')
+          .expect("content-type", /json/)
+          .expect(200, (err, res) => {
+            if(err) return done(err)
+            expect(res.body.enfants[0].nomPrenom).to.equal("Marie Martin")
+            done()
+          })
+      });
+    })
+
+    describe("with  error", function() {
+      it('replies 400', function (done) {
+        nock('https://pep-test.caf.fr')
+          .post('/sgmap/wswdd/v1')
+          .reply(400, xmlHttpResponse);
+
+        api()
+          .get('/api/caf/famille')
+          .query({ numeroFiscal: 'toto' })
+          .expect(500,done)
+      });
+    })
+  });
 });
