@@ -125,6 +125,62 @@ describe('Caf Service', () => {
         })
       })
     })
+
+    describe("when the WS return an error", () => {
+      beforeEach(() => {
+        cafCall = nock('https://pep-test.caf.fr')
+          .post('/sgmap/wswdd/v1')
+          .reply(500, httpResponse);
+      })
+
+      it("return an error",(done) => {
+        cafService.getData("toto", "tutu", "droits", false, (err, data) => {
+          cafCall.done();
+          expect(err).to.deep.equal(new Error("Request error"));
+          expect(err.message).to.deep.equal("Request error");
+          expect(data).to.deep.equal(undefined);
+          nock.cleanAll();
+          done()
+        });
+      })
+
+      describe("when getting the quotient familial data", () => {
+        it("return the quotient familiale with the user and the date", (done) => {
+          cafService.getQf("toto", "tutu", (err, data) => {
+            expect(err).to.deep.equal(new Error("Request error"));
+            expect(err.message).to.deep.equal("Request error");
+            expect(data).to.deep.equal(undefined);
+            nock.cleanAll();
+            done()
+          });
+        })
+      })
+
+      describe("when getting the adress data", () => {
+        it("return an error", (done) => {
+          cafService.getAdress("toto", "tutu", (err, data) => {
+            expect(err).to.deep.equal(new Error("Request error"));
+            expect(err.message).to.deep.equal("Request error");
+            expect(data).to.deep.equal(undefined);
+            nock.cleanAll();
+            done()
+          });
+        })
+      })
+
+      describe("when getting the family data", () => {
+        it("return an error", (done) => {
+          cafService.getFamily("toto", "tutu", (err, data) => {
+            expect(err).to.deep.equal(new Error("Request error"));
+            expect(err.message).to.deep.equal("Request error");
+            expect(data).to.deep.equal(undefined);
+            nock.cleanAll();
+            done()
+          });
+        })
+      })
+    })
+
   })
 
 
