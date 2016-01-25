@@ -98,6 +98,33 @@ class CafService {
     })
   }
 
+  getFamily(codeOrganisme, numeroAllocataire, callback) {
+    this.getData(codeOrganisme, numeroAllocataire, "droits", false, (err, data) => {
+      if(err) return callback(err)
+      const doc = data["FLUX_TRAFIC"]["DOCUMENT"][0]
+      const body = doc["CORPS"][0]["ATTPAIDRT"][0]
+      const allocataires = body["IDENTITEPERSONNES"][0]["UNEPERSONNE"].map((item) => {
+          return {
+            nomPrenom: item["NOMPRENOM"][0],
+            dateDeNaissance: item["DATNAISS"][0],
+            sexe: item["SEXE"][0]
+          }
+        })
+      const enfants = body["IDENTITEENFANTS"][0]["UNENFANT"].map((item) => {
+          return {
+            nomPrenom: item["NOMPRENOM"][0],
+            dateDeNaissance: item["DATNAISS"][0],
+            sexe: item["SEXE"][0]
+          }
+        })
+        callback(null, {
+          enfants,
+          allocataires
+        })
+
+    })
+  }
+
 
   getAttestation(codeOrganisme, numeroAllocataire, type, callback) {
     return this.getData(codeOrganisme, numeroAllocataire, type, true, callback)

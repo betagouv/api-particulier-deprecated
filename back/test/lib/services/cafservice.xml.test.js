@@ -67,7 +67,7 @@ describe('Caf Service', () => {
       })
 
       describe("when getting the adress data", () => {
-        it("return the quotient familiale with the user and the date", (done) => {
+        it("return the adress", (done) => {
           cafService.getAdress("toto", "tutu", (err, data) => {
             if(err) return done(err)
             expect(data).to.deep.equal({
@@ -83,6 +83,41 @@ describe('Caf Service', () => {
               mois: 12,
               annee: 2015,
               allocataires: ["Marine Martin", "Jean Martin"]
+            });
+            nock.cleanAll();
+            done()
+          });
+        })
+      })
+
+      describe("when getting the family data", () => {
+        it("return the family with the parents and the children", (done) => {
+          cafService.getFamily("toto", "tutu", (err, data) => {
+            if(err) return done(err)
+            expect(data).to.deep.equal({
+              allocataires: [
+                {
+                  nomPrenom: "Marine Martin",
+                  dateDeNaissance: "17111961",
+                  sexe: 'F'
+                },
+                {
+                  nomPrenom: "Jean Martin",
+                  dateDeNaissance: "17071959",
+                  sexe: 'M'
+                }],
+              enfants: [
+                {
+                  nomPrenom: "Marie Martin",
+                  dateDeNaissance: "18061996",
+                  sexe: 'F'
+                },
+                {
+                  nomPrenom: "Pierre Martin",
+                  dateDeNaissance: "23092000",
+                  sexe: 'M'
+                }
+              ]
             });
             nock.cleanAll();
             done()
