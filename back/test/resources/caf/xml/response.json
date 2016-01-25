@@ -174,6 +174,20 @@
                                                 "SEXE": [
                                                     "F"
                                                 ]
+                                            },
+                                            {
+                                                "QUAL": [
+                                                    "Monsieur"
+                                                ],
+                                                "NOMPRENOM": [
+                                                    "Jean Martin"
+                                                ],
+                                                "DATNAISS": [
+                                                    "17071959"
+                                                ],
+                                                "SEXE": [
+                                                    "M"
+                                                ]
                                             }
                                         ]
                                     }
@@ -197,8 +211,25 @@
                                                 "SEXE": [
                                                     "F"
                                                 ]
+                                            },
+                                            {
+                                                "TopENFRSA": [
+                                                    "N"
+                                                ],
+                                                "TopENFPPA": [
+                                                    "N"
+                                                ],
+                                                "NOMPRENOM": [
+                                                    "Pierre Martin"
+                                                ],
+                                                "DATNAISS": [
+                                                    "23092000"
+                                                ],
+                                                "SEXE": [
+                                                    "M"
+                                                ]
                                             }
-                                        ]
+                                      ]
                                     }
                                 ],
                                 "QUOTIENTS": [

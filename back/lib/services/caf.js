@@ -53,6 +53,26 @@ class CafService {
     this.sslKey = fs.readFileSync(options.cafSslKey);
   }
 
+  getQf(codeOrganisme, numeroAllocataire, callback) {
+    this.getData(codeOrganisme, numeroAllocataire, "droits", false, (err, data) => {
+      if(err) return callback(err)
+      const doc = data["FLUX_TRAFIC"]["DOCUMENT"][0]["CORPS"][0]["ATTPAIDRT"][0]
+      const allocataires = doc["IDENTITEPERSONNES"][0]["UNEPERSONNE"].map((item) => {
+        return item["NOMPRENOM"][0]
+      })
+      const quotientData = doc["QUOTIENTS"][0]["QFMOIS"][0]
+      const quotientFamilial = Number.parseInt(quotientData["QUOTIENTF"][0])
+      const month = Number.parseInt(quotientData["DUMOIS"][0])
+      const year = Number.parseInt(quotientData["DELANNEE"][0])
+      callback(null, {
+        allocataires,
+        quotientFamilial,
+        month,
+        year
+      })
+    })
+  }
+
   getAttestation(codeOrganisme, numeroAllocataire, type, callback) {
     return this.getData(codeOrganisme, numeroAllocataire, type, true, callback)
   }

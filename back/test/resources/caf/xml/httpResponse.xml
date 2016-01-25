@@ -73,6 +73,12 @@
                         <DATNAISS>17111961</DATNAISS>
                         <SEXE>F</SEXE>
                     </UNEPERSONNE>
+                    <UNEPERSONNE>
+                        <QUAL>Monsieur</QUAL>
+                        <NOMPRENOM>Jean Martin</NOMPRENOM>
+                        <DATNAISS>17071959</DATNAISS>
+                        <SEXE>M</SEXE>
+                    </UNEPERSONNE>
                 </IDENTITEPERSONNES>
                 <IDENTITEENFANTS>
                     <UNENFANT>
@@ -81,6 +87,13 @@
                         <NOMPRENOM>Marie Martin</NOMPRENOM>
                         <DATNAISS>18061996</DATNAISS>
                         <SEXE>F</SEXE>
+                    </UNENFANT>
+                    <UNENFANT>
+                        <TopENFRSA>N</TopENFRSA>
+                        <TopENFPPA>N</TopENFPPA>
+                        <NOMPRENOM>Pierre Martin</NOMPRENOM>
+                        <DATNAISS>23092000</DATNAISS>
+                        <SEXE>M</SEXE>
                     </UNENFANT>
                 </IDENTITEENFANTS>
                 <QUOTIENTS>
