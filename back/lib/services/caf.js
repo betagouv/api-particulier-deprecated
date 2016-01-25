@@ -62,13 +62,13 @@ class CafService {
       })
       const quotientData = doc["QUOTIENTS"][0]["QFMOIS"][0]
       const quotientFamilial = Number.parseInt(quotientData["QUOTIENTF"][0])
-      const month = Number.parseInt(quotientData["DUMOIS"][0])
-      const year = Number.parseInt(quotientData["DELANNEE"][0])
+      const mois = Number.parseInt(quotientData["DUMOIS"][0])
+      const annee = Number.parseInt(quotientData["DELANNEE"][0])
       callback(null, {
         allocataires,
         quotientFamilial,
-        month,
-        year
+        mois,
+        annee
       })
     })
   }

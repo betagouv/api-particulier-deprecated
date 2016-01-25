@@ -1,20 +1,20 @@
-var expect = require('chai').expect;
-var request = require('request');
-var serverTest = require('./utils/server');
-var nock = require('nock');
-var fs = require('fs');
-
+const expect = require('chai').expect;
+const request = require('request');
+const serverTest = require('./utils/server');
+const nock = require('nock');
+const fs = require('fs');
 
 describe('Caf API', function () {
   const server = serverTest();
   const api = server.api;
-  const httpResponse = fs.readFileSync(__dirname + '/resources/caf/pdf/httpResponse.txt','utf-8');
+  const pdfhttpResponse = fs.readFileSync(__dirname + '/resources/caf/pdf/httpResponse.txt','utf-8');
+  const xmlHttpResponse = fs.readFileSync(__dirname + '/resources/caf/xml/httpResponse.txt','utf-8');
 
   describe("ping", () => {
     it('replies 200', (done) => {
       nock('https://pep-test.caf.fr')
         .post('/sgmap/wswdd/v1')
-        .reply(200, httpResponse);
+        .reply(200, pdfhttpResponse);
 
       api()
         .get('/api/ping/caf')
@@ -29,7 +29,7 @@ describe('Caf API', function () {
 
         nock('https://pep-test.caf.fr')
           .post('/sgmap/wswdd/v1')
-          .reply(200, httpResponse);
+          .reply(200, pdfhttpResponse);
 
         api()
           .get('/api/caf/attestation/droits')
@@ -42,7 +42,7 @@ describe('Caf API', function () {
       it('replies 400', function (done) {
         nock('https://pep-test.caf.fr')
           .post('/sgmap/wswdd/v1')
-          .reply(400, httpResponse);
+          .reply(400, pdfhttpResponse);
 
         api()
           .get('/api/caf/attestation/droits')
@@ -59,7 +59,7 @@ describe('Caf API', function () {
 
         nock('https://pep-test.caf.fr')
           .post('/sgmap/wswdd/v1')
-          .reply(200, httpResponse);
+          .reply(200, pdfhttpResponse);
 
         api()
           .get('/api/caf/attestation/qf')
@@ -72,10 +72,43 @@ describe('Caf API', function () {
       it('replies 400', function (done) {
         nock('https://pep-test.caf.fr')
           .post('/sgmap/wswdd/v1')
-          .reply(400, httpResponse);
+          .reply(400, pdfhttpResponse);
 
         api()
           .get('/api/caf/attestation/qf')
+          .query({ numeroFiscal: 'toto' })
+          .expect(500,done)
+      });
+    })
+  });
+
+  describe("When getting the qf data", () => {
+    describe("without errors", () => {
+      it('replies 200', (done) => {
+
+        nock('https://pep-test.caf.fr')
+          .post('/sgmap/wswdd/v1')
+          .reply(200, xmlHttpResponse);
+
+        api()
+          .get('/api/caf/qf')
+          .expect("content-type", /json/)
+          .expect(200, (err, res) => {
+            if(err) return done(err)
+            expect(res.body.quotientFamilial).to.equal(345)
+            done()
+          })
+      });
+    })
+
+    describe("with  error", function() {
+      it('replies 400', function (done) {
+        nock('https://pep-test.caf.fr')
+          .post('/sgmap/wswdd/v1')
+          .reply(400, xmlHttpResponse);
+
+        api()
+          .get('/api/caf/qf')
           .query({ numeroFiscal: 'toto' })
           .expect(500,done)
       });

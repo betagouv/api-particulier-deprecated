@@ -56,8 +56,8 @@ describe('Caf Service', () => {
             if(err) return done(err)
             expect(data).to.deep.equal({
               quotientFamilial: 345,
-              month: 12,
-              year: 2015,
+              mois: 12,
+              annee: 2015,
               allocataires: ["Marine Martin", "Jean Martin"]
             });
             nock.cleanAll();

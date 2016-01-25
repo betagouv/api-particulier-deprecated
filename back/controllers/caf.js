@@ -36,4 +36,13 @@ function CafController(options) {
       return format(res, 'pong')
     })
   }
+
+  this.getQf = function(req, res, next) {
+    var codeOrganisme = req.query.codeOrganisme || 148;
+    var numeroAllocataire = req.query.numeroAllocataire || 354;
+    cafService.getQf(codeOrganisme, numeroAllocataire, (err, data) => {
+      if(err) return next(new StandardError("impossible de contacter la CAF", {code: 500}));
+      return format(res, data)
+    })
+  }
 }
