@@ -9,6 +9,8 @@ describe('Caf API', function () {
   const api = server.api;
   const pdfhttpResponse = fs.readFileSync(__dirname + '/resources/caf/pdf/httpResponse.txt','utf-8');
   const xmlHttpResponse = fs.readFileSync(__dirname + '/resources/caf/xml/httpResponse.txt','utf-8');
+  const xmlHttpFunctionnalError = fs.readFileSync(__dirname + '/resources/caf/xml/httpFunctionnalError.txt','utf-8');
+  const xmlHttpTechError = fs.readFileSync(__dirname + '/resources/caf/xml/httpTechError.txt','utf-8');
 
   describe("ping", () => {
     it('replies 200', (done) => {
@@ -38,7 +40,7 @@ describe('Caf API', function () {
       });
     })
 
-    describe("with  error", function() {
+    describe("with http error", function() {
       it('replies 400', function (done) {
         nock('https://pep-test.caf.fr')
           .post('/sgmap/wswdd/v1')
@@ -68,7 +70,7 @@ describe('Caf API', function () {
       });
     })
 
-    describe("with  error", function() {
+    describe("with http error", function() {
       it('replies 400', function (done) {
         nock('https://pep-test.caf.fr')
           .post('/sgmap/wswdd/v1')
@@ -101,7 +103,7 @@ describe('Caf API', function () {
       });
     })
 
-    describe("with  error", function() {
+    describe("with http error", function() {
       it('replies 400', function (done) {
         nock('https://pep-test.caf.fr')
           .post('/sgmap/wswdd/v1')
@@ -134,7 +136,7 @@ describe('Caf API', function () {
       });
     })
 
-    describe("with  error", function() {
+    describe("with http error", function() {
       it('replies 400', function (done) {
         nock('https://pep-test.caf.fr')
           .post('/sgmap/wswdd/v1')
@@ -166,7 +168,7 @@ describe('Caf API', function () {
       });
     })
 
-    describe("with  error", function() {
+    describe("with http error", function() {
       it('replies 400', function (done) {
         nock('https://pep-test.caf.fr')
           .post('/sgmap/wswdd/v1')
@@ -176,6 +178,32 @@ describe('Caf API', function () {
           .get('/api/caf/famille')
           .query({ numeroFiscal: 'toto' })
           .expect(500,done)
+      });
+    })
+
+    describe("with technical error", () => {
+      it('replies 400',  (done) => {
+        nock('https://pep-test.caf.fr')
+          .post('/sgmap/wswdd/v1')
+          .reply(200, xmlHttpTechError);
+
+        api()
+          .get('/api/caf/famille')
+          .query({ numeroFiscal: 'toto' })
+          .expect(500, done)
+      });
+    })
+
+    describe("with functional error", () => {
+      it('replies 400', (done) => {
+        nock('https://pep-test.caf.fr')
+          .post('/sgmap/wswdd/v1')
+          .reply(200, xmlHttpFunctionnalError);
+
+        api()
+          .get('/api/caf/famille')
+          .query({ numeroFiscal: 'toto' })
+          .expect(400, done)
       });
     })
   });

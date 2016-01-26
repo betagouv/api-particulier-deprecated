@@ -10,6 +10,8 @@ const Readable = require('stream').Readable
 const parseString = require('xml2js').parseString;
 const documentType = require('./caf/typeDocument')
 const returnType = require('./caf/typeRetour')
+const errors = require('./caf/errors')
+const StandardError = require('standard-error')
 
 class CafService {
 
@@ -154,6 +156,11 @@ class CafService {
         if(err) callback(err)
         parseString(self.getFirstPart(decodedBody), (err, result) => {
           const returnData = result["soapenv:Envelope"]["soapenv:Body"][0]["ns2:demanderDocumentWebResponse"][0]["return"][0]["beanRetourDemandeDocumentWeb"][0]
+          const returnCode = returnData["codeRetour"][0]
+          if(returnCode != 0) {
+            const error = errors[returnCode]
+            return callback(new StandardError(error.msg, { code: error.code }))
+          }
           parseString(returnData["fluxRetour"][0], (err, result) => {
             callback(err, result)
           })

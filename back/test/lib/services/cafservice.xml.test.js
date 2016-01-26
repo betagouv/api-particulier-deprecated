@@ -5,6 +5,7 @@ const CafService = require('../../../lib/services/caf')
 const fs = require('fs');
 const nock = require('nock');
 const httpJson = require('./../../resources/caf/xml/response.json')
+const StandardError = require('standard-error')
 
 
 
@@ -17,6 +18,8 @@ describe('Caf Service', () => {
 
   const httpResponse = fs.readFileSync(__dirname + '/../../resources/caf/xml/httpResponse.txt','utf-8');
   const xml = fs.readFileSync(__dirname + '/../../resources/caf/xml/httpResponse.xml','utf-8');
+  const xmlHttpFunctionnalError = fs.readFileSync(__dirname + '/../../resources/caf/xml/httpFunctionnalError.txt','utf-8');
+  const xmlHttpTechError = fs.readFileSync(__dirname + '/../../resources/caf/xml/httpTechError.txt','utf-8');
 
 
   describe("get first part of body", () => {
@@ -126,7 +129,7 @@ describe('Caf Service', () => {
       })
     })
 
-    describe("when the WS return an error", () => {
+    describe("when the WS return an  http error", () => {
       beforeEach(() => {
         cafCall = nock('https://pep-test.caf.fr')
           .post('/sgmap/wswdd/v1')
@@ -178,6 +181,42 @@ describe('Caf Service', () => {
             done()
           });
         })
+      })
+    })
+
+    describe("when the WS return an functional error", () => {
+      beforeEach(() => {
+        cafCall = nock('https://pep-test.caf.fr')
+          .post('/sgmap/wswdd/v1')
+          .reply(200, xmlHttpFunctionnalError);
+      })
+
+      it("return an StandardError",(done) => {
+        cafService.getData("toto", "tutu", "droits", false, (err, data) => {
+          cafCall.done();
+          expect(err).to.deep.equal(new StandardError("Il existe au moins un enfant pour lequel il existe un droit sur le dossier et/ou après la date de situation demandée", {code: 400}));
+          expect(data).to.deep.equal(undefined);
+          nock.cleanAll();
+          done()
+        });
+      })
+    })
+
+    describe("when the WS return an tech error", () => {
+      beforeEach(() => {
+        cafCall = nock('https://pep-test.caf.fr')
+          .post('/sgmap/wswdd/v1')
+          .reply(200, xmlHttpTechError);
+      })
+
+      it("return an StandardError",(done) => {
+        cafService.getData("toto", "tutu", "droits", false, (err, data) => {
+          cafCall.done();
+          expect(err).to.deep.equal(new StandardError("Votre demande n'a pu aboutir en raison d'un incident technique lié à l'appel au service IMC. Des paramètres manquent.", {code: 500}));
+          expect(data).to.deep.equal(undefined);
+          nock.cleanAll();
+          done()
+        });
       })
     })
 

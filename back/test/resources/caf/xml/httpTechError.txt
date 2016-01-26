@@ -1,0 +1,19 @@
+--MIMEBoundaryurn_uuid_8B0A764C423F16ACC21453714612396
+Content-ID: <0.urn:uuid:8B0A764C423F16ACC21453714612397@apache.org>
+Content-Type: application/xop+xml; charset=utf-8; type="text/xml"
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <ns2:demanderDocumentWebResponse xmlns:ns2="http://v1.ws.wsdemandedocumentweb.cnaf/">
+         <return>
+            <beanRetourDemandeDocumentWeb>
+               <codeRetour>253</codeRetour>
+               <fluxRetour></fluxRetour>
+               <libelleRetour>Une erreur est survenue</libelleRetour>
+            </beanRetourDemandeDocumentWeb>
+         </return>
+      </ns2:demanderDocumentWebResponse>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+--MIMEBoundaryurn_uuid_8B0A764C423F16ACC21453714612396--
