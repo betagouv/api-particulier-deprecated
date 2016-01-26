@@ -8,49 +8,17 @@ const UrlAssembler = require('url-assembler');
 const iconv = require('iconv-lite');
 const Readable = require('stream').Readable
 const parseString = require('xml2js').parseString;
-
-// L'ordre des paramètres de la requêtes est important
-const query =`<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://v1.ws.wsdemandedocumentweb.cnaf/">
-    <soap:Header/>
-    <soap:Body>
-        <tns:demanderDocumentWeb xmlns:tns="http://v1.ws.wsdemandedocumentweb.cnaf/">
-            <arg0>
-                <app>WAT</app>
-                <id>?</id>
-                <beanEntreeDemandeDocumentWeb>
-                    <codeAppli>WAT</codeAppli>
-                    <codeOrganisme>{{ codeOrganisme }}</codeOrganisme>
-                    <codePrestation>AF</codePrestation>
-                    <codeSituation>1</codeSituation>
-                    <matricule>{{numeroAllocataire}}</matricule>
-                    <typeDocument>{{ typeDocument }}</typeDocument>
-                    <typeEnvoi>{{ typeEnvoi }}</typeEnvoi>
-                </beanEntreeDemandeDocumentWeb>
-            </arg0>
-        </tns:demanderDocumentWeb>
-    </soap:Body>
-</soap:Envelope>`;
-
-
-const documentType = {
-  paiement: 0,
-  qf: 2,
-  allocataire: 3,
-  droits: 4
-}
-
-const returnType = {
-  pdf: 3,
-  structured: 4
-}
+const documentType = require('./caf/typeDocument')
+const returnType = require('./caf/typeRetour')
 
 class CafService {
 
   constructor(options) {
     this.options = options || {};
+    const query = fs.readFileSync( __dirname + '/caf/query.xml', 'utf-8')
     this.queryTemplate = Handlebars.compile(query);
     this.sslCertificate = fs.readFileSync(options.cafSslCertificate);
-    this.sslKey = fs.readFileSync(options.cafSslKey);
+    this.sslKey = fs.readFileSync(options.cafSslKey)
   }
 
   getQf(codeOrganisme, numeroAllocataire, callback) {

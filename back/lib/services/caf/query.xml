@@ -1,0 +1,20 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://v1.ws.wsdemandedocumentweb.cnaf/">
+    <soap:Header/>
+    <soap:Body>
+        <tns:demanderDocumentWeb xmlns:tns="http://v1.ws.wsdemandedocumentweb.cnaf/">
+            <arg0>
+                <app>WAT</app>
+                <id>?</id>
+                <beanEntreeDemandeDocumentWeb>
+                    <codeAppli>WAT</codeAppli>
+                    <codeOrganisme>{{ codeOrganisme }}</codeOrganisme>
+                    <codePrestation>AF</codePrestation>
+                    <codeSituation>1</codeSituation>
+                    <matricule>{{numeroAllocataire}}</matricule>
+                    <typeDocument>{{ typeDocument }}</typeDocument>
+                    <typeEnvoi>{{ typeEnvoi }}</typeEnvoi>
+                </beanEntreeDemandeDocumentWeb>
+            </arg0>
+        </tns:demanderDocumentWeb>
+    </soap:Body>
+</soap:Envelope>
