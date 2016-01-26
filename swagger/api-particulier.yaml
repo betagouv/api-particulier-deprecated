@@ -269,7 +269,7 @@ paths:
 
   /caf/adresse:
     get:
-      summary: Adresse des allocataire de la caf
+      summary: Adresse des allocataires de la caf
       description: |
         Le service récupérer l'adresse, et les allocataires.
       parameters:
