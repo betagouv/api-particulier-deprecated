@@ -130,7 +130,7 @@ describe('Caf API', function () {
           .expect("content-type", /json/)
           .expect(200, (err, res) => {
             if(err) return done(err)
-            expect(res.body.libelles[0]).to.equal("Madame Marine Martin")
+            expect(res.body.adresse.identite).to.equal("Madame Marine Martin")
             done()
           })
       });

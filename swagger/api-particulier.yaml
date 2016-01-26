@@ -525,11 +525,8 @@ definitions:
     type: object
     description: L'adresse de la Caf
     properties:
-      libelles:
-        type: array
-        description: champs en partie déstructurés contenant l'adresse de la personne
-        items:
-          type: string
+      adresse:
+        $ref: '#/definitions/PosteAdresse'
       allocataires:
         type: array
         description: Noms et prénom des personnes allocataire de la CAF
@@ -542,6 +539,31 @@ definitions:
         type: integer
         description: Mois du quotient familial
 
+  PosteAdresse:
+    type: object
+    description: Adresse au format de la poste
+    properties:
+      identite:
+        type: string
+        description: '<b>Identitité du destinataire : </b>Civilité, titre ou qualité + nom Prénom'
+      complementIdentite:
+        type: string
+        description: "<b>Complément d'information du destinataire ou point de remise : </b>Numéro d'appartement, Escalier"
+      complementIdentiteGeo:
+        type: string
+        description: "<b>Complément d'information du point géographique : </b>Entrée, tour, immeuble, bâtiment, Résidence"
+      numeroRue:
+        type: string
+        description: '<b>Numéro et libellé de la voie</b>'
+      lieuDit:
+        type: string
+        description: '<b>Lieu-dit ou service particulier de distribution :</b> poste restante, boîte postale'
+      codePostalVille:
+        type: string
+        description: '<b>Code postale et localité de destination</b>'
+      pays:
+        type: string
+        description: '<b>Pays</b>'
   Person:
     type: object
     description: Personne référencée à la CAF

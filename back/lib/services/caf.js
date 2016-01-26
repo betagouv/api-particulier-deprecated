@@ -55,12 +55,18 @@ class CafService {
       const adress = header["ADRESSE"][0]
       const mois = Number.parseInt(header["DUMOIS"][0])
       const annee = Number.parseInt(header["DELANNEE"][0])
-      const libelles = []
-      for (var i = 1; i <= 7; i++) {
-        libelles.push(adress["LIBLIG"+ i+"ADR"][0])
+      const adresse = {
+        identite: adress["LIBLIG1ADR"][0],
+        complementIdentite: adress["LIBLIG2ADR"][0],
+        complementIdentiteGeo: adress["LIBLIG3ADR"][0],
+        numeroRue: adress["LIBLIG4ADR"][0],
+        lieuDit: adress["LIBLIG5ADR"][0],
+        codePostalVille: adress["LIBLIG6ADR"][0],
+        pays: adress["LIBLIG7ADR"][0]
       }
+
       callback(null, {
-        libelles,
+        adresse,
         allocataires,
         mois,
         annee
@@ -138,10 +144,10 @@ class CafService {
 
   returnPdf(self, callback) {
     return (res) => {
-      if (res.statusCode !== 200) return callback(new Error('Request error'));
+      if (res.statusCode !== 200) return callback(new StandardError('Request error', { code: 500 }));
       res.pipe(iconv.decodeStream('latin1')).collect(function(err, decodedBody) {
         if(err) return callback(err)
-        if(self.hasBodyError(decodedBody)) return callback(new Error("The service has an error " + res.statusCode))
+        if(self.hasBodyError(decodedBody)) return callback(new StandardError("The service has an error " + res.statusCode, { code: 500 }))
         var pdfText = self.getSecondPart(decodedBody);
         var pdfBuffer = iconv.encode(pdfText, 'latin1');
         callback(null, pdfBuffer);
@@ -151,7 +157,7 @@ class CafService {
 
   returnStructuredData(self, callback) {
     return (res) => {
-      if (res.statusCode !== 200) return callback(new Error('Request error'));
+      if (res.statusCode !== 200) return callback(new StandardError('Request error', { code: 500 }));
       res.pipe(iconv.decodeStream('latin1')).collect(function(err, decodedBody) {
         if(err) callback(err)
         parseString(self.getFirstPart(decodedBody), (err, result) => {

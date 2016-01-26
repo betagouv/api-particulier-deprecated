@@ -74,15 +74,15 @@ describe('Caf Service', () => {
           cafService.getAdress("toto", "tutu", (err, data) => {
             if(err) return done(err)
             expect(data).to.deep.equal({
-              libelles: [
-                "Madame Marine Martin",
-                "",
-                "",
-                "26 Rue Pasteur",
-                "",
-                "14360 TROUVILLE SUR MER",
-                "FRANCE"
-              ],
+              adresse: {
+                identite: "Madame Marine Martin",
+                complementIdentite: "",
+                complementIdentiteGeo: "",
+                numeroRue: "26 Rue Pasteur",
+                lieuDit: "",
+                codePostalVille: "14360 TROUVILLE SUR MER",
+                pays: "FRANCE"
+              },
               mois: 12,
               annee: 2015,
               allocataires: ["Marine Martin", "Jean Martin"]
@@ -129,7 +129,7 @@ describe('Caf Service', () => {
       })
     })
 
-    describe("when the WS return an  http error", () => {
+    describe("when the WS return an http error", () => {
       beforeEach(() => {
         cafCall = nock('https://pep-test.caf.fr')
           .post('/sgmap/wswdd/v1')
@@ -139,8 +139,7 @@ describe('Caf Service', () => {
       it("return an error",(done) => {
         cafService.getData("toto", "tutu", "droits", false, (err, data) => {
           cafCall.done();
-          expect(err).to.deep.equal(new Error("Request error"));
-          expect(err.message).to.deep.equal("Request error");
+          expect(err).to.deep.equal(new StandardError("Request error", {code: 500}));
           expect(data).to.deep.equal(undefined);
           nock.cleanAll();
           done()
@@ -150,8 +149,7 @@ describe('Caf Service', () => {
       describe("when getting the quotient familial data", () => {
         it("return the quotient familiale with the user and the date", (done) => {
           cafService.getQf("toto", "tutu", (err, data) => {
-            expect(err).to.deep.equal(new Error("Request error"));
-            expect(err.message).to.deep.equal("Request error");
+            expect(err).to.deep.equal(new StandardError("Request error", {code: 500}));
             expect(data).to.deep.equal(undefined);
             nock.cleanAll();
             done()
@@ -162,8 +160,7 @@ describe('Caf Service', () => {
       describe("when getting the adress data", () => {
         it("return an error", (done) => {
           cafService.getAdress("toto", "tutu", (err, data) => {
-            expect(err).to.deep.equal(new Error("Request error"));
-            expect(err.message).to.deep.equal("Request error");
+            expect(err).to.deep.equal(new StandardError("Request error", {code: 500}));
             expect(data).to.deep.equal(undefined);
             nock.cleanAll();
             done()
@@ -174,7 +171,7 @@ describe('Caf Service', () => {
       describe("when getting the family data", () => {
         it("return an error", (done) => {
           cafService.getFamily("toto", "tutu", (err, data) => {
-            expect(err).to.deep.equal(new Error("Request error"));
+            expect(err).to.deep.equal(new StandardError("Request error", {code: 500}));
             expect(err.message).to.deep.equal("Request error");
             expect(data).to.deep.equal(undefined);
             nock.cleanAll();
