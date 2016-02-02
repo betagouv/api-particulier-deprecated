@@ -8,6 +8,8 @@ toc_footers:
   - <a href='mailto:apiparticulier@sgmap.fr'>Demander un jeton d'accès</a>
 
 includes:
+  - impots
+  - caf
   - errors
 
 search: true
