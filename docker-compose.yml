@@ -20,6 +20,11 @@ redis:
 front:
   build: front
 
+devDocs:
+  build: docs
+  ports:
+    - 4567:4567
+
 docs:
   build: swagger
   dockerfile: DockerfileDocs
