@@ -11,10 +11,11 @@ Il existe différents acteurs au sein d'API PARTICULIER
 
  * Les fournisseurs de données: ils n'utilisent pas l'application en tant que template
  mais fournissent juste des données
- * Les administrateurs de la platforme: ils supervisent l'application
- * Les consommateurs : il s'agit des organismes (personnes morales) ayant signés
+ * Les administrateurs de la plateforme: ils supervisent l'application
+ * Les fournisseurs de service : il s'agit des organismes (personnes morales) ayant signés
  la charte
- * Les utilisateurs: il s'agit des agents (personnes physiques) des organismes
+ * Les citoyens français
+ * Les agents: il s'agit des agents (personnes physiques) des organismes
  consommateurs.
 
 En signant la charte, les consommateurs sont identifiés et authentifiés, alors
