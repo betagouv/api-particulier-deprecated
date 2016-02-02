@@ -1,0 +1,102 @@
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <ul class="nav navbar-nav">
+                  <li><img class="logo" src="img/logo_marianne.png" alt="Accueil - apiparticulier.sgmap.fr"></li>
+                  <li><a ui-sref="landingPage" class="navbar-brand title" title="Accueil - apiparticulier.sgmap.fr" href="/">API PARTICULIER</a></li>
+                </ul>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="mailto:apiparticulier@sgmap.fr">Contactez-nous</a>
+                    </li>
+                    <li>
+                      <a href="/docs">
+                        <i class="fa fa-book fa-fw"></i>
+                        <span>Documentation</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://github.com/sgmap/api-particulier">
+                        <i class="fa fa-github fa-fw"></i>
+                        <span>Sources</span>
+                      </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <p class="lead">
+            Merci de prendre connaissance de la charte d'utilisation de l'API
+            PARTICULIER afin de demander un jeton d'accès en décrivant votre
+            projet.
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <iframe src="/charte.pdf" style="width:100%; height:600px;" frameborder="0"></iframe>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1 text-right">
+          <a href="/charte.pdf" download="[Charte] API PARTICULIER.pdf">
+            Télécharger la charte
+          </a>
+        </div>
+      </div>
+      <form>
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+            <label class="checkDroits">
+              <input type="checkbox" ng-model="check"> J'ai compris mes droits
+              et mes devoirs liés à l'utilisation et l'intégration
+              d'API PARTICULIER
+            </label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1 text-center">
+            <a
+                ng-class="['btn', 'btn-default', 'btn-lg', 'btn-primary', 'tokenAction',
+                {disabled: !check}]"
+                href="mailto:apiparticulier@sgmap.fr">
+              Demandez un jeton
+            </a>
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+          <div class="row">
+              <div class="center-block">
+                    <p class="copyright text-muted small">Copyright &copy; <a href="http://etatplateforme.modernisation.gouv.fr">SGMAP</a> 2015. All Rights Reserved <a href="mailto:apiparticulier@sgmap.fr">apiparticulier@sgmap.fr</a></p>
+
+                </div>
+            </div>
+        </div>
+    </footer>

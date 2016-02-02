@@ -5,5 +5,9 @@ export default function routes($stateProvider) {
     .state('landingPage', {
       url: '/',
       template: require('./landingPage.html')
+    })
+    .state('registration', {
+      url: '/registration',
+      template: require('./registration.html')
     });
 }
