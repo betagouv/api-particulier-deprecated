@@ -1,5 +1,4 @@
 
-    <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
         <div class="container topnav">
           <div class="logo-beta">Bêta</div>
@@ -50,13 +49,14 @@
                 <div class="col-lg-12">
                     <div class="intro-message">
                         <h1>API PARTICULIER</h1>
-                        <h3>Simplifiez vos démarches, ne demandez plus de justificatifs</h3>
+                        <h3>Simplifiez vos démarches, ne demandez plus de
+                          justificatifs</h3>
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
                           <li>
                             <a class="btn btn-default btn-lg btn-inverse"
                                 ui-sref="registration">
-                              Demander un Accès
+                              Demander un accès
                             </a>
                           </li>
                         </ul>
@@ -82,9 +82,12 @@
                        justificatives inutiles</h2>
                     <p class="lead">Limiter les demandes des pièces justificatives
                       ou informations lorsqu’elles sont détenues par d’autres
-                      administrations (CAF, DGFIP, Pôle Emploi ...).</p>
+                      administrations (
+                      <abbr title="Caisse d'Allocation Familiale">CAF</abbr>,
+                      <abbr title="Direction générale des Finances publiques">
+                        DGFIP</abbr>, Pôle Emploi…).</p>
                     <p class="lead">Limiter le risque de fraude documentaire en
-                      récupérant des informations fiables et certifiées à la
+                      récupérant des informations certifiées à la
                       source dans un point d'accès unique.</p>
                 </div>
                 <div class="col-lg-4 col-lg-offset-1  col-sm-3 hidden-xs">
@@ -108,11 +111,20 @@
                     <img class="img-responsive" src="img/environmental-protection.jpg" alt="">
                 </div>
                 <div class="col-lg-7 col-lg-offset-1 col-sm-9">
-                    <h2 class="section-heading">Accéder aux données de façon sécurisée</h2>
-                    <p class="lead">L'accès aux données est réalisé au travers de protocoles de communications sécurisés et seuls les opérateurs agréés peuvent se connecter à l'API.</p>
-                    <p class="lead">Pour obtenir un agrément, vous devez justifier d'une simplification pour les citoyens, et vous engager à n'accéder aux données personnelles qu'avec <u>l'accord explicite de l'usager</u>.</p>
+                    <h2 class="section-heading">Accéder aux données de façon
+                      sécurisée</h2>
+                    <p class="lead">L'accès aux données est réalisé au travers
+                      de protocoles de communications sécurisés et seuls les
+                      opérateurs agréés peuvent se connecter à l'API.</p>
+                    <p class="lead">Pour obtenir un agrément, vous devez
+                      justifier d'une simplification pour les citoyens, et
+                      vous engager à n'accéder aux données personnelles qu'avec
+                      <u>l'accord explicite de l'usager</u>.</p>
                     <p>
-                      <a href="charte.pdf" class="btn btn-primary"><i class="fa fa-book fa-fw"></i> <span>Obtenir la charte</span></a>
+                      <a href="charte.pdf" class="btn btn-primary">
+                        <i class="fa fa-book fa-fw"></i>
+                        <span>Consulter la charte</span>
+                      </a>
                     </p>
                 </div>
             </div>
@@ -141,9 +153,10 @@
                     </p>
 
                     <p class="lead">
-                      API PARTICULIER, quant à lui, propose une solution non identifiée: pour
-                      l'utilisateur qui n'a pas de compte, pour les données liées
-                      au foyer familial et non à la personne...
+                      API PARTICULIER, quant à lui, propose une solution non
+                      identifiée&#160;: pour l'utilisateur qui n'a pas de compte,
+                      pour les données liées au foyer familial et non à la
+                      personne…
                     </p>
 
                     <p class="lead">
@@ -169,7 +182,9 @@
 
             <div class="row">
               <div class="col-lg-12">
-                <h2 class="section-heading">Exemples d'utilisation d'API PARTICULIER</h2>
+                <h2 class="section-heading">
+                  Exemples d'utilisation d'API PARTICULIER
+                </h2>
               </div>
             </div>
             <div class="row">
@@ -180,7 +195,9 @@
                       class="list-group-item clearfix site-example">
                       <div class="row">
                         <div class="col-lg-12">
-                          <h4 class="list-group-item-heading">Calculateur du quotient familial</h4>
+                          <h4 class="list-group-item-heading">
+                            Calculateur du quotient familial
+                          </h4>
                           <img src="img/qf.png" alt="calculateur du quotient familial" width="100%">
                           <p>
                             L'application permet de calculer et personaliser le quotient
@@ -199,7 +216,8 @@
                       class="list-group-item clearfix site-example">
                       <div class="row">
                         <div class="col-lg-12">
-                          <h4 class="list-group-item-heading">Géolocalisation du foyer fiscal</h4>
+                          <h4 class="list-group-item-heading">
+                            Géolocalisation du foyer fiscal</h4>
                           <img src="img/carto.png" alt="geolocalisation du foyer fiscal" width="100%">
                           <p>
                             L'application permet de visualiser le foyer fiscal sur une
@@ -279,7 +297,8 @@
 </code></pre>
                 </div>
                 <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                  <h2 class="section-heading">Exemple: récupérer l'avis d'impôt sur le revenu</p>
+                  <h2 class="section-heading">
+                    Exemple&#160;: récupérer l'avis d'impôt sur le revenu
                     <pre><code class="bash">curl --include \
     --header "X-API-Key: correct-key" \
     'https://private-anon-977fd3e61-apiparticulier.apiary-mock.com/api/impots/svair?numeroFiscal=475757686&referenceAvis=768585'</code></pre>
@@ -307,8 +326,16 @@
         <div class="container">
           <div class="row">
               <div class="center-block">
-                    <p class="copyright text-muted small">Copyright &copy; <a href="http://etatplateforme.modernisation.gouv.fr">SGMAP</a> 2015. All Rights Reserved <a href="mailto:apiparticulier@sgmap.fr">apiparticulier@sgmap.fr</a></p>
-
+                    <p class="copyright text-muted small">
+                      Copyright &copy;
+                      <a href="http://etatplateforme.modernisation.gouv.fr">
+                        SGMAP
+                      </a>
+                      2015. All Rights Reserved
+                      <a href="mailto:apiparticulier@sgmap.fr">
+                        apiparticulier@sgmap.fr
+                      </a>
+                    </p>
                 </div>
             </div>
         </div>
