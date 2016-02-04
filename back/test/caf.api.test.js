@@ -20,6 +20,7 @@ describe('Caf API', function () {
 
       api()
         .get('/api/ping/caf')
+        //.set("X-API-Key", "badKey")
         .expect("content-type", /json/)
         .expect(200,'"pong"', done)
     });

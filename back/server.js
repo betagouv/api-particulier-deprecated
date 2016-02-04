@@ -77,7 +77,9 @@ function Server (options) {
 
   app.use(formatFromUrl)
 
-  app.use(isAuthorized(usersService).unless({path:'/api/ping'}))
+  app.use(isAuthorized(usersService).unless((req) => {
+    return req.originalUrl.indexOf("ping") != -1
+  }))
 
   routes.configure(app, options);
 
