@@ -92,13 +92,15 @@ h6 {
     letter-spacing: 2px;
 }
 
-.content-section-a {
-    padding: 50px 0;
+section {
+  padding: 50px 0;
+}
+
+section.content-a {
     background-color: #f8f8f8;
 }
 
-.content-section-b {
-    padding: 50px 0;
+section.content-b {
     border-top: 1px solid #e7e7e7;
     border-bottom: 1px solid #e7e7e7;
 }
@@ -162,10 +164,22 @@ h6 {
 }
 
 footer {
-    padding: 50px 0;
+    padding: 20px 0;
     background-color: #f8f8f8;
 }
 
 p.copyright {
     margin: 15px 0 0;
+}
+
+a.disabled {
+    pointer-events: none;
+}
+
+.checkDroits {
+  margin: 10px 0;
+}
+
+a.tokenAction {
+  margin: 20px 0;
 }
