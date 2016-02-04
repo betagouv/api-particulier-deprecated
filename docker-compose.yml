@@ -42,7 +42,7 @@ nginx:
   volumes_from:
     - front
     - docs
+    - tech
   links:
     - app:app
     - mocks:mocks
-    - tech:tech
