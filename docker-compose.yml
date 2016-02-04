@@ -17,6 +17,9 @@ redis:
   volumes:
     - ./redis-data:/data
 
+upscuits:
+  build: upscuits
+
 front:
   build: front
 
@@ -41,6 +44,7 @@ nginx:
     - 8081:8080
   volumes_from:
     - front
+    - upscuits
     - docs
     - tech
   links:
