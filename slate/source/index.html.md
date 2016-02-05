@@ -35,10 +35,12 @@ API PARTICULIER utilise les principes des
 Il existe plusieurs environnements:
 
 
-|             | Domain                       | Documentation                                     | Authentifié |
-|-------------|------------------------------|---------------------------------------------------|-------------|
-| Production  | apiparticulier.sgmap.fr      |[Lien](https://apiparticulier.sgmap.fr/docs/)      | Oui         |
-| Mocks       | apiparticulier-mock.sgmap.fr |[Lien](https://apiparticulier-mock.sgmap.fr/docs/) | Non         |
+|             | Domain                       | Documentation                                     | API Key     | Stable |
+|-------------|------------------------------|---------------------------------------------------|-------------|--------|
+| Production  | apiparticulier.sgmap.fr      |[Lien](https://apiparticulier.sgmap.fr/docs/)      | Secret      | Oui    |
+| Test        | apiparticulier-test.sgmap.fr |[Lien](https://apiparticulier-test.sgmap.fr/docs/) | `test-token`| Oui    |
+| Dev         | apiparticulier-dev.sgmap.fr  |[Lien](https://apiparticulier-dev.sgmap.fr/docs/)  | Secret      | Non    |
+| Mocks       | apiparticulier-mock.sgmap.fr |[Lien](https://apiparticulier-mock.sgmap.fr/docs/) | ``          | Oui    |
 
 # Présentation
 
@@ -67,8 +69,8 @@ fournisseurs de service.
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: X-API-KEY
-curl https://apiparticulier.sgmap.fr/api/impots/svair \
-  -H "X-API-KEY: myKey"
+curl https://apiparticulier-test.sgmap.fr/api/impots/svair \
+  -H "X-API-KEY: test-token"
 ```
 
 > N'oubliez pas de remplacer `myKey` avec votre clé, `1` et `2` par les bons
@@ -86,15 +88,15 @@ requête HTTP en incluant le jeton dans les headers HTTP comme ceci:
 `X-API-KEY: myKey`
 
 <aside class="notice">
-Vous devez remplacer <code>myKey</code> avec le jeton d'API de votre collectivité
+Vous devez remplacer <code>test-token</code> avec le jeton d'API de votre collectivité
 </aside>
 
 ## Le citoyen ou l'agent
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: X-User
-curl https://apiparticulier.sgmap.fr/api/impots/svair \
-  -H "X-API-KEY: myKey" \
+curl https://apiparticulier-test.sgmap.fr/api/impots/svair \
+  -H "X-API-KEY: test-token" \
   -H "X-User: myUser"
 ```
 
@@ -111,7 +113,7 @@ fournisseur de service.
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: Accept
-curl https://apiparticulier.sgmap.fr/api/ping \
+curl https://apiparticulier-test.sgmap.fr/api/ping \
   -H "Accept: application/json"
 ```
 
@@ -123,7 +125,7 @@ curl https://apiparticulier.sgmap.fr/api/ping \
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: Accept
-curl https://apiparticulier.sgmap.fr/api/ping \
+curl https://apiparticulier-test.sgmap.fr/api/ping \
   -H "Accept: application/xml"
 ```
 

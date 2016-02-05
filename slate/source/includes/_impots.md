@@ -4,8 +4,8 @@
 ## Récupérer les données fiscales d'un citoyen
 
 ```shell
-curl "https://apiparticulier.sgmap.fr/api/impots/svair?numeroFiscal=12&referenceAvis=34" \
-  -H "Authorization: myKey" \
+curl "https://apiparticulier-test.sgmap.fr/api/impots/svair?numeroFiscal=12&referenceAvis=34" \
+  -H "Authorization: test-token" \
   -H "accept: application/json" \
   -H "X-User: myUser"
 ```
@@ -34,8 +34,8 @@ sur l'API PARTICULIER
 ## Récupérer l'adresse fiscale
 
 ```shell
-curl "https://apiparticulier.sgmap.fr/api/impots/adress?numeroFiscal=12&referenceAvis=34" \
-  -H "Authorization: myKey" \
+curl "https://apiparticulier-test.sgmap.fr/api/impots/adress?numeroFiscal=12&referenceAvis=34" \
+  -H "Authorization: test-token" \
   -H "accept: application/xml"
 ```
 > Cette commande retournera du xml
