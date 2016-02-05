@@ -26,7 +26,9 @@ numeroFiscal | Non | Oui | Numéro fiscal propre à chaque citoyen (identifiant 
 referenceAvis | Non | Oui | Référence de l'avis fiscal correspond à l'année de l'avis (identifiant alpha-numérique de 13 chiffres)
 
 <aside class="warning">
-Attention, il est possible que l'utilisateur ajoute une lettre à la fin de sa référence d'avis, il est nécessaire de l'enlever avant de l'envoyer sur API PARTICULIER
+Attention, il est possible que l'utilisateur ajoute une quatorzième lettre à la
+fin de sa référence d'avis, il est nécessaire de l'enlever avant de l'envoyer
+sur l'API PARTICULIER
 </aside>
 
 ## Récupérer l'adresse fiscale
@@ -54,5 +56,7 @@ referenceAvis | Non | Oui | Référence de l'avis fiscal correspond à l'année 
 
 
 <aside class="warning">
-Attention, il est possible que l'utilisateur ajoute une lettre à la fin de sa référence d'avis, il est nécessaire de l'enlever avant de l'envoyer sur API PARTICULIER
+Attention, il est possible que l'utilisateur ajoute une quatorzième lettre à la
+fin de sa référence d'avis, il est nécessaire de l'enlever avant de l'envoyer
+sur l'API PARTICULIER
 </aside>

@@ -45,16 +45,19 @@ Il existe plusieurs environnements:
 
 Il existe différents acteurs au sein d'API PARTICULIER
 
- * Les fournisseurs de données: ils n'utilisent pas l'application en tant que template
- mais fournissent juste des données
+ * Les fournisseurs de données : ils n'utilisent pas l'application en tant que tel
+ mais fournissent simplement des données
  * Les administrateurs de la plateforme: ils supervisent l'application
- * Les fournisseurs de service : il s'agit des organismes (personnes morales) ayant signés
- la charte
- * Les citoyens français
- * Les agents: il s'agit des agents (personnes physiques) des organismes
- consommateurs.
+ * Les fournisseurs de service : il s'agit des organismes (personnes morales)
+ ayant signées la charte et qui souhaite simplifier une démarche administrative
+ * Les citoyens français : utilisateur finaux des services
+ * Les agents : il s'agit des personnes physiques des fournisseurs de données
 
-API PARTICULIER se contente de mettre en relation les différents acteurs.
+API PARTICULIER permet de facilité la récupération d'information aurpès des
+fournisseurs de données. Ces informations appartiennent à des citoyens
+français qui utilisent un téléservice des fournisseurs de données. Une fois les
+informations récupérées, elles sont affichées aux agents assermentés des
+fournisseurs de service.
 
 # Autorisations
 
@@ -95,10 +98,10 @@ curl https://apiparticulier.sgmap.fr/api/impots/svair \
 ```
 
 Il est aussi possible d'identifier (sans authentifier) les citoyens ou les
-agents ayant déclenché un appel donné. En effet, en cas de problème ou de
+agents ayant déclenchés un appel donné. En effet, en cas de problème ou de
 fraude, les fournisseurs de données doivent être en mesure de dire quels étaient
 les utilisateurs de l'API PARTICULIER.
-C'est pour quoi il existe un header HTTP facultatif `X-User` qui permet
+C'est pourquoi il existe un header HTTP facultatif `X-User` qui permet
 d'identifier l'utilisateur : celui-ci peut être un identifiant interne du
 fournisseur de service.
 
