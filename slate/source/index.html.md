@@ -6,6 +6,7 @@ language_tabs:
 
 toc_footers:
   - <a href='mailto:apiparticulier@sgmap.fr'>Demander un jeton d'accès</a>
+  - <a href='https://github.com/sgmap/api-particulier'>Sources</a>
 
 includes:
   - impots
