@@ -19,7 +19,7 @@ const loggerProperties = require('./lib/middlewares/logger')
 const formatError = require('./lib/middlewares/formatError')
 const isAuthorized = require('./lib/middlewares/isAuthorized')
 const UsersService = require('./lib/services/users');
-
+require('stackup')
 
 var extend = require('extend');
 

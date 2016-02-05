@@ -37,6 +37,7 @@ var raven = {
 var server = new Server({
   port: nconf.get('port'),
   cafHost: nconf.get('cafHost'),
+  svairHost: nconf.get('svairHost'),
   cafSslCertificate: nconf.get('cafSslCertificate'),
   cafSslKey: nconf.get('cafSslKey'),
   logger: logger,

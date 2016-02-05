@@ -2,7 +2,7 @@
 
 
 const BanService = require('./ban')
-const svair = require('svair-api')
+const Svair = require('svair-api')
 const StandardError = require('standard-error');
 
 
@@ -10,10 +10,11 @@ class SvairBanService {
 
   constructor(options) {
     this.banService = new BanService(options)
+    this.svair = new Svair(options.svairHost)
   }
 
   getAdress(numeroFiscal, referenceAvis, callback) {
-    svair(numeroFiscal, referenceAvis, (err, svairResult) => {
+    this.svair(numeroFiscal, referenceAvis, (err, svairResult) => {
       if (err && err.message === 'Invalid credentials') {
         callback(new StandardError('Les paramètres fournis sont incorrects ou ne correspondent pas à un avis', {code: 404}));
       } else if (err) {

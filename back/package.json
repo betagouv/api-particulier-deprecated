@@ -19,7 +19,6 @@
     "nock": "^2.15.0",
     "node-mocks-http": "^1.4.4",
     "proxyquire": "^1.4.0",
-    "stackup": "^1.0.0",
     "sinon": "^1.14.1",
     "supertest": "^0.15.0"
   },
@@ -34,6 +33,7 @@
     "express-bunyan-logger": "^1.1.1",
     "express-unless": "0.3.0",
     "extend": "^2.0.0",
+    "stackup": "^1.0.0",
     "handlebars": "^4.0.3",
     "http-measuring-client": "^0.3.6",
     "iconv-lite": "^0.4.13",
@@ -47,7 +47,7 @@
     "request": "^2.55.0",
     "standard-error": "^1.1.0",
     "string": "^3.1.1",
-    "svair-api": "~0.2.1",
+    "svair-api": "~0.3.0",
     "url-assembler": "^1.2.2",
     "xml2js": "0.4.16"
   }

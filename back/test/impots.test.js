@@ -11,8 +11,10 @@ describe('Impots Controller', function () {
 
     beforeEach(function(done) {
       impotController = proxyquire('../controllers/impots', {
-        'svair-api': function svairApiFake(numeroFiscal, referenceAvis, done) {
-          done({error: true,message: "Some message"}, "")
+        'svair-api': () => {
+            return function svairApiFake(numeroFiscal, referenceAvis, done) {
+              done({error: true,message: "Some message"}, "")
+          }
         }
       });
       done()
@@ -37,8 +39,10 @@ describe('Impots Controller', function () {
 
     beforeEach(function(done) {
       impotController = proxyquire('../controllers/impots', {
-        'svair-api': function svairApiFake(numeroFiscal, referenceAvis, done) {
-          done({error: true, message: "Invalid credentials"}, "")
+        'svair-api': () => {
+          return function svairApiFake(numeroFiscal, referenceAvis, done) {
+            done({error: true, message: "Invalid credentials"}, "")
+          }
         }
       });
       done()
@@ -63,8 +67,10 @@ describe('Impots Controller', function () {
 
     beforeEach(function(done) {
       importController = proxyquire('../controllers/impots', {
-        'svair-api': function svairApiFake(numeroFiscal, referenceAvis, done) {
-          done(null, {result: "tutu"})
+        'svair-api': () => {
+          return function svairApiFake(numeroFiscal, referenceAvis, done) {
+            done(null, {result: "tutu"})
+          }
         }
       });
       done()

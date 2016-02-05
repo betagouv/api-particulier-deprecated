@@ -40,7 +40,7 @@ function ImpotController(options) {
     if (!numeroFiscal || !referenceAvis) {
       return next(new StandardError('Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.', {code: 400}));
     } else {
-      svair(numeroFiscal, referenceAvis, function(err, result) {
+      svair(options.svairHost)(numeroFiscal, referenceAvis, function(err, result) {
         sendDataFromSvair(err, result, next, res)
       });
     }
@@ -52,7 +52,7 @@ function ImpotController(options) {
     if (!numeroFiscal || !referenceAvis) {
       return next(new StandardError('Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.', {code: 400}));
     } else {
-      svair(numeroFiscal, referenceAvis, function(err, result) {
+      svair(options.svairHost)(numeroFiscal, referenceAvis, function(err, result) {
         sendDataFromSvair(err, 'pong', next, res)
       });
     }
