@@ -20,6 +20,11 @@ redis:
 front:
   build: front
 
+tech:
+  build: slate
+  ports:
+    - 4567:4567
+
 docs:
   build: swagger
   dockerfile: DockerfileDocs
@@ -34,10 +39,10 @@ nginx:
   ports:
     - 8080:80
     - 8081:8080
-    - 443:443
   volumes_from:
     - front
     - docs
+    - tech
   links:
     - app:app
     - mocks:mocks
