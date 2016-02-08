@@ -14,6 +14,7 @@ module.exports = function(){
   var options = {
     appname: 'api-particulier-test',
     cafHost: 'https://pep-test.caf.fr',
+    svairHost: 'https://cfsmsp.impots.gouv.fr',
     cafSslCertificate: __dirname + '/../resources/server.csr',
     cafSslKey: __dirname + '/../resources/server.key',
     redis: {

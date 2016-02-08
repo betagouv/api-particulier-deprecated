@@ -15,8 +15,10 @@ describe('Svair Ban Service', function () {
 
     beforeEach(function(done) {
       SvairBanService = proxyquire('../../../lib/services/svairBan', {
-        'svair-api': function svairApiFake(numeroFiscal, referenceAvis, callback) {
-          callback(null, svairResult)
+        'svair-api': function() {
+          return function svairApiFake(numeroFiscal, referenceAvis, callback) {
+            callback(null, svairResult)
+          }
         },
         './ban': function FakeBanService() {
           this.getAdress = function fakeGetAdress(query, callback) {
@@ -29,7 +31,7 @@ describe('Svair Ban Service', function () {
 
     it('replies the adress with the persons', function (done) {
       //given
-      const svairBanService = new SvairBanService()
+      const svairBanService = new SvairBanService({ svairHost:''})
 
       //when
       svairBanService.getAdress( 23, 34, function(err, data) {
