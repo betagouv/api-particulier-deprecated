@@ -12,7 +12,7 @@
                 </button>
                 <ul class="nav navbar-nav">
                   <li><img class="logo" src="img/logo_marianne.png" alt="Accueil - apiparticulier.sgmap.fr"></li>
-                  <li><a ui-sref="landingPage" class="navbar-brand title" title="Accueil - apiparticulier.sgmap.fr" href="/">API PARTICULIER</a></li>
+                  <li><a ui-sref="landingPage" class="navbar-brand title" title="Accueil - apiparticulier.sgmap.fr" href="/">API Particulier</a></li>
                 </ul>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -60,24 +60,21 @@
       </div>
       <div class="row">
         <div class="col-md-10 col-md-offset-1 text-right">
-          <a href="/charte.pdf" download="[Charte] API PARTICULIER.pdf">
+          <a href="/charte.pdf" download="[Charte] API Particulier.pdf">
             Télécharger la charte
           </a>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12">
-          <p class="lead">
-            La charte peut être synthétisée sous la forme d'un tableau vous
-            expliquant vos droits, devoirs et interdits.
-          </p>
+          <h3>Vos droits et devoirs à l'utilisation d'API Particulier</h3>
         </div>
       </div>
       <div class="row">
         <div class="col-md-4">
           <ul class="list-group">
             <li href="" class="list-group-item list-group-item-success">
-              Les droits
+              Vos droits
             </li>
             <li class="list-group-item">
               <h4 class="list-group-item-heading">Afficher les données brutes à l'agent instructeur</h4>
@@ -100,19 +97,20 @@
         <div class="col-md-4">
           <ul class="list-group">
             <li href="" class="list-group-item list-group-item-info">
-              Les devoirs
+              Vos devoirs
             </li>
             <li class="list-group-item">
-              <h4 class="list-group-item-heading">Accepter de la charte</h4>
+              <h4 class="list-group-item-heading">Accepter la charte</h4>
               <p class="list-group-item-text">
-                Il n'est pas nécessaire de la faire signer. Récupérer le token
-                vous engage à respecter la charte
+                Il n'est pas nécessaire de la faire signer. Obtenir le jeton
+                vous engage à respecter la charte.
               </p>
             </li>
             <li class="list-group-item">
               <h4 class="list-group-item-heading">Récupérer l'accord de l'usager</h4>
               <p class="list-group-item-text">Explicitement demander l'accord de
-                l'usager pour récupérer ses données auprès d'un fournisseur</p>
+                l'usager pour récupérer ses données auprès d'un fournisseur.
+              </p>
             </li>
           </ul>
         </div>
@@ -125,13 +123,13 @@
             <li class="list-group-item">
               <h4 class="list-group-item-heading">Afficher les données brutes à l'usager</h4>
               <p class="list-group-item-text">
-                API Particulier ne permet pas d'identier la personne, on n'affiche
+                API Particulier ne permet pas d'identifier la personne, vous n'afficherez
                 pas d'informations personnelles à l'usager car il peut s'agir
-                des données d'un autre
+                des données d'un autre.
               </p>
             </li>
             <li class="list-group-item">
-              <h4 class="list-group-item-heading">Recupérer les informations par "batch"</h4>
+              <h4 class="list-group-item-heading">Recupérer les informations par lot</h4>
               <p class="list-group-item-text">
                 Ne pouvant pas récupérer l'accord explicite de l'usager, il est
                 impossible de lancer des récupérations de données en masse par des
@@ -146,8 +144,8 @@
         <div class="row">
           <div class="col-md-10 col-md-offset-1">
             <label class="checkDroits">
-              <input type="checkbox" ng-model="check"> J'ai compris les
-              modalités d'utilisation et d'intégration d'API PARTICULIER
+              <input type="checkbox" ng-model="check"> J'ai compris et j'accepte
+              les modalités d'utilisation et d'intégration d'API Particulier
             </label>
           </div>
         </div>
@@ -157,7 +155,7 @@
             <a
                 ng-class="['btn', 'btn-default', 'btn-lg', 'btn-primary', 'tokenAction',
                 {disabled: !check}]"
-                href="mailto:apiparticulier@sgmap.fr?subject=Demande d'accès à API Particulier&amp;body=Bonjour, je suis intéressé par API Particulier. Veuillez me recontacter aux <Coordonnées>. Merci">
+                href="mailto:apiparticulier@sgmap.fr?subject=Demande d'accès à API Particulier">
               Demandez un jeton
             </a>
           </div>
