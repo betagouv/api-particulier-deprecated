@@ -69,12 +69,11 @@ fournisseurs de service.
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: X-API-KEY
-curl https://apiparticulier-test.sgmap.fr/api/impots/svair \
+curl "https://apiparticulier-test.sgmap.fr/api/impots/svair?numeroFiscal=12&referenceAvis=15" \
   -H "X-API-KEY: test-token"
 ```
 
-> N'oubliez pas de remplacer `myKey` avec votre clé, `1` et `2` par les bons
-identifiants.
+> Vous utilisez l'environement de test
 
 API PARTICULIER utilise un système de jeton pour **identifier** et **authentifier** les fournisseurs de service. Vous pouvez
 demander votre jeton d'authentification en envoyant un mail à
@@ -95,9 +94,9 @@ Vous devez remplacer <code>test-token</code> avec le jeton d'API de votre collec
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: X-User
-curl https://apiparticulier-test.sgmap.fr/api/impots/svair \
+curl "https://apiparticulier-test.sgmap.fr/api/impots/svair?numeroFiscal=12&referenceAvis=15" \
   -H "X-API-KEY: test-token" \
-  -H "X-User: myUser"
+  -H "X-User: demo"
 ```
 
 Il est aussi possible d'identifier (sans authentifier) les citoyens ou les
@@ -113,7 +112,7 @@ fournisseur de service.
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: Accept
-curl https://apiparticulier-test.sgmap.fr/api/ping \
+curl "https://apiparticulier-test.sgmap.fr/api/ping" \
   -H "Accept: application/json"
 ```
 
@@ -125,7 +124,7 @@ curl https://apiparticulier-test.sgmap.fr/api/ping \
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: Accept
-curl https://apiparticulier-test.sgmap.fr/api/ping \
+curl "https://apiparticulier-test.sgmap.fr/api/ping" \
   -H "Accept: application/xml"
 ```
 
