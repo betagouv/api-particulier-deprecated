@@ -1,5 +1,5 @@
 ---
-title: API PARTICULIER
+title: API Particulier
 
 language_tabs:
   - shell
@@ -18,7 +18,7 @@ search: true
 
 # Introduction
 
-Bienvenue sur API PARTICULIER ! Cette API vous permet de simplifier les démarches
+Bienvenue sur API Particulier ! Cette API vous permet de simplifier les démarches
 administratives. Il est maintenant possible d'ajouter les informations à la
 source et donc de limiter les demandes de pièces justificatives
 
@@ -27,7 +27,7 @@ N'hésitez pas à contribuer pour ajouter des exemples dans les langages que vou
 utilisez. Il existe aussi une documentation très complète sur les données de
 retour&#8239;: [apiparticulier.sgmap.fr/docs](https://apiparticulier.sgmap.fr/docs/)
 
-API PARTICULIER utilise les principes des
+API Particulier utilise les principes des
 [API REST](http://blog.octo.com/designer-une-api-rest/) pour exposer ses données
 
 # Environnements
@@ -46,7 +46,7 @@ Il existe plusieurs environnements:
 
 ## Acteurs
 
-Il existe différents acteurs au sein d'API PARTICULIER
+Il existe différents acteurs au sein d'API Particulier
 
  * Les fournisseurs de données : ils n'utilisent pas l'application en tant que tel
  mais fournissent simplement des données
@@ -56,7 +56,7 @@ Il existe différents acteurs au sein d'API PARTICULIER
  * Les citoyens français : utilisateur finaux des services
  * Les agents : il s'agit des personnes physiques des fournisseurs de données
 
-API PARTICULIER permet de facilité la récupération d'information aurpès des
+API Particulier permet de facilité la récupération d'information aurpès des
 fournisseurs de données. Ces informations appartiennent à des citoyens
 français qui utilisent un téléservice des fournisseurs de données. Une fois les
 informations récupérées, elles sont affichées aux agents assermentés des
@@ -69,14 +69,13 @@ fournisseurs de service.
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: X-API-KEY
-curl https://apiparticulier-test.sgmap.fr/api/impots/svair \
+curl "https://apiparticulier-test.sgmap.fr/api/impots/svair?numeroFiscal=12&referenceAvis=15" \
   -H "X-API-KEY: test-token"
 ```
 
-> N'oubliez pas de remplacer `myKey` avec votre clé, `1` et `2` par les bons
-identifiants.
+> Vous utilisez l'environement de test
 
-API PARTICULIER utilise un système de jeton pour **identifier** et **authentifier** les fournisseurs de service. Vous pouvez
+API Particulier utilise un système de jeton pour **identifier** et **authentifier** les fournisseurs de service. Vous pouvez
 demander votre jeton d'authentification en envoyant un mail à
 [apiparticulier@sgmap.fr](mailto:apiparticulier@sgmap.fr) en précisant dans quel
 projet vous souhaitez intégrer l'API.
@@ -95,15 +94,15 @@ Vous devez remplacer <code>test-token</code> avec le jeton d'API de votre collec
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: X-User
-curl https://apiparticulier-test.sgmap.fr/api/impots/svair \
+curl "https://apiparticulier-test.sgmap.fr/api/impots/svair?numeroFiscal=12&referenceAvis=15" \
   -H "X-API-KEY: test-token" \
-  -H "X-User: myUser"
+  -H "X-User: demo"
 ```
 
 Il est aussi possible d'identifier (sans authentifier) les citoyens ou les
 agents ayant déclenchés un appel donné. En effet, en cas de problème ou de
 fraude, les fournisseurs de données doivent être en mesure de dire quels étaient
-les utilisateurs de l'API PARTICULIER.
+les utilisateurs de l'API Particulier.
 C'est pourquoi il existe un header HTTP facultatif `X-User` qui permet
 d'identifier l'utilisateur : celui-ci peut être un identifiant interne du
 fournisseur de service.
@@ -113,7 +112,7 @@ fournisseur de service.
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: Accept
-curl https://apiparticulier-test.sgmap.fr/api/ping \
+curl "https://apiparticulier-test.sgmap.fr/api/ping" \
   -H "Accept: application/json"
 ```
 
@@ -125,7 +124,7 @@ curl https://apiparticulier-test.sgmap.fr/api/ping \
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: Accept
-curl https://apiparticulier-test.sgmap.fr/api/ping \
+curl "https://apiparticulier-test.sgmap.fr/api/ping" \
   -H "Accept: application/xml"
 ```
 
