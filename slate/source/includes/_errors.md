@@ -1,6 +1,6 @@
 # Errors
 
-L'API PARTICULIER utilise les codes retour suivants
+L'API Particulier utilise les codes retour suivants
 
 
 Code Erreur | Signification

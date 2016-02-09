@@ -28,7 +28,7 @@ referenceAvis | Non | Oui | Référence de l'avis fiscal correspond à l'année 
 <aside class="warning">
 Attention, il est possible que l'utilisateur ajoute une quatorzième lettre à la
 fin de sa référence d'avis, il est nécessaire de l'enlever avant de l'envoyer
-sur l'API PARTICULIER
+sur l'API Particulier
 </aside>
 
 ## Récupérer l'adresse fiscale
@@ -59,5 +59,5 @@ referenceAvis | Non | Oui | Référence de l'avis fiscal correspond à l'année 
 <aside class="warning">
 Attention, il est possible que l'utilisateur ajoute une quatorzième lettre à la
 fin de sa référence d'avis, il est nécessaire de l'enlever avant de l'envoyer
-sur l'API PARTICULIER
+sur l'API Particulier
 </aside>
