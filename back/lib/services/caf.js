@@ -190,15 +190,16 @@ class CafService {
   getPart(part, body) {
     var lines = body.split('\n');
     var separatorFound= 0;
+    var isHeader = false;
     var newBody ='';
     for(var line = 0; line < lines.length; line++){
       if(lines[line].indexOf('--MIMEBoundaryurn_uuid_') === 0) {
         separatorFound++
-        line += 2
-      } else {
-        if(separatorFound === part) {
-          newBody += lines[line]+"\n"
-        }
+        isHeader = true
+      } else if (isHeader && lines[line].length === 1) {
+        isHeader = false
+      } else if (!isHeader && separatorFound === part) {
+        newBody += lines[line]+"\n"
       }
     }
     return newBody;

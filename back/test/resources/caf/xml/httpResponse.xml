@@ -1,4 +1,3 @@
-
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
    <soapenv:Body>
       <ns2:demanderDocumentWebResponse xmlns:ns2="http://v1.ws.wsdemandedocumentweb.cnaf/">
