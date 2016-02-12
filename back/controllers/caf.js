@@ -11,16 +11,14 @@ module.exports = CafController;
 
 function CafController(options) {
   options = options || {};
-  var logger = options.logger;
   var cafService = new CafService(options)
 
   this.getAttestation = function(name) {
     return function(req, res, next) {
       res.append("Content-Type", "application/pdf")
-      var codePostal = req.query.codePostal || 148;
-      var numeroAllocataire = req.query.numeroAllocataire || 354;
+      var codePostal = req.query.codePostal;
+      var numeroAllocataire = req.query.numeroAllocataire;
       cafService.getAttestation(codePostal, numeroAllocataire, name, (err, data) => {
-        logger.debug(err)
         if(err) return next(new StandardError("impossible de contacter la CAF", {code: 500}));
         res.send(data);
       })
@@ -31,8 +29,10 @@ function CafController(options) {
   this.attestationDroits = this.getAttestation("droits")
 
   this.ping = function(req, res, next) {
-    cafService.getAttestation(148, 354, "qf", function(err, data) {
-      if(err) return next(new StandardError("impossible de contacter la CAF", {code: 500}));
+    var codePostal = options.codePostal;
+    var numeroAllocataire = options.numeroAllocataire;
+    cafService.getFamily(codePostal, numeroAllocataire, (err, data) => {
+      if(err) return next(err);
       return format(res, 'pong')
     })
   }

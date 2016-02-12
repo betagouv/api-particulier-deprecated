@@ -13,6 +13,8 @@ module.exports = {
   },
   referenceAvis: '',
   numeroFiscal: '',
+  numeroAllocataire: '0000354',
+  codePostal: '99148',
   raven: {
     activate: false,
     dsn:''

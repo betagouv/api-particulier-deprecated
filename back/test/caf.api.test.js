@@ -16,7 +16,7 @@ describe('Caf API', function () {
     it('replies 200', (done) => {
       nock('https://pep-test.caf.fr')
         .post('/sgmap/wswdd/v1')
-        .reply(200, pdfhttpResponse);
+        .reply(200, xmlHttpResponse);
 
       api()
         .get('/api/ping/caf')

@@ -12,14 +12,7 @@ exports.configure = function (app, options) {
     logger: app.get('logger')
   }
   var adminController = new AdminController(adminOptions);
-
-  var cafOptions = {
-    logger: app.get('logger'),
-    cafHost: app.get('cafHost'),
-    cafSslCertificate: app.get('cafSslCertificate'),
-    cafSslKey: app.get('cafSslKey'),
-  }
-  var cafController = new CafController(cafOptions);
+  var cafController = new CafController(options);
 
   app.get('/api/ping', systemController.ping);
   app.get('/api/impots/svair', impotsController.svair);

@@ -26,6 +26,8 @@ module.exports = function(){
       activate: false,
       dsn:''
     },
+    numeroAllocataire: '1234567',
+    codePostal: '75009',
     ban: {
       baseUrl: "http://adresse.data.gouv.local"
     }
