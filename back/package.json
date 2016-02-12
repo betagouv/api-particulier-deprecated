@@ -9,7 +9,8 @@
   },
   "scripts": {
     "pretest": "npm install",
-    "test": "istanbul cover --print details _mocha -- --recursive -R spec test"
+    "test": "istanbul cover --print details _mocha -- --recursive -R spec test",
+    "start": "node ./bin/www"
   },
   "author": "SGMAP",
   "devDependencies": {

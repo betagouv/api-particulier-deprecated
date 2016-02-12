@@ -33,7 +33,7 @@ describe('Caf Service', function () {
       beforeEach(() => {
         cafCall = nock('https://pep-test.caf.fr')
           .post('/sgmap/wswdd/v1', function(body){
-             return body.indexOf("<codeOrganisme>toto</codeOrganisme>") >= 0 &&
+             return body.indexOf("<codePostal>toto</codePostal>") >= 0 &&
              body.indexOf("<matricule>tutu</matricule>") >= 0 &&
              body.indexOf("<typeEnvoi>3</typeEnvoi>") >= 0 &&
               body.indexOf("<typeDocument>2</typeDocument>") >= 0
@@ -96,7 +96,7 @@ describe('Caf Service', function () {
       beforeEach(() => {
         cafCall = nock('https://pep-test.caf.fr')
           .post('/sgmap/wswdd/v1', function(body){
-             return body.indexOf("<codeOrganisme>toto</codeOrganisme>") >= 0 &&
+             return body.indexOf("<codePostal>toto</codePostal>") >= 0 &&
              body.indexOf("<matricule>tutu</matricule>") >= 0 &&
              body.indexOf("<typeEnvoi>3</typeEnvoi>") >= 0 &&
               body.indexOf("<typeDocument>4</typeDocument>") >= 0

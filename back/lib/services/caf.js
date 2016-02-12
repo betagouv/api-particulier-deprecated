@@ -23,8 +23,8 @@ class CafService {
     this.sslKey = fs.readFileSync(options.cafSslKey)
   }
 
-  getQf(codeOrganisme, numeroAllocataire, callback) {
-    this.getData(codeOrganisme, numeroAllocataire, "droits", false, (err, data) => {
+  getQf(codePostal, numeroAllocataire, callback) {
+    this.getData(codePostal, numeroAllocataire, "droits", false, (err, data) => {
       if(err) return callback(err)
       const doc = data["FLUX_TRAFIC"]["DOCUMENT"][0]["CORPS"][0]["ATTPAIDRT"][0]
       const allocataires = doc["IDENTITEPERSONNES"][0]["UNEPERSONNE"].map((item) => {
@@ -43,8 +43,8 @@ class CafService {
     })
   }
 
-  getAdress(codeOrganisme, numeroAllocataire, callback) {
-    this.getData(codeOrganisme, numeroAllocataire, "droits", false, (err, data) => {
+  getAdress(codePostal, numeroAllocataire, callback) {
+    this.getData(codePostal, numeroAllocataire, "droits", false, (err, data) => {
       if(err) return callback(err)
       const doc = data["FLUX_TRAFIC"]["DOCUMENT"][0]
       const header = doc["ENTETE"][0]
@@ -74,8 +74,8 @@ class CafService {
     })
   }
 
-  getFamily(codeOrganisme, numeroAllocataire, callback) {
-    this.getData(codeOrganisme, numeroAllocataire, "droits", false, (err, data) => {
+  getFamily(codePostal, numeroAllocataire, callback) {
+    this.getData(codePostal, numeroAllocataire, "droits", false, (err, data) => {
       if(err) return callback(err)
       const doc = data["FLUX_TRAFIC"]["DOCUMENT"][0]
       const body = doc["CORPS"][0]["ATTPAIDRT"][0]
@@ -102,18 +102,18 @@ class CafService {
   }
 
 
-  getAttestation(codeOrganisme, numeroAllocataire, type, callback) {
-    return this.getData(codeOrganisme, numeroAllocataire, type, true, callback)
+  getAttestation(codePostal, numeroAllocataire, type, callback) {
+    return this.getData(codePostal, numeroAllocataire, type, true, callback)
   }
 
-  getData(codeOrganisme, numeroAllocataire, type, pdfRequired, callback) {
+  getData(codePostal, numeroAllocataire, type, pdfRequired, callback) {
     var self = this;
 
     const typeEnvoi = pdfRequired == true ? returnType.pdf : returnType.structured
     const typeDocument =  documentType[type]
     const parameters = {
       typeEnvoi,
-      codeOrganisme ,
+      codePostal ,
       numeroAllocataire,
       typeDocument
     }
@@ -125,7 +125,6 @@ class CafService {
     const onSuccess = pdfRequired ?
                         this.returnPdf(self, callback) :
                         this.returnStructuredData(self, callback)
-
     request
         .post({
             url: url,
@@ -159,8 +158,9 @@ class CafService {
     return (res) => {
       if (res.statusCode !== 200) return callback(new StandardError('Request error', { code: 500 }));
       res.pipe(iconv.decodeStream('latin1')).collect(function(err, decodedBody) {
-        if(err) callback(err)
+        if(err) return callback(err)
         parseString(self.getFirstPart(decodedBody), (err, result) => {
+          if(err) return callback(err)
           const returnData = result["soapenv:Envelope"]["soapenv:Body"][0]["ns2:demanderDocumentWebResponse"][0]["return"][0]["beanRetourDemandeDocumentWeb"][0]
           const returnCode = returnData["codeRetour"][0]
           if(returnCode != 0) {

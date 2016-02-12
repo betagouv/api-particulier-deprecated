@@ -17,9 +17,9 @@ function CafController(options) {
   this.getAttestation = function(name) {
     return function(req, res, next) {
       res.append("Content-Type", "application/pdf")
-      var codeOrganisme = req.query.codeOrganisme || 148;
+      var codePostal = req.query.codePostal || 148;
       var numeroAllocataire = req.query.numeroAllocataire || 354;
-      cafService.getAttestation(codeOrganisme, numeroAllocataire, name, (err, data) => {
+      cafService.getAttestation(codePostal, numeroAllocataire, name, (err, data) => {
         logger.debug(err)
         if(err) return next(new StandardError("impossible de contacter la CAF", {code: 500}));
         res.send(data);
@@ -38,27 +38,27 @@ function CafController(options) {
   }
 
   this.getQf = function(req, res, next) {
-    var codeOrganisme = req.query.codeOrganisme || 148;
-    var numeroAllocataire = req.query.numeroAllocataire || 354;
-    cafService.getQf(codeOrganisme, numeroAllocataire, (err, data) => {
+    var codePostal = req.query.codePostal;
+    var numeroAllocataire = req.query.numeroAllocataire;
+    cafService.getQf(codePostal, numeroAllocataire, (err, data) => {
       if(err) return next(err);
       return format(res, data)
     })
   }
 
   this.getAdress = function(req, res, next) {
-    var codeOrganisme = req.query.codeOrganisme || 148;
-    var numeroAllocataire = req.query.numeroAllocataire || 354;
-    cafService.getAdress(codeOrganisme, numeroAllocataire, (err, data) => {
+    var codePostal = req.query.codePostal;
+    var numeroAllocataire = req.query.numeroAllocataire;
+    cafService.getAdress(codePostal, numeroAllocataire, (err, data) => {
       if(err) return next(err);
       return format(res, data)
     })
   }
 
   this.getFamily = function(req, res, next) {
-    var codeOrganisme = req.query.codeOrganisme || 148;
-    var numeroAllocataire = req.query.numeroAllocataire || 354;
-    cafService.getFamily(codeOrganisme, numeroAllocataire, (err, data) => {
+    var codePostal = req.query.codePostal;
+    var numeroAllocataire = req.query.numeroAllocataire;
+    cafService.getFamily(codePostal, numeroAllocataire, (err, data) => {
       if(err) return next(err);
       return format(res, data)
     })
