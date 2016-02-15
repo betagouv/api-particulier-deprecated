@@ -146,10 +146,18 @@ class CafService {
       if (res.statusCode !== 200) return callback(new StandardError('Request error', { code: 500 }));
       res.pipe(iconv.decodeStream('latin1')).collect(function(err, decodedBody) {
         if(err) return callback(err)
-        if(self.hasBodyError(decodedBody)) return callback(new StandardError("The service has an error " + res.statusCode, { code: 500 }))
-        var pdfText = self.getSecondPart(decodedBody);
-        var pdfBuffer = iconv.encode(pdfText, 'latin1');
-        callback(null, pdfBuffer);
+        parseString(self.getFirstPart(decodedBody), (err, result) => {
+          if(err) return callback(err)
+          const returnData = result["soapenv:Envelope"]["soapenv:Body"][0]["ns2:demanderDocumentWebResponse"][0]["return"][0]["beanRetourDemandeDocumentWeb"][0]
+          const returnCode = returnData["codeRetour"][0]
+          if(returnCode != 0) {
+            const error = errors[returnCode]
+            return callback(new StandardError(error.msg, { code: error.code }))
+          }
+          var pdfText = self.getSecondPart(decodedBody);
+          var pdfBuffer = iconv.encode(pdfText, 'latin1');
+          callback(null, pdfBuffer);
+        })
       });
     }
   }

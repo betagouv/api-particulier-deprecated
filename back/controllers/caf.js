@@ -19,7 +19,7 @@ function CafController(options) {
       var codePostal = req.query.codePostal;
       var numeroAllocataire = req.query.numeroAllocataire;
       cafService.getAttestation(codePostal, numeroAllocataire, name, (err, data) => {
-        if(err) return next(new StandardError("impossible de contacter la CAF", {code: 500}));
+        if(err) return next(err);
         res.send(data);
       })
     }

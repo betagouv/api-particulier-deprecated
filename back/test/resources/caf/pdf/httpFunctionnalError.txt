@@ -1,0 +1,6 @@
+--MIMEBoundaryurn_uuid_2E9969D44833AC60541445434539162
+Content-ID: <0.urn:uuid:2E9969D44833AC60541445434539163@apache.org>
+Content-Type: application/xop+xml; charset=utf-8; type="text/xml"
+
+<?xml version="1.0" encoding="utf-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Body><ns2:demanderDocumentWebResponse xmlns:ns2="http://v1.ws.wsdemandedocumentweb.cnaf/"><return><beanRetourDemandeDocumentWeb><codeRetour>111</codeRetour><fluxBinaire><xop:Include xmlns:xop="http://www.w3.org/2004/08/xop/include" href="cid:urn:uuid:2E9969D44833AC60541445434539159@apache.org"/></fluxBinaire><libelleRetour>Votre demande est bien enregistrée. Un document vous sera adressé à votre domicile dans les prochains jours.</libelleRetour></beanRetourDemandeDocumentWeb></return></ns2:demanderDocumentWebResponse></soapenv:Body></soapenv:Envelope>
