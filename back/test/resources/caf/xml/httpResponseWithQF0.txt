@@ -1,0 +1,151 @@
+--MIMEBoundaryurn_uuid_8B0A764C423F16ACC21453714612396
+Content-Type: application/xop+xml; charset=utf-8; type="text/xml"
+Content-Transfer-Encoding: binary
+Content-ID: <0.urn:uuid:DFBF3CA6829D17D6091455278989463@apache.org>
+
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <ns2:demanderDocumentWebResponse xmlns:ns2="http://v1.ws.wsdemandedocumentweb.cnaf/">
+         <return>
+            <beanRetourDemandeDocumentWeb>
+               <codeRetour>0</codeRetour>
+               <fluxRetour><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<FLUX_TRAFIC>
+    <GENERALITES>
+        <ORGANISME>
+            <NUMORG>148</NUMORG>
+            <TYPORG>CAF</TYPORG>
+        </ORGANISME>
+        <DATEFLUX>
+            <DTCREAFLUX>20012016</DTCREAFLUX>
+            <HEUCREAFLUX>164317</HEUCREAFLUX>
+        </DATEFLUX>
+        <ZONE_TECHNIQUE>
+            <CDDOC>ATTDRT</CDDOC>
+            <CDAPPLI>WAT</CDAPPLI>
+        </ZONE_TECHNIQUE>
+    </GENERALITES>
+    <DOCUMENT>
+        <PUBLICATION traitementPapier="false" traitementMail="false">
+            <NUMIDENTIFICATION>46558</NUMIDENTIFICATION>
+            <TYPEIDENTIFICATION>ALLOC</TYPEIDENTIFICATION>
+            <IMPRESSION>
+                <CODEPOS>14360</CODEPOS>
+                <VILLE>TROUVILLE SUR MER</VILLE>
+                <CODEPAYS>FRA</CODEPAYS>
+                <PAYS>FRANCE</PAYS>
+            </IMPRESSION>
+        </PUBLICATION>
+        <ENTETE>
+            <CONTACT>
+                <IDUTI></IDUTI>
+                <PSEUDOAGT></PSEUDOAGT>
+                <NOMAGT></NOMAGT>
+                <PRENOMAGT></PRENOMAGT>
+                <LIBSERAGT></LIBSERAGT>
+                <CDAPPLI>WAT</CDAPPLI>
+            </CONTACT>
+            <DESTINATAIRE>
+                <NATDEST>ALLOC</NATDEST>
+                <MATRICULE>46558</MATRICULE>
+                <LETCLE>X</LETCLE>
+                <CODGES>03</CODGES>
+            </DESTINATAIRE>
+            <ADRESSE>
+                <LIBLIG1ADR>Madame Marine Martin</LIBLIG1ADR>
+                <LIBLIG2ADR></LIBLIG2ADR>
+                <LIBLIG3ADR></LIBLIG3ADR>
+                <LIBLIG4ADR>26 Rue Pasteur</LIBLIG4ADR>
+                <LIBLIG5ADR></LIBLIG5ADR>
+                <LIBLIG6ADR>14360 TROUVILLE SUR MER</LIBLIG6ADR>
+                <LIBLIG7ADR>FRANCE</LIBLIG7ADR>
+            </ADRESSE>
+            <DATECOMMANDE>20012016</DATECOMMANDE>
+            <DOCUMENTCOMMANDE>ATTDRT</DOCUMENTCOMMANDE>
+            <DUMOIS>12</DUMOIS>
+            <DELANNEE>2015</DELANNEE>
+            <DUMOISFIN>12</DUMOISFIN>
+            <DELANNEEFIN>2015</DELANNEEFIN>
+            <NOMALLOCATAIRE></NOMALLOCATAIRE>
+        </ENTETE>
+        <CORPS>
+            <ATTPAIDRT>
+                <IDENTITEPERSONNES>
+                    <UNEPERSONNE>
+                        <QUAL>Madame</QUAL>
+                        <NOMPRENOM>Marine Martin</NOMPRENOM>
+                        <DATNAISS>17111961</DATNAISS>
+                        <SEXE>F</SEXE>
+                    </UNEPERSONNE>
+                    <UNEPERSONNE>
+                        <QUAL>Monsieur</QUAL>
+                        <NOMPRENOM>Jean Martin</NOMPRENOM>
+                        <DATNAISS>17071959</DATNAISS>
+                        <SEXE>M</SEXE>
+                    </UNEPERSONNE>
+                </IDENTITEPERSONNES>
+                <IDENTITEENFANTS>
+                    <UNENFANT>
+                        <TopENFRSA>N</TopENFRSA>
+                        <TopENFPPA>N</TopENFPPA>
+                        <NOMPRENOM>Marie Martin</NOMPRENOM>
+                        <DATNAISS>18061996</DATNAISS>
+                        <SEXE>F</SEXE>
+                    </UNENFANT>
+                    <UNENFANT>
+                        <TopENFRSA>N</TopENFRSA>
+                        <TopENFPPA>N</TopENFPPA>
+                        <NOMPRENOM>Pierre Martin</NOMPRENOM>
+                        <DATNAISS>23092000</DATNAISS>
+                        <SEXE>M</SEXE>
+                    </UNENFANT>
+                </IDENTITEENFANTS>
+                <QUOTIENTS>
+                    <QFMOIS>
+                        <DUMOIS>12</DUMOIS>
+                        <DELANNEE>2015</DELANNEE>
+                        <QUOTIENTF>0</QUOTIENTF>
+                    </QFMOIS>
+                </QUOTIENTS>
+                <PRESTATIONS>
+                    <NBMOIS>1</NBMOIS>
+                    <DUMOISANNEE>
+                        <DUMOIS>12</DUMOIS>
+                        <DELANNEE>2015</DELANNEE>
+                        <PRESTATIONSDUMOIS>
+                            <UNEPRESTATION>
+<NATURE>Allocation de logement</NATURE>
+<TITULAIRE></TITULAIRE>
+<MONTANT>456,68</MONTANT>
+<topTIERS>O</topTIERS>
+<IDENTTIERS></IDENTTIERS>
+<topRSA>N</topRSA>
+<DETMTPAI></DETMTPAI>
+<DONTMTRSAACT>0,00</DONTMTRSAACT>
+<MTFORF></MTFORF>
+<MTREVACTI></MTREVACTI>
+<MTGARANTI></MTGARANTI>
+<TOPLIBGARANTIRSA>N</TOPLIBGARANTIRSA>
+<topNONDROIT>N</topNONDROIT>
+<MOTIFNONDROIT></MOTIFNONDROIT>
+<topSUSPEN>N</topSUSPEN>
+<topPPA>N</topPPA>
+<MTFORFPPA></MTFORFPPA>
+<MTREVACTIPPA></MTREVACTIPPA>
+                            </UNEPRESTATION>
+                            <MONTANTTOTAL>456,68</MONTANTTOTAL>
+                        </PRESTATIONSDUMOIS>
+                    </DUMOISANNEE>
+                </PRESTATIONS>
+            </ATTPAIDRT>
+        </CORPS>
+    </DOCUMENT>
+</FLUX_TRAFIC>]]></fluxRetour>
+               <libelleRetour>Votre demande est bien enregistree. Un document vous sera adresse à votre domicile dans les prochains jours.</libelleRetour>
+            </beanRetourDemandeDocumentWeb>
+         </return>
+      </ns2:demanderDocumentWebResponse>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+--MIMEBoundaryurn_uuid_8B0A764C423F16ACC21453714612396--

@@ -10,6 +10,7 @@ describe('Caf API', function () {
   const pdfhttpResponse = fs.readFileSync(__dirname + '/resources/caf/pdf/httpResponse.txt','utf-8');
   const pdfhttpFunctionnalError = fs.readFileSync(__dirname + '/resources/caf/pdf/httpFunctionnalError.txt','utf-8');
   const xmlHttpResponse = fs.readFileSync(__dirname + '/resources/caf/xml/httpResponse.txt','utf-8');
+  const xmlHttpResponseWithQF0 = fs.readFileSync(__dirname + '/resources/caf/xml/httpResponseWithQF0.txt','utf-8');
   const xmlHttpFunctionnalError = fs.readFileSync(__dirname + '/resources/caf/xml/httpFunctionnalError.txt','utf-8');
   const xmlHttpTechError = fs.readFileSync(__dirname + '/resources/caf/xml/httpTechError.txt','utf-8');
 
@@ -115,6 +116,20 @@ describe('Caf API', function () {
             expect(res.body.quotientFamilial).to.equal(345)
             done()
           })
+      });
+    })
+
+    describe("when QF is 0", () => {
+      it('replies 404', (done) => {
+
+        nock('https://pep-test.caf.fr')
+          .post('/sgmap/wswdd/v1')
+          .reply(200, xmlHttpResponseWithQF0);
+
+        api()
+          .get('/api/caf/qf')
+          .expect("content-type", /json/)
+          .expect(404, done)
       });
     })
 
