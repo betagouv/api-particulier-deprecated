@@ -56,3 +56,10 @@
 .site-example img:hover {
   opacity: 0.9
 }
+
+#mailAdress {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  font-size: x-large;
+  font-weight: bold;
+}
