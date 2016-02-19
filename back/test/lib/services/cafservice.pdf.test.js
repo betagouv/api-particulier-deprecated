@@ -4,8 +4,7 @@ const expect = require('chai').expect;
 const CafService = require('../../../lib/services/caf')
 const fs = require('fs');
 const nock = require('nock');
-
-
+const StandardError = require('standard-error')
 
 describe('Caf Service', function () {
   var cafService = new CafService({
@@ -14,10 +13,11 @@ describe('Caf Service', function () {
     cafSslKey: __dirname + '/../../resources/server.key'
   });
 
-  var httpResponse = fs.readFileSync(__dirname + '/../../resources/caf/pdf/httpResponse.txt','utf-8');
-  var httpError = fs.readFileSync(__dirname + '/../../resources/caf/pdf/httpError.txt','utf-8');
-  var pdf = fs.readFileSync(__dirname + '/../../resources/caf/pdf/response.pdf','utf-8');
-  var pdfBuffer = fs.readFileSync(__dirname + '/../../resources/caf/pdf/response.pdf');
+  const httpResponse = fs.readFileSync(__dirname + '/../../resources/caf/pdf/httpResponse.txt','utf-8');
+  const httpError = fs.readFileSync(__dirname + '/../../resources/caf/pdf/httpError.txt','utf-8');
+  const pdfhttpFunctionnalError = fs.readFileSync(__dirname + '/../../resources/caf/pdf/httpFunctionnalError.txt','utf-8');
+  const pdf = fs.readFileSync(__dirname + '/../../resources/caf/pdf/response.pdf','utf-8');
+  const pdfBuffer = fs.readFileSync(__dirname + '/../../resources/caf/pdf/response.pdf');
 
 
   describe("get second part of body", function () {
@@ -33,7 +33,7 @@ describe('Caf Service', function () {
       beforeEach(() => {
         cafCall = nock('https://pep-test.caf.fr')
           .post('/sgmap/wswdd/v1', function(body){
-             return body.indexOf("<codeOrganisme>toto</codeOrganisme>") >= 0 &&
+             return body.indexOf("<codePostal>toto</codePostal>") >= 0 &&
              body.indexOf("<matricule>tutu</matricule>") >= 0 &&
              body.indexOf("<typeEnvoi>3</typeEnvoi>") >= 0 &&
               body.indexOf("<typeDocument>2</typeDocument>") >= 0
@@ -75,14 +75,15 @@ describe('Caf Service', function () {
       beforeEach(() => {
         cafCall = nock('https://pep-test.caf.fr')
           .post('/sgmap/wswdd/v1')
-          .reply(200, httpError);
+          .reply(200, pdfhttpFunctionnalError);
       })
 
-      it("return the pdf",(done) => {
+      it("return an error",(done) => {
         const stream = fs.writeFileSync(__dirname + '/../../resources/out.pdf')
         cafService.getAttestation("toto", "tutu", "qf", (err, data) => {
           cafCall.done();
           nock.cleanAll();
+          expect(err).to.deep.equal(new StandardError("Dossier en cours d'affiliation sur la période de référence. Le document ne peut être édité.", { code: 404 }))
           if(err) return done()
           done(new Error("Le service n'a pas retourné d'erreur"))
         });
@@ -96,7 +97,7 @@ describe('Caf Service', function () {
       beforeEach(() => {
         cafCall = nock('https://pep-test.caf.fr')
           .post('/sgmap/wswdd/v1', function(body){
-             return body.indexOf("<codeOrganisme>toto</codeOrganisme>") >= 0 &&
+             return body.indexOf("<codePostal>toto</codePostal>") >= 0 &&
              body.indexOf("<matricule>tutu</matricule>") >= 0 &&
              body.indexOf("<typeEnvoi>3</typeEnvoi>") >= 0 &&
               body.indexOf("<typeDocument>4</typeDocument>") >= 0

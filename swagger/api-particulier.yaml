@@ -125,9 +125,9 @@ paths:
           required: true
           type: number
           format: integer
-        - name: codeOrganisme
+        - name: codePostal
           in: query
-          description: Code organisme de la CAF (un par code postal)
+          description: Code postal
           required: true
           type: number
           format: integer
@@ -183,9 +183,9 @@ paths:
             required: true
             type: number
             format: integer
-          - name: codeOrganisme
+          - name: codePostal
             in: query
-            description: Code organisme de la CAF (un par code postal)
+            description: Code Postal
             required: true
             type: number
             format: integer
@@ -231,9 +231,9 @@ paths:
             required: true
             type: number
             format: integer
-          - name: codeOrganisme
+          - name: codePostal
             in: query
-            description: Code organisme de la CAF (un par code postal)
+            description: Code postal
             required: true
             type: number
             format: integer
@@ -279,9 +279,9 @@ paths:
             required: true
             type: number
             format: integer
-          - name: codeOrganisme
+          - name: codePostal
             in: query
-            description: Code organisme de la CAF (un par code postal)
+            description: Code postal
             required: true
             type: number
             format: integer
@@ -328,9 +328,9 @@ paths:
             required: true
             type: number
             format: integer
-          - name: codeOrganisme
+          - name: codePostal
             in: query
-            description: Code organisme de la CAF (un par code postal)
+            description: Code Postal
             required: true
             type: number
             format: integer

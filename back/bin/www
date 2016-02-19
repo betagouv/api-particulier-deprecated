@@ -43,6 +43,8 @@ var server = new Server({
   logger: logger,
   numeroFiscal: nconf.get('numeroFiscal'),
   referenceAvis: nconf.get('referenceAvis'),
+  codePostal: nconf.get('codePostal'),
+  numeroAllocataire: nconf.get('numeroAllocataire'),
   nconf: nconf,
   raven: {
     activate: nconf.get('raven:activate'),

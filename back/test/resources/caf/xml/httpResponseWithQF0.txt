@@ -1,3 +1,8 @@
+--MIMEBoundaryurn_uuid_8B0A764C423F16ACC21453714612396
+Content-Type: application/xop+xml; charset=utf-8; type="text/xml"
+Content-Transfer-Encoding: binary
+Content-ID: <0.urn:uuid:DFBF3CA6829D17D6091455278989463@apache.org>
+
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
    <soapenv:Body>
       <ns2:demanderDocumentWebResponse xmlns:ns2="http://v1.ws.wsdemandedocumentweb.cnaf/">
@@ -99,7 +104,7 @@
                     <QFMOIS>
                         <DUMOIS>12</DUMOIS>
                         <DELANNEE>2015</DELANNEE>
-                        <QUOTIENTF>345</QUOTIENTF>
+                        <QUOTIENTF>0</QUOTIENTF>
                     </QFMOIS>
                 </QUOTIENTS>
                 <PRESTATIONS>
@@ -143,3 +148,4 @@
    </soapenv:Body>
 </soapenv:Envelope>
 
+--MIMEBoundaryurn_uuid_8B0A764C423F16ACC21453714612396--

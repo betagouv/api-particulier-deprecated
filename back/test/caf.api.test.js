@@ -8,7 +8,9 @@ describe('Caf API', function () {
   const server = serverTest();
   const api = server.api;
   const pdfhttpResponse = fs.readFileSync(__dirname + '/resources/caf/pdf/httpResponse.txt','utf-8');
+  const pdfhttpFunctionnalError = fs.readFileSync(__dirname + '/resources/caf/pdf/httpFunctionnalError.txt','utf-8');
   const xmlHttpResponse = fs.readFileSync(__dirname + '/resources/caf/xml/httpResponse.txt','utf-8');
+  const xmlHttpResponseWithQF0 = fs.readFileSync(__dirname + '/resources/caf/xml/httpResponseWithQF0.txt','utf-8');
   const xmlHttpFunctionnalError = fs.readFileSync(__dirname + '/resources/caf/xml/httpFunctionnalError.txt','utf-8');
   const xmlHttpTechError = fs.readFileSync(__dirname + '/resources/caf/xml/httpTechError.txt','utf-8');
 
@@ -16,7 +18,7 @@ describe('Caf API', function () {
     it('replies 200', (done) => {
       nock('https://pep-test.caf.fr')
         .post('/sgmap/wswdd/v1')
-        .reply(200, pdfhttpResponse);
+        .reply(200, xmlHttpResponse);
 
       api()
         .get('/api/ping/caf')
@@ -51,6 +53,19 @@ describe('Caf API', function () {
           .get('/api/caf/attestation/droits')
           .query({ numeroFiscal: 'toto' })
           .expect(500,done)
+      });
+    })
+
+    describe("with functionnal error", function() {
+      it('replies 400', function (done) {
+        nock('https://pep-test.caf.fr')
+          .post('/sgmap/wswdd/v1')
+          .reply(200, pdfhttpFunctionnalError);
+
+        api()
+          .get('/api/caf/attestation/droits')
+          .query({ numeroFiscal: 'toto' })
+          .expect(404,done)
       });
     })
   });
@@ -101,6 +116,20 @@ describe('Caf API', function () {
             expect(res.body.quotientFamilial).to.equal(345)
             done()
           })
+      });
+    })
+
+    describe("when QF is 0", () => {
+      it('replies 404', (done) => {
+
+        nock('https://pep-test.caf.fr')
+          .post('/sgmap/wswdd/v1')
+          .reply(200, xmlHttpResponseWithQF0);
+
+        api()
+          .get('/api/caf/qf')
+          .expect("content-type", /json/)
+          .expect(404, done)
       });
     })
 

@@ -1,11 +1,11 @@
 {
   "101" : {
     "msg" : "Dossier radié. Le document ne peut être édité.",
-    "code": 400
+    "code": 404
   },
   "102": {
     "msg" : "Dossier radié au cours de la période de référence. Le document ne peut être édité.",
-    "code": 400
+    "code": 404
   },
   "103": {
     "msg": "L’opérateurs téléphonique» ne propose pas de raccordement SMS avec un prestataire externe (raccordement avec un numéro court). ",
@@ -13,15 +13,15 @@
   },
   "111": {
     "msg": "Dossier en cours d'affiliation sur la période de référence. Le document ne peut être édité.",
-    "code": 400
+    "code": 404
   },
   "121": {
     "msg": "Dossier suspendu. Le document ne peut être édité.",
-    "code": 400
+    "code": 404
   },
   "122": {
     "msg": "Dossier suspendu au cours de la période de référence. Le document ne peut être édité.",
-    "code": 400
+    "code": 404
   },
   "131": {
     "msg": "Absence du nom du responsable dossier. Le document ne peut être édité.",
@@ -29,27 +29,27 @@
   },
   "132": {
     "msg": "Décès MON/MME. Le document ne peut être édité.",
-    "code": 400
+    "code": 404
   },
   "133": {
     "msg": "Dossier allocataire inexistant. Le document ne peut être édité.",
-    "code": 400
+    "code": 404
   },
   "141": {
     "msg": "Non droit. Le document ne peut être édité.",
-    "code": 400
+    "code": 404
   },
   "151": {
     "msg": "Votre quotient familial (Qf) sur cette période est non disponible. Pour plus d'information, contactez-nous.",
-    "code": 400
+    "code": 404
   },
   "161": {
     "msg": "Absence ressources ou QF à 0 sur la période de référence. Le document ne peut être édité.",
-    "code": 400
+    "code": 404
   },
   "171": {
     "msg": "Le dossier n'est pas éligible à la réduction sociale téléphonique - Pas de droit AAH ou RSA à la date de situation.",
-    "code": 400
+    "code": 404
   },
   "181": {
     "msg": "Absence de code confidentiel. Le document ne peut être édité.",
@@ -57,7 +57,7 @@
   },
   "191": {
     "msg": "Pas de droit sur la période demandée pour la prestation sélectionnée (entre début période et date du jour)",
-    "code": 400
+    "code": 404
   },
   "192": {
     "msg": "Il existe des droits pour la prestation sélectionnée sur le dossier et/ou la période demandée",
@@ -69,7 +69,7 @@
   },
   "194": {
     "msg": "Pas de droit sur la période demandée pour la prestation sélectionnée (entre début période et fin période)",
-    "code": 400
+    "code": 404
   },
   "195": {
     "msg": "Allocataire non radié à la date de situation demandée",
@@ -89,11 +89,11 @@
   },
   "1113": {
     "msg":"Pas de droit sur la période demandée pour la prestation sélectionnée.",
-    "code": 400
+    "code": 404
   },
   "1114": {
     "msg": "Pas de droit sur la période demandée pour la prestation sélectionnée et le bénéficiaire choisi",
-    "code": 400
+    "code": 404
   },
   "201": {
     "msg": "Les informations souhaitées sont momentanément indisponibles. Merci de renouveler votre demande ultérieurement.",
