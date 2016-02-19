@@ -46,25 +46,17 @@
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
           <p class="lead">
-            Merci de prendre connaissance de la charte d'utilisation d'API
-            PARTICULIER afin de demander un jeton d'accès en décrivant votre
+            Merci de prendre connaissance de la <a href="/charte.pdf">charte d'utilisation d'API
+            Particulier</a> afin de demander un jeton d'accès en décrivant votre
             projet.
+          </p>
+          <p class="lead">
+            Un résumé est fait ci-dessus. Néamoins, il ne se substitue pas à
+            la lecture de la convention d'adhésion.
           </p>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-          <iframe src="/charte.pdf" width="100%" height="600px"></iframe>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1 text-right">
-          <a href="/charte.pdf" download="[Charte] API Particulier.pdf">
-            Télécharger la charte
-          </a>
-        </div>
-      </div>
       <div class="row">
         <div class="col-md-4">
           <ul class="list-group">
@@ -147,7 +139,7 @@
           <div class="col-md-10 col-md-offset-1">
             <label class="checkDroits">
               <input type="checkbox" ng-model="check"> J'ai compris et j'accepte
-              les modalités d'utilisation et d'intégration d'API Particulier
+              <a href="/charte.pdf" target="_blank"> la convention d’adhésion à l’API Particulier</a>
             </label>
           </div>
         </div>
@@ -157,7 +149,7 @@
             <a
                 ng-class="['btn', 'btn-default', 'btn-lg', 'btn-primary', 'tokenAction',
                 {disabled: !check}]"
-                href="mailto:apiparticulier@sgmap.fr?subject=Demande d'accès à API Particulier">
+                href="https://thibaut6.typeform.com/to/PmvUB7">
               Demandez un jeton
             </a>
           </div>
