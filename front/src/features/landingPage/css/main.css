@@ -25,16 +25,16 @@
 }
 
 .btn-inverse {
-  background-color: transparent;
-  border: 1px solid whitesmoke;
-  color: whitesmoke;
+  background-color: whitesmoke;
+  color: back;
+  border: 2px solid whitesmoke;
   padding: 20px 30px;
   font-size: 2rem;
 }
 
 .btn-inverse:hover {
-  background-color: whitesmoke;
-  color: back;
+  background-color: transparent;
+  color: whitesmoke;
 }
 
 .site-example h4 {
