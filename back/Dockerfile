@@ -1,4 +1,4 @@
-FROM node:4.2.1
+FROM node:5.7
 
 RUN mkdir -p /srv/apps
 
