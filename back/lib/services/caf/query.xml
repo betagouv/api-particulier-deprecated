@@ -3,10 +3,10 @@
     <soap:Body>
         <tns:demanderDocumentWeb xmlns:tns="http://v1.ws.wsdemandedocumentcafweb.cnaf/">
             <arg0>
-                <app>WAT</app>
+                <app>WDD</app>
                 <id>?</id>
                 <beanEntreeDemandeDocumentWeb>
-                    <codeAppli>WAT</codeAppli>
+                    <codeAppli>WDD</codeAppli>
                     <codePostal>{{ codePostal }}</codePostal>
                     <matricule>{{numeroAllocataire}}</matricule>
                     <typeDocument>{{ typeDocument }}</typeDocument>
