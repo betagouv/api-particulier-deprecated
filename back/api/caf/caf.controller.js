@@ -1,9 +1,7 @@
-"use strict";
+'use strict';
 
 const StandardError = require('standard-error');
 const CafService = require('./caf.service');
-const fs = require('fs')
-const iconv = require('iconv-lite');
 const format = require('./../lib/utils/format')
 
 
@@ -15,7 +13,7 @@ function CafController(options) {
 
   this.getAttestation = function(name) {
     return function(req, res, next) {
-      res.append("Content-Type", "application/pdf")
+      res.append('Content-Type', 'application/pdf')
       var codePostal = req.query.codePostal;
       var numeroAllocataire = req.query.numeroAllocataire;
       cafService.getAttestation(codePostal, numeroAllocataire, name, (err, data) => {
@@ -25,8 +23,8 @@ function CafController(options) {
     }
   }
 
-  this.attestationQf = this.getAttestation("qf")
-  this.attestationDroits = this.getAttestation("droits")
+  this.attestationQf = this.getAttestation('qf')
+  this.attestationDroits = this.getAttestation('droits')
 
   this.ping = function(req, res, next) {
     var codePostal = options.codePostal;
@@ -44,7 +42,7 @@ function CafController(options) {
       if(err) return next(err);
       console.log(data.quotientFamilial)
       if(data.quotientFamilial === 0) {
-        return next(new StandardError("Pas de QF sur cette période", {code: 404}))
+        return next(new StandardError('Pas de QF sur cette période', {code: 404}))
       }
       return format(res, data)
     })

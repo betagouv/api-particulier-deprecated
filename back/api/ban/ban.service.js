@@ -1,8 +1,7 @@
-"use strict";
+'use strict';
 
 const request = require('request') ;
 const UrlAssembler = require('url-assembler')
-const StandardError = require('standard-error');
 
 class BanService {
 

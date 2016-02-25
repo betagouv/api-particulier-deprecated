@@ -1,13 +1,12 @@
-"use strict";
+'use strict';
 
 const svair = require('svair-api')
 const StandardError = require('standard-error');
 const SvairBanService = require('./../ban/svairBan.service')
 const format = require('./../lib/utils/format')
-const js2xmlparser = require('js2xmlparser')
 
 function ImpotController(options) {
-  var options = options || {}
+  options = options || {}
   var svairBanService = new SvairBanService(options)
 
   this.adress = function(req, res, next) {
@@ -56,7 +55,7 @@ function ImpotController(options) {
     if (!numeroFiscal || !referenceAvis) {
       return next(new StandardError('Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.', {code: 400}));
     } else {
-      svair(options.svairHost)(numeroFiscal, referenceAvis, function(err, result) {
+      svair(options.svairHost)(numeroFiscal, referenceAvis, function(err) {
         sendDataFromSvair(err, 'pong', next, res)
       });
     }

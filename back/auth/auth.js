@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const StandardError = require('standard-error');
 const compose = require('composable-middleware');
