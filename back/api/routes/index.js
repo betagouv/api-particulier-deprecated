@@ -1,5 +1,5 @@
 var SystemController = require('../controllers/system');
-var ImpotsController = require('../controllers/impots');
+var ImpotsController = require('../impots/impots.controller');
 var CafController = require('../caf/caf.controller');
 var AdminController = require ('../controllers/admin')
 exports.configure = function (app, options) {

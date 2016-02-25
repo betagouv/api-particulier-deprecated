@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const request = require('request');
-const serverTest = require('./utils/server');
+const serverTest = require('./../../test/utils/server');
 
 describe('Impots API', function () {
   const server = serverTest();
@@ -106,7 +106,5 @@ describe('Impots API', function () {
         });
       })
     })
-
-
   });
 });
