@@ -4,9 +4,9 @@ const expect = require('chai').expect;
 const proxyquire = require('proxyquire').noCallThru();
 const sinon = require('sinon');
 const StandardError = require('standard-error');
-const banResult = require('./../../resources/adresses');
-const svairResult = require('./../../resources/svair');
-const expectedResponse = require('./../../resources/adressesWithDeclarant');
+const banResult = require('./../../test/resources/adresses');
+const svairResult = require('./../../test/resources/svair');
+const expectedResponse = require('./../../test/resources/adressesWithDeclarant');
 
 describe('Svair Ban Service', function () {
   let SvairBanService;
@@ -14,13 +14,13 @@ describe('Svair Ban Service', function () {
   describe("When everything works", () => {
 
     beforeEach(function(done) {
-      SvairBanService = proxyquire('../../../lib/services/svairBan', {
+      SvairBanService = proxyquire('../svairBan.service', {
         'svair-api': function() {
           return function svairApiFake(numeroFiscal, referenceAvis, callback) {
             callback(null, svairResult)
           }
         },
-        './ban': function FakeBanService() {
+        './../ban/ban.service': function FakeBanService() {
           this.getAdress = function fakeGetAdress(query, callback) {
             callback(null, banResult)
           }
@@ -35,6 +35,7 @@ describe('Svair Ban Service', function () {
 
       //when
       svairBanService.getAdress( 23, 34, function(err, data) {
+        console.log(err)
         expect(err).to.not.exist
         expect(data).to.deep.equal(expectedResponse)
         done();

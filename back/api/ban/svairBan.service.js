@@ -1,7 +1,7 @@
 "use strict";
 
 
-const BanService = require('./ban')
+const BanService = require('./../ban/ban.service')
 const Svair = require('svair-api')
 const StandardError = require('standard-error');
 

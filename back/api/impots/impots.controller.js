@@ -2,7 +2,7 @@
 
 const svair = require('svair-api')
 const StandardError = require('standard-error');
-const SvairBanService = require('./../lib/services/svairBan')
+const SvairBanService = require('./../ban/svairBan.service')
 const format = require('./../lib/utils/format')
 const js2xmlparser = require('js2xmlparser')
 
