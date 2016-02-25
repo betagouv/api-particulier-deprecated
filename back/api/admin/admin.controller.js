@@ -2,9 +2,9 @@ var StandardError = require('standard-error');
 var Redis = require('ioredis');
 
 
-module.exports = CafController;
+module.exports = AdminController;
 
-function CafController(options) {
+function AdminController(options) {
   options = options || {};
   logger = options.logger;
 

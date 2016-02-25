@@ -1,17 +1,17 @@
-var expect = require('chai').expect;
-var request = require('request');
-var serverTest = require('./utils/server');
-var nock = require('nock');
-var fs = require('fs');
+const expect = require('chai').expect;
+const request = require('request');
+const serverTest = require('./../../test/utils/server');
+const nock = require('nock');
+const fs = require('fs');
 
 
-describe('Admin API', function () {
+describe('Admin API', () => {
   var server = serverTest();
   var api = server.api;
 
-  describe("When getting the users", function () {
+  describe("When getting the users", () => {
 
-    describe("when not admin", function () {
+    describe("when not admin", () => {
       it('replies 403', function (done) {
         api()
           .get('/api/admin/users')
@@ -19,8 +19,8 @@ describe('Admin API', function () {
       });
     })
 
-    describe("when you are an admin", function () {
-      it('replies 200 with the users', function (done) {
+    describe("when you are an admin", () => {
+      it('replies 200 with the users', (done) => {
         api()
           .get('/api/admin/users')
           .set('X-API-Key', 'adminToken')
@@ -47,18 +47,18 @@ describe('Admin API', function () {
     })
   });
 
-  describe("When creating the users", function () {
+  describe("When creating the users", () => {
 
-    describe("when not admin", function () {
-      it('replies 403', function (done) {
+    describe("when not admin", () => {
+      it('replies 403', (done) => {
         api()
           .post('/api/admin/users')
           .expect(403,done)
       });
     })
 
-    describe("when you are an admin", function () {
-      it('replies 200 with the users', function (done) {
+    describe("when you are an admin", () => {
+      it('replies 200 with the users', (done) => {
 
         var user = {
           name: 'tge',
@@ -86,7 +86,7 @@ describe('Admin API', function () {
     })
   })
 
-  describe("when you delete an user", function () {
+  describe("when you delete an user", () => {
     var user = {
       name: 'tge',
       token: 'wsdulfhsdhf',

@@ -18,7 +18,7 @@ const identifyUser = require('./lib/middlewares/identifyUser')
 const loggerProperties = require('./lib/middlewares/logger')
 const formatError = require('./lib/middlewares/formatError')
 const isAuthorized = require('./lib/middlewares/isAuthorized')
-const UsersService = require('./lib/services/users');
+const UsersService = require('./admin/users.service');
 require('stackup')
 
 var extend = require('extend');
