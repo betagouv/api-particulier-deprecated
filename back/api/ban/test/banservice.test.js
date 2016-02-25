@@ -2,7 +2,7 @@
 
 
 const expect = require('chai').expect;
-const BanService = require('../../../lib/services/ban')
+const BanService = require('./../ban.service')
 const nock = require('nock');
 const fs = require('fs');
 
@@ -14,8 +14,10 @@ describe('Ban Service', function () {
     }
   });
 
-  const banResponse = JSON.parse(fs.readFileSync(__dirname + '/../../resources/banResponse.json','utf-8'));
-  const banExpected = JSON.parse(fs.readFileSync(__dirname + '/../../resources/adresses.json','utf-8'));
+  const resourcePath = __dirname + '/../../test/resources'
+
+  const banResponse = JSON.parse(fs.readFileSync(resourcePath + '/banResponse.json','utf-8'));
+  const banExpected = JSON.parse(fs.readFileSync(resourcePath + '/adresses.json','utf-8'));
 
   describe("getting an adresse", () => {
     it("return the adress",function(done) {
