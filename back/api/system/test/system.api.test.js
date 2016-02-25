@@ -1,5 +1,5 @@
-var expect = require('chai').expect;
-var serverTest = require('./utils/server');
+const expect = require('chai').expect;
+const serverTest = require('./../../test/utils/server');
 
 
 describe('System API', () => {

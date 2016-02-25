@@ -1,4 +1,4 @@
-var SystemController = require('../controllers/system');
+var SystemController = require('../system/system.controller');
 var ImpotsController = require('../impots/impots.controller');
 var CafController = require('../caf/caf.controller');
 var AdminController = require ('../controllers/admin')
