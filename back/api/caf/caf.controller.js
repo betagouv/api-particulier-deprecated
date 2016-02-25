@@ -1,7 +1,7 @@
 "use strict";
 
 const StandardError = require('standard-error');
-const CafService = require('../lib/services/caf');
+const CafService = require('./caf.service');
 const fs = require('fs')
 const iconv = require('iconv-lite');
 const format = require('./../lib/utils/format')

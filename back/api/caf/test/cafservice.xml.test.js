@@ -1,25 +1,27 @@
 "use strict";
 
 const expect = require('chai').expect;
-const CafService = require('../../../lib/services/caf')
+const CafService = require('./../caf.service')
 const fs = require('fs');
 const nock = require('nock');
-const httpJson = require('./../../resources/caf/xml/response.json')
+const httpJson = require('./../../test/resources/caf/xml/response.json')
 const StandardError = require('standard-error')
 
 
 
 describe('Caf Service', () => {
+  const resourcePath = __dirname + '/../../test/resources'
+
   var cafService = new CafService({
     cafHost: 'https://pep-test.caf.fr',
-    cafSslCertificate: __dirname + '/../../resources/server.csr',
-    cafSslKey: __dirname + '/../../resources/server.key'
+    cafSslCertificate: resourcePath + '/server.csr',
+    cafSslKey: resourcePath + '/server.key'
   });
 
-  const httpResponse = fs.readFileSync(__dirname + '/../../resources/caf/xml/httpResponse.txt','utf-8');
-  const xml = fs.readFileSync(__dirname + '/../../resources/caf/xml/httpResponse.xml','utf-8');
-  const xmlHttpFunctionnalError = fs.readFileSync(__dirname + '/../../resources/caf/xml/httpFunctionnalError.txt','utf-8');
-  const xmlHttpTechError = fs.readFileSync(__dirname + '/../../resources/caf/xml/httpTechError.txt','utf-8');
+  const httpResponse = fs.readFileSync(resourcePath + '/caf/xml/httpResponse.txt','utf-8');
+  const xml = fs.readFileSync(resourcePath + '/caf/xml/httpResponse.xml','utf-8');
+  const xmlHttpFunctionnalError = fs.readFileSync(resourcePath + '/caf/xml/httpFunctionnalError.txt','utf-8');
+  const xmlHttpTechError = fs.readFileSync(resourcePath + '/caf/xml/httpTechError.txt','utf-8');
 
 
   describe("get first part of body", () => {

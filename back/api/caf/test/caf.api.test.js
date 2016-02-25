@@ -1,18 +1,19 @@
 const expect = require('chai').expect;
 const request = require('request');
-const serverTest = require('./utils/server');
+const serverTest = require('./../../test/utils/server');
 const nock = require('nock');
 const fs = require('fs');
 
 describe('Caf API', function () {
   const server = serverTest();
   const api = server.api;
-  const pdfhttpResponse = fs.readFileSync(__dirname + '/resources/caf/pdf/httpResponse.txt','utf-8');
-  const pdfhttpFunctionnalError = fs.readFileSync(__dirname + '/resources/caf/pdf/httpFunctionnalError.txt','utf-8');
-  const xmlHttpResponse = fs.readFileSync(__dirname + '/resources/caf/xml/httpResponse.txt','utf-8');
-  const xmlHttpResponseWithQF0 = fs.readFileSync(__dirname + '/resources/caf/xml/httpResponseWithQF0.txt','utf-8');
-  const xmlHttpFunctionnalError = fs.readFileSync(__dirname + '/resources/caf/xml/httpFunctionnalError.txt','utf-8');
-  const xmlHttpTechError = fs.readFileSync(__dirname + '/resources/caf/xml/httpTechError.txt','utf-8');
+  const resourcePath = __dirname + '/../../test/resources'
+  const pdfhttpResponse = fs.readFileSync(resourcePath + '/caf/pdf/httpResponse.txt','utf-8');
+  const pdfhttpFunctionnalError = fs.readFileSync(resourcePath + '/caf/pdf/httpFunctionnalError.txt','utf-8');
+  const xmlHttpResponse = fs.readFileSync(resourcePath + '/caf/xml/httpResponse.txt','utf-8');
+  const xmlHttpResponseWithQF0 = fs.readFileSync(resourcePath + '/caf/xml/httpResponseWithQF0.txt','utf-8');
+  const xmlHttpFunctionnalError = fs.readFileSync(resourcePath + '/caf/xml/httpFunctionnalError.txt','utf-8');
+  const xmlHttpTechError = fs.readFileSync(resourcePath + '/caf/xml/httpTechError.txt','utf-8');
 
   describe("ping", () => {
     it('replies 200', (done) => {

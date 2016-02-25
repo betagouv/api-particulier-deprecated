@@ -8,16 +8,16 @@ const UrlAssembler = require('url-assembler');
 const iconv = require('iconv-lite');
 const Readable = require('stream').Readable
 const parseString = require('xml2js').parseString;
-const documentType = require('./caf/typeDocument')
-const returnType = require('./caf/typeRetour')
-const errors = require('./caf/errors')
+const documentType = require('./models/typeDocument')
+const returnType = require('./models/typeRetour')
+const errors = require('./models/errors')
 const StandardError = require('standard-error')
 
 class CafService {
 
   constructor(options) {
     this.options = options || {};
-    const query = fs.readFileSync( __dirname + '/caf/query.xml', 'utf-8')
+    const query = fs.readFileSync( __dirname + '/models/query.xml', 'utf-8')
     this.queryTemplate = Handlebars.compile(query);
     this.sslCertificate = fs.readFileSync(options.cafSslCertificate);
     this.sslKey = fs.readFileSync(options.cafSslKey)
