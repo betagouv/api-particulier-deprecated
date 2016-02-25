@@ -29,7 +29,8 @@ function Server (options) {
   var self = this;
   options = options || {};
   options.port = options.port || 0;
-  var logger = options.logger || emptylogger();
+  options.logger = options.logger || emptylogger();
+  var logger = options.logger
   var app = express();
   app.set('port', options.port);
   app.set('json spaces', 2);
@@ -43,7 +44,7 @@ function Server (options) {
   app.use(express.static('public'));
   var usersService = new UsersService(options);
   app.set('usersService', usersService)
-
+  options.usersService = usersService
   app.use(bodyParser.json());
   var corsOptions = {
     exposedHeaders: ['Range', 'Content-Range', 'X-Content-Range'],
