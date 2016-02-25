@@ -1,4 +1,4 @@
-FROM        node:4.2-wheezy
+FROM        node:5.7
 
 MAINTAINER  Thibaut Géry
 
