@@ -1,15 +1,17 @@
 
-var express = require('express');
-var Controller = require('./impots.controller');
+const express = require('express');
+const Controller = require('./impots.controller');
+const Auth = require('../../auth/auth')
 
-var router = express.Router();
+const router = express.Router();
 
 module.exports = function(options){
-  var impotsController = new Controller(options);
+  const impotsController = new Controller(options);
+  const auth = new Auth(options.usersService)
 
-  router.get('/svair', impotsController.svair);
+  router.get('/svair', auth.canAccessApi, impotsController.svair);
+  router.get('/adress', auth.canAccessApi, impotsController.adress);
   router.get('/ping', impotsController.ping);
-  router.get('/adress', impotsController.adress);
 
   return router
 }

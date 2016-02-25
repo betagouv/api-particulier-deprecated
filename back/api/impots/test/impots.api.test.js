@@ -55,10 +55,19 @@ describe('Impots API', function () {
       })
     })
 
-
+    describe("with a incorrect token", () => {
+      describe("when getting the svair", () => {
+        it('replies 403', function (done) {
+          api()
+            .get('/api/impots/svair')
+            .set('X-API-Key', 'token-nok')
+            .expect(401,done)
+        });
+      })
+    })
   });
 
-  describe("When getting the svair", () => {
+  describe("When getting the adress", () => {
     describe("When working with json", () => {
       describe("without numeroFiscal", () => {
         it('replies 400', (done) => {
@@ -103,6 +112,18 @@ describe('Impots API', function () {
             .query({ numeroFiscal: 'toto' })
             .expect("content-type", /xml/)
             .expect(400,done)
+        });
+      })
+    })
+
+    describe("with a incorrect token", () => {
+
+      describe("when getting the adress", () => {
+        it('replies 403', function (done) {
+          api()
+            .get('/api/impots/adress')
+            .set('X-API-Key', 'token-nok')
+            .expect(401,done)
         });
       })
     })

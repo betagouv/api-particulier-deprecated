@@ -69,6 +69,15 @@ describe('Caf API', function () {
           .expect(404,done)
       });
     })
+
+    describe("with a incorrect token", () => {
+      it('replies 403', function (done) {
+        api()
+          .get('/api/caf/attestation/droits')
+          .set('X-API-Key', 'token-nok')
+          .expect(401,done)
+      });
+    })
   });
 
 
@@ -85,6 +94,14 @@ describe('Caf API', function () {
           .expect("content-type", /application\/pdf/)
           .expect(200,done)
       });
+      describe("with a incorrect token", () => {
+        it('replies 403', function (done) {
+          api()
+            .get('/api/caf/attestation/qf')
+            .set('X-API-Key', 'token-nok')
+            .expect(401,done)
+        });
+      })
     })
 
     describe("with http error", function() {
@@ -134,6 +151,15 @@ describe('Caf API', function () {
       });
     })
 
+    describe("with a incorrect token", () => {
+      it('replies 403', function (done) {
+        api()
+          .get('/api/caf/qf')
+          .set('X-API-Key', 'token-nok')
+          .expect(401,done)
+      });
+    })
+
     describe("with http error", function() {
       it('replies 400', function (done) {
         nock('https://pep-test.caf.fr')
@@ -179,9 +205,18 @@ describe('Caf API', function () {
           .expect(500,done)
       });
     })
+
+    describe("with a incorrect token", () => {
+      it('replies 403', function (done) {
+        api()
+          .get('/api/caf/adresse')
+          .set('X-API-Key', 'token-nok')
+          .expect(401,done)
+      });
+    })
   });
 
-  describe("When getting the adresses data", () => {
+  describe("When getting the famille data", () => {
     describe("without errors", () => {
       it('replies 200', (done) => {
         nock('https://pep-test.caf.fr')
@@ -196,6 +231,15 @@ describe('Caf API', function () {
             expect(res.body.enfants[0].nomPrenom).to.equal("Marie Martin")
             done()
           })
+      });
+    })
+
+    describe("with a incorrect token", () => {
+      it('replies 403', function (done) {
+        api()
+          .get('/api/caf/famille')
+          .set('X-API-Key', 'token-nok')
+          .expect(401,done)
       });
     })
 

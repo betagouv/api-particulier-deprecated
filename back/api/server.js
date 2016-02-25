@@ -17,9 +17,7 @@ const getApiKeyFromQueryParam = require('./lib/middlewares/getApiKeyFromQueryPar
 const identifyUser = require('./lib/middlewares/identifyUser')
 const loggerProperties = require('./lib/middlewares/logger')
 const formatError = require('./lib/middlewares/formatError')
-const isAuthorized = require('./lib/middlewares/isAuthorized')
 const UsersService = require('./admin/users.service');
-require('stackup')
 
 var extend = require('extend');
 
@@ -77,10 +75,6 @@ function Server (options) {
   app.use(identifyUser)
 
   app.use(formatFromUrl)
-
-  app.use(isAuthorized(usersService).unless((req) => {
-    return req.originalUrl.indexOf("ping") != -1
-  }))
 
   routes.configure(app, options);
 
