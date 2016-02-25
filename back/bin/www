@@ -4,7 +4,7 @@
 var bunyan = require('bunyan');
 var bunyanFormat = require('bunyan-format');
 var nconf = require('nconf');
-var Server = require('../server');
+var Server = require('../api/server');
 var http = require('http');
 var url = require('url');
 
