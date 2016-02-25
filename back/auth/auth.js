@@ -1,6 +1,7 @@
 "use strict";
 
 const StandardError = require('standard-error');
+const compose = require('composable-middleware');
 
 module.exports = Auth
 
@@ -26,11 +27,15 @@ function Auth(usersService) {
     })
   }
 
-  this.canAccessAdminFunction = function(req, res, next) {
+  var canAccesAdmin = function(req, res, next) {
     if(req.consumer.role && req.consumer.role !== 'admin') {
       next(new StandardError('Vous n\'être pas administrateur', {code: 403}));
     } else {
       next()
     }
   }
+
+  this.canAccessAdminFunction = compose()
+      .use(this.canAccessApi)
+      .use(canAccesAdmin)
 }
