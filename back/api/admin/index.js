@@ -7,7 +7,7 @@ const router = express.Router();
 
 module.exports = function(options){
   const adminController = new Controller(options);
-  const auth = new Auth(options.tokenService);
+  const auth = new Auth(options);
 
   router.get('/users', auth.canAccessAdminFunction, adminController.getTokens);
   router.post('/users', auth.canAccessAdminFunction, adminController.createToken);

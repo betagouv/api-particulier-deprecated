@@ -28,6 +28,7 @@ function Server (options) {
   options = options || {};
   options.port = options.port || 0;
   options.logger = options.logger || emptylogger();
+  options.redis.driver = new Redis(options.redis.port, options.redis.host)
   var logger = options.logger
   var app = express();
   app.set('port', options.port);
@@ -40,8 +41,6 @@ function Server (options) {
   app.set('banBaseUrl', options.ban.baseUrl)
   app.disable('x-powered-by');
   app.use(express.static('public'));
-  var tokenService = new TokenService(options);
-  options.tokenService = tokenService
   app.use(bodyParser.json());
   var corsOptions = {
     exposedHeaders: ['Range', 'Content-Range', 'X-Content-Range'],

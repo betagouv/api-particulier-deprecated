@@ -7,7 +7,7 @@ const router = express.Router();
 
 module.exports = function(options){
   const cafController = new Controller(options);
-  const auth = new Auth(options.tokenService)
+  const auth = new Auth(options)
 
   router.get('/qf', auth.canAccessApi, cafController.getQf);
   router.get('/adresse', auth.canAccessApi, cafController.getAdress);

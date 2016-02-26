@@ -1,11 +1,14 @@
 module.exports = AdminController;
 
+const TokenService = require('./tokens.service')
+
 function AdminController(options) {
   options = options || {};
-  logger = options.logger;
+  const logger = options.logger;
+  const tokenService = new TokenService(options)
 
   this.getTokens = function(req, res, next) {
-    options.tokenService.getTokens(function(err, results) {
+    tokenService.getTokens(function(err, results) {
       if(err) {
         logger.error(err);
         return next(err)
@@ -15,7 +18,7 @@ function AdminController(options) {
   }
 
   this.createToken = function(req, res, next) {
-    options.tokenService.createToken(req.body, function(err, result) {
+    tokenService.createToken(req.body, function(err, result) {
       if(err) {
         logger.error(err);
         return next(err)
@@ -26,7 +29,7 @@ function AdminController(options) {
   }
 
   this.deleteToken = function(req, res, next) {
-    options.tokenService.deleteToken(req.params.name, function(err, result) {
+    tokenService.deleteToken(req.params.name, function(err, result) {
       if(err) {
         logger.error(err);
         return next(err)

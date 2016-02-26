@@ -2,10 +2,12 @@
 
 const StandardError = require('standard-error');
 const compose = require('composable-middleware');
+const TokenService = require('./../api/admin/tokens.service')
 
 module.exports = Auth
 
-function Auth(tokenService) {
+function Auth(options) {
+  const tokenService = new TokenService(options)
 
   this.canAccessApi = function(req, res, next) {
     var token = req.get('X-API-Key') || ""
