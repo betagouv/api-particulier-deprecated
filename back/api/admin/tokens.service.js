@@ -3,7 +3,7 @@
 const Redis = require('ioredis')
 const async = require('async')
 
-class UserService {
+class TokenService {
 
   constructor(options) {
     this.redis = new Redis(options.redis.port, options.redis.host);
@@ -12,7 +12,7 @@ class UserService {
     this.key = options.redis.tokensPrefix;
   }
 
-  getUsers(callback) {
+  getTokens(callback) {
     const self = this;
     self.redis.keys(self.key +'::*', (err, keys) => {
       if(err) {
@@ -35,7 +35,7 @@ class UserService {
     })
   }
 
-  getUser(token, callback) {
+  getToken(token, callback) {
     const self = this;
     self.redis.get(self.key + '::' + token, (err, result) => {
       if(err) {
@@ -46,7 +46,7 @@ class UserService {
     })
   }
 
-  createUser(user, callback) {
+  createToken(user, callback) {
     const self = this;
     self.redis.set(self.key +'::'+ user.token, JSON.stringify(user), (err) => {
       if(err) {
@@ -57,7 +57,7 @@ class UserService {
     })
   }
 
-  deleteUser(token, callback) {
+  deleteToken(token, callback) {
     const self = this;
     self.redis.del(self.key + '::'+ token, (err, result) => {
       if(err) {
@@ -71,4 +71,4 @@ class UserService {
 }
 
 
-module.exports = UserService
+module.exports = TokenService

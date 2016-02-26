@@ -7,7 +7,7 @@ const router = express.Router();
 
 module.exports = function(options){
   const impotsController = new Controller(options);
-  const auth = new Auth(options.usersService)
+  const auth = new Auth(options.tokenService)
 
   router.get('/svair', auth.canAccessApi, impotsController.svair);
   router.get('/adress', auth.canAccessApi, impotsController.adress);

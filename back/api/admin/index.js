@@ -7,11 +7,11 @@ const router = express.Router();
 
 module.exports = function(options){
   const adminController = new Controller(options);
-  const auth = new Auth(options.usersService);
+  const auth = new Auth(options.tokenService);
 
-  router.get('/users', auth.canAccessAdminFunction, adminController.getUsers);
-  router.post('/users', auth.canAccessAdminFunction, adminController.createUser);
-  router.delete('/users/:name', auth.canAccessAdminFunction, adminController.deleteUser);
+  router.get('/users', auth.canAccessAdminFunction, adminController.getTokens);
+  router.post('/users', auth.canAccessAdminFunction, adminController.createToken);
+  router.delete('/users/:name', auth.canAccessAdminFunction, adminController.deleteToken);
 
   return router
 }

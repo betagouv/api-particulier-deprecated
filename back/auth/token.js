@@ -5,12 +5,12 @@ const compose = require('composable-middleware');
 
 module.exports = Auth
 
-function Auth(usersService) {
+function Auth(tokenService) {
 
   this.canAccessApi = function(req, res, next) {
     var token = req.get('X-API-Key') || ""
 
-    usersService.getUser(token, (err, result) => {
+    tokenService.getToken(token, (err, result) => {
       if(err) {
        req.logger.warn(err);
        return next(err)
