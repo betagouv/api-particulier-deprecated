@@ -7,6 +7,7 @@ describe('User API', function () {
   const api = server.api;
 
   describe("When getting the profile", () => {
+
     it('replies with json and 200', (done) => {
       api()
         .get('/api/users/tge@octo.com')

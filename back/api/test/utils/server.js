@@ -20,7 +20,8 @@ module.exports = function(){
     redis: {
       host: '127.0.0.1',
       port: 6379,
-      tokensPrefix: 'testTokenAuthorized'
+      tokensPrefix: 'testTokenAuthorized',
+      userPrefix: 'testUser'
     },
     raven: {
       activate: false,
@@ -47,23 +48,46 @@ module.exports = function(){
   beforeEach(function (done) {
     server = new Server(options);
     redis = new Redis(options.redis.port, options.redis.host);
-    server.start(function(err) {
-      if(err) return done(err);
-      var user = {
-        name: 'test',
-        token: '',
-        role: 'user'
-      }
-      var admin = {
-        name: 'admin',
-        token: 'adminToken',
-        role: 'admin'
-      }
-      redis.set(options.redis.tokensPrefix + '::' + user.token, JSON.stringify(user), function(err) {
-        if(err) return done(err);
-        redis.set(options.redis.tokensPrefix  + '::' + admin.token, JSON.stringify(admin), done)
-      })
-    });
+    const tokenUser = {
+      name: 'test',
+      token: '',
+      role: 'user'
+    }
+    const tokenAdmin = {
+      name: 'admin',
+      token: 'adminToken',
+      role: 'admin'
+    }
+    const user = {
+      email: 'tge@octo.com',
+      name: 'gery',
+      surname: 'Thibaut',
+      role: 'user',
+      localAuthority: 'Paris',
+      keys: ['A', 'B']
+    }
+    const admin = {
+      email: 'tgery@octo.com',
+      name: 'gery',
+      surname: 'Thibaut',
+      role: 'admin',
+      localAuthority: 'Paris',
+      keys: ['A', 'B']
+    }
+    async.series([
+      server.start,
+      (callback) => {
+        redis.set(options.redis.tokensPrefix + '::' + tokenUser.token, JSON.stringify(tokenUser), callback)
+      },
+      (callback) => {
+        redis.set(options.redis.tokensPrefix + '::' + tokenAdmin.token, JSON.stringify(tokenAdmin), callback)
+      },
+      (callback) => {
+        redis.set(options.redis.userPrefix + '::' + user.email, JSON.stringify(user), callback)
+      },
+      (callback) => {
+        redis.set(options.redis.userPrefix + '::' + admin.email, JSON.stringify(admin), callback)
+      }], done)
   });
 
   afterEach(function (done) {

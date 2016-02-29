@@ -23,6 +23,7 @@ describe('Users Service', () => {
       email,
       name: 'gery',
       surname: 'Thibaut',
+      role: 'user',
       localAuthority: 'Paris',
       keys: ['A', 'B']
     }
@@ -71,6 +72,7 @@ describe('Users Service', () => {
           email,
           name: 'Géry',
           surname: 'Thibaut',
+          role: 'user',
           localAuthority: 'Paris',
           keys: ['A', 'B', 'C']
         }
