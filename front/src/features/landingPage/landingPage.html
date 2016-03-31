@@ -27,12 +27,6 @@
                         <span>Documentation technique</span>
                       </a>
                     </li>
-                    <li>
-                      <a href="https://github.com/sgmap/api-particulier">
-                        <i class="fa fa-github fa-fw"></i>
-                        <span>Sources</span>
-                      </a>
-                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -49,13 +43,15 @@
                 <div class="col-lg-12">
                     <div class="intro-message">
                         <h1>API Particulier</h1>
-                        <h3>Simplifiez vos démarches, ne demandez plus de
-                          justificatifs</h3>
+                        <h3>
+                          Simplifiez les démarches de vos usagers, ne demandez plus de
+                          justificatifs
+                        </h3>
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
                           <li>
                             <a class="btn btn-default btn-lg btn-inverse"
-                                ui-sref="registration">
+                                ui-sref="registration.charte">
                               Demander un accès
                             </a>
                           </li>
@@ -117,7 +113,7 @@
                     <p class="lead">Pour obtenir un agrément, vous devez
                       justifier d'une simplification pour les citoyens, et
                       vous engager à n'accéder aux données personnelles qu'avec
-                      <u>l'accord explicite de l'usager</u>.</p>
+                      <b>l'accord explicite de l'usager</b>.</p>
                     <p>
                       <a href="charte.pdf" class="btn btn-primary">
                         <i class="fa fa-book fa-fw"></i>
@@ -140,30 +136,65 @@
             <div class="row">
                 <div class="col-lg-7 col-sm-9">
                     <h2 class="section-heading">
-                      Faire le lien avec France Connect
+                      Comprendre la différence avec FranceConnect
                     </h2>
 
                     <p class="lead">
-                      <a href="https://doc.integ01.dev-franceconnect.fr/">
-                        France Connect
-                      </a> permet à un utilisateur, une fois connecté, de
-                      récupérer ses données facilement.
+                      API Particulier et FranceConnect sont deux systèmes
+                      indenpendants mais complémentaires.
                     </p>
 
-                    <p class="lead">
-                      API Particulier, quant à lui, propose une solution non
-                      identifiée&#160;: pour l'utilisateur qui n'a pas de compte,
-                      pour les données liées au foyer familial et non à la
-                      personne…
-                    </p>
+                    <table class="table">
+                      <tr>
+                        <th></th>
+                        <th>
+                          FranceConnect
+                        </th>
+                        <th>
+                          API Particulier
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>
+                          Nature
+                        </th>
+                        <td>
+                          Fournisseur d’Identité et tiers de confiance                        </td>
+                        <td>
+                          Fournisseur de Données
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>
+                          Identification
+                        </th>
+                        <td>
+                          Citoyen et Fournisseur de Service
+                        </td>
+                        <td>
+                          Fournisseur de Service
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>
+                          Type de donnée
+                        </th>
+                        <td>
+                          liée à la personne
+                        </td>
+                        <td>
+                          liée à la personne, au foyer familial, aux parents et aux enfant
+                        </td>
+                      </tr>
+                    </table>
 
                     <p class="lead">
-                      API Particulier et France connect peuvent être utilisés
-                      seuls ou en parallèle.
+                      API Particulier et FranceConnect peuvent être utilisés
+                      seul ou conjointement.
                     </p>
                 </div>
                 <div class="col-lg-3 col-lg-offset-2 col-sm-3">
-                    <img class="img-responsive" src="img/logo_fc.png" alt="">
+                    <img class="img-responsive" src="img/logo-fc.png" alt="">
                 </div>
             </div>
 
@@ -233,89 +264,98 @@
 
     </section>
     <!-- /.content-b -->
-
     <section class="content-a">
 
-        <div class="container">
-          <a  name="try-it"></a>
-            <div class="row">
-                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
-                  <h3>Resultat</h3>
-                    <pre ng-show="showResult"><code class="json">{
-  "declarant1": {
-    "nom": "MARTIN",
-    "nomNaissance": "MARTIN",
-    "prenoms": "HENRI",
-    "dateNaissance": "29/05/1984"
-  },
-  "declarant2": {
-    "nom": "",
-    "nomNaissance": "",
-    "prenoms": "",
-    "dateNaissance": ""
-  },
-  "dateRecouvrement": "31/07/2015",
-  "dateEtablissement": "08/07/2015",
-  "nombreParts": 1,
-  "situationFamille": "Célibataire",
-  "nombrePersonnesCharge": 0,
-  "revenuBrutGlobal": 17580,
-  "revenuImposable": 17580,
-  "impotRevenuNetAvantCorrections": 1665,
-  "montantImpot": 1665,
-  "revenuFiscalReference": 17580,
-  "anneeImpots": "2015",
-  "anneeRevenus": "2014"
-}</code></pre>
-<pre ng-hide="showResult"><code class="json" >
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</code></pre>
-                </div>
-                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                  <h2 class="section-heading">
-                    Exemple&#160;: récupérer l'avis d'impôt sur le revenu
-                    <pre><code class="bash">curl --include \
-    --header "X-API-Key: correct-key" \
-    'https://private-anon-977fd3e61-apiparticulier.apiary-mock.com/api/impots/svair?numeroFiscal=475757686&referenceAvis=768585'</code></pre>
-                  <span class="center-block">
-                    <button type="button" class="btn btn-primary" ng-click="showResult = 'toto'">Essayer</button>
-                    <a href="/tech" class="btn btn-default"><i class="fa fa-book fa-fw"></i> <span>Documentation</span></a>
-                  </span>
-
-                </div>
-              </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <h2 class="section-heading">
+              Catalogue des données fournies par API Particulier
+            </h2>
           </div>
-
         </div>
-        <!-- /.container -->
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-info">
+                <h3 class="list-group-item-heading">Direction Générale des Finances Publiques</h3>
+              </li>
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">Avis d'imposition</h4>
+                <p class="list-group-item-text">
+                  Contient le revenu fiscal de référence, le nombre de part et
+                  les déclarants
+                </p>
+
+              </li>
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">Adresse fiscale</h4>
+                <p class="list-group-item-text">
+                  Contient l'adresse fiscale ainsi que l'adresse structurée et styles
+                  coordonnée GPS
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-info">
+                <h3 class="list-group-item-heading">Caisse d'Allocation Familiales</h3>
+              </li>
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">Quotient familial <span class="badge pull-right">Bientot</span></h4>
+                <p class="list-group-item-text">
+                  Contient le quotient familial du mois précédent
+                </p>
+
+              </li>
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">Composition familiale <span class="badge pull-right">Bientot</span></h4>
+                <p class="list-group-item-text">
+                  Contient les parents et les enfants de la familles déclaré à la
+                  <abbr title="Caisse d'Allocation Familiale">CAF</abbr>
+                </p>
+              </li>
+
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">Adresse <span class="badge pull-right">Bientot</span></h4>
+                <p class="list-group-item-text">
+                  Contient l'adresse déclarée à la
+                  <abbr title="Caisse d'Allocation Familiale">CAF</abbr>
+                </p>
+              </li>
+
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">Attestation de droits <span class="badge pull-right">Bientot</span></h4>
+                <p class="list-group-item-text">
+                  Génère le PDF d'attestation des droits d'un allocataire
+                </p>
+              </li>
+
+              <li class="list-group-item">
+                <h4 class="list-group-item-heading">Attestation de quotient familial <span class="badge pull-right">Bientot</span></h4>
+                <p class="list-group-item-text">
+                  Génère le PDF d'attestation du quotient familial
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
     </section>
-    <!-- /.content-a -->
-
-
+    <section>
+      <div class="container">
+        <div class="col-md-12 text-center">
+          <p>
+            <a class="btn btn-default btn-lg btn-primary"
+                ui-sref="registration.charte">
+              <i class="fa fa-4 fa-hand-o-right"></i> Demander un accès
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
   </div>
     <!-- /.banner -->
 
