@@ -1,7 +1,6 @@
-const yaml2json = require('yaml-to-json');
+const YAML = require('yamljs');
 const fs = require('fs')
 
 
-const swaggerYaml = fs.readFileSync("./api-particulier.yaml")
-const swaggerJson = yaml2json(swaggerYaml);
+const swaggerJson = YAML.load("./api-particulier.yaml");
 fs.writeFile('./api-particulier.json', JSON.stringify(swaggerJson), 'utf8')

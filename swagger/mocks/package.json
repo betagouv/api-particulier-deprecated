@@ -17,6 +17,6 @@
     "install": "0.4.1",
     "npm": "3.5.2",
     "swagger-tools": "^0.9.7",
-    "yaml-to-json": "0.3.0"
+    "yamljs": "0.2.7"
   }
 }
