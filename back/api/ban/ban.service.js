@@ -7,7 +7,7 @@ class BanService {
 
   constructor(options) {
     options = options || {}
-    const url = (options.ban || {}).baseUrl || ''
+    const url = (options.ban || {}).baseUrl || ''
     this.baseUrl = UrlAssembler(url)
   }
 

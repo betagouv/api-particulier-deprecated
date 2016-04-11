@@ -79,24 +79,23 @@ class CafService {
       const doc = data['FLUX_TRAFIC']['DOCUMENT'][0]
       const body = doc['CORPS'][0]['ATTPAIDRT'][0]
       const allocataires = body['IDENTITEPERSONNES'][0]['UNEPERSONNE'].map((item) => {
-          return {
-            nomPrenom: item['NOMPRENOM'][0],
-            dateDeNaissance: item['DATNAISS'][0],
-            sexe: item['SEXE'][0]
-          }
-        })
+        return {
+          nomPrenom: item['NOMPRENOM'][0],
+          dateDeNaissance: item['DATNAISS'][0],
+          sexe: item['SEXE'][0]
+        }
+      })
       const enfants = body['IDENTITEENFANTS'][0]['UNENFANT'].map((item) => {
-          return {
-            nomPrenom: item['NOMPRENOM'][0],
-            dateDeNaissance: item['DATNAISS'][0],
-            sexe: item['SEXE'][0]
-          }
-        })
-        callback(null, {
-          enfants,
-          allocataires
-        })
-
+        return {
+          nomPrenom: item['NOMPRENOM'][0],
+          dateDeNaissance: item['DATNAISS'][0],
+          sexe: item['SEXE'][0]
+        }
+      })
+      callback(null, {
+        enfants,
+        allocataires
+      })
     })
   }
 
@@ -126,15 +125,15 @@ class CafService {
                         this.returnStructuredData(self, callback)
     request
         .post({
-            url: url,
-            body: queryWithParameters,
-            headers: { 'Content-Type': 'text/xml; charset=utf-8' },
-            gzip: true,
-            cert: this.sslCertificate,
-            key: this.sslKey,
-            rejectUnauthorized: false,
-            timeout: 10000,
-            encoding: null
+          url: url,
+          body: queryWithParameters,
+          headers: { 'Content-Type': 'text/xml; charset=utf-8' },
+          gzip: true,
+          cert: this.sslCertificate,
+          key: this.sslKey,
+          rejectUnauthorized: false,
+          timeout: 10000,
+          encoding: null
         })
         .on('error', err => callback(err))
         .on('response', onSuccess);
