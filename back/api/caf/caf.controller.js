@@ -40,7 +40,6 @@ function CafController(options) {
     var numeroAllocataire = req.query.numeroAllocataire;
     cafService.getQf(codePostal, numeroAllocataire, (err, data) => {
       if(err) return next(err);
-      console.log(data.quotientFamilial)
       if(data.quotientFamilial === 0) {
         return next(new StandardError('Pas de QF sur cette période', {code: 404}))
       }
