@@ -64,8 +64,8 @@ curl "https://apiparticulier-test.sgmap.fr/api/caf/famille?codePostal=99148&nume
 
 > Cette commande retournera du json
 
-Cette URL permet de récupérer les noms et prénoms des allocataires CAF ainsi que
-leur enfants
+Cette URL permet de récupérer les allocataires CAF ainsi que
+leurs enfants.
 
 ### HTTP Request
 
@@ -80,8 +80,11 @@ numeroAllocataire | Non | Oui | Numéro de l'allocataire CAF, Code postal, ident
 
 
 <aside class="warning">
-Attention, la CAF ne renverra que les enfants touchant les aides de la CAF. La
-CAF ne liste pas les conjoints s'ils sont en union libre.
+La CAF ne renvoie que les enfants à charge (<a href="https://www.caf.fr/aides-et-services/s-informer-sur-les-aides/les-enfants-a-charge">voir les conditions </a>)
+</aside>
+
+<aside class="warning">
+La CAF renvoie une deuxième personne si le couple est marié, pacsé ou en concubinage.
 </aside>
 
 ## Récupérer l'attestation des droits de la CAF
