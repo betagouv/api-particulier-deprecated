@@ -1,7 +1,8 @@
 'use strict';
 
-const Redis = require('ioredis')
 const async = require('async')
+const StandardError = require('standard-error');
+
 
 class TokenService {
 

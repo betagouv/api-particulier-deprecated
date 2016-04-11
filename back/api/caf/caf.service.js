@@ -6,7 +6,6 @@ const fs = require('fs') ;
 const Handlebars = require('handlebars');
 const UrlAssembler = require('url-assembler');
 const iconv = require('iconv-lite');
-const Readable = require('stream').Readable
 const parseString = require('xml2js').parseString;
 const documentType = require('./models/typeDocument')
 const returnType = require('./models/typeRetour')

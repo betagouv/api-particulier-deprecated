@@ -29,7 +29,7 @@ function CafController(options) {
   this.ping = function(req, res, next) {
     var codePostal = options.codePostal;
     var numeroAllocataire = options.numeroAllocataire;
-    cafService.getFamily(codePostal, numeroAllocataire, (err, data) => {
+    cafService.getFamily(codePostal, numeroAllocataire, (err) => {
       if(err) return next(err);
       return format(res, 'pong')
     })
