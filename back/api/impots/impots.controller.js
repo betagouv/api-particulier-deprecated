@@ -11,7 +11,7 @@ function ImpotController(options) {
   var svairBanService = new SvairBanService(options)
 
   this.adress = function(req, res, next) {
-    var numeroFiscal = req.query.numeroFiscal;
+    var numeroFiscal = formatNumeroFiscal(req.query.numeroFiscal);
     var referenceAvis = req.query.referenceAvis;
     if (!numeroFiscal || !referenceAvis) {
       return next(new StandardError('Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.', {code: 400}));
@@ -34,8 +34,12 @@ function ImpotController(options) {
     }
   }
 
+   function formatNumeroFiscal(numeroFiscal) {
+    return (numeroFiscal || '').substring(0, 13);
+  }
+
   this.svair = function(req, res, next) {
-    var numeroFiscal = req.query.numeroFiscal;
+    var numeroFiscal = formatNumeroFiscal(req.query.numeroFiscal);
     var referenceAvis = req.query.referenceAvis;
     if (!numeroFiscal || !referenceAvis) {
       return next(new StandardError('Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.', {code: 400}));
