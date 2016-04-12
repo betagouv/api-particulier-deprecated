@@ -64,13 +64,16 @@ describe('Impots Controller', function () {
   });
 
   describe("When the svair return the result", function () {
+    var svairCall;
 
     beforeEach(function(done) {
+      svairCall =  sinon.spy(function svairApiFake(numeroFiscal, referenceAvis, done) {
+        done(null, {result: "tutu"})
+      });
+
       importController = proxyquire('../impots.controller', {
         'svair-api': () => {
-          return function svairApiFake(numeroFiscal, referenceAvis, done) {
-            done(null, {result: "tutu"})
-          }
+          return svairCall
         }
       });
       done()
@@ -88,5 +91,22 @@ describe('Impots Controller', function () {
       expect(callback.calledOnce).to.be.true;
       done()
     });
+
+    describe("when the numero fiscal has a letter after its 13 numbers", () => {
+
+      it('the service has been called without the last letter', function (done) {
+        //given
+        var callback = sinon.spy();
+        var req =   {query: {numeroFiscal: "3578788848943a", referenceAvis: "titi"}}
+        var res = {}
+        var controller = new importController();
+
+        //when
+        controller.svair( req, { format: callback  }, null)
+        expect(callback.calledOnce).to.be.true;
+        expect(svairCall.args[0][0]).to.equal('3578788848943');
+        done()
+      });
+    })
   });
 });
