@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const http = require('http');
 const express = require('express');
@@ -17,7 +17,7 @@ const getApiKeyFromQueryParam = require('./lib/middlewares/getApiKeyFromQueryPar
 const identifyUser = require('./lib/middlewares/identifyUser')
 const loggerProperties = require('./lib/middlewares/logger')
 const formatError = require('./lib/middlewares/formatError')
-const UsersService = require('./admin/users.service');
+const TokenService = require('./admin/tokens.service');
 
 var extend = require('extend');
 
@@ -28,6 +28,7 @@ function Server (options) {
   options = options || {};
   options.port = options.port || 0;
   options.logger = options.logger || emptylogger();
+  options.redis.driver = new Redis(options.redis.port, options.redis.host)
   var logger = options.logger
   var app = express();
   app.set('port', options.port);
@@ -40,9 +41,6 @@ function Server (options) {
   app.set('banBaseUrl', options.ban.baseUrl)
   app.disable('x-powered-by');
   app.use(express.static('public'));
-  var usersService = new UsersService(options);
-  app.set('usersService', usersService)
-  options.usersService = usersService
   app.use(bodyParser.json());
   var corsOptions = {
     exposedHeaders: ['Range', 'Content-Range', 'X-Content-Range'],

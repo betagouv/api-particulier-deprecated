@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 
 const BanService = require('./../ban/ban.service')

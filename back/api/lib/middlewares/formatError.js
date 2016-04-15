@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 const S = require('string');
 const StandardError = require('standard-error');
 const http = require('http');

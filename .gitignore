@@ -1,3 +1,4 @@
 redis-data
 redis-data-dev
 redis-data-prod
+**.log

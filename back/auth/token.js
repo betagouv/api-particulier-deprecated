@@ -1,16 +1,18 @@
-"use strict";
+'use strict';
 
 const StandardError = require('standard-error');
 const compose = require('composable-middleware');
+const TokenService = require('./../api/admin/tokens.service')
 
 module.exports = Auth
 
-function Auth(usersService) {
+function Auth(options) {
+  const tokenService = new TokenService(options)
 
   this.canAccessApi = function(req, res, next) {
     var token = req.get('X-API-Key') || ""
 
-    usersService.getUser(token, (err, result) => {
+    tokenService.getToken(token, (err, result) => {
       if(err) {
        req.logger.warn(err);
        return next(err)
