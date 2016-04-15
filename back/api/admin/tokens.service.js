@@ -1,7 +1,8 @@
 'use strict';
 
-const Redis = require('ioredis')
 const async = require('async')
+const StandardError = require('standard-error');
+
 
 class TokenService {
 
@@ -13,7 +14,7 @@ class TokenService {
   getTokens(callback) {
     this.redis.keys(this.key +'::*', (err, keys) => {
       if(err) {
-        return callback(new StandardError("Impossible to connect to redis", {code: 500}))
+        return callback(new StandardError('Impossible to connect to redis', {code: 500}))
       }
       async.map(keys, (item, callback) => {
         this.redis.get(item, (err, result) => {
@@ -22,7 +23,7 @@ class TokenService {
         } )
       }, (err, results) => {
         if(err) {
-          return callback(new StandardError("Impossible to connect to redis", {code: 500}))
+          return callback(new StandardError('Impossible to connect to redis', {code: 500}))
         }
         callback(null, results.map(JSON.parse))
       })
@@ -33,7 +34,7 @@ class TokenService {
   getToken(token, callback) {
     this.redis.get(this.key + '::' + token, (err, result) => {
       if(err) {
-        return callback(new StandardError("Impossible to connect to redis", {code: 500}))
+        return callback(new StandardError('Impossible to connect to redis', {code: 500}))
       }
       callback(null, JSON.parse(result))
     })
@@ -42,7 +43,7 @@ class TokenService {
   createToken(user, callback) {
     this.redis.set(this.key +'::'+ user.token, JSON.stringify(user), (err) => {
       if(err) {
-        return callback(new StandardError("Impossible to connect to redis", {code: 500}))
+        return callback(new StandardError('Impossible to connect to redis', {code: 500}))
       }
       callback(null, user)
     })
@@ -51,7 +52,7 @@ class TokenService {
   deleteToken(token, callback) {
     this.redis.del(this.key + '::'+ token, (err, result) => {
       if(err) {
-        return callback(new StandardError("Impossible to connect to redis", {code: 500}))
+        return callback(new StandardError('Impossible to connect to redis', {code: 500}))
       }
       callback(null, result)
     })

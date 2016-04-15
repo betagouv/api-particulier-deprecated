@@ -11,7 +11,7 @@ class UserService {
   getUser(email, callback) {
     this.redis.get(this.key + '::' + email, (err, result) => {
       if(err) {
-        return callback(new StandardError("Impossible to connect to redis", {code: 500}))
+        return callback(new StandardError('Impossible to connect to redis', {code: 500}))
       }
       callback(null, JSON.parse(result))
     })
@@ -20,7 +20,7 @@ class UserService {
   setUser(user, callback) {
     this.redis.set(this.key +'::'+ user.email, JSON.stringify(user), (err) => {
       if(err) {
-        return callback(new StandardError("Impossible to connect to redis", {code: 500}))
+        return callback(new StandardError('Impossible to connect to redis', {code: 500}))
       }
       callback(null, user)
     })
@@ -29,7 +29,7 @@ class UserService {
   deleteUser(email, callback) {
     this.redis.del(this.key + '::'+ email, (err, result) => {
       if(err) {
-        return callback(new StandardError("Impossible to connect to redis", {code: 500}))
+        return callback(new StandardError('Impossible to connect to redis', {code: 500}))
       }
       callback(null, result)
     })

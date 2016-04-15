@@ -29,7 +29,7 @@ function CafController(options) {
   this.ping = function(req, res, next) {
     var codePostal = options.codePostal;
     var numeroAllocataire = options.numeroAllocataire;
-    cafService.getFamily(codePostal, numeroAllocataire, (err, data) => {
+    cafService.getFamily(codePostal, numeroAllocataire, (err) => {
       if(err) return next(err);
       return format(res, 'pong')
     })
@@ -40,7 +40,6 @@ function CafController(options) {
     var numeroAllocataire = req.query.numeroAllocataire;
     cafService.getQf(codePostal, numeroAllocataire, (err, data) => {
       if(err) return next(err);
-      console.log(data.quotientFamilial)
       if(data.quotientFamilial === 0) {
         return next(new StandardError('Pas de QF sur cette période', {code: 404}))
       }
