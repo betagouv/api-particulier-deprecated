@@ -33,7 +33,7 @@ function ImpotController(options) {
     }
   }
 
-   function formatNumeroFiscal(numeroFiscal) {
+  function formatNumeroFiscal(numeroFiscal) {
     return (numeroFiscal || '').substring(0, 13);
   }
 
