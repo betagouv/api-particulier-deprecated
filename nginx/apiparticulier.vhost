@@ -9,7 +9,7 @@ server {
 
         location /docs {
           root /var/www;
-          add_header 'Access-Control-Allow-Origin' '*.gouv.fr';
+          add_header 'Access-Control-Allow-Origin' '*';
         }
 
         location /status {
