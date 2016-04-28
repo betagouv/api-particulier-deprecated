@@ -55,6 +55,10 @@ var server = new Server({
     port: nconf.get('redis:port'),
     tokensPrefix: nconf.get('redis:tokensPrefix')
   },
+  es: {
+    host: nconf.get('es:host'),
+    index: nconf.get('es:index')
+  },
   ban: {
     baseUrl: nconf.get('ban:baseUrl')
   }
