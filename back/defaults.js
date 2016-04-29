@@ -11,6 +11,10 @@ module.exports = {
     level: 'debug',
     format: 'simple'
   },
+  es: {
+    host: 'localhost:9200',
+    index: 'logstash-apiparticulier-*'
+  },
   referenceAvis: '',
   numeroFiscal: '',
   numeroAllocataire: '0000354',

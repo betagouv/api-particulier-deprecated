@@ -32,6 +32,7 @@
     "bunyan-format": "^0.2.1",
     "composable-middleware": "0.3.0",
     "cors": "^2.6.0",
+    "elasticsearch": "11.0.1",
     "express": "^4.12.3",
     "express-bunyan-logger": "^1.1.1",
     "express-unless": "0.3.0",
