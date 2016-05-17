@@ -4,7 +4,7 @@ server {
         root /var/www/app;
         index index.html;
 
-        server_name ~^apiparticulier(-dev|-test|-local|)\.sgmap\.fr$ default;
+        server_name ~^particulier(-dev|-test|-local|)\.api\.gouv\.fr$ default;
 
 
         location /docs {

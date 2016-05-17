@@ -1,0 +1,22 @@
+server {
+        listen   80;
+
+        root /var/www/app;
+        index index.html;
+
+        server_name ~^apiparticulier(-dev|-test|-local|)\.sgmap\.fr$;
+
+
+        location /api {
+
+          proxy_set_header X-Real-IP  $remote_addr;
+          proxy_set_header X-Forwarded-For $remote_addr;
+          proxy_set_header Host $host;
+          proxy_pass http://app:3004;
+
+        }
+
+        location / {
+          return         301 $scheme://particulier.api.gouv.fr$request_uri;
+        }
+}
