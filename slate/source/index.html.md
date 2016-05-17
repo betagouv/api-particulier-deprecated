@@ -69,7 +69,7 @@ fournisseurs de service.
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: X-API-KEY
-curl "https://particulier.api.gouv.fr/api/impots/svair?numeroFiscal=12&referenceAvis=15" \
+curl "https://particulier-test.api.gouv.fr/api/impots/svair?numeroFiscal=12&referenceAvis=15" \
   -H "X-API-KEY: test-token"
 ```
 
@@ -94,7 +94,7 @@ Vous devez remplacer <code>test-token</code> avec le jeton d'API de votre collec
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: X-User
-curl "https://particulier.api.gouv.fr/api/impots/svair?numeroFiscal=12&referenceAvis=15" \
+curl "https://particulier-test.api.gouv.fr/api/impots/svair?numeroFiscal=12&referenceAvis=15" \
   -H "X-API-KEY: test-token" \
   -H "X-User: demo"
 ```
@@ -112,7 +112,7 @@ fournisseur de service.
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: Accept
-curl "https://particulier.api.gouv.fr/api/ping" \
+curl "https://particulier-test.api.gouv.fr/api/ping" \
   -H "Accept: application/json"
 ```
 
@@ -124,7 +124,7 @@ curl "https://particulier.api.gouv.fr/api/ping" \
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: Accept
-curl "https://particulier.api.gouv.fr/api/ping" \
+curl "https://particulier-test.api.gouv.fr/api/ping" \
   -H "Accept: application/xml"
 ```
 

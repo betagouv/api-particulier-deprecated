@@ -4,7 +4,7 @@
 ## Récupérer les données fiscales d'un citoyen
 
 ```shell
-curl "https://particulier.api.gouv.fr/api/impots/svair?numeroFiscal=12&referenceAvis=15" \
+curl "https://particulier-test.api.gouv.fr/api/impots/svair?numeroFiscal=12&referenceAvis=15" \
   -H "X-API-KEY: test-token" \
   -H "accept: application/json" \
   -H "X-User: demo"
@@ -34,7 +34,7 @@ sur l'API Particulier
 ## Récupérer l'adresse fiscale
 
 ```shell
-curl "https://particulier.api.gouv.fr/api/impots/adress?numeroFiscal=12&referenceAvis=15" \
+curl "https://particulier-test.api.gouv.fr/api/impots/adress?numeroFiscal=12&referenceAvis=15" \
   -H "X-API-KEY: test-token" \
   -H "Accept: application/xml" \
   -H "X-User: demo"

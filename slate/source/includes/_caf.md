@@ -4,7 +4,7 @@
 ## Récupérer le quotient familial d'un allocataire CAF
 
 ```shell
-curl "https://particulier.api.gouv.fr/api/caf/qf?codePostal=99148&numeroAllocataire=0000354" \
+curl "https://particulier-test.api.gouv.fr/api/caf/qf?codePostal=99148&numeroAllocataire=0000354" \
   -H "X-API-KEY: test-token" \
   -H "accept: application/json" \
   -H "X-User: demo"
@@ -30,7 +30,7 @@ numeroAllocataire | Non | Oui | Numéro de l'allocataire CAF, Code postal, ident
 ## Récupérer l'adresse d'un allocataire CAF
 
 ```shell
-curl "https://particulier.api.gouv.fr/api/caf/adresse?codePostal=99148&numeroAllocataire=0000354" \
+curl "https://particulier-test.api.gouv.fr/api/caf/adresse?codePostal=99148&numeroAllocataire=0000354" \
   -H "X-API-KEY: test-token" \
   -H "accept: application/json" \
   -H "X-User: demo"
@@ -56,7 +56,7 @@ numeroAllocataire | Non | Oui | Numéro de l'allocataire CAF, Code postal, ident
 ## Récupérer la composition de la famille d'un allocataire CAF
 
 ```shell
-curl "https://particulier.api.gouv.fr/api/caf/famille?codePostal=99148&numeroAllocataire=0000354" \
+curl "https://particulier-test.api.gouv.fr/api/caf/famille?codePostal=99148&numeroAllocataire=0000354" \
   -H "X-API-KEY: test-token" \
   -H "accept: application/json" \
   -H "X-User: demo"
@@ -90,7 +90,7 @@ La CAF renvoie une deuxième personne si le couple est marié, pacsé ou en conc
 ## Récupérer l'attestation des droits de la CAF
 
 ```shell
-curl "https://particulier.api.gouv.fr/api/caf/attestation/droits?codePostal=99148&numeroAllocataire=0000354" \
+curl "https://particulier-test.api.gouv.fr/api/caf/attestation/droits?codePostal=99148&numeroAllocataire=0000354" \
   -H "X-API-KEY: test-token" \
   -H "X-User: demo"
 ```
@@ -115,7 +115,7 @@ numeroAllocataire | Non | Oui | Numéro de l'allocataire CAF, Code postal, ident
 ## Récupérer l'attestation du quotient familial de la CAF
 
 ```shell
-curl "https://particulier.api.gouv.fr/api/caf/attestation/qf?codePostal=99148&numeroAllocataire=0000354" \
+curl "https://particulier-test.api.gouv.fr/api/caf/attestation/qf?codePostal=99148&numeroAllocataire=0000354" \
   -H "X-API-KEY: test-token" \
   -H "X-User: demo"
 ```
