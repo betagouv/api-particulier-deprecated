@@ -25,7 +25,7 @@ source et donc de limiter les demandes de pièces justificatives
 Nous fournissons des exemples de l'utilisation de l'API avec des commandes cURL.
 N'hésitez pas à contribuer pour ajouter des exemples dans les langages que vous
 utilisez. Il existe aussi une documentation très complète sur les données de
-retour&#8239;: [apiparticulier.sgmap.fr/docs](https://apiparticulier.sgmap.fr/docs/)
+retour&#8239;: [particulier.api.gouv.fr/docs](https://particulier.api.gouv.fr/docs/)
 
 API Particulier utilise les principes des
 [API REST](http://blog.octo.com/designer-une-api-rest/) pour exposer ses données
@@ -37,10 +37,10 @@ Il existe plusieurs environnements:
 
 |             | Domain                       | Documentation                                     | API Key     | Stable |
 |-------------|------------------------------|---------------------------------------------------|-------------|--------|
-| Production  | apiparticulier.sgmap.fr      |[Lien](https://apiparticulier.sgmap.fr/docs/)      | Secret      | Oui    |
-| Test        | apiparticulier-test.sgmap.fr |[Lien](https://apiparticulier-test.sgmap.fr/docs/) | `test-token`| Oui    |
-| Dev         | apiparticulier-dev.sgmap.fr  |[Lien](https://apiparticulier-dev.sgmap.fr/docs/)  | Secret      | Non    |
-| Mocks       | apiparticulier-mock.sgmap.fr |[Lien](https://apiparticulier-mock.sgmap.fr/docs/) | ``          | Oui    |
+| Production  | particulier.api.gouv.fr      |[Lien](https://particulier.api.gouv.fr/docs/)      | Secret      | Oui    |
+| Test        | particulier-test.api.gouv.fr |[Lien](https://particulier-test.api.gouv.fr/docs/) | `test-token`| Oui    |
+| Dev         | particulier-dev.api.gouv.fr  |[Lien](https://particulier-dev.api.gouv.fr/docs/)  | Secret      | Non    |
+| Mocks       | particulier-mock.api.gouv.fr |[Lien](https://particulier-mock.api.gouv.fr/docs/) | ``          | Oui    |
 
 # Présentation
 
@@ -69,7 +69,7 @@ fournisseurs de service.
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: X-API-KEY
-curl "https://apiparticulier-test.sgmap.fr/api/impots/svair?numeroFiscal=12&referenceAvis=15" \
+curl "https://particulier-test.api.gouv.fr/api/impots/svair?numeroFiscal=12&referenceAvis=15" \
   -H "X-API-KEY: test-token"
 ```
 
@@ -94,7 +94,7 @@ Vous devez remplacer <code>test-token</code> avec le jeton d'API de votre collec
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: X-User
-curl "https://apiparticulier-test.sgmap.fr/api/impots/svair?numeroFiscal=12&referenceAvis=15" \
+curl "https://particulier-test.api.gouv.fr/api/impots/svair?numeroFiscal=12&referenceAvis=15" \
   -H "X-API-KEY: test-token" \
   -H "X-User: demo"
 ```
@@ -112,7 +112,7 @@ fournisseur de service.
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: Accept
-curl "https://apiparticulier-test.sgmap.fr/api/ping" \
+curl "https://particulier-test.api.gouv.fr/api/ping" \
   -H "Accept: application/json"
 ```
 
@@ -124,7 +124,7 @@ curl "https://apiparticulier-test.sgmap.fr/api/ping" \
 
 ```shell
 # Avec Curl, il suffit de passer le header HTTP: Accept
-curl "https://apiparticulier-test.sgmap.fr/api/ping" \
+curl "https://particulier-test.api.gouv.fr/api/ping" \
   -H "Accept: application/xml"
 ```
 

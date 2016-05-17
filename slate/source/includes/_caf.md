@@ -4,7 +4,7 @@
 ## Récupérer le quotient familial d'un allocataire CAF
 
 ```shell
-curl "https://apiparticulier-test.sgmap.fr/api/caf/qf?codePostal=99148&numeroAllocataire=0000354" \
+curl "https://particulier-test.api.gouv.fr/api/caf/qf?codePostal=99148&numeroAllocataire=0000354" \
   -H "X-API-KEY: test-token" \
   -H "accept: application/json" \
   -H "X-User: demo"
@@ -17,7 +17,7 @@ le CAF du mois passé
 
 ### HTTP Request
 
-`GET https://apiparticulier.sgmap.fr/api/caf/qf`
+`GET https://particulier.api.gouv.fr/api/caf/qf`
 
 ### Query Parameters
 
@@ -30,7 +30,7 @@ numeroAllocataire | Non | Oui | Numéro de l'allocataire CAF, Code postal, ident
 ## Récupérer l'adresse d'un allocataire CAF
 
 ```shell
-curl "https://apiparticulier-test.sgmap.fr/api/caf/adresse?codePostal=99148&numeroAllocataire=0000354" \
+curl "https://particulier-test.api.gouv.fr/api/caf/adresse?codePostal=99148&numeroAllocataire=0000354" \
   -H "X-API-KEY: test-token" \
   -H "accept: application/json" \
   -H "X-User: demo"
@@ -43,7 +43,7 @@ leur adresse
 
 ### HTTP Request
 
-`GET https://apiparticulier.sgmap.fr/api/caf/adresse`
+`GET https://particulier.api.gouv.fr/api/caf/adresse`
 
 ### Query Parameters
 
@@ -56,7 +56,7 @@ numeroAllocataire | Non | Oui | Numéro de l'allocataire CAF, Code postal, ident
 ## Récupérer la composition de la famille d'un allocataire CAF
 
 ```shell
-curl "https://apiparticulier-test.sgmap.fr/api/caf/famille?codePostal=99148&numeroAllocataire=0000354" \
+curl "https://particulier-test.api.gouv.fr/api/caf/famille?codePostal=99148&numeroAllocataire=0000354" \
   -H "X-API-KEY: test-token" \
   -H "accept: application/json" \
   -H "X-User: demo"
@@ -69,7 +69,7 @@ leurs enfants.
 
 ### HTTP Request
 
-`GET https://apiparticulier.sgmap.fr/api/caf/famille`
+`GET https://particulier.api.gouv.fr/api/caf/famille`
 
 ### Query Parameters
 
@@ -90,7 +90,7 @@ La CAF renvoie une deuxième personne si le couple est marié, pacsé ou en conc
 ## Récupérer l'attestation des droits de la CAF
 
 ```shell
-curl "https://apiparticulier-test.sgmap.fr/api/caf/attestation/droits?codePostal=99148&numeroAllocataire=0000354" \
+curl "https://particulier-test.api.gouv.fr/api/caf/attestation/droits?codePostal=99148&numeroAllocataire=0000354" \
   -H "X-API-KEY: test-token" \
   -H "X-User: demo"
 ```
@@ -102,7 +102,7 @@ l'allocataire.
 
 ### HTTP Request
 
-`GET https://apiparticulier.sgmap.fr/api/caf/attestation/droits`
+`GET https://particulier.api.gouv.fr/api/caf/attestation/droits`
 
 ### Query Parameters
 
@@ -115,7 +115,7 @@ numeroAllocataire | Non | Oui | Numéro de l'allocataire CAF, Code postal, ident
 ## Récupérer l'attestation du quotient familial de la CAF
 
 ```shell
-curl "https://apiparticulier-test.sgmap.fr/api/caf/attestation/qf?codePostal=99148&numeroAllocataire=0000354" \
+curl "https://particulier-test.api.gouv.fr/api/caf/attestation/qf?codePostal=99148&numeroAllocataire=0000354" \
   -H "X-API-KEY: test-token" \
   -H "X-User: demo"
 ```
@@ -127,7 +127,7 @@ l'allocataire.
 
 ### HTTP Request
 
-`GET https://apiparticulier.sgmap.fr/api/caf/attestation/qf`
+`GET https://particulier.api.gouv.fr/api/caf/attestation/qf`
 
 ### Query Parameters
 
