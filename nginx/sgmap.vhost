@@ -4,7 +4,7 @@ server {
         root /var/www/app;
         index index.html;
 
-        server_name ~^apiparticulier(-dev|-test|-local|)\.sgmap\.fr$;
+        server_name ~^apiparticulier(?<env>-dev|-test|-local|)\.sgmap\.fr$;
 
 
         location /api {
@@ -17,6 +17,6 @@ server {
         }
 
         location / {
-          return         301 $scheme://particulier.api.gouv.fr$request_uri;
+          return         301 $scheme://particulier$env.api.gouv.fr$request_uri;
         }
 }
