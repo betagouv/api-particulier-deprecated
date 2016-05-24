@@ -23,11 +23,7 @@ module.exports = {
     activate: false,
     dsn:''
   },
-  redis: {
-    port: 6379,
-    host:'127.0.0.1',
-    tokensPrefix: 'token_authorized'
-  },
+  tokensPath: './tokens',
   ban: {
     baseUrl: 'https://api-adresse.data.gouv.fr'
   }

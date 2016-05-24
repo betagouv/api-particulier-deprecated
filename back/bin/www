@@ -44,16 +44,12 @@ var server = new Server({
   numeroFiscal: nconf.get('numeroFiscal'),
   referenceAvis: nconf.get('referenceAvis'),
   codePostal: nconf.get('codePostal'),
+  tokensPath: nconf.get('tokensPath'),
   numeroAllocataire: nconf.get('numeroAllocataire'),
   nconf: nconf,
   raven: {
     activate: nconf.get('raven:activate'),
     dsn: nconf.get('raven:dsn'),
-  },
-  redis: {
-    host: nconf.get('redis:host'),
-    port: nconf.get('redis:port'),
-    tokensPrefix: nconf.get('redis:tokensPrefix')
   },
   es: {
     host: nconf.get('es:host'),

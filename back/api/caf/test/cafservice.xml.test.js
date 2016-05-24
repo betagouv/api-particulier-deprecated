@@ -9,7 +9,7 @@ const StandardError = require('standard-error')
 
 
 
-describe('Caf Service', () => {
+describe('Caf Service (XML)', () => {
   const resourcePath = __dirname + '/../../test/resources'
 
   var cafService = new CafService({

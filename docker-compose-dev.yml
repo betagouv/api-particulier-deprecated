@@ -5,11 +5,9 @@ app:
     - 3005:3004
   volumes:
       - ./back/cert:/srv/apps/cert
+      - ./tokens.json:/srv/apps/tokens.json
 
-  links:
-    - redis:redis
   environment:
-    - redis_host=redis
     - log_format=bunyan
 
 

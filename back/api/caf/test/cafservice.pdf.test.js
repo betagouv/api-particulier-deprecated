@@ -6,7 +6,7 @@ const fs = require('fs');
 const nock = require('nock');
 const StandardError = require('standard-error')
 
-describe('Caf Service', function () {
+describe('Caf Service (PDF)', function () {
   const resourcePath = __dirname + '/../../test/resources'
 
   var cafService = new CafService({
