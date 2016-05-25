@@ -3,3 +3,9 @@ general:
 machine:
   node:
     version: 5.11.0
+
+test:
+  post:
+    - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls --verbose
+  pre:
+    - npm install -g eslint
