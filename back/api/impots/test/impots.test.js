@@ -107,6 +107,38 @@ describe('Impots Controller', function () {
         expect(svairCall.args[0][0]).to.equal('3578788848943');
         done()
       });
+
+      describe('when there is space in the nuemro fiscal', () => {
+        it('remove the space', (done) => {
+          //given
+          var callback = sinon.spy();
+          var req =   {query: {numeroFiscal: "3578788848 943a", referenceAvis: "titi"}}
+          var res = {}
+          var controller = new importController();
+
+          //when
+          controller.svair( req, { format: callback  }, null)
+          expect(callback.calledOnce).to.be.true;
+          expect(svairCall.args[0][0]).to.equal('3578788848943');
+          done()
+        })
+      })
+    })
+
+    describe('when there is space in the referenceAvis', () => {
+      it('remove the space', (done) => {
+        //given
+        var callback = sinon.spy();
+        var req =   {query: {numeroFiscal: "35787 88848 943a", referenceAvis: "ti ti"}}
+        var res = {}
+        var controller = new importController();
+
+        //when
+        controller.svair( req, { format: callback  }, null)
+        expect(callback.calledOnce).to.be.true;
+        expect(svairCall.args[0][1]).to.equal('titi');
+        done()
+      })
     })
   });
 });

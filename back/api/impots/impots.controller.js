@@ -11,7 +11,7 @@ function ImpotController(options) {
 
   this.adress = function(req, res, next) {
     var numeroFiscal = formatNumeroFiscal(req.query.numeroFiscal);
-    var referenceAvis = req.query.referenceAvis;
+    var referenceAvis = formatReferenceAvis(req.query.referenceAvis);
     if (!numeroFiscal || !referenceAvis) {
       return next(new StandardError('Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.', {code: 400}));
     } else {
@@ -34,12 +34,16 @@ function ImpotController(options) {
   }
 
   function formatNumeroFiscal(numeroFiscal) {
-    return (numeroFiscal || '').substring(0, 13);
+    return (numeroFiscal || '').replace(' ','').substring(0, 13);
+  }
+
+  function formatReferenceAvis(referenceAvis) {
+    return (referenceAvis || '').replace(' ','');
   }
 
   this.svair = function(req, res, next) {
     var numeroFiscal = formatNumeroFiscal(req.query.numeroFiscal);
-    var referenceAvis = req.query.referenceAvis;
+    var referenceAvis = formatReferenceAvis(req.query.referenceAvis);
     if (!numeroFiscal || !referenceAvis) {
       return next(new StandardError('Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.', {code: 400}));
     } else {
