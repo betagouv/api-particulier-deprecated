@@ -1,0 +1,5 @@
+general:
+  build_dir: back
+machine:
+  node:
+    version: 5.11.0
