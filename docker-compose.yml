@@ -3,19 +3,9 @@ app:
   container_name: apiparticulier-back
   ports:
     - 3005:3004
-  links:
-    - redis:redis
-  environment:
-    - redis_host=redis
-
-
-redis:
-  image: redis:3.0.5
-  container_name: apiparticulier-redis
-  ports:
-    - 6380:6379
   volumes:
-    - ./redis-data:/data
+    - ./back/cert:/srv/apps/cert
+    - ./tokens.json:/srv/apps/tokens.json
 
 upscuits:
   build: upscuits
@@ -40,7 +30,7 @@ nginx:
   build: nginx
   container_name: apiparticulier-nginx
   ports:
-    - 8080:80
+    - 80:80
     - 8081:8080
   volumes_from:
     - front

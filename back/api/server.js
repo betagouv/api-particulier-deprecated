@@ -9,7 +9,6 @@ const routes = require('./routes');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const UrlAssembler = require('url-assembler');
-const Redis = require('ioredis');
 const raven = require('raven')
 const js2xmlparser = require("js2xmlparser");
 const formatFromUrl = require('./lib/middlewares/formatFromUrl')
@@ -17,7 +16,6 @@ const getApiKeyFromQueryParam = require('./lib/middlewares/getApiKeyFromQueryPar
 const identifyUser = require('./lib/middlewares/identifyUser')
 const loggerProperties = require('./lib/middlewares/logger')
 const formatError = require('./lib/middlewares/formatError')
-const TokenService = require('./admin/tokens.service');
 
 var extend = require('extend');
 
@@ -28,7 +26,7 @@ function Server (options) {
   options = options || {};
   options.port = options.port || 0;
   options.logger = options.logger || emptylogger();
-  options.redis.driver = new Redis(options.redis.port, options.redis.host)
+
   var logger = options.logger
   var app = express();
   app.set('port', options.port);
@@ -37,7 +35,6 @@ function Server (options) {
   app.set('cafHost',  options.cafHost);
   app.set('cafSslCertificate',  options.cafSslCertificate);
   app.set('cafSslKey',  options.cafSslKey);
-  app.set('tokensPrefix',  options.redis.tokensPrefix);
   app.set('banBaseUrl', options.ban.baseUrl)
   app.disable('x-powered-by');
   app.use(express.static('public'));

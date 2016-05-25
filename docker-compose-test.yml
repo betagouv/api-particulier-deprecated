@@ -1,22 +1,8 @@
 app:
   build: back
-  links:
-    - redis:redis
-  environment:
-    - REDIS_PORT_HOST=redis
   entrypoint:
     - npm
     - test
   volumes:
    - ./back/node_modules_test:/srv/apps/node_modules
-
-redis:
-  image: redis:3.0.5
-
-front:
-  build: front
-  entrypoint:
-    - npm
-    - test
-  volumes:
-   - ./front/node_modules_test:/root/front/node_modules
+   - ./tokens.json:/srv/apps/tokens.json

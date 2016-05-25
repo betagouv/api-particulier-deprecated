@@ -1,5 +1,6 @@
 # Api-particulier
-
+[![CircleCI](https://circleci.com/gh/sgmap/api-particulier.svg?style=svg)](https://circleci.com/gh/sgmap/api-particulier)
+[![Coverage Status](https://coveralls.io/repos/github/sgmap/api-particulier/badge.svg?branch=tokenAsConf)](https://coveralls.io/github/sgmap/api-particulier?branch=tokenAsConf)
 ## Intégrateur
 
 Cette partie s'adresse aux développeurs souhaitant intégrer l'API.

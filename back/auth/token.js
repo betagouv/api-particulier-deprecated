@@ -2,7 +2,7 @@
 
 const StandardError = require('standard-error');
 const compose = require('composable-middleware');
-const TokenService = require('./../api/admin/tokens.service')
+const TokenService = require('./tokens.service')
 
 module.exports = Auth
 
@@ -12,32 +12,16 @@ function Auth(options) {
   this.canAccessApi = function(req, res, next) {
     var token = req.get('X-API-Key') || ""
 
-    tokenService.getToken(token, (err, result) => {
-      if(err) {
-       req.logger.warn(err);
-       return next(err)
-      }
-      if(result) {
-       req.logger.debug({ event: 'authorization' }, result.name + ' is authorized ('+ result.role+')');
-       req.consumer = result;
-       next()
-      } else {
-       req.logger.debug({ event: 'authorization' }, 'not authorized');
-       req.consumer= {}
-       next(new StandardError('You are not authorized to use the api', {code: 401}));
-      }
-    })
-  }
-
-  var canAccesAdmin = function(req, res, next) {
-    if(req.consumer.role && req.consumer.role !== 'admin') {
-      next(new StandardError('Vous n\'être pas administrateur', {code: 403}));
+    const result = tokenService.getToken(token);
+    if(result) {
+     req.logger.debug({ event: 'authorization' }, result.name + ' is authorized ('+ result.role+')');
+     req.consumer = result;
+     next()
     } else {
-      next()
+     req.logger.debug({ event: 'authorization' }, 'not authorized');
+     req.consumer= {}
+     next(new StandardError('You are not authorized to use the api', {code: 401}));
     }
-  }
 
-  this.canAccessAdminFunction = compose()
-      .use(this.canAccessApi)
-      .use(canAccesAdmin)
+  }
 }

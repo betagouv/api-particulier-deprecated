@@ -10,12 +10,13 @@
   "scripts": {
     "pretest": "npm install",
     "lint": "eslint api/**/*.js",
-    "test": "istanbul cover --print details _mocha -- -R spec api/test/** api/*/test/** --recursive",
+    "test": "istanbul cover --print details _mocha -- -R spec auth/test/** api/test/** api/*/test/** --recursive",
     "start": "node ./bin/www"
   },
   "author": "SGMAP",
   "devDependencies": {
     "chai": "^2.2.0",
+    "coveralls": "2.11.9",
     "istanbul": "^0.3.13",
     "mocha": "^2.2.1",
     "nock": "^2.15.0",
