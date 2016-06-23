@@ -168,7 +168,7 @@ paths:
           schema:
             type: file
         '401':
-          description: Le token ne vous permet d'accéder à l'API
+          description: Le token ne vous permet pas d'accéder à l'API
           schema:
             $ref: '#/definitions/Error'
         '404':
@@ -226,7 +226,7 @@ paths:
             schema:
               type: file
           '401':
-            description: Le token ne vous permet d'accèder à l'API
+            description: Le token ne vous permet pas d'accéder à l'API
             schema:
               $ref: '#/definitions/Error'
           '404':
@@ -274,7 +274,7 @@ paths:
           schema:
             $ref: '#/definitions/QuotientFamilial'
         '401':
-          description: Le token ne vous permet d'accèder à l'API
+          description: Le token ne vous permet pas d'accéder à l'API
           schema:
             $ref: '#/definitions/Error'
         '404':
@@ -322,7 +322,7 @@ paths:
           schema:
             $ref: '#/definitions/CafAdresse'
         '401':
-          description: Le token ne vous permet d'accèder à l'API
+          description: Le token ne vous permet pas d'accéder à l'API
           schema:
             $ref: '#/definitions/Error'
         '404':
@@ -338,8 +338,8 @@ paths:
     get:
       summary: Composition d'un foyer CAF
       description: |
-        Le service permet de récupérer les parents et les enfants du foyer déclaré à la CAF
-        Il récupère: leur nom et prénom, leur date de naissance et leur sexe
+        Le service permet de récupérer les parents et les enfants du foyer déclaré à la CAF.
+        Il récupère leur nom et prénom, leur date de naissance et leur sexe.
       parameters:
           - name: numeroAllocataire
             in: query
@@ -371,7 +371,7 @@ paths:
           schema:
             $ref: '#/definitions/Famille'
         '401':
-          description: Le token ne vous permet d'accèder à l'API
+          description: Le token ne vous permet pas d'accéder à l'API
           schema:
             $ref: '#/definitions/Error'
         '404':
