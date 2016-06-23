@@ -65,7 +65,7 @@ paths:
           schema:
             $ref: '#/definitions/Declaration'
         '401':
-          description: Le token ne vous permet pas d'accèder à l'API
+          description: Le token ne vous permet pas d'accéder à l'API
           schema:
             $ref: '#/definitions/Error'
         '404':
@@ -113,7 +113,7 @@ paths:
           schema:
             $ref: '#/definitions/SvairAdresses'
         '401':
-          description: Le token ne vous permet pas d'accèder à l'API
+          description: Le token ne vous permet pas d'accéder à l'API
           schema:
             $ref: '#/definitions/Error'
         '404':
@@ -168,7 +168,7 @@ paths:
           schema:
             type: file
         '401':
-          description: Le token ne vous permet d'accèder à l'API
+          description: Le token ne vous permet d'accéder à l'API
           schema:
             $ref: '#/definitions/Error'
         '404':
@@ -530,7 +530,7 @@ definitions:
         description: Quotient familial
       allocataires:
         type: array
-        description: Noms et prénom des personnes allocataire de la CAF
+        description: Noms et prénoms des personnes allocataire de la CAF
         items:
           type: string
       annee:
@@ -589,7 +589,7 @@ definitions:
     properties:
       nomPrenon:
         type: array
-        description: Noms et prénom des personnes allocataires de la CAF
+        description: Noms et prénoms des personnes allocataires de la CAF
         items:
           type: string
       dateDeNaissance:
