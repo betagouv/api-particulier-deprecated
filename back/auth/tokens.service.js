@@ -6,7 +6,6 @@ const tokens = require('./tokens')
 
 class TokenService {
   constructor(options) {
-    console.log('load tokensPath', options.tokensPath)
     this.tokens = require(options.tokensPath)
   }
   getToken(token) {
