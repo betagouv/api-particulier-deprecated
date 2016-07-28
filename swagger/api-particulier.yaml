@@ -20,7 +20,7 @@ info:
     Pour la caf vous pouvez utiliser le numéro d'allocataire `0000354` et le département `99148`.
     Pour les impots vous pouvez utiliser le numéro fiscal `1562456789521` et la référence d'avis `1512456789521`.
 
-    Essayez par vous même !
+    Essayez par vous-même !
   version: 1.0.0
 basePath: /api
 schemes:
@@ -65,7 +65,7 @@ paths:
           schema:
             $ref: '#/definitions/Declaration'
         '401':
-          description: Le token ne vous permet d'accèder à l'API
+          description: Le token ne vous permet pas d'accéder à l'API
           schema:
             $ref: '#/definitions/Error'
         '404':
@@ -81,8 +81,8 @@ paths:
     get:
       summary: Service pour récupérer l'adresse du foyer fiscal
       description: |
-        permet de récupérer les possibles localisations du foyer fiscale
-        enrichie grace à la BAN
+        permet de récupérer les possibles localisations du foyer fiscal
+        enrichies grace à la BAN
       parameters:
         - name: numeroFiscal
           in: query
@@ -113,7 +113,7 @@ paths:
           schema:
             $ref: '#/definitions/SvairAdresses'
         '401':
-          description: Le token ne vous permet d'accèder à l'API
+          description: Le token ne vous permet pas d'accéder à l'API
           schema:
             $ref: '#/definitions/Error'
         '404':
@@ -129,7 +129,7 @@ paths:
     get:
       summary: Service de récupération de l'attestation du QF
       description: |
-        permet de récupérer le PDF certifiant les attestations reçu par la CAF
+        permet de récupérer le PDF certifiant les attestations reçues par la CAF
         du mois dernier
         Il contient:
         <ul>
@@ -168,7 +168,7 @@ paths:
           schema:
             type: file
         '401':
-          description: Le token ne vous permet d'accèder à l'API
+          description: Le token ne vous permet pas d'accéder à l'API
           schema:
             $ref: '#/definitions/Error'
         '404':
@@ -184,7 +184,7 @@ paths:
       get:
         summary: Service de récupération de l'attestation des droits
         description: |
-          permet de récupérer le PDF certifiant les droits sociaux perçu par le
+          permet de récupérer le PDF certifiant les droits sociaux perçus par le
           mandataire de la part de la CAF du mois dernier
           Il contient:
           <ul>
@@ -226,7 +226,7 @@ paths:
             schema:
               type: file
           '401':
-            description: Le token ne vous permet d'accèder à l'API
+            description: Le token ne vous permet pas d'accéder à l'API
             schema:
               $ref: '#/definitions/Error'
           '404':
@@ -242,7 +242,7 @@ paths:
     get:
       summary: Quotient familial de la CAD
       description: |
-        Le service récupérer le quotient familial, sa date de calcul et les allocataires.
+        Le service permet de récupérer le quotient familial, sa date de calcul et les allocataires.
       parameters:
           - name: numeroAllocataire
             in: query
@@ -274,7 +274,7 @@ paths:
           schema:
             $ref: '#/definitions/QuotientFamilial'
         '401':
-          description: Le token ne vous permet d'accèder à l'API
+          description: Le token ne vous permet pas d'accéder à l'API
           schema:
             $ref: '#/definitions/Error'
         '404':
@@ -290,7 +290,7 @@ paths:
     get:
       summary: Adresse des allocataires de la caf
       description: |
-        Le service récupérer l'adresse, et les allocataires.
+        Le service permet de récupérer l'adresse, et les allocataires.
       parameters:
           - name: numeroAllocataire
             in: query
@@ -322,7 +322,7 @@ paths:
           schema:
             $ref: '#/definitions/CafAdresse'
         '401':
-          description: Le token ne vous permet d'accèder à l'API
+          description: Le token ne vous permet pas d'accéder à l'API
           schema:
             $ref: '#/definitions/Error'
         '404':
@@ -338,8 +338,8 @@ paths:
     get:
       summary: Composition d'un foyer CAF
       description: |
-        Le service récupérer les parents et les enfants du foyer déclaré à la CAF
-        Il récupère, leur nom et prénom, leur date de naissance et leur sexe
+        Le service permet de récupérer les parents et les enfants du foyer déclaré à la CAF.
+        Il récupère leur nom et prénom, leur date de naissance et leur sexe.
       parameters:
           - name: numeroAllocataire
             in: query
@@ -371,7 +371,7 @@ paths:
           schema:
             $ref: '#/definitions/Famille'
         '401':
-          description: Le token ne vous permet d'accèder à l'API
+          description: Le token ne vous permet pas d'accéder à l'API
           schema:
             $ref: '#/definitions/Error'
         '404':
@@ -530,7 +530,7 @@ definitions:
         description: Quotient familial
       allocataires:
         type: array
-        description: Noms et prénom des personnes allocataire de la CAF
+        description: Noms et prénoms des personnes allocataire de la CAF
         items:
           type: string
       annee:
@@ -548,7 +548,7 @@ definitions:
         $ref: '#/definitions/PosteAdresse'
       allocataires:
         type: array
-        description: Noms et prénom des personnes allocataire de la CAF
+        description: Noms et prénoms des personnes allocataire de la CAF
         items:
           type: string
       annee:
@@ -564,7 +564,7 @@ definitions:
     properties:
       identite:
         type: string
-        description: '<b>Identitité du destinataire : </b>Civilité, titre ou qualité + nom Prénom'
+        description: '<b>Identité du destinataire : </b>Civilité, titre ou qualité + nom et prénom'
       complementIdentite:
         type: string
         description: "<b>Complément d'information du destinataire ou point de remise : </b>Numéro d'appartement, Escalier"
@@ -589,7 +589,7 @@ definitions:
     properties:
       nomPrenon:
         type: array
-        description: Noms et prénom des personnes allocataire de la CAF
+        description: Noms et prénoms des personnes allocataires de la CAF
         items:
           type: string
       dateDeNaissance:
