@@ -1,4 +1,4 @@
-FROM        node:5.7
+FROM        node:4
 
 MAINTAINER  Thibaut Géry
 

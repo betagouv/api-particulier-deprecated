@@ -40,7 +40,6 @@ Il existe plusieurs environnements:
 | Production  | particulier.api.gouv.fr      |[Lien](https://particulier.api.gouv.fr/docs/)      | Secret      | Oui    |
 | Test        | particulier-test.api.gouv.fr |[Lien](https://particulier-test.api.gouv.fr/docs/) | `test-token`| Oui    |
 | Dev         | particulier-dev.api.gouv.fr  |[Lien](https://particulier-dev.api.gouv.fr/docs/)  | Secret      | Non    |
-| Mocks       | particulier-mock.api.gouv.fr |[Lien](https://particulier-mock.api.gouv.fr/docs/) | ``          | Oui    |
 
 # Présentation
 

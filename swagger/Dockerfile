@@ -1,10 +1,10 @@
-FROM        node:5.7
+FROM node:4
 
 MAINTAINER  Thibaut Géry
 
 RUN mkdir -p /var/www/docs
 
-COPY ./docs /var/www/docs
+COPY ./ /var/www/docs
 
 WORKDIR /var/www/docs
 

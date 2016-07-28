@@ -20,11 +20,6 @@ tech:
 
 docs:
   build: swagger
-  dockerfile: DockerfileDocs
-
-mocks:
-  build: swagger
-  dockerfile: DockerfileMocks
 
 nginx:
   build: nginx
@@ -39,4 +34,3 @@ nginx:
     - tech
   links:
     - app:app
-    - mocks:mocks
