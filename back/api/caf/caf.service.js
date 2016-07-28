@@ -8,7 +8,6 @@ const UrlAssembler = require('url-assembler');
 const iconv = require('iconv-lite');
 const parseString = require('xml2js').parseString;
 const documentType = require('./models/typeDocument')
-const returnType = require('./models/typeRetour')
 const errors = require('./models/errors')
 const StandardError = require('standard-error')
 
@@ -23,7 +22,7 @@ class CafService {
   }
 
   getQf(codePostal, numeroAllocataire, callback) {
-    this.getData(codePostal, numeroAllocataire, 'droits', false, (err, data) => {
+    this.getData(codePostal, numeroAllocataire, 'droits', (err, data) => {
       if(err) return callback(err)
       const doc = data['FLUX_TRAFIC']['DOCUMENT'][0]['CORPS'][0]['ATTPAIDRT'][0]
       const allocataires = doc['IDENTITEPERSONNES'][0]['UNEPERSONNE'].map((item) => {
@@ -43,7 +42,7 @@ class CafService {
   }
 
   getAdress(codePostal, numeroAllocataire, callback) {
-    this.getData(codePostal, numeroAllocataire, 'droits', false, (err, data) => {
+    this.getData(codePostal, numeroAllocataire, 'droits', (err, data) => {
       if(err) return callback(err)
       const doc = data['FLUX_TRAFIC']['DOCUMENT'][0]
       const header = doc['ENTETE'][0]
@@ -74,7 +73,7 @@ class CafService {
   }
 
   getFamily(codePostal, numeroAllocataire, callback) {
-    this.getData(codePostal, numeroAllocataire, 'droits', false, (err, data) => {
+    this.getData(codePostal, numeroAllocataire, 'droits', (err, data) => {
       if(err) return callback(err)
       const doc = data['FLUX_TRAFIC']['DOCUMENT'][0]
       const body = doc['CORPS'][0]['ATTPAIDRT'][0]
@@ -99,18 +98,13 @@ class CafService {
     })
   }
 
-
-  getAttestation(codePostal, numeroAllocataire, type, callback) {
-    return this.getData(codePostal, numeroAllocataire, type, true, callback)
-  }
-
-  getData(codePostal, numeroAllocataire, type, pdfRequired, callback) {
+  getData(codePostal, numeroAllocataire, type, callback) {
     var self = this;
 
-    const typeEnvoi = pdfRequired == true ? returnType.pdf : returnType.structured
+    const typeEnvoi = 4
     const typeDocument =  documentType[type]
     const parameters = {
-      typeEnvoi,
+      typeEnvoi: 4,
       codePostal ,
       numeroAllocataire,
       typeDocument
@@ -120,9 +114,8 @@ class CafService {
                   .template('/sgmap/wswdd/v1')
                   .toString();
 
-    const onSuccess = pdfRequired ?
-                        this.returnPdf(self, callback) :
-                        this.returnStructuredData(self, callback)
+    const onSuccess = this.returnStructuredData(self, callback)
+
     request
         .post({
           url: url,
@@ -139,26 +132,6 @@ class CafService {
         .on('response', onSuccess);
   }
 
-  returnPdf(self, callback) {
-    return (res) => {
-      if (res.statusCode !== 200) return callback(new StandardError('Request error', { code: 500 }));
-      res.pipe(iconv.decodeStream('latin1')).collect(function(err, decodedBody) {
-        if(err) return callback(err)
-        parseString(self.getFirstPart(decodedBody), (err, result) => {
-          if(err) return callback(err)
-          const returnData = result['soapenv:Envelope']['soapenv:Body'][0]['ns2:demanderDocumentWebResponse'][0]['return'][0]['beanRetourDemandeDocumentWeb'][0]
-          const returnCode = returnData['codeRetour'][0]
-          if(returnCode != 0) {
-            const error = errors[returnCode]
-            return callback(new StandardError(error.msg, { code: error.code }))
-          }
-          var pdfText = self.getSecondPart(decodedBody);
-          var pdfBuffer = iconv.encode(pdfText, 'latin1');
-          callback(null, pdfBuffer);
-        })
-      });
-    }
-  }
 
   returnStructuredData(self, callback) {
     return (res) => {

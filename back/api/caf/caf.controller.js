@@ -11,20 +11,7 @@ function CafController(options) {
   options = options || {};
   var cafService = new CafService(options)
 
-  this.getAttestation = function(name) {
-    return function(req, res, next) {
-      res.append('Content-Type', 'application/pdf')
-      var codePostal = req.query.codePostal;
-      var numeroAllocataire = req.query.numeroAllocataire;
-      cafService.getAttestation(codePostal, numeroAllocataire, name, (err, data) => {
-        if(err) return next(err);
-        res.send(data);
-      })
-    }
-  }
 
-  this.attestationQf = this.getAttestation('qf')
-  this.attestationDroits = this.getAttestation('droits')
 
   this.ping = function(req, res, next) {
     var codePostal = options.codePostal;
