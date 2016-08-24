@@ -12,7 +12,7 @@ const StandardError = require('standard-error')
 describe('Caf Service (XML)', () => {
   const resourcePath = __dirname + '/../../test/resources'
 
-  var cafService = new CafService({
+  const cafService = new CafService({
     cafHost: 'https://pep-test.caf.fr',
     cafSslCertificate: resourcePath + '/server.csr',
     cafSslKey: resourcePath + '/server.key'
@@ -39,14 +39,14 @@ describe('Caf Service (XML)', () => {
           .post('/sgmap/wswdd/v1', function(body){
              return body.indexOf("<codePostal>toto</codePostal>") >= 0 &&
              body.indexOf("<matricule>tutu</matricule>") >= 0 &&
-             body.indexOf("<typeEnvoi>4</typeEnvoi>") >= 0 &&
+             body.indexOf("<typeEnvoi>5</typeEnvoi>") >= 0 &&
               body.indexOf("<typeDocument>4</typeDocument>") >= 0
           })
           .reply(200, httpResponse);
       })
 
       it("return the data",(done) => {
-        cafService.getData("toto", "tutu", "droits", false, (err, data) => {
+        cafService.getData("toto", "tutu", "droits", (err, data) => {
           if(err) return done(err)
           cafCall.done();
           expect(data).to.deep.equal(httpJson);
@@ -139,7 +139,7 @@ describe('Caf Service (XML)', () => {
       })
 
       it("return an error",(done) => {
-        cafService.getData("toto", "tutu", "droits", false, (err, data) => {
+        cafService.getData("toto", "tutu", "droits", (err, data) => {
           cafCall.done();
           expect(err).to.deep.equal(new StandardError("Request error", {code: 500}));
           expect(data).to.deep.equal(undefined);
@@ -191,7 +191,7 @@ describe('Caf Service (XML)', () => {
       })
 
       it("return an StandardError",(done) => {
-        cafService.getData("toto", "tutu", "droits", false, (err, data) => {
+        cafService.getData("toto", "tutu", "droits", (err, data) => {
           cafCall.done();
           expect(err).to.deep.equal(new StandardError("Il existe au moins un enfant pour lequel il existe un droit sur le dossier et/ou après la date de situation demandée", {code: 400}));
           expect(data).to.deep.equal(undefined);
@@ -209,7 +209,7 @@ describe('Caf Service (XML)', () => {
       })
 
       it("return an StandardError",(done) => {
-        cafService.getData("toto", "tutu", "droits", false, (err, data) => {
+        cafService.getData("toto", "tutu", "droits", (err, data) => {
           cafCall.done();
           expect(err).to.deep.equal(new StandardError("Votre demande n'a pu aboutir en raison d'un incident technique lié à l'appel au service IMC. Des paramètres manquent.", {code: 500}));
           expect(data).to.deep.equal(undefined);
