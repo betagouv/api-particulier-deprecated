@@ -8,8 +8,6 @@ describe('Caf API', function () {
   const server = serverTest();
   const api = server.api;
   const resourcePath = __dirname + '/../../test/resources'
-  const pdfhttpResponse = fs.readFileSync(resourcePath + '/caf/pdf/httpResponse.txt','utf-8');
-  const pdfhttpFunctionnalError = fs.readFileSync(resourcePath + '/caf/pdf/httpFunctionnalError.txt','utf-8');
   const xmlHttpResponse = fs.readFileSync(resourcePath + '/caf/xml/httpResponse.txt','utf-8');
   const xmlHttpResponseWithQF0 = fs.readFileSync(resourcePath + '/caf/xml/httpResponseWithQF0.txt','utf-8');
   const xmlHttpFunctionnalError = fs.readFileSync(resourcePath + '/caf/xml/httpFunctionnalError.txt','utf-8');

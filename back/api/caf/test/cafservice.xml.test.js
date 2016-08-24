@@ -12,7 +12,7 @@ const StandardError = require('standard-error')
 describe('Caf Service (XML)', () => {
   const resourcePath = __dirname + '/../../test/resources'
 
-  var cafService = new CafService({
+  const cafService = new CafService({
     cafHost: 'https://pep-test.caf.fr',
     cafSslCertificate: resourcePath + '/server.csr',
     cafSslKey: resourcePath + '/server.key'
@@ -39,7 +39,7 @@ describe('Caf Service (XML)', () => {
           .post('/sgmap/wswdd/v1', function(body){
              return body.indexOf("<codePostal>toto</codePostal>") >= 0 &&
              body.indexOf("<matricule>tutu</matricule>") >= 0 &&
-             body.indexOf("<typeEnvoi>4</typeEnvoi>") >= 0 &&
+             body.indexOf("<typeEnvoi>5</typeEnvoi>") >= 0 &&
               body.indexOf("<typeDocument>4</typeDocument>") >= 0
           })
           .reply(200, httpResponse);
