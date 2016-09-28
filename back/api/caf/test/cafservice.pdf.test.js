@@ -11,7 +11,7 @@ describe('Caf Service (PDF)', function () {
 
   var cafService = new CafService({
     cafHost: 'https://pep-test.caf.fr',
-    cafSslCertificate: resourcePath + '/server.csr',
+    cafSslCertificate: resourcePath + '/server.crt',
     cafSslKey: resourcePath + '/server.key'
   });
 
