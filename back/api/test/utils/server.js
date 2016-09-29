@@ -12,7 +12,7 @@ module.exports = function(){
     appname: 'api-particulier-test',
     cafHost: 'https://pep-test.caf.fr',
     svairHost: 'https://cfsmsp.impots.gouv.fr',
-    cafSslCertificate: __dirname + '/../resources/server.csr',
+    cafSslCertificate: __dirname + '/../resources/server.crt',
     cafSslKey: __dirname + '/../resources/server.key',
     tokensPath: __dirname + '/tokens',
     raven: {
