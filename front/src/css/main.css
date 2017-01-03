@@ -63,3 +63,22 @@
   font-size: x-large;
   font-weight: bold;
 }
+
+fieldset legend {
+  border: none;
+  font-size: 1.4em;
+  margin-bottom: 5px;
+}
+
+div.radio-type-wrapper {
+  margin-left: 30px;
+}
+
+.panel-default {
+  background-color: whitesmoke;
+  padding: 10px 25px;
+}
+
+.panel-default p.lead {
+  margin-top: 20px;
+}
