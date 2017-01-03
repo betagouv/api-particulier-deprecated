@@ -5,7 +5,7 @@ language_tabs:
   - shell
 
 toc_footers:
-  - <a href='mailto:apiparticulier@sgmap.fr'>Demander un jeton d'accès</a>
+  - <a href='mailto:contact@particulier.api.gouv.fr'>Demander un jeton d'accès</a>
   - <a href='https://github.com/sgmap/api-particulier'>Sources</a>
 
 includes:
@@ -76,7 +76,7 @@ curl "https://particulier-test.api.gouv.fr/api/impots/svair?numeroFiscal=12&refe
 
 API Particulier utilise un système de jeton pour **identifier** et **authentifier** les fournisseurs de service. Vous pouvez
 demander votre jeton d'authentification en envoyant un mail à
-[apiparticulier@sgmap.fr](mailto:apiparticulier@sgmap.fr) en précisant dans quel
+[contact@particulier.api.gouv.fr](mailto:contact@particulier.api.gouv.fr) en précisant dans quel
 projet vous souhaitez intégrer l'API.
 
 
