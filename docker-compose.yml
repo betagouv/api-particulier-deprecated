@@ -10,14 +10,6 @@ app:
 front:
   build: front
 
-tech:
-  build: slate
-  ports:
-    - 4567:4567
-
-docs:
-  build: swagger
-
 nginx:
   build: nginx
   container_name: apiparticulier-nginx
@@ -26,7 +18,5 @@ nginx:
     - 8081:8080
   volumes_from:
     - front
-    - docs
-    - tech
   links:
     - app:app
