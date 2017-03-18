@@ -12,10 +12,6 @@ server {
           add_header 'Access-Control-Allow-Origin' '*';
         }
 
-        location /status {
-          root /var/www;
-        }
-
         location /api {
 
           proxy_set_header X-Real-IP  $remote_addr;
