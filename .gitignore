@@ -1,4 +1,5 @@
-redis-data
-redis-data-dev
-redis-data-prod
+node_modules
+node_modules_test
+coverage
+cert
 **.log
