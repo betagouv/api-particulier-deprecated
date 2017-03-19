@@ -1,8 +1,0 @@
-app:
-  build: back
-  entrypoint:
-    - npm
-    - test
-  volumes:
-   - ./back/node_modules_test:/srv/apps/node_modules
-   - ./tokens.json:/srv/apps/tokens.json
