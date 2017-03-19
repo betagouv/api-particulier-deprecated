@@ -8,8 +8,6 @@
     "url": "https://github.com/sgmap/api-particulier"
   },
   "scripts": {
-    "pretest": "npm install",
-    "lint": "eslint api/**/*.js",
     "test": "istanbul cover --print details _mocha -- -R spec auth/test/** api/test/** api/*/test/** --recursive",
     "start": "node ./bin/www"
   },

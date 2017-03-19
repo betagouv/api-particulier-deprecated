@@ -22,7 +22,6 @@ dependencies:
 
 test:
   override:
-    - yarn lint
     - yarn test
   post:
     - cat ./coverage/lcov.info | coveralls --verbose
