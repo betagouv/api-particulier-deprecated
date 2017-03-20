@@ -40,6 +40,10 @@ var server = new Server({
   svairHost: nconf.get('svairHost'),
   cafSslCertificate: nconf.get('cafSslCertificate'),
   cafSslKey: nconf.get('cafSslKey'),
+  cafPingParams: {
+    numeroAllocataire: nconf.get('numeroAllocataire'),
+    codePostal: nconf.get('codePostal'),
+  },
   logger: logger,
   numeroFiscal: nconf.get('numeroFiscal'),
   referenceAvis: nconf.get('referenceAvis'),
