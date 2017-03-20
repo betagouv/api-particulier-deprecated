@@ -12,8 +12,6 @@ info:
     |-------------|------------------------------|---------------------------------------------------|-------------|--------|
     | Production  | particulier.api.gouv.fr      |[Lien](https://particulier.api.gouv.fr/docs/)      | Secret      | Oui    |
     | Test        | particulier-test.api.gouv.fr |[Lien](https://apiparticulier-test.sgmap.fr/docs/) | `test-token`| Oui    |
-    | Dev         | particulier-dev.api.gouv.fr  |[Lien](https://apiparticulier-dev.sgmap.fr/docs/)  | Secret      | Non    |
-    | Mocks       | particulier-mock.api.gouv.fr |[Lien](https://apiparticulier-mock.sgmap.fr/docs/) | ``          | Oui    |
 
     La documentation ci-dessous propose des données bidons pour faire des tests avec le token `test-token`.
 
@@ -27,7 +25,6 @@ schemes:
   - https
 produces:
   - application/json
-  - application/xml
 paths:
   /impots/svair:
     get:
@@ -378,21 +375,6 @@ paths:
           description: 'Les paramètres fournis sont incorrects ou ne correspondent pas à un allocataire CAF'
           schema:
             $ref: '#/definitions/Error'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /ping:
-    get:
-      summary: Service pour connaitre si l'application fonctionne correctement
-      tags:
-        - System
-      responses:
-        '200':
-          description: Un
-          schema:
-            type: string
         default:
           description: Unexpected error
           schema:
