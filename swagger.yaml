@@ -122,221 +122,12 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-  /caf/attestation/qf:
-    get:
-      summary: Service de récupération de l'attestation du QF
-      description: |
-        permet de récupérer le PDF certifiant les attestations reçues par la CAF
-        du mois dernier
-        Il contient:
-        <ul>
-          <li>l'adresse</li>
-          <li>le quotient familial</li>
-        </ul>
-
-      parameters:
-        - name: numeroAllocataire
-          in: query
-          description: Numéro d'allocataire
-          required: true
-          type: number
-          format: integer
-        - name: codePostal
-          in: query
-          description: Code postal
-          required: true
-          type: number
-          format: integer
-        - name: X-API-Key
-          in: header
-          description: Token d'identification de l'API
-          required: true
-          type: string
-        - name: X-User
-          in: header
-          description: Utilisateur final de l'API
-          required: false
-          type: string
-      tags:
-        - CAF
-      responses:
-        '200':
-          description: Un
-          schema:
-            type: file
-        '401':
-          description: Le token ne vous permet pas d'accéder à l'API
-          schema:
-            $ref: '#/definitions/Error'
-        '404':
-          description: 'Les paramètres fournis sont incorrects ou ne correspondent pas à un avis'
-          schema:
-            $ref: '#/definitions/Error'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /caf/attestation/droits:
-      get:
-        summary: Service de récupération de l'attestation des droits
-        description: |
-          permet de récupérer le PDF certifiant les droits sociaux perçus par le
-          mandataire de la part de la CAF du mois dernier
-          Il contient:
-          <ul>
-            <li>les identités des personnes recevant les allocations</li>
-            <li>L'adresse</li>
-            <li>les enfants</li>
-            <li>les allocations</li>
-            <li>le quotient familial</li>
-          </ul>
-
-        parameters:
-          - name: numeroAllocataire
-            in: query
-            description: Numéro d'allocataire
-            required: true
-            type: number
-            format: integer
-          - name: codePostal
-            in: query
-            description: Code Postal
-            required: true
-            type: number
-            format: integer
-          - name: X-API-Key
-            in: header
-            description: Token d'identification de l'API
-            required: true
-            type: string
-          - name: X-User
-            in: header
-            description: Utilisateur final de l'API
-            required: false
-            type: string
-        tags:
-          - CAF
-        responses:
-          '200':
-            description: Un
-            schema:
-              type: file
-          '401':
-            description: Le token ne vous permet pas d'accéder à l'API
-            schema:
-              $ref: '#/definitions/Error'
-          '404':
-            description: 'Les paramètres fournis sont incorrects ou ne correspondent pas à un avis'
-            schema:
-              $ref: '#/definitions/Error'
-          default:
-            description: Unexpected error
-            schema:
-              $ref: '#/definitions/Error'
-
-  /caf/qf:
-    get:
-      summary: Quotient familial de la CAD
-      description: |
-        Le service permet de récupérer le quotient familial, sa date de calcul et les allocataires.
-      parameters:
-          - name: numeroAllocataire
-            in: query
-            description: Numéro d'allocataire
-            required: true
-            type: number
-            format: integer
-          - name: codePostal
-            in: query
-            description: Code postal
-            required: true
-            type: number
-            format: integer
-          - name: X-API-Key
-            in: header
-            description: Token d'identification de l'API
-            required: true
-            type: string
-          - name: X-User
-            in: header
-            description: Utilisateur final de l'API
-            required: false
-            type: string
-      tags:
-        - CAF
-      responses:
-        '200':
-          description: Le quotient familial
-          schema:
-            $ref: '#/definitions/QuotientFamilial'
-        '401':
-          description: Le token ne vous permet pas d'accéder à l'API
-          schema:
-            $ref: '#/definitions/Error'
-        '404':
-          description: 'Les paramètres fournis sont incorrects ou ne correspondent pas à un allocataire CAF'
-          schema:
-            $ref: '#/definitions/Error'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
-  /caf/adresse:
-    get:
-      summary: Adresse des allocataires de la caf
-      description: |
-        Le service permet de récupérer l'adresse, et les allocataires.
-      parameters:
-          - name: numeroAllocataire
-            in: query
-            description: Numéro d'allocataire
-            required: true
-            type: number
-            format: integer
-          - name: codePostal
-            in: query
-            description: Code postal
-            required: true
-            type: number
-            format: integer
-          - name: X-API-Key
-            in: header
-            description: Token d'identification de l'API
-            required: true
-            type: string
-          - name: X-User
-            in: header
-            description: Utilisateur final de l'API
-            required: false
-            type: string
-      tags:
-        - CAF
-      responses:
-        '200':
-          description: Le quotient familial
-          schema:
-            $ref: '#/definitions/CafAdresse'
-        '401':
-          description: Le token ne vous permet pas d'accéder à l'API
-          schema:
-            $ref: '#/definitions/Error'
-        '404':
-          description: 'Les paramètres fournis sont incorrects ou ne correspondent pas à un allocataire CAF'
-          schema:
-            $ref: '#/definitions/Error'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-
   /caf/famille:
     get:
-      summary: Composition d'un foyer CAF
+      summary: Informations concernant la famille
       description: |
-        Le service permet de récupérer les parents et les enfants du foyer déclaré à la CAF.
-        Il récupère leur nom et prénom, leur date de naissance et leur sexe.
+        Le service permet de récupérer la composition de la famille, l'adresse déclarée à la CAF, ainsi que le quotient familial.
+        Les données sont actualisées chaque mois.
       parameters:
           - name: numeroAllocataire
             in: query
@@ -503,43 +294,6 @@ definitions:
         type: string
         description: adresse fiscale de l'année passée
 
-
-  QuotientFamilial:
-    type: object
-    properties:
-      quotientFamilial:
-        type: integer
-        description: Quotient familial
-      allocataires:
-        type: array
-        description: Noms et prénoms des personnes allocataire de la CAF
-        items:
-          type: string
-      annee:
-        type: integer
-        description: Année du quotient familial
-      mois:
-        type: integer
-        description: Mois du quotient familial
-
-  CafAdresse:
-    type: object
-    description: L'adresse de la Caf
-    properties:
-      adresse:
-        $ref: '#/definitions/PosteAdresse'
-      allocataires:
-        type: array
-        description: Noms et prénoms des personnes allocataire de la CAF
-        items:
-          type: string
-      annee:
-        type: integer
-        description: Année du quotient familial
-      mois:
-        type: integer
-        description: Mois du quotient familial
-
   PosteAdresse:
     type: object
     description: Adresse au format de la poste
@@ -565,6 +319,7 @@ definitions:
       pays:
         type: string
         description: '<b>Pays</b>'
+
   Person:
     type: object
     description: Personne référencée à la CAF
@@ -593,6 +348,17 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Person'
+      adresse:
+        $ref: '#/definitions/PosteAdresse'
+      quotientFamilial:
+        type: integer
+        description: Valeur du quotient familial calculé par la CAF
+      annee:
+        type: integer
+        description: Année du quotient familial
+      mois:
+        type: integer
+        description: Mois du quotient familial
 
   Error:
     type: object
