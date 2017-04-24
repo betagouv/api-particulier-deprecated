@@ -14,7 +14,7 @@
   },
   "author": "SGMAP",
   "devDependencies": {
-    "chai": "^2.2.0",
+    "chai": "^3.5.0",
     "coveralls": "^2.13.0",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.1",
