@@ -62,6 +62,6 @@
     "string": "^3.1.1",
     "svair-api": "0.4.1",
     "url-assembler": "^1.2.7",
-    "xml2js": "0.4.16"
+    "xml2js": "^0.4.17"
   }
 }
