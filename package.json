@@ -30,7 +30,7 @@
     "node-mocks-http": "^1.4.4",
     "proxyquire": "^1.4.0",
     "sinon": "^2.1.0",
-    "supertest": "^0.15.0"
+    "supertest": "^3.0.0"
   },
   "dependencies": {
     "api-caf": "^0.1.1",
