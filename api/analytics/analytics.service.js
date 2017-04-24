@@ -1,18 +1,18 @@
-'use strict';
+'use strict'
 
-const elasticsearch = require('elasticsearch');
+const elasticsearch = require('elasticsearch')
 
 class AnalyticsService {
-  constructor(options) {
-    this.options = options;
+  constructor (options) {
+    this.options = options
     this.client = new elasticsearch.Client({
       host: options.es.host,
       log: 'error'
-    });
+    })
     this.ignoreUserAgent = ['Chrome', 'Googlebot', 'Firefox', 'cURL']
   }
 
-  getRequestFromtheLastXdays(days) {
+  getRequestFromtheLastXdays (days) {
     return this.client.count({
       index: this.options.es.index,
       body:
@@ -55,7 +55,7 @@ class AnalyticsService {
       }
     }).then((resp) => {
       return resp.count
-    });
+    })
   }
 }
 

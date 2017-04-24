@@ -1,22 +1,21 @@
-'use strict';
+'use strict'
 
-const expect = require('chai').expect;
+const expect = require('chai').expect
 const middleware = require('../../../lib/middlewares/identifyUser')
-const sinon = require('sinon');
-
+const sinon = require('sinon')
 
 describe('Middleware : identifyUser', () => {
   describe('when the user is in the headers', () => {
     var request = {
-      headers: {"X-User": "toto"}
+      headers: {'X-User': 'toto'}
     }
     it('add the user to the request', () => {
-      var next = sinon.spy();
+      var next = sinon.spy()
 
       middleware(request, null, next)
 
       expect(request.user).to.equal('toto')
-      expect(next.calledOnce).to.be.true;
+      expect(next.calledOnce).to.be.true
     })
   })
 
@@ -28,12 +27,12 @@ describe('Middleware : identifyUser', () => {
       }
     }
     it('add the user to the request', () => {
-      var next = sinon.spy();
+      var next = sinon.spy()
 
       middleware(request, null, next)
 
       expect(request.user).to.equal('toto')
-      expect(next.calledOnce).to.be.true;
+      expect(next.calledOnce).to.be.true
     })
   })
 
@@ -43,12 +42,12 @@ describe('Middleware : identifyUser', () => {
       query: {}
     }
     it('add the user to the request', () => {
-      var next = sinon.spy();
+      var next = sinon.spy()
 
       middleware(request, null, next)
 
       expect(request.user).to.equal('Anonymous')
-      expect(next.calledOnce).to.be.true;
+      expect(next.calledOnce).to.be.true
     })
   })
 })

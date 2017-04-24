@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 // vi: ft=javascript
 
-var bunyan = require('bunyan');
-var bunyanFormat = require('bunyan-format');
-var nconf = require('nconf');
-var Server = require('../api/server');
-var http = require('http');
-var url = require('url');
+var bunyan = require('bunyan')
+var bunyanFormat = require('bunyan-format')
+var nconf = require('nconf')
+var Server = require('../api/server')
+var http = require('http')
+var url = require('url')
 
 nconf.env({
   separator: '_'
-}).argv();
-nconf.defaults(require('../defaults'));
+}).argv()
+nconf.defaults(require('../defaults'))
 
 var logger = bunyan.createLogger({
   name: nconf.get('appname'),
@@ -19,16 +19,16 @@ var logger = bunyan.createLogger({
   stream: bunyanFormat({
     outputMode: nconf.get('log:format')
   })
-});
+})
 
-var mhttp = require('http-measuring-client').create();
-mhttp.mixin(http);
+var mhttp = require('http-measuring-client').create()
+mhttp.mixin(http)
 mhttp.on('stat', function (parsed, stats) {
   logger.info({
     parsedUri: parsed,
     stats: stats
-  }, '%s %s took %dms (%d)', stats.method || 'GET', url.format(parsed), stats.totalTime, stats.statusCode);
-});
+  }, '%s %s took %dms (%d)', stats.method || 'GET', url.format(parsed), stats.totalTime, stats.statusCode)
+})
 
 var raven = {
 
@@ -42,7 +42,7 @@ var server = new Server({
   cafSslKey: nconf.get('cafSslKey'),
   cafPingParams: {
     numeroAllocataire: nconf.get('numeroAllocataire'),
-    codePostal: nconf.get('codePostal'),
+    codePostal: nconf.get('codePostal')
   },
   logger: logger,
   numeroFiscal: nconf.get('numeroFiscal'),
@@ -53,7 +53,7 @@ var server = new Server({
   nconf: nconf,
   raven: {
     activate: nconf.get('raven:activate'),
-    dsn: nconf.get('raven:dsn'),
+    dsn: nconf.get('raven:dsn')
   },
   es: {
     host: nconf.get('es:host'),
@@ -62,12 +62,12 @@ var server = new Server({
   ban: {
     baseUrl: nconf.get('ban:baseUrl')
   }
-});
+})
 
 server.start(function (err) {
   if (err) {
-    logger.fatal({error: err}, 'cannot recover from previous errors. shutting down now. error was', err.stack);
-    setTimeout(process.exit.bind(null, 99), 10);
+    logger.fatal({error: err}, 'cannot recover from previous errors. shutting down now. error was', err.stack)
+    setTimeout(process.exit.bind(null, 99), 10)
   }
-  logger.info('Sever successfully started.');
-});
+  logger.info('Sever successfully started.')
+})

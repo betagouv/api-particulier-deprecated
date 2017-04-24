@@ -1,9 +1,8 @@
-'use strict';
+'use strict'
 
-const expect = require('chai').expect;
+const expect = require('chai').expect
 const logger = require('../../../lib/middlewares/logger')
-const sinon = require('sinon');
-
+const sinon = require('sinon')
 
 describe('Logger', () => {
   it('must exclude a component', () => {
@@ -96,5 +95,4 @@ describe('Logger', () => {
       expect(properties2.url).to.equal('/toto?q=a&API-Key=XXX&t=y')
     })
   })
-
 })

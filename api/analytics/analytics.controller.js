@@ -1,15 +1,15 @@
-'use strict';
+'use strict'
 
 const format = require('./../lib/utils/format')
 const Service = require('./analytics.service')
-const StandardError = require('standard-error');
+const StandardError = require('standard-error')
 
 class AnalyticsController {
-  constructor(options) {
+  constructor (options) {
     this.service = new Service(options)
   }
 
-  requestsLast30days(req, res, next) {
+  requestsLast30days (req, res, next) {
     this.service.getRequestFromtheLastXdays(31)
       .then((result) => {
         format(res, result)
@@ -19,4 +19,4 @@ class AnalyticsController {
   }
 }
 
-module.exports = AnalyticsController;
+module.exports = AnalyticsController

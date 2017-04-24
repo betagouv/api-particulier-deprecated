@@ -1,13 +1,11 @@
-var proxyquire = require('proxyquire');
-var supertest = require('supertest');
+var proxyquire = require('proxyquire')
+var supertest = require('supertest')
 var nock = require('nock')
 
+var Server = require('../../server')
 
-var Server = require('../../server');
-
-
-module.exports = function(){
-  var server;
+module.exports = function () {
+  var server
   var options = {
     appname: 'api-particulier-test',
     cafHost: 'https://pep-test.caf.fr',
@@ -18,7 +16,7 @@ module.exports = function(){
     tokensPath: __dirname + '/tokens',
     raven: {
       activate: false,
-      dsn:''
+      dsn: ''
     },
     es: {
       host: 'http://es.infra.gouv.fr:9203',
@@ -27,18 +25,18 @@ module.exports = function(){
     numeroAllocataire: '1234567',
     codePostal: '75009',
     ban: {
-      baseUrl: "http://adresse.data.gouv.local"
+      baseUrl: 'http://adresse.data.gouv.local'
     }
-  };
-  var serverPort = process.env['SERVER_PORT_TEST'];
-  if(serverPort) {
+  }
+  var serverPort = process.env['SERVER_PORT_TEST']
+  if (serverPort) {
     options.port = serverPort
   }
 
-  nock.enableNetConnect('localhost');
+  nock.enableNetConnect('localhost')
 
   beforeEach((done) => {
-    server = new Server(options);
+    server = new Server(options)
     server.start(done)
   })
   afterEach((done) => {
@@ -47,9 +45,9 @@ module.exports = function(){
 
   var api = function () {
     return supertest
-      .agent('http://localhost:' + server.getPort());
-  };
-  return {
-    api : api
+      .agent('http://localhost:' + server.getPort())
   }
-};
+  return {
+    api: api
+  }
+}
