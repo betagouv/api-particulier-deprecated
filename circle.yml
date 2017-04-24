@@ -7,21 +7,15 @@ machine:
 
 dependencies:
   pre:
-    - |
-      if [[ ! -e ~/.yarn/bin/yarn || $(yarn --version) != "${YARN_VERSION}" ]]; then
-        echo "Download and install Yarn."
-        curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
-      else
-        echo "The correct version of Yarn is already installed."
-      fi
+    - npm install yarn
   override:
-    - yarn
+    - ./node_modules/.bin/yarn install
   cache_directories:
     - ~/.yarn
     - ~/.cache/yarn
 
 test:
   override:
-    - yarn test
+    - ./node_modules/.bin/yarn test
   post:
     - cat ./coverage/lcov.info | coveralls --verbose
