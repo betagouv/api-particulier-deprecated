@@ -8,27 +8,27 @@ describe('Analytics API', () => {
 
   describe('When requesting /analytics/requestsLast30days', () => {
     describe('and ElasticSearch replies successfully', () => {
-      it('replies json data', (done) => {
+      it('replies json data', () => {
         nock('http://es.infra.gouv.fr:9203')
           .post('/' + indexPattern + '/_count')
           .reply(200, { count: 291 })
 
-        api()
+        return api()
           .get('/api/analytics/requestsLast30days')
           .expect('content-type', /json/)
-          .expect(200, done)
+          .expect(200)
       })
     })
     describe('and ElasticSearch fails', () => {
-      it('replies a 500', (done) => {
+      it('replies a 500', () => {
         nock('http://es.infra.gouv.fr:9203')
           .post('/' + indexPattern + '/_count')
           .reply(500, { error: 500 })
 
-        api()
+        return api()
           .get('/api/analytics/requestsLast30days')
           .expect('content-type', /json/)
-          .expect(500, done)
+          .expect(500)
       })
     })
   })
