@@ -2,7 +2,6 @@
 
 const expect = require('chai').expect
 const logger = require('../../../lib/middlewares/logger')
-const sinon = require('sinon')
 
 describe('Logger', () => {
   it('must exclude a component', () => {

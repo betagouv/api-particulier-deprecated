@@ -1,9 +1,5 @@
 'use strict'
 
-const async = require('async')
-const StandardError = require('standard-error')
-const tokens = require('./tokens')
-
 class TokenService {
   constructor (options) {
     if (options.logger) {

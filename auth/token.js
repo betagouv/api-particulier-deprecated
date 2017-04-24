@@ -1,7 +1,6 @@
 'use strict'
 
 const StandardError = require('standard-error')
-const compose = require('composable-middleware')
 const TokenService = require('./tokens.service')
 
 module.exports = Auth

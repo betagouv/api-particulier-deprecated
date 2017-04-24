@@ -1,8 +1,9 @@
 'use strict'
 
-const format = require('./../lib/utils/format')
 const fs = require('fs')
-const definition = fs.readFileSync(__dirname + '/../../swagger.yaml')
+const path = require('path')
+const format = require('./../lib/utils/format')
+const definition = fs.readFileSync(path.join(__dirname, '../../swagger.yaml'))
 
 class SystemController {
   ping (req, res) {

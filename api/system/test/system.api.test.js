@@ -1,4 +1,3 @@
-const expect = require('chai').expect
 const serverTest = require('./../../test/utils/server')
 
 describe('System API', () => {

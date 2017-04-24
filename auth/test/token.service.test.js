@@ -1,9 +1,10 @@
+const path = require('path')
 const expect = require('chai').expect
 const Service = require('../tokens.service')
 
 describe('Token service', () => {
   const service = new Service({
-    tokensPath: __dirname + '/../tokens'
+    tokensPath: path.join(__dirname, '../tokens')
   })
   describe('when the token exist', () => {
     it('return the user', () => {

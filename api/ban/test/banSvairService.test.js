@@ -2,8 +2,6 @@
 
 const expect = require('chai').expect
 const proxyquire = require('proxyquire').noCallThru()
-const sinon = require('sinon')
-const StandardError = require('standard-error')
 const banResult = require('./../../test/resources/adresses')
 const svairResult = require('./../../test/resources/svair')
 const expectedResponse = require('./../../test/resources/adressesWithDeclarant')
@@ -30,11 +28,10 @@ describe('Svair Ban Service', function () {
 
     it('replies the adress with the persons', function (done) {
       // given
-      const svairBanService = new SvairBanService({ svairHost: ''})
+      const svairBanService = new SvairBanService({ svairHost: '' })
 
       // when
       svairBanService.getAdress(23, 34, function (err, data) {
-        console.log(err)
         expect(err).to.not.exist
         expect(data).to.deep.equal(expectedResponse)
         done()

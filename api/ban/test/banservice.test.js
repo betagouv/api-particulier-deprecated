@@ -1,5 +1,6 @@
 'use strict'
 
+const path = require('path')
 const expect = require('chai').expect
 const BanService = require('./../ban.service')
 const nock = require('nock')
@@ -12,7 +13,7 @@ describe('Ban Service', function () {
     }
   })
 
-  const resourcePath = __dirname + '/../../test/resources'
+  const resourcePath = path.join(__dirname, '../../test/resources')
 
   const banResponse = JSON.parse(fs.readFileSync(resourcePath + '/banResponse.json', 'utf-8'))
   const banExpected = JSON.parse(fs.readFileSync(resourcePath + '/adresses.json', 'utf-8'))

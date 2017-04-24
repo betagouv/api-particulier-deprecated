@@ -8,16 +8,12 @@ const expressBunyanLogger = require('express-bunyan-logger')
 const routes = require('./routes')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const UrlAssembler = require('url-assembler')
 const raven = require('raven')
-const js2xmlparser = require('js2xmlparser')
 const formatFromUrl = require('./lib/middlewares/formatFromUrl')
 const getApiKeyFromQueryParam = require('./lib/middlewares/getApiKeyFromQueryParam')
 const identifyUser = require('./lib/middlewares/identifyUser')
 const loggerProperties = require('./lib/middlewares/logger')
 const formatError = require('./lib/middlewares/formatError')
-
-var extend = require('extend')
 
 module.exports = Server
 

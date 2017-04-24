@@ -1,4 +1,3 @@
-const expect = require('chai').expect
 const nock = require('nock')
 const serverTest = require('./../../test/utils/server')
 
@@ -8,28 +7,29 @@ describe('Analytics API', () => {
   const indexPattern = 'logstash-apiparticulier-*'
 
   describe('When requesting /analytics/requestsLast30days', () => {
-    it('replies json data', (done) => {
-      nock('http://es.infra.gouv.fr:9203')
-        .post('/' + indexPattern + '/_count')
-        .reply(200, { count: 291 })
+    describe('and ElasticSearch replies successfully', () => {
+      it('replies json data', (done) => {
+        nock('http://es.infra.gouv.fr:9203')
+          .post('/' + indexPattern + '/_count')
+          .reply(200, { count: 291 })
 
-      api()
-        .get('/api/analytics/requestsLast30days')
-        .expect('content-type', /json/)
-        .expect(200, done)
+        api()
+          .get('/api/analytics/requestsLast30days')
+          .expect('content-type', /json/)
+          .expect(200, done)
+      })
     })
-  })
+    describe('and ElasticSearch fails', () => {
+      it('replies a 500', (done) => {
+        nock('http://es.infra.gouv.fr:9203')
+          .post('/' + indexPattern + '/_count')
+          .reply(500, { error: 500 })
 
-  describe('When requesting /analytics/requestsLast30days', () => {
-    it('replies json data', (done) => {
-      nock('http://es.infra.gouv.fr:9203')
-        .post('/' + indexPattern + '/_count')
-        .reply(500, { error: 500 })
-
-      api()
-        .get('/api/analytics/requestsLast30days')
-        .expect('content-type', /json/)
-        .expect(500, done)
+        api()
+          .get('/api/analytics/requestsLast30days')
+          .expect('content-type', /json/)
+          .expect(500, done)
+      })
     })
   })
 })

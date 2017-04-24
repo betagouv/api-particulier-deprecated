@@ -4,11 +4,11 @@ var sinon = require('sinon')
 var StandardError = require('standard-error')
 
 describe('Impots Controller', function () {
-  var impotController
+  var ImpotController
 
   describe("When the svair doesn't return anything", function () {
     beforeEach(function (done) {
-      impotController = proxyquire('../impots.controller', {
+      ImpotController = proxyquire('../impots.controller', {
         'svair-api': () => {
           return function svairApiFake (numeroFiscal, referenceAvis, done) {
             done({error: true, message: 'Some message'}, '')
@@ -20,10 +20,9 @@ describe('Impots Controller', function () {
 
     it('replies 500', function (done) {
       // given
-      var callback = sinon.spy()
       var req = {query: {numeroFiscal: 'toto', referenceAvis: 'titi'}}
       var res = {}
-      var controller = new impotController()
+      var controller = new ImpotController()
 
       // when
       controller.svair(req, res, function (err) {
@@ -35,7 +34,7 @@ describe('Impots Controller', function () {
 
   describe('When the svair return Invalid credentials', function () {
     beforeEach(function (done) {
-      impotController = proxyquire('../impots.controller', {
+      ImpotController = proxyquire('../impots.controller', {
         'svair-api': () => {
           return function svairApiFake (numeroFiscal, referenceAvis, done) {
             done({error: true, message: 'Invalid credentials'}, '')
@@ -47,10 +46,9 @@ describe('Impots Controller', function () {
 
     it('replies 404', function (done) {
       // given
-      var callback = sinon.spy()
       var req = {query: {numeroFiscal: 'toto', referenceAvis: 'titi'}}
       var res = {}
-      var controller = new impotController()
+      var controller = new ImpotController()
 
       // when
       controller.svair(req, res, function (err) {
@@ -68,7 +66,7 @@ describe('Impots Controller', function () {
         done(null, {result: 'tutu'})
       })
 
-      importController = proxyquire('../impots.controller', {
+      ImpotController = proxyquire('../impots.controller', {
         'svair-api': () => {
           return svairCall
         }
@@ -80,8 +78,7 @@ describe('Impots Controller', function () {
       // given
       var callback = sinon.spy()
       var req = {query: {numeroFiscal: 'toto', referenceAvis: 'titi'}}
-      var res = {}
-      var controller = new importController()
+      var controller = new ImpotController()
 
       // when
       controller.svair(req, { format: callback }, null)
@@ -94,8 +91,7 @@ describe('Impots Controller', function () {
         // given
         var callback = sinon.spy()
         var req = {query: {numeroFiscal: '3578788848943a', referenceAvis: 'titi'}}
-        var res = {}
-        var controller = new importController()
+        var controller = new ImpotController()
 
         // when
         controller.svair(req, { format: callback }, null)
@@ -109,8 +105,7 @@ describe('Impots Controller', function () {
           // given
           var callback = sinon.spy()
           var req = {query: {numeroFiscal: '3578788848 943a', referenceAvis: 'titi'}}
-          var res = {}
-          var controller = new importController()
+          var controller = new ImpotController()
 
           // when
           controller.svair(req, { format: callback }, null)
@@ -126,8 +121,7 @@ describe('Impots Controller', function () {
         // given
         var callback = sinon.spy()
         var req = {query: {numeroFiscal: '35787 88848 943a', referenceAvis: 'ti ti'}}
-        var res = {}
-        var controller = new importController()
+        var controller = new ImpotController()
 
         // when
         controller.svair(req, { format: callback }, null)

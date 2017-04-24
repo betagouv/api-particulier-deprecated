@@ -1,4 +1,4 @@
-var proxyquire = require('proxyquire')
+const path = require('path')
 var supertest = require('supertest')
 var nock = require('nock')
 
@@ -10,10 +10,10 @@ module.exports = function () {
     appname: 'api-particulier-test',
     cafHost: 'https://pep-test.caf.fr',
     svairHost: 'https://cfsmsp.impots.gouv.fr',
-    cafSslCertificate: __dirname + '/../resources/server.crt',
-    cafSslKey: __dirname + '/../resources/server.key',
+    cafSslCertificate: path.join(__dirname, '../resources/server.crt'),
+    cafSslKey: path.join(__dirname, '../resources/server.key'),
     cafPingParams: { codePostal: '00000', numeroAllocataire: '0000000' },
-    tokensPath: __dirname + '/tokens',
+    tokensPath: path.join(__dirname, 'tokens'),
     raven: {
       activate: false,
       dsn: ''
