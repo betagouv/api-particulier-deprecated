@@ -9,12 +9,19 @@
   },
   "scripts": {
     "test": "istanbul cover --print details _mocha -- -R spec auth/test/** api/test/** api/*/test/** --recursive",
+    "test-style": "eslint --ignore-path .gitignore api/ auth/ bin/*",
     "start": "node ./bin/www"
   },
   "author": "SGMAP",
   "devDependencies": {
     "chai": "^2.2.0",
     "coveralls": "^2.13.0",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
     "istanbul": "^0.4.5",
     "mocha": "^2.2.1",
     "nock": "^2.15.0",
