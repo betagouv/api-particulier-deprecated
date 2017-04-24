@@ -5,17 +5,6 @@ machine:
   node:
     version: 6
 
-dependencies:
-  pre:
-    - npm install yarn
-  override:
-    - ./node_modules/.bin/yarn install
-  cache_directories:
-    - ~/.yarn
-    - ~/.cache/yarn
-
 test:
-  override:
-    - ./node_modules/.bin/yarn test
   post:
     - cat ./coverage/lcov.info | coveralls --verbose
