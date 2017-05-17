@@ -84,14 +84,22 @@ ansistyles@~0.1.1:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/ansistyles/-/ansistyles-0.1.3.tgz#5de60415bda071bb37127854c864f41b23254539"
 
-api-caf@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/api-caf/-/api-caf-0.1.1.tgz#3c53d78c3bacd77e153503ef20b95d6126559beb"
+any-promise@^1.0.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/any-promise/-/any-promise-1.3.0.tgz#abc6afeedcea52e809cdc0376aed3ce39635d17f"
+
+api-caf@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/api-caf/-/api-caf-0.2.0.tgz#629ab3f15850545a013e343f23e7d2bf8e1fd28d"
   dependencies:
     cors "^2.6.0"
     express "^4.12.3"
     morgan "^1.7.0"
+    nock "^9.0.13"
+    proxyquire "^1.7.11"
     request "^2.55.0"
+    request-promise-native "^1.0.3"
+    thenify "^3.2.1"
     xml2js "^0.4.16"
 
 argparse@^1.0.7:
@@ -1413,7 +1421,7 @@ lodash@^3.10.0, lodash@^3.10.1:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.0.0, lodash@^4.14.0, lodash@^4.3.0, lodash@~4.17.2:
+lodash@^4.0.0, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.3.0, lodash@~4.17.2:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -1779,7 +1787,7 @@ proxy-addr@~1.1.3:
     forwarded "~0.1.0"
     ipaddr.js "1.2.0"
 
-proxyquire@^1.4.0:
+proxyquire@^1.4.0, proxyquire@^1.7.11:
   version "1.7.11"
   resolved "https://registry.yarnpkg.com/proxyquire/-/proxyquire-1.7.11.tgz#13b494eb1e71fb21cc3ebe3699e637d3bec1af9e"
   dependencies:
@@ -1858,6 +1866,20 @@ rechoir@^0.6.2:
 repeat-string@^1.5.2:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/repeat-string/-/repeat-string-1.6.1.tgz#8dcae470e1c88abc2d600fff4a776286da75e637"
+
+request-promise-core@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/request-promise-core/-/request-promise-core-1.1.1.tgz#3eee00b2c5aa83239cfb04c5700da36f81cd08b6"
+  dependencies:
+    lodash "^4.13.1"
+
+request-promise-native@^1.0.3:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/request-promise-native/-/request-promise-native-1.0.4.tgz#86988ec8eee408e45579fce83bfd05b3adf9a155"
+  dependencies:
+    request-promise-core "1.1.1"
+    stealthy-require "^1.1.0"
+    tough-cookie ">=2.3.0"
 
 request@2.79.0:
   version "2.79.0"
@@ -2088,6 +2110,10 @@ standard-error@^1.1.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.3.1.tgz#faf51b9eb74aaef3b3acf4ad5f61abf24cb7b93e"
 
+stealthy-require@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/stealthy-require/-/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
+
 stream-blackhole@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/stream-blackhole/-/stream-blackhole-1.0.3.tgz#6fc2e2c2e9d9fde6be8c68d3db88de09802e4d63"
@@ -2173,9 +2199,9 @@ supports-color@^3.1.0:
   dependencies:
     has-flag "^1.0.0"
 
-svair-api@0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/svair-api/-/svair-api-0.4.1.tgz#38ddcb6775d19bb058cfd90ef799ec2845f11fb5"
+svair-api@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/svair-api/-/svair-api-0.5.0.tgz#a16f3814b3b957dfca1626f1bb89530160089a64"
   dependencies:
     jsdom "^7.0.2"
     lodash "^3.10.1"
@@ -2204,6 +2230,12 @@ text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
 
+thenify@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/thenify/-/thenify-3.2.1.tgz#251fd1c80aff6e5cf57cb179ab1fcb724269bd11"
+  dependencies:
+    any-promise "^1.0.0"
+
 through@^2.3.6:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
@@ -2214,7 +2246,7 @@ tmp@0.0.x:
   dependencies:
     os-tmpdir "~1.0.1"
 
-tough-cookie@^2.2.0, tough-cookie@~2.3.0:
+tough-cookie@>=2.3.0, tough-cookie@^2.2.0, tough-cookie@~2.3.0:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.3.2.tgz#f081f76e4c85720e6c37a5faced737150d84072a"
   dependencies:

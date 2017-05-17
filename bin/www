@@ -34,6 +34,7 @@ var server = new Server({
   port: nconf.get('port'),
   cafHost: nconf.get('cafHost'),
   svairHost: nconf.get('svairHost'),
+  cafStub: nconf.get('cafStub'),
   cafSslCertificate: nconf.get('cafSslCertificate'),
   cafSslKey: nconf.get('cafSslKey'),
   cafPingParams: {
