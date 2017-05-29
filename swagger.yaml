@@ -363,7 +363,10 @@ definitions:
   Error:
     type: object
     properties:
+      reason:
+        type: string
       message:
+        deprecated: true
         type: string
       error:
         type: string

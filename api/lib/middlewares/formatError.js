@@ -10,7 +10,8 @@ module.exports = function (err, req, res, next) {
     if (err instanceof StandardError) {
       let error = {
         error: S(http.STATUS_CODES[err.code]).underscore().s,
-        reason: err.message
+        reason: err.message,
+        message: err.message
       }
       return res.format({
         'application/json': function () {
