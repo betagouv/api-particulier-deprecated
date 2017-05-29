@@ -29,6 +29,7 @@ mhttp.on('stat', function (parsed, stats) {
     stats: stats
   }, '%s %s took %dms (%d)', stats.method || 'GET', url.format(parsed), stats.totalTime, stats.statusCode)
 })
+http.globalAgent.maxSockets = nconf.get('outgoingHttpMaxSockets')
 
 var server = new Server({
   port: nconf.get('port'),
