@@ -2,6 +2,7 @@ var path = require('path');
 
 module.exports = {
   port: 3004,
+  nbWorkers: 1,
   outgoingHttpMaxSockets: 5,
   appname: 'api-particulier',
   cafHost: 'https://pep-test.caf.fr',

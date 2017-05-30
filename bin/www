@@ -10,12 +10,13 @@ var url = require('url')
 var blocked = require('blocked')
 var throng = require('throng')
 
-throng(function (id) {
-  nconf.env({
-    separator: '_'
-  }).argv()
-  nconf.defaults(require('../defaults'))
+nconf.env({
+  separator: '_'
+}).argv()
+nconf.defaults(require('../defaults'))
+var NB_WORKERS = nconf.get('nbWorkers')
 
+throng(NB_WORKERS, function (id) {
   var logger = bunyan.createLogger({
     name: nconf.get('appname:' + id),
     level: nconf.get('log:level'),
