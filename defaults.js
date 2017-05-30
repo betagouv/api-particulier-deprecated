@@ -1,7 +1,7 @@
 var path = require('path');
 
 module.exports = {
-  port: 3004,
+  PORT: 3004,
   nbWorkers: 1,
   outgoingHttpMaxSockets: 5,
   appname: 'api-particulier',
