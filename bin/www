@@ -18,7 +18,7 @@ var NB_WORKERS = nconf.get('nbWorkers')
 
 throng(NB_WORKERS, function (id) {
   var logger = bunyan.createLogger({
-    name: nconf.get('appname:' + id),
+    name: nconf.get('appname') + id,
     level: nconf.get('log:level'),
     stream: bunyanFormat({
       outputMode: nconf.get('log:format')
