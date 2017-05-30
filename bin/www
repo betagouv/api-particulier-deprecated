@@ -7,6 +7,7 @@ var nconf = require('nconf')
 var Server = require('../api/server')
 var http = require('http')
 var url = require('url')
+var blocked = require('blocked')
 
 nconf.env({
   separator: '_'
@@ -21,13 +22,17 @@ var logger = bunyan.createLogger({
   })
 })
 
+blocked((ms) => {
+  logger.debug('BLOCKED for %dms!', ms)
+})
+
 var mhttp = require('http-measuring-client').create()
 mhttp.mixin(http)
 mhttp.on('stat', function (parsed, stats) {
   logger.info({
     parsedUri: parsed,
     stats: stats
-  }, '%s %s took %dms (%d)', stats.method || 'GET', url.format(parsed), stats.totalTime, stats.statusCode)
+  }, '%s %s took %d/%dms (%d)', stats.method || 'GET', url.format(parsed), stats.connectionTime, stats.totalTime, stats.statusCode)
 })
 http.globalAgent.maxSockets = nconf.get('outgoingHttpMaxSockets')
 
