@@ -1,6 +1,6 @@
 {
   "name": "api-particulier",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "private": false,
   "description": "Api brocker for the french government",
   "repository": {
