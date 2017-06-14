@@ -2,28 +2,18 @@
 // vi: ft=javascript
 
 var bunyan = require('bunyan')
-var bunyanFormat = require('bunyan-format')
-var nconf = require('nconf')
+var nconf = require('../api/lib/utils/nconf')
 var Server = require('../api/server')
 var http = require('http')
 var url = require('url')
 var blocked = require('blocked')
 var throng = require('throng')
+const logging = require('../api/lib/logging')
 
-nconf.env({
-  separator: '_'
-}).argv()
-nconf.defaults(require('../defaults'))
 var NB_WORKERS = nconf.get('nbWorkers')
 
 throng(NB_WORKERS, function (id) {
-  var logger = bunyan.createLogger({
-    name: nconf.get('appname') + id,
-    level: nconf.get('log:level'),
-    stream: bunyanFormat({
-      outputMode: nconf.get('log:format')
-    })
-  })
+  const logger = logging.createLogger(nconf, id)
 
   blocked((ms) => {
     logger.debug('BLOCKED for %dms!', ms)
@@ -37,7 +27,6 @@ throng(NB_WORKERS, function (id) {
       stats: stats
     }, '%s %s took %d/%dms (%d)', stats.method || 'GET', url.format(parsed), stats.connectionTime, stats.totalTime, stats.statusCode)
   })
-  //http.globalAgent.maxSockets = nconf.get('outgoingHttpMaxSockets')
 
   var server = new Server({
     port: nconf.get('PORT'),

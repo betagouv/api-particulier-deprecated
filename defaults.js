@@ -10,11 +10,12 @@ module.exports = {
   cafSslCertificate: './cert/bourse.sgmap.fr.bundle.crt',
   cafSslKey: './cert/bourse.sgmap.fr.key',
   log: {
-    level: 'debug',
+    level: 'info',
     format: 'simple'
   },
   es: {
-    host: 'localhost:9200',
+    host: null,
+    indexPattern: '[logstash-apiparticulier-]YYYY.MM.DD',
     index: 'logstash-apiparticulier-*'
   },
   referenceAvis: '',
