@@ -15,8 +15,8 @@ module.exports = {
   },
   es: {
     host: null,
-    indexPattern: '[logstash-apiparticulier-]YYYY.MM.DD',
-    index: 'logstash-apiparticulier-*'
+    indexPattern: '[logstash-api-particulier-]YYYY.MM.DD',
+    index: 'logstash-api-particulier-*'
   },
   referenceAvis: '',
   numeroFiscal: '',

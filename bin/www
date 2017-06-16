@@ -22,6 +22,10 @@ throng(NB_WORKERS, function (id) {
   var mhttp = require('http-measuring-client').create()
   mhttp.mixin(http)
   mhttp.on('stat', function (parsed, stats) {
+    if (url.format(parsed).includes(nconf.get('es:host'))) {
+      return
+    }
+    console.log('parsed', url.format(parsed))
     logger.info({
       parsedUri: parsed,
       stats: stats

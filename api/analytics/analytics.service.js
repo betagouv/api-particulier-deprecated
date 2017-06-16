@@ -9,7 +9,8 @@ class AnalyticsService {
       host: options.es.host,
       log: 'error'
     })
-    this.ignoreUserAgent = ['Chrome', 'Googlebot', 'Firefox', 'cURL']
+    //this.ignoreUserAgent = ['Chrome', 'Googlebot', 'Firefox', 'cURL']
+    this.ignoreUserAgent = ['Chrome', 'Googlebot', 'Firefox']
   }
 
   getRequestFromtheLastXdays (days) {
@@ -21,20 +22,36 @@ class AnalyticsService {
           bool: {
             must: [
               {
-                term: {
-                  'incoming.raw': '<--'
+                range: {
+                  'status-code': { gte: 200, lt: 400 }
                 }
               },
-              {
-                term: {
-                  'env.raw': 'prod'
-                }
-              },
+              //{
+                //term: {
+                  //'env.raw': 'prod'
+                //}
+              //},
               {
                 range: {
                   '@timestamp': {
                     gte: 'now-' + days + 'd'
                   }
+                }
+              },
+              {
+                bool: {
+                  should: [
+                    {
+                      term: {
+                        'url': '/api/caf'
+                      }
+                    },
+                    {
+                      term: {
+                        'url': '/api/impots'
+                      }
+                    }
+                  ]
                 }
               }
             ],
@@ -55,6 +72,9 @@ class AnalyticsService {
       }
     }).then((resp) => {
       return resp.count
+    }).catch((err) => {
+      console.log('err', err)
+      throw err
     })
   }
 }
