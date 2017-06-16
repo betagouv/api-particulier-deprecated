@@ -11,7 +11,7 @@ info:
     |             | Domain                       | Documentation                                     | API Key     | Stable |
     |-------------|------------------------------|---------------------------------------------------|-------------|--------|
     | Production  | particulier.api.gouv.fr      |[Lien](https://particulier.api.gouv.fr/docs/)      | Secret      | Oui    |
-    | Test        | particulier-sandbox.api.gouv.fr |[Lien](https://apiparticulier-sandbox.api.gouv.fr/docs/) | `test-token`| Oui    |
+    | Test        | particulier-sandbox.api.gouv.fr |[Lien](https://particulier-sandbox.api.gouv.fr/docs/) | `test-token`| Oui    |
 
     La documentation ci-dessous propose des données bidons pour faire des tests avec le token `test-token`.
 
