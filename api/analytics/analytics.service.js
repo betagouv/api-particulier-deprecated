@@ -1,16 +1,18 @@
 'use strict'
 
 const elasticsearch = require('elasticsearch')
+const emptylogger = require('bunyan-blackhole')
 
 class AnalyticsService {
   constructor (options) {
+    this.logger = options.logger || emptylogger()
     this.options = options
     this.client = new elasticsearch.Client({
       host: options.es.host,
       log: 'error'
     })
-    //this.ignoreUserAgent = ['Chrome', 'Googlebot', 'Firefox', 'cURL']
-    this.ignoreUserAgent = ['Chrome', 'Googlebot', 'Firefox']
+    this.ignoreUserAgent = ['Chrome', 'Googlebot', 'Firefox', 'cURL']
+    //this.ignoreUserAgent = ['Chrome', 'Googlebot', 'Firefox']
   }
 
   getRequestFromtheLastXdays (days) {
@@ -72,9 +74,9 @@ class AnalyticsService {
       }
     }).then((resp) => {
       return resp.count
-    }).catch((err) => {
-      console.log('err', err)
-      throw err
+    }).catch((error) => {
+      this.logger.error({ error }, 'Error while getting requests for the last 30 days %s', error.message)
+      throw error
     })
   }
 }
