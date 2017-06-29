@@ -12,7 +12,7 @@ class AnalyticsController {
   requestsLast30days (req, res, next) {
     this.service.getRequestFromtheLastXdays(31)
       .then((result) => {
-        format(res, result)
+        res.json(result)
       }, () => {
         next(new StandardError('impossible to gather data', {code: 500}))
       })
