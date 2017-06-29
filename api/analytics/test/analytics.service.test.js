@@ -1,6 +1,5 @@
 'use strict'
 
-const deep = require('deep-get-set')
 const expect = require('chai').expect
 const Service = require('../analytics.service')
 const nock = require('nock')
