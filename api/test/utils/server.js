@@ -15,7 +15,7 @@ module.exports = function () {
     svairHost: 'https://cfsmsp.impots.gouv.fr',
     cafSslCertificate: path.join(__dirname, '../resources/server.crt'),
     cafSslKey: path.join(__dirname, '../resources/server.key'),
-    cafPingParams: { codePostal: '00000', numeroAllocataire: '0000000' },
+    cafPingParams: { codePostal: '99148', numeroAllocataire: '0000354' },
     tokensPath: path.join(__dirname, 'tokens'),
     raven: {
       activate: false,

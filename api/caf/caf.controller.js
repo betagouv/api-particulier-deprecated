@@ -1,7 +1,7 @@
 const { ping, injectClient, fetch } = require('api-caf/lib/components')
 const fakeResponse = require('./fake-response')
+const { ClientError } = require('api-caf/lib/client')
 const fs = require('fs')
-
 
 function CafController (options) {
   options = options || {}
@@ -9,9 +9,9 @@ function CafController (options) {
   this.prepare = function () {
     // is options.cafStub will be used at anytime ?
     if (options.cafStub) {
-      return function fakeClient(req, res, next) {
+      return function fakeClient (req, res, next) {
         req.client = {
-          getAll(codePostal, numeroAllocataire) {
+          getAll (codePostal, numeroAllocataire) {
             if (codePostal === '99148' && numeroAllocataire === '0000354') {
               return Promise.resolve(fakeResponse)
             } else {

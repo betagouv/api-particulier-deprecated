@@ -12,10 +12,10 @@ class BanService {
 
   getAdress (query, callback) {
     var url = this.baseUrl.template('search')
-                .query({
-                  q: query
-                })
-                .toString()
+      .query({
+        q: query
+      })
+      .toString()
     request(url, (err, response) => {
       if (err) return callback(err)
       const adresses = JSON.parse(response.body).features.map((item) => {

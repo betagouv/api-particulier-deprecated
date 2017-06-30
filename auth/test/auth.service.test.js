@@ -14,11 +14,10 @@ describe('Auth service', () => {
       beforeEach(() => {
         Auth = proxyrequire('../token', {
           './db-tokens.service': class FakeTokenService {
-            constructor(options) {}
-            initialize() {
+            initialize () {
               return Promise.resolve(this)
             }
-            getToken() {
+            getToken () {
               return Promise.resolve(consumer)
             }
           }
@@ -46,11 +45,10 @@ describe('Auth service', () => {
       beforeEach(() => {
         Auth = proxyrequire('../token', {
           './db-tokens.service': class FakeTokenService {
-            constructor(options) {}
-            initialize() {
+            initialize () {
               return Promise.resolve(this)
             }
-            getToken() {
+            getToken () {
               return Promise.resolve(null)
             }
           }
@@ -84,11 +82,10 @@ describe('Auth service', () => {
       beforeEach(() => {
         Auth = proxyrequire('../token', {
           './file-tokens.service': class FakeTokenService {
-            constructor(options) {}
-            initialize() {
+            initialize () {
               return Promise.resolve(this)
             }
-            getToken() {
+            getToken () {
               return Promise.resolve(consumer)
             }
           }
@@ -116,11 +113,10 @@ describe('Auth service', () => {
       beforeEach(() => {
         Auth = proxyrequire('../token', {
           './file-tokens.service': class FakeTokenService {
-            constructor(options) {}
-            initialize() {
+            initialize () {
               return Promise.resolve(this)
             }
-            getToken() {
+            getToken () {
               return Promise.resolve(undefined)
             }
           }

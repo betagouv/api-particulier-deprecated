@@ -10,8 +10,8 @@ describe('File Token service', () => {
   it('gets a token when the token exists', () => {
     return service.getToken('test-token').then((token) => {
       expect(token).to.deep.equal({
-        "name": "Jeu de test",
-        "mail": "someone@somewhere.com"
+        'name': 'Jeu de test',
+        'mail': 'someone@somewhere.com'
       })
     })
   })

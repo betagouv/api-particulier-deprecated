@@ -8,7 +8,7 @@ class TokenService {
     this.tokens = require(options.tokensPath)
   }
 
-  initialize() {
+  initialize () {
     return Promise.resolve(this)
   }
   getToken (token) {

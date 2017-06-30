@@ -7,7 +7,7 @@ class DbTokenService {
     this.mongoConnect = MongoClient.connect(this.options.mongoDbUrl, {})
   }
 
-  initialize() {
+  initialize () {
     return this.mongoConnect.then((db) => {
       this.collection = db.collection('tokens')
       return this

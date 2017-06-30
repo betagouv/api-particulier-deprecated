@@ -21,9 +21,9 @@ describe('Ban Service', function () {
   describe('getting an adresse', () => {
     it('return the adress', function (done) {
       const banCall = nock('http://adresse.data.gouv.local')
-                .get('/search')
-                .query({q: '8 bd du port'})
-                .reply(200, banResponse)
+        .get('/search')
+        .query({q: '8 bd du port'})
+        .reply(200, banResponse)
 
       banService.getAdress('8 bd du port', (err, data) => {
         if (err) return done(err)

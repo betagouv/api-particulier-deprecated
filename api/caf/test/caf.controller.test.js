@@ -1,14 +1,13 @@
-const { ping, injectClient, fetch } = require('api-caf/lib/components')
 const fs = require('fs')
 const path = require('path')
-const proxyrequire = require('proxyquire');
+const proxyrequire = require('proxyquire')
 const {expect} = require('chai')
 const CafController = require('../caf.controller')
 const fakeResponse = require('../fake-response')
 const { ClientError } = require('api-caf/lib/client')
 const sinon = require('sinon')
 const sinonChai = require('sinon-chai')
-require('chai').use(sinonChai);
+require('chai').use(sinonChai)
 
 describe('CAF controller', () => {
   const cafPingParams = { codePostal: '00000', numeroAllocataire: '0000000' }
@@ -102,7 +101,7 @@ describe('CAF controller', () => {
     describe('with caStub option', () => {
       const controller = new CafController({
         cafStub: true,
-        cafPingParams: cafPingParams,
+        cafPingParams: cafPingParams
       })
       const req = {}
       const res = {}
