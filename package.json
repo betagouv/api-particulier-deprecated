@@ -12,6 +12,8 @@
     "test-style": "eslint --ignore-path .gitignore api/ auth/ bin/*",
     "start": "node ./bin/www"
   },
+  "pre-commit": "test-style",
+  "pre-push": "test",
   "author": "SGMAP",
   "devDependencies": {
     "chai": "^3.5.0",
@@ -28,6 +30,8 @@
     "mocha": "^3.3.0",
     "nock": "^9.0.13",
     "node-mocks-http": "^1.4.4",
+    "pre-commit": "^1.2.2",
+    "pre-push": "^0.1.1",
     "proxyquire": "^1.4.0",
     "sinon": "^2.1.0",
     "supertest": "^3.0.0"
