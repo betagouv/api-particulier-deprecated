@@ -1,8 +1,8 @@
 const bunyan = require('bunyan')
 const bunyanFormat = require('bunyan-format')
-const bunyanElasticsearch = require('bunyan-elasticsearch')
+const BunyanElasticsearch = require('bunyan-elasticsearch')
 
-exports.createLogger = function (nconf, id='') {
+exports.createLogger = function (nconf, id = '') {
   const logger = bunyan.createLogger({
     name: nconf.get('appname') + id,
     level: nconf.get('log:level'),
@@ -20,7 +20,7 @@ exports._streams = function (nconf) {
   }]
   if (nconf.get('es:host')) {
     streams.push({
-      stream: new bunyanElasticsearch({
+      stream: new BunyanElasticsearch({
         indexPattern: nconf.get('es:indexPattern'),
         host: nconf.get('es:host')
       })

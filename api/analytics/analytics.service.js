@@ -12,7 +12,7 @@ class AnalyticsService {
       log: 'error'
     })
     this.ignoreUserAgent = ['Chrome', 'Googlebot', 'Firefox', 'cURL']
-    //this.ignoreUserAgent = ['Chrome', 'Googlebot', 'Firefox']
+    // this.ignoreUserAgent = ['Chrome', 'Googlebot', 'Firefox']
   }
 
   getRequestFromtheLastXdays (days) {
@@ -28,11 +28,11 @@ class AnalyticsService {
                   'status-code': { gte: 200, lt: 400 }
                 }
               },
-              //{
-                //term: {
-                  //'env.raw': 'prod'
-                //}
-              //},
+              // {
+                // term: {
+                  // 'env.raw': 'prod'
+                // }
+              // },
               {
                 range: {
                   '@timestamp': {

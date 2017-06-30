@@ -9,40 +9,40 @@ module.exports = function (options) {
   const auth = new Auth(options)
 
   if (options.cafStub) {
-    router.use(function fakeClient(req, res, next) {
+    router.use(function fakeClient (req, res, next) {
       req.client = {
-        getAll(codePostal, numeroAllocataire) {
+        getAll (codePostal, numeroAllocataire) {
           if (codePostal === '99148' && numeroAllocataire === '0000354') {
             return Promise.resolve({
-              "allocataires": [
+              'allocataires': [
                 {
-                  "nomPrenom": "MARIE DUPONT",
-                  "dateDeNaissance": "12111971",
-                  "sexe": "F"
+                  'nomPrenom': 'MARIE DUPONT',
+                  'dateDeNaissance': '12111971',
+                  'sexe': 'F'
                 },
                 {
-                  "nomPrenom": "JEAN DUPONT",
-                  "dateDeNaissance": "18101969",
-                  "sexe": "M"
+                  'nomPrenom': 'JEAN DUPONT',
+                  'dateDeNaissance': '18101969',
+                  'sexe': 'M'
                 }
               ],
-              "enfants": [
+              'enfants': [
                 {
-                  "nomPrenom": "LUCIE DUPONT",
-                  "dateDeNaissance": "11122016",
-                  "sexe": "F"
+                  'nomPrenom': 'LUCIE DUPONT',
+                  'dateDeNaissance': '11122016',
+                  'sexe': 'F'
                 }
               ],
-              "adresse": {
-                "identite": "Madame MARIE DUPONT",
-                "complementIdentiteGeo": "ESCALIER B",
-                "numeroRue": "123 RUE BIDON",
-                "codePostalVille": "12345 CONDAT",
-                "pays": "FRANCE"
+              'adresse': {
+                'identite': 'Madame MARIE DUPONT',
+                'complementIdentiteGeo': 'ESCALIER B',
+                'numeroRue': '123 RUE BIDON',
+                'codePostalVille': '12345 CONDAT',
+                'pays': 'FRANCE'
               },
-              "quotientFamilial": 1754,
-              "mois": 4,
-              "annee": 2017
+              'quotientFamilial': 1754,
+              'mois': 4,
+              'annee': 2017
             })
           } else {
             return Promise.reject(new ClientError(133))

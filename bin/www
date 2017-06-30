@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 // vi: ft=javascript
 
-var bunyan = require('bunyan')
 var nconf = require('../api/lib/utils/nconf')
 var Server = require('../api/server')
 var http = require('http')
@@ -25,7 +24,6 @@ throng(NB_WORKERS, function (id) {
     if (url.format(parsed).includes(nconf.get('es:host'))) {
       return
     }
-    console.log('parsed', url.format(parsed))
     logger.info({
       parsedUri: parsed,
       stats: stats

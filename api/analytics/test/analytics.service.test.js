@@ -38,8 +38,8 @@ describe('Analytics service', () => {
     it('return the count of the successful incoming requests', () => {
       nock('http://es.infra.gouv.fr:9203')
         .post('/' + indexPattern + '/_count', (body) => {
-          return body.query.bool.must[0].range['status-code'].gte === 200
-              && body.query.bool.must[0].range['status-code'].lt === 400
+          return body.query.bool.must[0].range['status-code'].gte === 200 &&
+              body.query.bool.must[0].range['status-code'].lt === 400
         })
         .reply(200, response)
 

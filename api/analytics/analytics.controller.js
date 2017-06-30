@@ -1,6 +1,5 @@
 'use strict'
 
-const format = require('./../lib/utils/format')
 const Service = require('./analytics.service')
 const StandardError = require('standard-error')
 
