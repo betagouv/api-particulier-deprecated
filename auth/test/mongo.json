@@ -1,0 +1,10 @@
+{
+  "data": [
+    {
+      "_id" : "test-token",
+      "name": "Jeu de test",
+      "mail": "someone@somewhere.com"
+    }
+  ]
+}
+

@@ -5,6 +5,7 @@ module.exports = {
   nbWorkers: 1,
   outgoingHttpMaxSockets: 5,
   appname: 'api-particulier',
+  mongoDbUrl: 'mongodb://localhost:27017/api-particulier',
   cafHost: 'https://pep-test.caf.fr',
   svairHost: 'https://cfsmsp.impots.gouv.fr',
   cafSslCertificate: './cert/bourse.sgmap.fr.bundle.crt',
