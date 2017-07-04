@@ -29,9 +29,9 @@ class AnalyticsService {
                 }
               },
               // {
-                // term: {
-                  // 'env.raw': 'prod'
-                // }
+              // term: {
+              // 'env.raw': 'prod'
+              // }
               // },
               {
                 range: {

@@ -8,11 +8,14 @@ module.exports = function () {
   var server
   var options = {
     appname: 'api-particulier-test',
+    mongoDbUrl: 'mongodb://localhost:27017/test-api-particulier',
+    tokenService: 'file',
+    cafStub: true,
     cafHost: 'https://pep-test.caf.fr',
     svairHost: 'https://cfsmsp.impots.gouv.fr',
     cafSslCertificate: path.join(__dirname, '../resources/server.crt'),
     cafSslKey: path.join(__dirname, '../resources/server.key'),
-    cafPingParams: { codePostal: '00000', numeroAllocataire: '0000000' },
+    cafPingParams: { codePostal: '99148', numeroAllocataire: '0000354' },
     tokensPath: path.join(__dirname, 'tokens'),
     raven: {
       activate: false,

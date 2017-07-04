@@ -20,13 +20,13 @@ module.exports = function (err, req, res, next) {
 
         'application/xml': function () {
           res
-          .status(err.code)
-          .send(js2xmlparser('error', error))
+            .status(err.code)
+            .send(js2xmlparser('error', error))
         },
         'default': function () {
           res
-          .status(err.code)
-          .send(error.reason)
+            .status(err.code)
+            .send(error.reason)
         }
       })
     }
