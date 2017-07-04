@@ -11,4 +11,5 @@ exports.configure = function (app, options) {
   app.use('/api/caf', caf(options))
 
   app.use('/api/analytics', analytics(options))
+  app.use('/api/statistiques', analytics(options))
 }

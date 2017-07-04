@@ -32,4 +32,31 @@ describe('Analytics API', () => {
       })
     })
   })
+
+  describe('When requesting /statistiques/succes-30-derniers-jours', () => {
+    describe('and ElasticSearch replies successfully', () => {
+      it('replies json data', () => {
+        nock('http://es.infra.gouv.fr:9203')
+          .post('/' + indexPattern + '/_count')
+          .reply(200, { count: 291 })
+
+        return api()
+          .get('/api/statistiques/succes-30-derniers-jours')
+          .expect('content-type', /json/)
+          .expect(200)
+      })
+    })
+    describe('and ElasticSearch fails', () => {
+      it('replies a 500', () => {
+        nock('http://es.infra.gouv.fr:9203')
+          .post('/' + indexPattern + '/_count')
+          .reply(500, { error: 500 })
+
+        return api()
+          .get('/api/statistiques/succes-30-derniers-jours')
+          .expect('content-type', /json/)
+          .expect(500)
+      })
+    })
+  })
 })
