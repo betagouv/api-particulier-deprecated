@@ -1,11 +1,13 @@
-var path = require('path');
+var path = require('path')
 
 module.exports = {
   PORT: 3004,
   nbWorkers: 1,
+  cafStub: true,
   outgoingHttpMaxSockets: 5,
   appname: 'api-particulier',
   mongoDbUrl: 'mongodb://localhost:27017/api-particulier',
+  tokenService: 'db',
   cafHost: 'https://pep-test.caf.fr',
   svairHost: 'https://cfsmsp.impots.gouv.fr',
   cafSslCertificate: './cert/bourse.sgmap.fr.bundle.crt',
