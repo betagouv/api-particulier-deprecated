@@ -1,13 +1,14 @@
-const { ping, injectClient, fetch } = require('api-caf/lib/components')
+const { ping, injectClient } = require('api-caf/lib/components')
+const StandardError = require('standard-error')
 const fakeResponse = require('./fake-response')
 const { ClientError } = require('api-caf/lib/client')
+const format = require('./../lib/utils/format')
 const fs = require('fs')
 
 function CafController (options) {
   options = options || {}
 
   this.prepare = function () {
-    // is options.cafStub will be used at anytime ?
     if (options.cafStub) {
       return function fakeClient (req, res, next) {
         req.client = {
@@ -32,7 +33,36 @@ function CafController (options) {
 
   this.ping = ping(options.cafPingParams)
 
-  this.famille = fetch()
+  // clone from api-caf/lib/components#fetch
+  this.famille = function (req, res, next) {
+    const { codePostal, numeroAllocataire } = req.query
+    if (!codePostal || !numeroAllocataire) {
+      return next(
+        new StandardError(
+          'Les paramètres `codePostal` et `numeroAllocataire` sont obligatoires',
+          {code: 400}
+        )
+      )
+    }
+
+    return req.client.getAll(codePostal, numeroAllocataire).then((data) => {
+      return format(res, data)
+    }).catch((err) => {
+      if (err instanceof ClientError) {
+        logErrorIfLogger(req, err)
+        return next(new StandardError(err.message, { code: err.code }))
+      } else {
+        return next(err)
+      }
+    })
+
+    function logErrorIfLogger (req, error) {
+      const logger = req.log || req.loggger
+      if (logger) {
+        logger.error({ error }, error.message)
+      }
+    }
+  }
 }
 
 module.exports = CafController

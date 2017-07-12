@@ -41,6 +41,14 @@ describe('CAF API', function () {
             expect(res.body).to.deep.equal(fakeResponse)
           })
       })
+
+      it('replies as xml when asked', () => {
+        return api()
+          .get('/api/caf/famille')
+          .query(fakeQuery)
+          .set('Accept', 'application/xml')
+          .expect('content-type', /xml/)
+      })
     })
   })
 })
