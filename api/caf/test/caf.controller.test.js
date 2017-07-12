@@ -3,6 +3,7 @@ const path = require('path')
 const proxyrequire = require('proxyquire')
 const {expect} = require('chai')
 const CafController = require('../caf.controller')
+// const StandardError = require('standard-error')
 const fakeResponse = require('../fake-response')
 const { ClientError } = require('api-caf/lib/client')
 const sinon = require('sinon')
@@ -21,7 +22,6 @@ describe('CAF controller', () => {
       '../caf.controller', {
         'api-caf/lib/components': {
           injectClient: sinon.spy(),
-          fetch: sinon.spy(),
           ping: function (param) {
             return function (req, res, next) { pingSpy() }
           }
@@ -42,15 +42,15 @@ describe('CAF controller', () => {
   })
 
   describe('fetch', () => {
-    const fetchSpy = sinon.spy()
     const CafControllerStubbed = proxyrequire(
       '../caf.controller', {
         'api-caf/lib/components': {
           injectClient: sinon.spy(),
-          ping: sinon.spy(),
-          fetch: function (param) {
-            return function (req, res, next) { fetchSpy() }
-          }
+          ping: sinon.spy()
+        },
+        './../lib/utils/format': function (res, data) {
+          res.body = data
+          return Promise.resolve(data)
         }
       }
     )
@@ -61,9 +61,34 @@ describe('CAF controller', () => {
       cafSslKey: cafSslKey
     })
 
-    it('calls the api-caf fetch', () => {
-      controller.famille({}, {}, function () {})
-      expect(fetchSpy.calledOnce).to.equal(true)
+    it('returns an error with no parameters', () => {
+      const nextSpy = sinon.spy()
+
+      controller.famille({ query: {} }, {}, nextSpy)
+
+      expect(nextSpy.calledOnce).to.have.deep.been.equal(true)
+      // expect(nextSpy).to.have.deep.been.calledWith(
+      //   new StandardError(
+      //     'Les paramètres `codePostal` et `numeroAllocataire` sont obligatoires',
+      //     {code: 400}
+      //   )
+      // )
+    })
+
+    it('return the result with good parameters', () => {
+      const req = {
+        query: { numeroAllocataire: '12345', codePostal: '43567' },
+        client: {
+          getAll: function (codePostal, numeroAllocataire) {
+            return Promise.resolve(fakeResponse)
+          }
+        }
+      }
+      const res = {}
+
+      return controller.famille(req, res, function () {}).then(() => {
+        expect(res.body).to.deep.equal(fakeResponse)
+      })
     })
   })
 
@@ -74,7 +99,6 @@ describe('CAF controller', () => {
         '../caf.controller', {
           'api-caf/lib/components': {
             injectClient: injectClientSpy,
-            fetch: sinon.spy(),
             ping: sinon.spy()
           }
         }
