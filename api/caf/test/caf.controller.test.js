@@ -1,3 +1,5 @@
+/* eslint prefer-promise-reject-errors: "off" */
+
 const fs = require('fs')
 const path = require('path')
 const proxyrequire = require('proxyquire')
@@ -41,7 +43,7 @@ describe('CAF controller', () => {
     })
   })
 
-  describe('fetch', () => {
+  describe('famille', () => {
     const CafControllerStubbed = proxyrequire(
       '../caf.controller', {
         'api-caf/lib/components': {
@@ -66,7 +68,7 @@ describe('CAF controller', () => {
 
       controller.famille({ query: {} }, {}, nextSpy)
 
-      expect(nextSpy.calledOnce).to.have.deep.been.equal(true)
+      expect(nextSpy.calledOnce).to.have.been.equal(true)
       // expect(nextSpy).to.have.deep.been.calledWith(
       //   new StandardError(
       //     'Les paramètres `codePostal` et `numeroAllocataire` sont obligatoires',
@@ -88,6 +90,23 @@ describe('CAF controller', () => {
 
       return controller.famille(req, res, function () {}).then(() => {
         expect(res.body).to.deep.equal(fakeResponse)
+      })
+    })
+
+    it('return the error from caf', () => {
+      const nextSpy = sinon.spy()
+      const req = {
+        query: { numeroAllocataire: '12345', codePostal: '43567' },
+        client: {
+          getAll: function (codePostal, numeroAllocataire) {
+            return Promise.reject({message: 'error', code: '500'})
+          }
+        }
+      }
+      const res = {}
+
+      return controller.famille(req, res, nextSpy).then(() => {
+        expect(nextSpy.calledOnce).to.have.been.equal(true)
       })
     })
   })
