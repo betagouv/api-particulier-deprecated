@@ -17,6 +17,8 @@ exports._streams = function (nconf) {
     stream: bunyanFormat({
       outputMode: nconf.get('log:format')
     })
+  }, {
+    path: '/var/log/api-particulier/api-particulier.log'
   }]
   if (nconf.get('es:host')) {
     streams.push({
