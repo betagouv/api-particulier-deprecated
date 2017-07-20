@@ -1,4 +1,9 @@
-var expect = require('chai').expect
+const sinonChai = require('sinon-chai')
+const chai = require('chai')
+chai.use(sinonChai)
+chai.should()
+const expect = chai.expect
+const assert = chai.assert
 var proxyquire = require('proxyquire')
 var sinon = require('sinon')
 var StandardError = require('standard-error')
@@ -76,26 +81,26 @@ describe('Impots Controller', function () {
 
     it('replies the result', function (done) {
       // given
-      var callback = sinon.spy()
       var req = {query: {numeroFiscal: 'toto', referenceAvis: 'titi'}}
+      var res = {}
       var controller = new ImpotController()
 
       // when
-      controller.svair(req, { format: callback }, null)
-      expect(callback.calledOnce).to.be.true
+      controller.svair(req, res, function () {})
+      assert(res.data)
       done()
     })
 
     describe('when the numero fiscal has a letter after its 13 numbers', () => {
       it('the service has been called without the last letter', function (done) {
         // given
-        var callback = sinon.spy()
+        var res = {}
         var req = {query: {numeroFiscal: '3578788848943a', referenceAvis: 'titi'}}
         var controller = new ImpotController()
 
         // when
-        controller.svair(req, { format: callback }, null)
-        expect(callback.calledOnce).to.be.true
+        controller.svair(req, res, function () {})
+        assert(res.data)
         expect(svairCall.args[0][0]).to.equal('3578788848943')
         done()
       })
@@ -103,13 +108,13 @@ describe('Impots Controller', function () {
       describe('when there is space in the nuemro fiscal', () => {
         it('remove the space', (done) => {
           // given
-          var callback = sinon.spy()
+          var res = {}
           var req = {query: {numeroFiscal: '3578788848 943a', referenceAvis: 'titi'}}
           var controller = new ImpotController()
 
           // when
-          controller.svair(req, { format: callback }, null)
-          expect(callback.calledOnce).to.be.true
+          controller.svair(req, res, function () {})
+          assert(res.data)
           expect(svairCall.args[0][0]).to.equal('3578788848943')
           done()
         })
@@ -119,15 +124,50 @@ describe('Impots Controller', function () {
     describe('when there is space in the referenceAvis', () => {
       it('remove the space', (done) => {
         // given
-        var callback = sinon.spy()
+        var res = {}
         var req = {query: {numeroFiscal: '35787 88848 943a', referenceAvis: 'ti ti'}}
         var controller = new ImpotController()
 
         // when
-        controller.svair(req, { format: callback }, null)
-        expect(callback.calledOnce).to.be.true
+        controller.svair(req, res, function () {})
+        assert(res.data)
         expect(svairCall.args[0][1]).to.equal('titi')
         done()
+      })
+    })
+  })
+
+  describe('authorize', () => {
+    const ImpotController = require('../impots.controller')
+    const controller = new ImpotController()
+
+    describe('with authType FranceConnect', () => {
+      it('should let pass if names are good', () => {
+        const req = { authType: 'FranceConnect', consumer: { name: 'Bar Foo' } }
+        const res = {
+          data: {
+            declarant1: { nom: 'Foo', prenoms: 'Bar' },
+            declarant2: { nom: 'Foo', prenoms: 'Foo' }
+          }
+        }
+        const nextSpy = sinon.spy()
+
+        controller.authorize(req, res, nextSpy)
+        expect(nextSpy.getCall(0).args[0]).to.be.undefined
+      })
+
+      it('should not let pass if names are wrong', () => {
+        const req = { authType: 'FranceConnect', consumer: { name: 'boom' } }
+        const res = {
+          data: {
+            declarant1: { nom: 'Foo', prenoms: 'Bar' },
+            declarant2: { nom: 'Foo', prenoms: 'Foo' }
+          }
+        }
+        const nextSpy = sinon.spy()
+
+        controller.authorize(req, res, nextSpy)
+        nextSpy.getCall(0).args[0].message.should.equals('You are forbidden to access this resource')
       })
     })
   })

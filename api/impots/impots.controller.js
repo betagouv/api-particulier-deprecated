@@ -3,7 +3,6 @@
 const svair = require('svair-api')
 const StandardError = require('standard-error')
 const SvairBanService = require('./../ban/svairBan.service')
-const format = require('./../lib/utils/format')
 
 function ImpotController (options) {
   options = options || {}
@@ -17,7 +16,8 @@ function ImpotController (options) {
     } else {
       svairBanService.getAdress(numeroFiscal, referenceAvis, (err, data) => {
         if (err) return next(err)
-        return format(res, data)
+        res.data = data
+        return next()
       })
     }
   }
@@ -28,7 +28,8 @@ function ImpotController (options) {
     } else if (err) {
       next(new StandardError(err.message, {code: 500}))
     } else {
-      return format(res, result)
+      res.data = result
+      return next()
     }
   }
 
@@ -61,6 +62,38 @@ function ImpotController (options) {
       svair(options.svairHost)(numeroFiscal, referenceAvis, function (err) {
         sendDataFromSvair(err, 'pong', next, res)
       })
+    }
+  }
+
+  this.authorize = function (req, res, next) {
+    if (req.authType === 'FranceConnect') {
+      if (this.consumerMatch(req, res)) {
+        return next()
+      } else {
+        return next(
+          new StandardError(
+            'You are forbidden to access this resource',
+            {code: 403}
+          )
+        )
+      }
+    } else {
+      return next()
+    }
+  }
+
+  this.consumerMatch = function (req, res) {
+    const impotsNames = upcaseImpotsNames(res)
+    const consumerName = req.consumer.name.toUpperCase()
+
+    return impotsNames.indexOf(consumerName) !== -1
+
+    function upcaseImpotsNames (res) {
+      let names = [
+        res.data.declarant1.prenoms.split(' ')[0] + ' ' + res.data.declarant1.nom,
+        res.data.declarant2.prenoms.split(' ')[0] + ' ' + res.data.declarant2.nom
+      ]
+      return names.map((name) => name.toUpperCase())
     }
   }
 }

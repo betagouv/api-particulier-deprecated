@@ -24,6 +24,7 @@ function Auth (options) {
 
     if (bearer) {
       return franceConnectService.userinfo(bearer).then((info) => {
+        req.authType = 'FranceConnect'
         handleResult({name: [info.given_name, info.familly_name].join(' '), email: info.email})
       }).catch(() => handleResult(null))
     }
