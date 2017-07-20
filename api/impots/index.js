@@ -14,7 +14,7 @@ module.exports = function (options) {
   router.use(auth.canAccessApi)
   router.get('/svair', impotsController.svair)
   router.get('/adress', impotsController.adress)
-  router.use(impotsController.authorize)
+  router.use((req, res, next) => impotsController.authorize(req, res, next))
   router.use(format)
 
   return router
