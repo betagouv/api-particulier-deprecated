@@ -1,5 +1,5 @@
 const express = require('express')
-const Auth = require('../../auth/token')
+const Auth = require('../../auth/auth')
 const Controller = require('./caf.controller')
 
 module.exports = function (options) {
