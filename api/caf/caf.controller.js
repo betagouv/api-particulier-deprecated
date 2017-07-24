@@ -1,19 +1,23 @@
 const { ping, injectClient } = require('api-caf/lib/components')
 const StandardError = require('standard-error')
-const fakeResponse = require('./fake-response')
+const fakeResponses = require('./fake-responses')
 const { ClientError } = require('api-caf/lib/client')
 const fs = require('fs')
 
 function CafController (options) {
   options = options || {}
 
-  this.prepare = function () {
-    if (options.cafStub) {
+  if (options.cafStub) {
+    this.prepare = function () {
       return function fakeClient (req, res, next) {
         req.client = {
           getAll (codePostal, numeroAllocataire) {
-            if (codePostal === '99148' && numeroAllocataire === '0000354') {
-              return Promise.resolve(fakeResponse)
+            const fakeResponse = fakeResponses.filter((fakeResponse) => {
+              return fakeResponse.numeroAllocataire === numeroAllocataire &&
+                fakeResponse.codePostal === codePostal
+            })[0]
+            if (fakeResponse) {
+              return Promise.resolve(fakeResponse.response)
             } else {
               return Promise.reject(new ClientError(133))
             }
@@ -21,7 +25,9 @@ function CafController (options) {
         }
         return next()
       }
-    } else {
+    }
+  } else {
+    this.prepare = function () {
       return injectClient({
         host: options.cafHost,
         cert: fs.readFileSync(options.cafSslCertificate),

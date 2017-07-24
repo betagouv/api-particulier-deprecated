@@ -1,7 +1,7 @@
 const serverTest = require('./../../test/utils/server')
 const {expect} = require('chai')
 const fakeQuery = {codePostal: '99148', numeroAllocataire: '0000354'}
-const fakeResponse = require('../fake-response')
+const fakeResponse = require('../fake-responses')[0].response
 
 describe('CAF API', function () {
   const server = serverTest()
