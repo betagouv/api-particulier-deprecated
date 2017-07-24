@@ -184,7 +184,7 @@ describe('CAF controller', () => {
       let nextSpy
       ['Jean Dupont', 'Marie Dupont', 'Lucie Dupont'].forEach((name) => {
         it('sould let pass with fake user ' + name, () => {
-          const req = { authType: 'FranceConnect', consumer: { name: name } }
+          const req = { authType: 'FranceConnect', consumer: { name } }
           const res = { data: fakeResponse }
           nextSpy = sinon.spy()
 

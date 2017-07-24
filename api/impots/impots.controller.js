@@ -87,14 +87,14 @@ function ImpotController (options) {
     const consumerName = req.consumer.name.toUpperCase()
 
     return impotsNames.indexOf(consumerName) !== -1
+  }
 
-    function upcaseImpotsNames (res) {
-      let names = [
-        res.data.declarant1.prenoms.split(' ')[0] + ' ' + res.data.declarant1.nom,
-        res.data.declarant2.prenoms.split(' ')[0] + ' ' + res.data.declarant2.nom
-      ]
-      return names.map((name) => name.toUpperCase())
-    }
+  function upcaseImpotsNames (res) {
+    let names = [
+      res.data.declarant1.prenoms.split(' ')[0] + ' ' + res.data.declarant1.nom,
+      res.data.declarant2.prenoms.split(' ')[0] + ' ' + res.data.declarant2.nom
+    ]
+    return names.map((name) => name.toUpperCase())
   }
 }
 

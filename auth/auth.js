@@ -8,7 +8,7 @@ module.exports = Auth
 function Auth (options) {
   let fileTokenService, dbTokenService, initializedService
 
-  let franceConnectService = new FranceConnectService(options)
+  const franceConnectService = new FranceConnectService(options)
 
   if (options.tokenService === 'db') {
     dbTokenService = new DbTokenService(options)
@@ -20,7 +20,11 @@ function Auth (options) {
 
   this.canAccessApi = function (req, res, next) {
     const bearer = req.get('Authorization')
-    let token = req.get('X-API-Key') || ''
+    let token = req.get('X-API-Key')
+    // set defaults
+    if (token === null || typeof token === 'undefined') {
+      token = ''
+    }
 
     if (bearer) {
       return franceConnectService.userinfo(bearer).then((info) => {

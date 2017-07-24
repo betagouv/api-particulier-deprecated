@@ -91,17 +91,17 @@ function CafController (options) {
     const cafNames = upcaseCafNames(res)
     const consumerName = req.consumer.name.toUpperCase()
     return cafNames.indexOf(consumerName) !== -1
+  }
 
-    function upcaseCafNames (res) {
-      let names = []
-      names = names.concat(
-        res.data.allocataires.map((allocataire) => allocataire.nomPrenom)
-      )
-      names = names.concat(
-        res.data.enfants.map((allocataire) => allocataire.nomPrenom)
-      )
-      return names.map((name) => name.toUpperCase())
-    }
+  function upcaseCafNames (res) {
+    let names = []
+    names = names.concat(
+      res.data.allocataires.map((allocataire) => allocataire.nomPrenom)
+    )
+    names = names.concat(
+      res.data.enfants.map((allocataire) => allocataire.nomPrenom)
+    )
+    return names.map((name) => name.toUpperCase())
   }
 }
 
