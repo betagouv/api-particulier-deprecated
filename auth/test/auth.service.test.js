@@ -42,12 +42,12 @@ describe('Auth service', () => {
       const consumer = {
         name: [
           fakeFCResponse.given_name,
-          fakeFCResponse.familly_name
+          fakeFCResponse.family_name
         ].join(' '),
         email: fakeFCResponse.email
       }
       return service.canAccessApi(req, {}, function () {}).then(() => {
-        expect(req.consumer).to.deep.equal(consumer)
+        expect(req.consumer.name).to.deep.equal(consumer.name)
       })
     })
 
