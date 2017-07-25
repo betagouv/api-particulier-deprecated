@@ -10,7 +10,7 @@
   "scripts": {
     "test": "istanbul cover --print details _mocha -- -R spec auth/test/** api/test/** api/*/test/** --recursive && npm run test-style",
     "test-style": "eslint --ignore-path .gitignore api/ auth/ bin/*",
-    "start": "node ./bin/www"
+    "start": "node --prof ./bin/www"
   },
   "pre-commit": "test-style",
   "pre-push": "test",
@@ -60,7 +60,7 @@
     "standard-error": "^1.1.0",
     "string": "^3.1.1",
     "superagent": "^3.5.2",
-    "svair-api": "^0.5.0",
+    "svair-api": "^0.5.1",
     "throng": "^4.0.0",
     "url-assembler": "^1.2.7"
   }
