@@ -1,11 +1,14 @@
 const StandardError = require('standard-error')
 const DbTokenService = require('./db-tokens.service')
 const FileTokenService = require('./file-tokens.service')
+const FranceConnectService = require('./france-connect.service')
 
 module.exports = Auth
 
 function Auth (options) {
   let fileTokenService, dbTokenService, initializedService
+
+  const franceConnectService = new FranceConnectService(options)
 
   if (options.tokenService === 'db') {
     dbTokenService = new DbTokenService(options)
@@ -16,12 +19,24 @@ function Auth (options) {
   }
 
   this.canAccessApi = function (req, res, next) {
-    const token = req.get('X-API-Key') || ''
+    const bearer = req.get('Authorization')
+    let token = req.get('X-API-Key')
+    // set defaults
+    if (token === null || typeof token === 'undefined') {
+      token = ''
+    }
+
+    if (bearer) {
+      return franceConnectService.userinfo(bearer).then((info) => {
+        req.authType = 'FranceConnect'
+        handleResult({name: [info.given_name, info.family_name].join(' '), email: info.email})
+      }).catch(() => handleResult(null))
+    }
 
     return initializedService.then((service) => {
       return service.getToken(token).then((result) => {
         handleResult(result)
-      })
+      }).catch(() => handleResult(null))
     })
 
     function handleResult (result) {

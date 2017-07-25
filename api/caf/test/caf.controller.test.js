@@ -6,11 +6,13 @@ const proxyrequire = require('proxyquire')
 const {expect} = require('chai')
 const CafController = require('../caf.controller')
 // const StandardError = require('standard-error')
-const fakeResponse = require('../fake-response')
+const fakeResponse = require('../fake-responses')[0].response
 const { ClientError } = require('api-caf/lib/client')
 const sinon = require('sinon')
 const sinonChai = require('sinon-chai')
-require('chai').use(sinonChai)
+const chai = require('chai')
+chai.use(sinonChai)
+chai.should()
 
 describe('CAF controller', () => {
   const cafPingParams = { codePostal: '00000', numeroAllocataire: '0000000' }
@@ -89,7 +91,7 @@ describe('CAF controller', () => {
       const res = {}
 
       return controller.famille(req, res, function () {}).then(() => {
-        expect(res.body).to.deep.equal(fakeResponse)
+        expect(res.data).to.deep.equal(fakeResponse)
       })
     })
 
@@ -169,6 +171,35 @@ describe('CAF controller', () => {
         return req.client.getAll(codePostal, numeroAllocataire).catch((response) => {
           expect(response).to.deep.equal(new ClientError(133))
         })
+      })
+    })
+  })
+
+  describe('authorize', () => {
+    const controller = new CafController({
+      cafStub: true,
+      cafPingParams: cafPingParams
+    })
+    describe('with authType FranceConnect', () => {
+      let nextSpy
+      ['Jean Dupont', 'Marie Dupont', 'Lucie Dupont'].forEach((name) => {
+        it('sould let pass with fake user ' + name, () => {
+          const req = { authType: 'FranceConnect', consumer: { name } }
+          const res = { data: fakeResponse }
+          nextSpy = sinon.spy()
+
+          controller.authorize(req, res, nextSpy)
+          expect(nextSpy.getCall(0).args[0]).to.be.undefined
+        })
+      })
+
+      it('sould not let pass if wrong user', () => {
+        const req = { authType: 'FranceConnect', consumer: {name: 'boom'} }
+        const res = { data: fakeResponse }
+        const nextSpy = sinon.spy()
+
+        controller.authorize(req, res, nextSpy)
+        nextSpy.getCall(0).args[0].message.should.equals('You are forbidden to access this resource')
       })
     })
   })

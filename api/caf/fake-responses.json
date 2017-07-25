@@ -1,0 +1,161 @@
+[
+  {
+    "numeroAllocataire": "0000354",
+    "codePostal": "99148",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "MARIE DUPONT",
+          "dateDeNaissance": "12111971",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "JEAN DUPONT",
+          "dateDeNaissance": "18101969",
+          "sexe": "M"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "LUCIE DUPONT",
+          "dateDeNaissance": "11122016",
+          "sexe": "F"
+        }
+      ],
+      "adresse": {
+        "identite": "Madame MARIE DUPONT",
+        "complementIdentiteGeo": "ESCALIER B",
+        "numeroRue": "123 RUE BIDON",
+        "codePostalVille": "12345 CONDAT",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 1754,
+      "mois": 4,
+      "annee": 2017
+    }
+  },
+  {
+    "numeroAllocataire": "0000001",
+    "codePostal": "75001",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "BENJAMIN ARNOUX",
+          "dateDeNaissance": "25011973",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "FRANCOISE ARNOUX",
+          "dateDeNaissance": "25061978",
+          "sexe": "F"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "GABRIEL ARNOUX",
+          "dateDeNaissance": "14072010",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "JULIE ARNOUX",
+          "dateDeNaissance": "23122008",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "MALCOM ARNOUX",
+          "dateDeNaissance": "03062012",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Monsieur Benjamin Arnoux",
+        "complementIdentiteGeo": "",
+        "numeroRue": "34 rue Rivoli",
+        "codePostalVille": "75001 PARIS",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 200,
+      "mois": 6,
+      "annee": 2017
+    }
+  },
+  {
+    "numeroAllocataire": "0000002",
+    "codePostal": "75002",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "CLOVIS HEBERT",
+          "dateDeNaissance": "12031968",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "EMILIE HEBERT",
+          "dateDeNaissance": "19111970",
+          "sexe": "F"
+        }
+      ],
+      "enfants": [
+        {
+          "nomPrenom": "GABRIEL HEBERT",
+          "dateDeNaissance": "14072010",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "JULIE HEBERT",
+          "dateDeNaissance": "23122008",
+          "sexe": "F"
+        },
+        {
+          "nomPrenom": "MALCOM HEBERT",
+          "dateDeNaissance": "03062012",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "ERIC HEBERT",
+          "dateDeNaissance": "01052009",
+          "sexe": "M"
+        }
+      ],
+      "adresse": {
+        "identite": "Madame Emilie HEBERT",
+        "complementIdentiteGeo": "Escalier D",
+        "numeroRue": "7 rue Montmartre",
+        "codePostalVille": "75002 PARIS",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 400,
+      "mois": 6,
+      "annee": 2017
+    }
+  },
+  {
+    "numeroAllocataire": "0000003",
+    "codePostal": "75003",
+    "response": {
+      "allocataires": [
+        {
+          "nomPrenom": "BERTRAND SIROIS",
+          "dateDeNaissance": "07081975",
+          "sexe": "M"
+        },
+        {
+          "nomPrenom": "JUDITH SIROIS",
+          "dateDeNaissance": "01041980",
+          "sexe": "F"
+        }
+      ],
+      "enfants": [ ],
+      "adresse": {
+        "identite": "Monsieur Bertrand Sirois",
+        "complementIdentiteGeo": "",
+        "numeroRue": "21 rue Charlot",
+        "codePostalVille": "75003 PARIS",
+        "pays": "FRANCE"
+      },
+      "quotientFamilial": 550,
+      "mois": 6,
+      "annee": 2017
+    }
+  }
+]

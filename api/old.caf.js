@@ -1,7 +1,7 @@
 const express = require('express')
 const { ping, injectClient, fetch } = require('api-caf/lib/components')
 const { ClientError } = require('api-caf/lib/client')
-const Auth = require('../auth/token')
+const Auth = require('../auth/auth')
 const fs = require('fs')
 
 module.exports = function (options) {

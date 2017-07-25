@@ -1,20 +1,23 @@
 const { ping, injectClient } = require('api-caf/lib/components')
 const StandardError = require('standard-error')
-const fakeResponse = require('./fake-response')
+const fakeResponses = require('./fake-responses')
 const { ClientError } = require('api-caf/lib/client')
-const format = require('./../lib/utils/format')
 const fs = require('fs')
 
 function CafController (options) {
   options = options || {}
 
-  this.prepare = function () {
-    if (options.cafStub) {
+  if (options.cafStub) {
+    this.prepare = function () {
       return function fakeClient (req, res, next) {
         req.client = {
           getAll (codePostal, numeroAllocataire) {
-            if (codePostal === '99148' && numeroAllocataire === '0000354') {
-              return Promise.resolve(fakeResponse)
+            const fakeResponse = fakeResponses.filter((fakeResponse) => {
+              return fakeResponse.numeroAllocataire === numeroAllocataire &&
+                fakeResponse.codePostal === codePostal
+            })[0]
+            if (fakeResponse) {
+              return Promise.resolve(fakeResponse.response)
             } else {
               return Promise.reject(new ClientError(133))
             }
@@ -22,7 +25,9 @@ function CafController (options) {
         }
         return next()
       }
-    } else {
+    }
+  } else {
+    this.prepare = function () {
       return injectClient({
         host: options.cafHost,
         cert: fs.readFileSync(options.cafSslCertificate),
@@ -46,7 +51,8 @@ function CafController (options) {
     }
 
     return req.client.getAll(codePostal, numeroAllocataire).then((data) => {
-      return format(res, data)
+      res.data = data
+      next()
     }).catch((err) => {
       if (err instanceof ClientError) {
         logErrorIfLogger(req, err)
@@ -62,6 +68,40 @@ function CafController (options) {
         logger.error({ error }, error.message)
       }
     }
+  }
+
+  this.authorize = function (req, res, next) {
+    if (req.authType === 'FranceConnect') {
+      if (this.consumerMatch(req, res)) {
+        return next()
+      } else {
+        return next(
+          new StandardError(
+            'You are forbidden to access this resource',
+            {code: 403}
+          )
+        )
+      }
+    } else {
+      return next()
+    }
+  }
+
+  this.consumerMatch = function (req, res) {
+    const cafNames = upcaseCafNames(res)
+    const consumerName = req.consumer.name.toUpperCase()
+    return cafNames.indexOf(consumerName) !== -1
+  }
+
+  function upcaseCafNames (res) {
+    let names = []
+    names = names.concat(
+      res.data.allocataires.map((allocataire) => allocataire.nomPrenom)
+    )
+    names = names.concat(
+      res.data.enfants.map((allocataire) => allocataire.nomPrenom)
+    )
+    return names.map((name) => name.toUpperCase())
   }
 }
 
