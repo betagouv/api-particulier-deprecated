@@ -55,10 +55,6 @@ throng(NB_WORKERS, function (id) {
       activate: nconf.get('raven:activate'),
       dsn: nconf.get('raven:dsn')
     },
-    es: {
-      host: nconf.get('es:host'),
-      index: nconf.get('es:index')
-    },
     ban: {
       baseUrl: nconf.get('ban:baseUrl')
     }
