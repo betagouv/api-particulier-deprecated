@@ -1,12 +1,14 @@
-const sinonChai = require('sinon-chai')
-const chai = require('chai')
+var sinonChai = require('sinon-chai')
+var chai = require('chai')
 chai.use(sinonChai)
 chai.should()
-const expect = chai.expect
-const assert = chai.assert
+var expect = chai.expect
+var assert = chai.assert
 var proxyquire = require('proxyquire')
 var sinon = require('sinon')
 var StandardError = require('standard-error')
+
+var banResult = require('./../../test/resources/adressesWithDeclarant')
 
 describe('Impots Controller', function () {
   var ImpotController
@@ -134,6 +136,34 @@ describe('Impots Controller', function () {
         expect(svairCall.args[0][1]).to.equal('titi')
         done()
       })
+    })
+  })
+
+  describe('when adress is requested', () => {
+    beforeEach(function (done) {
+      ImpotController = proxyquire('../impots.controller', {
+        './../ban/svairBan.service': function () {
+          this.getAdress = function (numeroFiscal, referenceAvis, callback) {
+            callback(null, banResult)
+          }
+        }
+      })
+      done()
+    })
+
+    it('give the right result', () => {
+      var controller = new ImpotController()
+      var req = {
+        query: {
+          numeroFiscal: '1',
+          referenceAvis: '1'
+        }
+      }
+      var res = {}
+
+      controller.adress(req, res, function () {})
+
+      expect(res.data).to.deep.equal(banResult)
     })
   })
 
