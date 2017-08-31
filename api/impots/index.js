@@ -10,12 +10,11 @@ module.exports = function (options) {
   const impotsController = new Controller(options)
   const auth = new Auth(options)
 
-  router.get('/ping', impotsController.ping)
+  router.get('/ping', impotsController.ping, format)
   router.use(auth.canAccessApi)
-  router.get('/svair', impotsController.svair)
-  router.get('/adress', impotsController.adress)
+  router.get('/svair', impotsController.svair, format)
+  router.get('/adress', impotsController.adress, format)
   router.use((req, res, next) => impotsController.authorize(req, res, next))
-  router.use(format)
 
   return router
 }

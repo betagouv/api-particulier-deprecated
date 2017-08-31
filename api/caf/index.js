@@ -10,11 +10,10 @@ module.exports = function (options) {
 
   router.use(cafController.prepare())
 
-  router.get('/ping', cafController.ping)
+  router.get('/ping', cafController.ping, format)
   router.use(auth.canAccessApi)
-  router.get('/famille', cafController.famille)
+  router.get('/famille', cafController.famille, format)
   router.use((req, res, next) => cafController.authorize(req, res, next))
-  router.use(format)
 
   return router
 }
