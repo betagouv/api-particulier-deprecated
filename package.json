@@ -1,6 +1,6 @@
 {
   "name": "api-particulier",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "private": false,
   "description": "Api brocker for the french government",
   "repository": {
@@ -58,7 +58,7 @@
     "standard-error": "^1.1.0",
     "string": "^3.1.1",
     "superagent": "^3.5.2",
-    "svair-api": "^0.5.2",
+    "svair-api": "^0.5.3",
     "throng": "^4.0.0",
     "url-assembler": "^1.2.7"
   }
