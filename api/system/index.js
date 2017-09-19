@@ -11,5 +11,7 @@ module.exports = function (options) {
   router.get('/swagger.yaml', systemController.swagger)
   router.get('/ping', systemController.ping)
   router.get('/ping', format)
+  router.get('/introspect', (req, res, next) => { systemController.introspect(req, res, next) })
+  router.get('/introspect', format)
   return router
 }
