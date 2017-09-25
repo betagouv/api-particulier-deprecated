@@ -1,7 +1,7 @@
 module.exports = {
   PORT: 3004,
   nbWorkers: 1,
-  cafStub: true,
+  cafStub: false,
   outgoingHttpMaxSockets: 5,
   appname: 'api-particulier',
   mongoDbUrl: 'mongodb://localhost:27017/api-particulier',

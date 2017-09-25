@@ -7,8 +7,8 @@ const fs = require('fs')
 function CafController (options) {
   options = options || {}
 
-  if (options.cafStub) {
-    this.prepare = function () {
+  this.prepare = function () {
+    if (options.cafStub) {
       return function fakeClient (req, res, next) {
         req.client = {
           getAll (codePostal, numeroAllocataire) {
@@ -25,9 +25,7 @@ function CafController (options) {
         }
         return next()
       }
-    }
-  } else {
-    this.prepare = function () {
+    } else {
       return injectClient({
         host: options.cafHost,
         cert: fs.readFileSync(options.cafSslCertificate),

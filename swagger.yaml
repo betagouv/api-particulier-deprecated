@@ -26,6 +26,27 @@ schemes:
 produces:
   - application/json
 paths:
+  /introspect:
+    get:
+      summary: Introspection du token donné en paramètre
+      description: |
+        Cet endpoint permet de découvrir les informations correspondant à un token donné
+      parameters:
+        - name: token
+          in: query
+          description: token à introspecter
+          type: string
+      tags:
+        - Token
+      responses:
+        '200':
+          description: l'introspection du token
+          schema:
+            $ref: '#/definitions/Introspection'
+        '404':
+          description: 'Token not found'
+          schema:
+            $ref: '#/definitions/Error'
   /impots/svair:
     get:
       summary: Service de vérification de l'avis d'impôt sur le revenu
@@ -173,6 +194,18 @@ paths:
 
 
 definitions:
+  Introspection:
+    type: object
+    properties:
+      _id:
+        type: string
+        description: Token introspecté
+      name:
+        type: string
+        description: Nom associé au token
+      email:
+        type: string
+        description: email de contact associé au token
   Declaration:
     type: object
     properties:
@@ -366,7 +399,6 @@ definitions:
       reason:
         type: string
       message:
-        deprecated: true
         type: string
       error:
         type: string
