@@ -5,9 +5,23 @@ exports.createLogger = function (nconf, id = '') {
     name: nconf.get('appname') + id,
     level: nconf.get('log:level'),
     streams: exports._streams(nconf),
-    serializers: bunyan.stdSerializers
+    serializers: {
+      req: reqSerializer,
+      res: bunyan.stdSerializers.res,
+      err: bunyan.stdSerializers.err
+    }
   })
   return logger
+}
+
+function reqSerializer (req) {
+  return {
+    method: req.method,
+    url: req.url.replace(/\?(.+)/, ''),
+    headers: req.headers,
+    remoteAddress: req.connection.remoteAddress,
+    remotePort: req.connection.remotePort
+  }
 }
 
 exports._streams = function (nconf) {
