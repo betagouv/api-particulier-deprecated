@@ -31,6 +31,18 @@ describe('Logger', () => {
     })
   })
 
+  describe('query params', () => {
+    it('must not be logged', () => {
+      const request = {
+        consumer: {},
+        headers: {host: 'titi'},
+        url: 'http://test.host?test=1'
+      }
+      const properties = logger.includesFn(request)
+      expect(properties.url).to.equal('http://test.host')
+    })
+  })
+
   describe('the consumer name', () => {
     it('must added', () => {
       const request = {
@@ -74,24 +86,6 @@ describe('Logger', () => {
       }
       const properties = logger.includesFn(request)
       expect(properties.url).to.equal('titi.com/toto')
-    })
-
-    it('must escape the API-KEY', () => {
-      const request = {
-        consumer: {},
-        headers: {},
-        url: '/toto?API-Key=5746489495485'
-      }
-      const properties = logger.includesFn(request)
-      expect(properties.url).to.equal('/toto?API-Key=XXX')
-
-      const request2 = {
-        consumer: {},
-        headers: {},
-        url: '/toto?q=a&API-Key=5746489495485&t=y'
-      }
-      const properties2 = logger.includesFn(request2)
-      expect(properties2.url).to.equal('/toto?q=a&API-Key=XXX&t=y')
     })
   })
 })

@@ -5,6 +5,7 @@ module.exports.excludes = ['req', 'res', 'req-headers', 'res-headers', 'msg', 'u
 module.exports.includesFn = function (req, res) {
   let url = (req.baseUrl || '') + String(req.url || '')
   url = url.replace(/([?&])API-Key=([^&]+)/, '$1API-Key=XXX')
+  url = url.replace(/\?(.+)/, '')
   return {
     correlationId: req.id,
     consumer: {

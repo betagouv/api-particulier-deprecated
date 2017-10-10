@@ -357,7 +357,7 @@ definitions:
     type: object
     description: Personne référencée à la CAF
     properties:
-      nomPrenon:
+      nomPrenom:
         type: array
         description: Noms et prénoms des personnes allocataires de la CAF
         items:
