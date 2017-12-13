@@ -246,10 +246,10 @@ definitions:
         type: integer
         description: 'Revenu fiscal de référence'
       anneeImpots:
-        type: integer
+        type: string
         description: 'Année format: AAAA'
       anneeRevenus:
-        type: integer
+        type: string
         description: 'Année format: AAAA'
 
   SvairAdresses:

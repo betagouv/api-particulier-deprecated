@@ -10,6 +10,7 @@ class SystemController {
   constructor (options) {
     this.dbTokenService = new DbTokenService(options)
     this.dbTokenService.initialize()
+    this.options = options
   }
   ping (req, res, next) {
     res.data = 'pong'
@@ -21,14 +22,27 @@ class SystemController {
   }
 
   introspect (req, res, next) {
-    return this.dbTokenService.getToken(req.query['token']).then((result) => {
-      if (result) {
-        res.data = result
+    if (this.options.mockIntrospect) {
+      if (req.query['token'] === 'test-token') {
+        res.data = {
+          '_id': 'test-token',
+          'name': 'test-token',
+          'email': 'test@test.test'
+        }
         next()
       } else {
         next(new StandardError('Token not found', {code: 404}))
       }
-    })
+    } else {
+      return this.dbTokenService.getToken(req.query['token']).then((result) => {
+        if (result) {
+          res.data = result
+          next()
+        } else {
+          next(new StandardError('Token not found', {code: 404}))
+        }
+      })
+    }
   }
 }
 
