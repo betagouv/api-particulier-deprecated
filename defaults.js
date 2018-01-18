@@ -26,5 +26,6 @@ module.exports = {
   tokensPath: './tokens',
   ban: {
     baseUrl: 'https://api-adresse.data.gouv.fr'
-  }
+  },
+  logginPath: '/var/log/api-particulier/api-particulier.log'
 }

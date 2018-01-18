@@ -1,6 +1,7 @@
 # Api-particulier
 [![CircleCI](https://circleci.com/gh/sgmap/api-particulier.svg?style=svg)](https://circleci.com/gh/sgmap/api-particulier)
 [![Coverage Status](https://coveralls.io/repos/github/sgmap/api-particulier/badge.svg?branch=tokenAsConf)](https://coveralls.io/github/sgmap/api-particulier?branch=tokenAsConf)
+
 ## Intégrateur
 
 Cette partie s'adresse aux développeurs souhaitant intégrer l'API.
@@ -16,32 +17,26 @@ Voici quelques liens utiles :
  laquelle il est possible d'utiliser tous les ids et token possibles.
 
 
-## Prerequisites
+## Pré-requis
 
 * [node.js](http://nodejs.org)
-* [redis](http://redis.io/)
-* [Docker](https://www.docker.com/)
-  * [Docker-compose](https://docs.docker.com/compose/)
-* [Make](http://www.tutorialspoint.com/makefile/)
+* [mongodb](http://www.mongodb.com)
+* [openssl](http://www.openssl.org)
 
-## Install
-
-    make install
+Créer un certificat auto-signé :
+`cafSslCertificate: './cert/bourse.sgmap.fr.bundle.crt',
+cafSslKey: './cert/bourse.sgmap.fr.key'` Voir par exemple : https://devcenter.heroku.com/articles/ssl-certificate-self
 
 
-## Test
+## Installation des modules
 
-    make test
+    `npm install`
 
-## Build
+## Tests
 
-    make build
+    lancer mongodb
+    `npm run test`
 
-## run
+## Lancer le serveur
 
-    make run
-
-
-## clean
-
-    make clean
+    `npm run start`
