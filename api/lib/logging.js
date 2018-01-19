@@ -29,7 +29,7 @@ exports._streams = function (nconf) {
     type: 'rotating-file',
     period: '7d',
     count: 108,
-    path: '/var/log/api-particulier/api-particulier.log'
+    path: nconf.get('logginPath')
   }]
   return streams
 }
