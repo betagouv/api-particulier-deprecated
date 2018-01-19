@@ -16,7 +16,9 @@ class DbTokenService {
   }
 
   getToken (token) {
-    const encryptedToken = crypto.createHmac('sha512', token).digest('hex')
+    const hash = crypto.createHash('sha512')
+    hash.update(token)
+    const encryptedToken = hash.digest('hex')
     return this.collection.findOne({_id: encryptedToken})
   }
 }
