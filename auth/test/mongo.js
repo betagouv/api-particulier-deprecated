@@ -7,7 +7,7 @@ const encryptedToken = hash.digest('hex')
 module.exports = {
   data: [
     {
-      _id: encryptedToken,
+      hashed_token: encryptedToken,
       name: 'Jeu de test',
       mail: 'someone@somewhere.com'
     }

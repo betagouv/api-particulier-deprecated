@@ -19,7 +19,7 @@ class DbTokenService {
     const hash = crypto.createHash('sha512')
     hash.update(token)
     const encryptedToken = hash.digest('hex')
-    return this.collection.findOne({_id: encryptedToken})
+    return this.collection.findOne({hashed_token: encryptedToken})
   }
 }
 

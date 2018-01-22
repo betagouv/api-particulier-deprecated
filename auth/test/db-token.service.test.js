@@ -26,7 +26,8 @@ describe('Db Token service', () => {
     const encryptedToken = hash.digest('hex')
     return service.getToken('test-token').then((token) => {
       expect(token).to.deep.equal({
-        '_id': encryptedToken,
+        '_id': token['_id'],
+        'hashed_token': encryptedToken,
         'name': 'Jeu de test',
         'mail': 'someone@somewhere.com'
       })
