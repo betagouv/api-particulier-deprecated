@@ -1,6 +1,7 @@
 const expect = require('chai').expect
 const Service = require('../db-tokens.service')
-const testData = require('./mongo.json')
+const testData = require('./mongo.js')
+const crypto = require('crypto')
 
 describe('Db Token service', () => {
   const url = 'mongodb://localhost:27017/test-api-particulier'
@@ -20,9 +21,11 @@ describe('Db Token service', () => {
   })
 
   it('gets a token when the token exists', () => {
+    const encryptedToken = crypto.createHash('sha512').update('test-token').digest('hex')
     return service.getToken('test-token').then((token) => {
       expect(token).to.deep.equal({
-        '_id': 'test-token',
+        '_id': token['_id'],
+        'hashed_token': encryptedToken,
         'name': 'Jeu de test',
         'mail': 'someone@somewhere.com'
       })
