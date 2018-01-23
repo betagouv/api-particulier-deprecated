@@ -21,7 +21,7 @@ module.exports.includesFn = function (req, res) {
       user: req.user
     },
     host: req.headers.host,
-    queryHash: queryHash,
+    queryHash,
     url
   }
 }
