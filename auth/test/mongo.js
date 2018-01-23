@@ -1,8 +1,6 @@
 const crypto = require('crypto')
 
-const hash = crypto.createHash('sha512')
-hash.update('test-token')
-const encryptedToken = hash.digest('hex')
+const encryptedToken = crypto.createHash('sha512').update('test-token').digest('hex')
 
 module.exports = {
   data: [

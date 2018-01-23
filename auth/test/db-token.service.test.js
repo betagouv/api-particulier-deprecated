@@ -21,9 +21,7 @@ describe('Db Token service', () => {
   })
 
   it('gets a token when the token exists', () => {
-    const hash = crypto.createHash('sha512')
-    hash.update('test-token')
-    const encryptedToken = hash.digest('hex')
+    const encryptedToken = crypto.createHash('sha512').update('test-token').digest('hex')
     return service.getToken('test-token').then((token) => {
       expect(token).to.deep.equal({
         '_id': token['_id'],
