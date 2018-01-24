@@ -20,14 +20,23 @@ describe('Logger', () => {
     })
   })
 
-  describe('the host header', () => {
-    it('must added', () => {
+  describe('the headers', () => {
+    it('host must added', () => {
       const request = {
         consumer: {},
         headers: {host: 'titi'}
       }
       const properties = logger.includesFn(request)
       expect(properties.host).to.equal('titi')
+    })
+
+    it('realIp must added', () => {
+      const request = {
+        consumer: {},
+        headers: {'x-real-ip': 'titi'}
+      }
+      const properties = logger.includesFn(request)
+      expect(properties.realIp).to.equal('titi')
     })
   })
 

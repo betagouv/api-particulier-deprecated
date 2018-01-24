@@ -21,6 +21,7 @@ module.exports.includesFn = function (req, res) {
       user: req.user
     },
     host: req.headers.host,
+    realIp: req.headers['x-real-ip'],
     queryHash,
     url
   }
