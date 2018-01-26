@@ -49,6 +49,16 @@ describe('CAF API', function () {
           .set('Accept', 'application/xml')
           .expect('content-type', /xml/)
       })
+
+      describe('without the caf scope', () => {
+        it('replies a 403', () => {
+          return api()
+            .get('/api/caf/famille')
+            .set('x-api-key', 'impots')
+            .query(fakeQuery)
+            .expect(403)
+        })
+      })
     })
   })
 })

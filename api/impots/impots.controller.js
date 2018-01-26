@@ -67,7 +67,7 @@ function ImpotController (options) {
 
   this.authorize = function (req, res, next) {
     if (req.authType === 'FranceConnect') {
-      if (this.consumerMatch(req, res)) {
+      if (consumerMatch(req, res)) {
         return next()
       } else {
         return next(
@@ -82,7 +82,7 @@ function ImpotController (options) {
     }
   }
 
-  this.consumerMatch = function (req, res) {
+  function consumerMatch (req, res) {
     const impotsNames = upcaseImpotsNames(res)
     const consumerName = req.consumer.name.toUpperCase()
 

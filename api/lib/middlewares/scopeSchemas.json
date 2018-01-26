@@ -1,0 +1,313 @@
+{
+  "impotsSvair": {
+    "type": "object",
+    "properties": {
+      "declarant1": {
+        "type": "object",
+        "properties": {
+          "nom": {
+            "type": "string"
+          },
+          "nomNaissance": {
+            "type": "string"
+          },
+          "prenoms": {
+            "type": "string"
+          },
+          "dateNaissance": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nom",
+          "nomNaissance",
+          "prenoms",
+          "dateNaissance"
+        ]
+      },
+      "declarant2": {
+        "type": "object",
+        "properties": {
+          "nom": {
+            "type": "string"
+          },
+          "nomNaissance": {
+            "type": "string"
+          },
+          "prenoms": {
+            "type": "string"
+          },
+          "dateNaissance": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nom",
+          "nomNaissance",
+          "prenoms",
+          "dateNaissance"
+        ]
+      },
+      "dateRecouvrement": {
+        "type": "string"
+      },
+      "dateEtablissement": {
+        "type": "string"
+      },
+      "nombreParts": {
+        "type": "number"
+      },
+      "situationFamillle": {
+        "type": "string"
+      },
+      "nombrePersonnesCharge": {
+        "type": "number"
+      },
+      "revenuBrutGlobal": {
+        "type": "number"
+      },
+      "revenuImposable": {
+        "type": "number"
+      },
+      "impotRevenuNetAvantCorrections": {
+        "type": "number"
+      },
+      "montantImpot": {
+        "type": "number"
+      },
+      "revenuFiscalReference": {
+        "type": "number"
+      },
+      "foyerFiscal": {
+        "type": "object",
+        "properties": {
+          "annee": {
+            "type": "integer"
+          },
+          "adresse": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "annee",
+          "adresse"
+        ]
+      },
+      "anneeImpots": {
+        "type": "string"
+      },
+      "anneeRevenus": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "declarant1",
+      "declarant2",
+      "dateRecouvrement",
+      "dateEtablissement",
+      "nombreParts",
+      "situationFamille",
+      "nombrePersonnesCharge",
+      "revenuBrutGlobal",
+      "revenuImposable",
+      "impotRevenuNetAvantCorrections",
+      "montantImpot",
+      "revenuFiscalReference",
+      "foyerFiscal",
+      "anneeImpots",
+      "anneeRevenus"
+    ]
+  },
+  "cafFamille": {
+    "type": "object",
+    "properties": {
+      "allocataires": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "nomPrenom": {
+              "type": "string"
+            },
+            "dateDeNaissance": {
+              "type": "string"
+            },
+            "sexe": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "nomPrenom",
+            "dateDeNaissance",
+            "sexe"
+          ]
+        }
+      },
+      "enfants": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "nomPrenom": {
+              "type": "string"
+            },
+            "dateDeNaissance": {
+              "type": "string"
+            },
+            "sexe": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "nomPrenom",
+            "dateDeNaissance",
+            "sexe"
+          ]
+        }
+      },
+      "adresse": {
+        "properties": {
+          "identite": {
+            "type": "string"
+          },
+          "complementIdentiteGeo": {
+            "type": "string"
+          },
+          "numeroRue": {
+            "type": "string"
+          },
+          "codePostalVille": {
+            "type": "string"
+          },
+          "pays": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "identite",
+          "complementIdentiteGeo",
+          "numeroRue",
+          "codePostalVille",
+          "pays"
+        ]
+      },
+      "quotientFamilial": {
+        "type": "integer"
+      },
+      "annee": {
+        "type": "integer"
+      },
+      "mois": {
+        "type": "integer"
+      }
+    },
+    "required": [
+      "quotientFamilial",
+      "annee",
+      "mois"
+    ]
+  },
+  "impotsAdresse": {
+    "properties": {
+      "adresses": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "adresse": {
+              "type": "object",
+              "properties": {
+                "postcode": { "type": "string" },
+                "x": { "type": "number" },
+                "citycode": { "type": "string" },
+                "context": { "type": "string" },
+                "type": { "type": "string" },
+                "city": { "type": "string" },
+                "label": { "type": "string" },
+                "y": { "type": "number" },
+                "importance": { "type": "number" },
+                "name": { "type": "string" },
+                "score": { "type": "number" }
+              },
+              "required": [
+                "postcode",
+                "x",
+                "citycode",
+                "context",
+                "type",
+                "city",
+                "label",
+                "y",
+                "importance",
+                "name",
+                "score"
+              ]
+            },
+            "geometry": {
+              "properties": {
+                "type": { "type": "string" },
+                "coordinates": {
+                  "type": "array",
+                  "items": { "type": "number" }
+                },
+                "required": [
+                  "type",
+                  "coordinates"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "declarant1": {
+        "type": "object",
+        "properties": {
+          "nom": { "type": "string" },
+          "nomNaissance": { "type": "string" },
+          "prenoms": { "type": "string" },
+          "dateNaissance": { "type": "string" }
+        },
+        "required": [
+          "nom",
+          "nomNaissance",
+          "prenoms",
+          "dateNaissance"
+        ]
+
+      },
+      "declarant2": {
+        "type": "object",
+        "properties": {
+          "nom": { "type": "string" },
+          "nomNaissance": { "type": "string" },
+          "prenoms": { "type": "string" },
+          "dateNaissance": { "type": "string" }
+        },
+        "required": [
+          "nom",
+          "nomNaissance",
+          "prenoms",
+          "dateNaissance"
+        ]
+      },
+      "foyerFiscal": {
+        "type": "object",
+        "properties": {
+          "annee": { "type": "integer" },
+          "adresse": { "type": "string" }
+        },
+        "required": [
+          "annee",
+          "adresse"
+        ]
+      }
+    },
+    "required": [
+      "adresses",
+      "declarant1",
+      "declarant2",
+      "foyerFiscal"
+    ]
+
+  }
+}

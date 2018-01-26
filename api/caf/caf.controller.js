@@ -70,7 +70,7 @@ function CafController (options) {
 
   this.authorize = function (req, res, next) {
     if (req.authType === 'FranceConnect') {
-      if (this.consumerMatch(req, res)) {
+      if (consumerMatch(req, res)) {
         return next()
       } else {
         return next(
@@ -85,7 +85,7 @@ function CafController (options) {
     }
   }
 
-  this.consumerMatch = function (req, res) {
+  function consumerMatch (req, res) {
     const cafNames = upcaseCafNames(res)
     const consumerName = req.consumer.name.toUpperCase()
     return cafNames.indexOf(consumerName) !== -1

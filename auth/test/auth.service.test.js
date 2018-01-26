@@ -71,7 +71,8 @@ describe('Auth service', () => {
       const consumer = {
         _id: 'test',
         name: 'test',
-        email: 'test@test.test'
+        email: 'test@test.test',
+        scopes: ['dgfip', 'cnaf']
       }
       let Auth, service
 

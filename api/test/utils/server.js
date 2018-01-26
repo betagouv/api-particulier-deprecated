@@ -21,10 +21,6 @@ module.exports = function () {
       activate: false,
       dsn: ''
     },
-    es: {
-      host: 'http://es.infra.gouv.fr:9203',
-      index: 'logstash-apiparticulier-*'
-    },
     numeroAllocataire: '1234567',
     codePostal: '75009',
     ban: {

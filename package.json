@@ -51,6 +51,7 @@
     "express-bunyan-logger": "^1.1.1",
     "http-measuring-client": "^0.3.6",
     "js2xmlparser": "1.0.0",
+    "jsonschema": "^1.2.2",
     "mongodb": "^2.2.29",
     "nconf": "^0.8.4",
     "raven": "^1.2.1",
