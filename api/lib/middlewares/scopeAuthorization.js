@@ -5,7 +5,7 @@ const schemas = require('./scopeSchemas')
 module.exports = function (req, res, next) {
   if (dgfipData(res.data)) return scopeRequired('dgfip', req, res, next)
   if (cafData(res.data)) return scopeRequired('caf', req, res, next)
-  return next(new StandardError('You are not authorized to use the api', {code: 401}))
+  return next(new StandardError('Your scopes are invalid. You are not authorized to access this resource.', {code: 403}))
 }
 
 function dgfipData (data) {
@@ -21,5 +21,5 @@ function scopeRequired (scope, req, res, next) {
   if (req.consumer.scopes.filter((e) => e === scope)[0]) {
     return next()
   }
-  return next(new StandardError('You are not authorized to access this resource.', {code: 403}))
+  return next(new StandardError('Your scopes are invalid. You are not authorized to access this resource.', {code: 403}))
 }
