@@ -1,25 +1,29 @@
 const StandardError = require('standard-error')
-const validate = require('jsonschema').validate
+const Ajv = require('ajv')
 const schemas = require('./scopeSchemas')
 
+const validators = {
+  impotsSvair: new Ajv({ removeAdditional: true }).compile(schemas.impotsSvair),
+  impotsAdresse: new Ajv({ removeAdditional: true }).compile(schemas.impotsAdresse),
+  cafFamille: new Ajv({ removeAdditional: true }).compile(schemas.cafFamille),
+  cafQuotientFamilial: new Ajv({ removeAdditional: true }).compile(schemas.cafQuotientFamilial)
+}
+const dataDefinitionByScope = {
+  dgfip_avis_imposition: ['impotsSvair', 'impotsAdresse'],
+  cnaf_attestation_droits: ['cafFamille'],
+  cnaf_quotient_familial: ['cafQuotientFamilial']
+}
+
 module.exports = function (req, res, next) {
-  if (dgfipData(res.data)) return scopeRequired('dgfip', req, res, next)
-  if (cafData(res.data)) return scopeRequired('caf', req, res, next)
-  return next(new StandardError('Your scopes are invalid. You are not authorized to access this resource.', {code: 403}))
-}
-
-function dgfipData (data) {
-  return validate(data, schemas.impotsSvair).valid ||
-    validate(data, schemas.impotsAdresse).valid
-}
-
-function cafData (data) {
-  return validate(data, schemas.cafFamille).valid
-}
-
-function scopeRequired (scope, req, res, next) {
-  if (req.consumer.scopes.filter((e) => e === scope)[0]) {
-    return next()
+  for (let scope of req.consumer.scopes) {
+    for (let dataDefinition of dataDefinitionByScope[scope] || []) {
+      const data = Object.assign({}, res.data)
+      if (validators[dataDefinition](data)) {
+        res.data = data
+        return next()
+      }
+    }
   }
+
   return next(new StandardError('Your scopes are invalid. You are not authorized to access this resource.', {code: 403}))
 }

@@ -1,9 +1,11 @@
 {
   "impotsSvair": {
     "type": "object",
+    "additionalProperties": false,
     "properties": {
       "declarant1": {
         "type": "object",
+        "additionalProperties": false,
         "properties": {
           "nom": {
             "type": "string"
@@ -27,6 +29,7 @@
       },
       "declarant2": {
         "type": "object",
+        "additionalProperties": false,
         "properties": {
           "nom": {
             "type": "string"
@@ -57,7 +60,7 @@
       "nombreParts": {
         "type": "number"
       },
-      "situationFamillle": {
+      "situationFamille": {
         "type": "string"
       },
       "nombrePersonnesCharge": {
@@ -80,6 +83,7 @@
       },
       "foyerFiscal": {
         "type": "object",
+        "additionalProperties": false,
         "properties": {
           "annee": {
             "type": "integer"
@@ -120,11 +124,13 @@
   },
   "cafFamille": {
     "type": "object",
+    "additionalProperties": false,
     "properties": {
       "allocataires": {
         "type": "array",
         "items": {
           "type": "object",
+          "additionalProperties": false,
           "properties": {
             "nomPrenom": {
               "type": "string"
@@ -147,6 +153,7 @@
         "type": "array",
         "items": {
           "type": "object",
+          "additionalProperties": false,
           "properties": {
             "nomPrenom": {
               "type": "string"
@@ -166,6 +173,7 @@
         }
       },
       "adresse": {
+        "additionalProperties": false,
         "properties": {
           "identite": {
             "type": "string"
@@ -208,14 +216,17 @@
     ]
   },
   "impotsAdresse": {
+    "additionalProperties": false,
     "properties": {
       "adresses": {
         "type": "array",
         "items": {
           "type": "object",
+          "additionalProperties": false,
           "properties": {
             "adresse": {
               "type": "object",
+              "additionalProperties": false,
               "properties": {
                 "postcode": { "type": "string" },
                 "x": { "type": "number" },
@@ -244,23 +255,25 @@
               ]
             },
             "geometry": {
+              "additionalProperties": false,
               "properties": {
                 "type": { "type": "string" },
                 "coordinates": {
                   "type": "array",
                   "items": { "type": "number" }
-                },
-                "required": [
-                  "type",
-                  "coordinates"
-                ]
-              }
+                }
+              },
+              "required": [
+                "type",
+                "coordinates"
+              ]
             }
           }
         }
       },
       "declarant1": {
         "type": "object",
+        "additionalProperties": false,
         "properties": {
           "nom": { "type": "string" },
           "nomNaissance": { "type": "string" },
@@ -277,6 +290,7 @@
       },
       "declarant2": {
         "type": "object",
+        "additionalProperties": false,
         "properties": {
           "nom": { "type": "string" },
           "nomNaissance": { "type": "string" },
@@ -292,6 +306,7 @@
       },
       "foyerFiscal": {
         "type": "object",
+        "additionalProperties": false,
         "properties": {
           "annee": { "type": "integer" },
           "adresse": { "type": "string" }
@@ -309,5 +324,19 @@
       "foyerFiscal"
     ]
 
+  },
+  "cafQuotientFamilial": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "quotientFamilial": { "type": "integer" },
+      "annee": { "type": "integer" },
+      "mois": { "type": "integer" }
+    },
+    "required": [
+      "quotientFamilial",
+      "annee",
+      "mois"
+    ]
   }
 }

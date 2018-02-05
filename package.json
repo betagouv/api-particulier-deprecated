@@ -39,6 +39,7 @@
     "supertest": "^3.0.0"
   },
   "dependencies": {
+    "ajv": "^6.1.1",
     "api-caf": "^0.2.0",
     "async": "^2.3.0",
     "blocked": "^1.2.1",
@@ -51,7 +52,6 @@
     "express-bunyan-logger": "^1.1.1",
     "http-measuring-client": "^0.3.6",
     "js2xmlparser": "1.0.0",
-    "jsonschema": "^1.2.2",
     "mongodb": "^2.2.29",
     "nconf": "^0.8.4",
     "raven": "^1.2.1",
