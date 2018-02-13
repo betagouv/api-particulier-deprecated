@@ -1,4 +1,4 @@
-
+const scopeAuthorization = require('../lib/middlewares/scopeAuthorization')
 const express = require('express')
 const Controller = require('./impots.controller')
 const Auth = require('../../auth/auth')
@@ -11,9 +11,22 @@ module.exports = function (options) {
   const auth = new Auth(options)
 
   router.get('/ping', impotsController.ping, format)
-  router.get('/svair', auth.canAccessApi, impotsController.svair, format)
-  router.get('/adress', auth.canAccessApi, impotsController.adress, format)
-  router.use((req, res, next) => impotsController.authorize(req, res, next))
+  router.get(
+    '/svair',
+    auth.canAccessApi,
+    impotsController.svair,
+    impotsController.authorize,
+    scopeAuthorization,
+    format
+  )
+  router.get(
+    '/adress',
+    auth.canAccessApi,
+    impotsController.adress,
+    impotsController.authorize,
+    scopeAuthorization,
+    format
+  )
 
   return router
 }

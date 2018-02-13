@@ -124,5 +124,29 @@ describe('Impots API', function () {
         })
       })
     })
+
+    // replies 500 TODO use nok to stub external requests
+    //
+    //     describe('without impots scope', () => {
+    //       describe('when getting the adress', () => {
+    //         it('replies 403', function () {
+    //           return api()
+    //             .get('/api/impots/adress')
+    //             .query({numeroFiscal: '12', referenceAvis: '15'})
+    //             .set('X-API-Key', 'caf')
+    //             .expect(403)
+    //         })
+    //       })
+    //
+    //       describe('when getting the svair', () => {
+    //         it('replies 403', function () {
+    //           return api()
+    //             .get('/api/impots/svair')
+    //             .query({numeroFiscal: '12', referenceAvis: '15'})
+    //             .set('X-API-Key', 'caf')
+    //             .expect(403)
+    //         })
+    //       })
+    //     })
   })
 })
