@@ -11,7 +11,7 @@
             "type": "string"
           },
           "nomNaissance": {
-            "type": "string"
+            "type": ["string", "null"]
           },
           "prenoms": {
             "type": "string"
@@ -22,7 +22,6 @@
         },
         "required": [
           "nom",
-          "nomNaissance",
           "prenoms",
           "dateNaissance"
         ]
@@ -35,7 +34,7 @@
             "type": "string"
           },
           "nomNaissance": {
-            "type": "string"
+            "type": ["string", "null"]
           },
           "prenoms": {
             "type": "string"
@@ -46,7 +45,6 @@
         },
         "required": [
           "nom",
-          "nomNaissance",
           "prenoms",
           "dateNaissance"
         ]
@@ -73,10 +71,10 @@
         "type": "number"
       },
       "impotRevenuNetAvantCorrections": {
-        "type": "number"
+        "type": ["number", "null"]
       },
       "montantImpot": {
-        "type": "number"
+        "type": ["number", "null"]
       },
       "revenuFiscalReference": {
         "type": "number"
@@ -107,16 +105,11 @@
     "required": [
       "declarant1",
       "declarant2",
-      "dateRecouvrement",
       "dateEtablissement",
       "nombreParts",
       "situationFamille",
       "nombrePersonnesCharge",
-      "revenuBrutGlobal",
-      "revenuImposable",
-      "impotRevenuNetAvantCorrections",
       "montantImpot",
-      "revenuFiscalReference",
       "foyerFiscal",
       "anneeImpots",
       "anneeRevenus"
@@ -179,7 +172,7 @@
             "type": "string"
           },
           "complementIdentiteGeo": {
-            "type": "string"
+            "type": ["string", "null"]
           },
           "numeroRue": {
             "type": "string"
@@ -193,7 +186,6 @@
         },
         "required": [
           "identite",
-          "complementIdentiteGeo",
           "numeroRue",
           "codePostalVille",
           "pays"
@@ -282,7 +274,6 @@
         },
         "required": [
           "nom",
-          "nomNaissance",
           "prenoms",
           "dateNaissance"
         ]
@@ -299,7 +290,6 @@
         },
         "required": [
           "nom",
-          "nomNaissance",
           "prenoms",
           "dateNaissance"
         ]
