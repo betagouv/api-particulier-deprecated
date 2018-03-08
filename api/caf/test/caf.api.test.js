@@ -23,6 +23,14 @@ describe('CAF API', function () {
           .set('Accept', '*/*')
           .expect(400)
       })
+
+      it('replies a 403 if invalid scope', () => {
+        return api()
+          .get('/api/caf/famille')
+          .set('x-api-key', 'impots')
+          .set('Accept', '*/*')
+          .expect(403)
+      })
     })
 
     describe('With query parameters', (done) => {

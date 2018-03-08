@@ -33,7 +33,7 @@ describe('Impots Controller', function () {
 
       // when
       controller.svair(req, res, function (err) {
-        expect(err).to.deep.equal(new StandardError('Some message', {code: 500}))
+        expect(err).to.deep.equal(new StandardError('Some message', {code: 500, scope: 'dgfip'}))
         done()
       })
     })
@@ -59,7 +59,7 @@ describe('Impots Controller', function () {
 
       // when
       controller.svair(req, res, function (err) {
-        expect(err).to.deep.equal(new StandardError('Les paramètres fournis sont incorrects ou ne correspondent pas à un avis', {code: 404}))
+        expect(err).to.deep.equal(new StandardError('Les paramètres fournis sont incorrects ou ne correspondent pas à un avis', {code: 404, scope: 'dgfip'}))
         done()
       })
     })
