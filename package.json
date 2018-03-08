@@ -44,7 +44,7 @@
     "async": "^2.3.0",
     "blocked": "^1.2.1",
     "body-parser": "^1.12.4",
-    "bunyan": "^1.8.10",
+    "bunyan": "^1.8.12",
     "bunyan-blackhole": "^1.0.1",
     "bunyan-format": "^0.2.1",
     "cors": "^2.8.3",
