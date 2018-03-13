@@ -43,7 +43,7 @@ function CafController (options) {
       return next(
         new StandardError(
           'Les paramètres `codePostal` et `numeroAllocataire` sont obligatoires',
-          {code: 400}
+          {code: 400, scope: 'cnaf'}
         )
       )
     }
@@ -54,8 +54,9 @@ function CafController (options) {
     }).catch((err) => {
       if (err instanceof ClientError) {
         logErrorIfLogger(req, err)
-        return next(new StandardError(err.message, { code: err.code }))
+        return next(new StandardError(err.message, { code: err.code, scope: 'caf' }))
       } else {
+        err.scope = 'caf'
         return next(err)
       }
     })
@@ -76,7 +77,7 @@ function CafController (options) {
         return next(
           new StandardError(
             'You are forbidden to access this resource',
-            {code: 403}
+            {code: 403, scope: 'caf'}
           )
         )
       }

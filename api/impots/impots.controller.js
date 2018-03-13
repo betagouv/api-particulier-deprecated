@@ -12,7 +12,7 @@ function ImpotController (options) {
     var numeroFiscal = formatNumeroFiscal(req.query.numeroFiscal)
     var referenceAvis = formatReferenceAvis(req.query.referenceAvis)
     if (!numeroFiscal || !referenceAvis) {
-      return next(new StandardError('Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.', {code: 400}))
+      return next(new StandardError('Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.', {code: 400, scope: 'dgfip'}))
     } else {
       svairBanService.getAdress(numeroFiscal, referenceAvis, (err, data) => {
         if (err) return next(err)
@@ -24,9 +24,9 @@ function ImpotController (options) {
 
   function sendDataFromSvair (err, result, next, res) {
     if (err && err.message === 'Invalid credentials') {
-      next(new StandardError('Les paramètres fournis sont incorrects ou ne correspondent pas à un avis', {code: 404}))
+      next(new StandardError('Les paramètres fournis sont incorrects ou ne correspondent pas à un avis', {code: 404, scope: 'dgfip'}))
     } else if (err) {
-      next(new StandardError(err.message, {code: 500}))
+      next(new StandardError(err.message, {code: 500, scope: 'dgfip'}))
     } else {
       res.data = result
       return next()
@@ -45,7 +45,7 @@ function ImpotController (options) {
     var numeroFiscal = formatNumeroFiscal(req.query.numeroFiscal)
     var referenceAvis = formatReferenceAvis(req.query.referenceAvis)
     if (!numeroFiscal || !referenceAvis) {
-      return next(new StandardError('Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.', {code: 400}))
+      return next(new StandardError('Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.', {code: 400, scope: 'dgfip'}))
     } else {
       svair(options.svairHost)(numeroFiscal, referenceAvis, function (err, result) {
         sendDataFromSvair(err, result, next, res)
@@ -57,7 +57,7 @@ function ImpotController (options) {
     var numeroFiscal = options.numeroFiscal
     var referenceAvis = options.referenceAvis
     if (!numeroFiscal || !referenceAvis) {
-      return next(new StandardError('Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.', {code: 400}))
+      return next(new StandardError('Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.', {code: 400, scope: 'dgfip'}))
     } else {
       svair(options.svairHost)(numeroFiscal, referenceAvis, function (err) {
         sendDataFromSvair(err, 'pong', next, res)

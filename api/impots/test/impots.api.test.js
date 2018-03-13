@@ -15,6 +15,15 @@ describe('Impots API', function () {
             .expect('content-type', /json/)
             .expect(400)
         })
+        it('replies 403 if invalid scope', () => {
+          return api()
+            .get('/api/impots/svair')
+            .set('Accept', '*/*')
+            .set('X-Api-Key', 'cnafQuotientFamilial')
+            .query({ referenceAvis: 'toto' })
+            .expect('content-type', /json/)
+            .expect(403)
+        })
       })
 
       describe('without referenceAvis', () => {

@@ -14,6 +14,7 @@ const getApiKeyFromQueryParam = require('./lib/middlewares/getApiKeyFromQueryPar
 const identifyUser = require('./lib/middlewares/identifyUser')
 const loggerProperties = require('./lib/middlewares/logger')
 const formatError = require('./lib/middlewares/formatError')
+const errorScopeAuthorization = require('./lib/middlewares/errorScopeAuthorization')
 
 module.exports = Server
 
@@ -78,6 +79,7 @@ function Server (options) {
     next(new StandardError('no route for URL ' + req.url, {code: 404}))
   })
 
+  app.use(errorScopeAuthorization)
   app.use(formatError)
 
   this.getPort = function () {
