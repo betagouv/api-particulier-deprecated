@@ -1,5 +1,6 @@
 const {expect} = require('chai')
 const proxyrequire = require('proxyquire')
+const sinon = require('sinon')
 
 const fakeFCResponse = { sub: 'ad421d168ec81bf5d3c968d135c0904506fce807b5aecc6360abdedd4e0f81c2v1',
   given_name: 'Eric',
@@ -199,6 +200,96 @@ describe('Auth service', () => {
 
         return service.canAccessApi(req, {}, function () {}).then(() => {
           expect(req.consumer).to.deep.equal({})
+        })
+      })
+    })
+  })
+
+  describe('Exported Auth', () => {
+    const Auth = require('../auth')
+    const service = new Auth({tokenService: 'exported'})
+
+    it('should not let pass if there is no X-User-Id header', () => {
+      const req = {
+        get: function (params) {
+          const res = {
+            'X-User-Name': 'test',
+            'X-User-Scopes': 'test'
+          }
+          return res[params]
+        },
+        logger: {
+          debug: function (params) {}
+        }
+      }
+      const nextSpy = sinon.spy()
+
+      return service.canAccessApi(req, {}, nextSpy).then(() => {
+        expect(nextSpy.lastCall.args[0].code).to.equal(401)
+      })
+    })
+
+    it('should not let pass if there is no X-User-Name header', () => {
+      const req = {
+        get: function (params) {
+          const res = {
+            'X-User-Id': 'test',
+            'X-User-Scopes': 'test'
+          }
+          return res[params]
+        },
+        logger: {
+          debug: function (params) {}
+        }
+      }
+      const nextSpy = sinon.spy()
+
+      return service.canAccessApi(req, {}, nextSpy).then(() => {
+        expect(nextSpy.lastCall.args[0].code).to.equal(401)
+      })
+    })
+
+    it('should not let pass if there is no X-User-Scopes header', () => {
+      const req = {
+        get: function (params) {
+          const res = {
+            'X-User-Id': 'test',
+            'X-User-Name': 'test'
+          }
+          return res[params]
+        },
+        logger: {
+          debug: function (params) {}
+        }
+      }
+      const nextSpy = sinon.spy()
+
+      return service.canAccessApi(req, {}, nextSpy).then(() => {
+        expect(nextSpy.lastCall.args[0].code).to.equal(401)
+      })
+    })
+
+    it('should let pass if headers set', () => {
+      const req = {
+        get: function (params) {
+          const res = {
+            'X-User-Id': 'test',
+            'X-User-Name': 'test',
+            'X-User-Scopes': 'test'
+          }
+          return res[params]
+        },
+        logger: {
+          debug: function (params) {}
+        }
+      }
+      const nextSpy = sinon.spy()
+
+      return service.canAccessApi(req, {}, nextSpy).then(() => {
+        expect(req.consumer).to.deep.equal({
+          _id: 'test',
+          name: 'test',
+          scopes: ['test']
         })
       })
     })

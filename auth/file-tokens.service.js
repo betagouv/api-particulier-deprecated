@@ -11,7 +11,13 @@ class TokenService {
   initialize () {
     return Promise.resolve(this)
   }
-  getToken (token) {
+  getToken (req) {
+    let token = req.get('X-API-Key')
+    // set defaults
+    if (token === null || typeof token === 'undefined') {
+      token = ''
+    }
+
     return Promise.resolve(this.tokens[token])
   }
 }

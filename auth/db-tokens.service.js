@@ -15,7 +15,13 @@ class DbTokenService {
     })
   }
 
-  getToken (token) {
+  getToken (req) {
+    let token = req.get('X-API-Key')
+    // set defaults
+    if (token === null || typeof token === 'undefined') {
+      token = ''
+    }
+
     const encryptedToken = crypto.createHash('sha512').update(token).digest('hex')
     return this.collection.findOne({hashed_token: encryptedToken})
   }
