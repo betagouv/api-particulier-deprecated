@@ -8,7 +8,15 @@ describe('File Token service', () => {
   })
 
   it('gets a token when the token exists', () => {
-    return service.getToken('test-token').then((token) => {
+    const req = {
+      get: function (key) {
+        const res = {
+          'X-API-Key': 'test-token'
+        }
+        return res[key]
+      }
+    }
+    return service.getToken(req).then((token) => {
       expect(token).to.deep.equal({
         'name': 'Jeu de test',
         'mail': 'someone@somewhere.com'
@@ -17,7 +25,15 @@ describe('File Token service', () => {
   })
 
   it('gets null when the token dose not exists', () => {
-    return service.getToken('bad-token').then((token) => {
+    const req = {
+      get: function (key) {
+        const res = {
+          'X-API-Key': 'bad-token'
+        }
+        return res[key]
+      }
+    }
+    return service.getToken(req).then((token) => {
       expect(token).to.equal(undefined)
     })
   })
