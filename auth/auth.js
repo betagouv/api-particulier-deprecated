@@ -33,7 +33,7 @@ function Auth (options) {
     }
 
     return initializedService.then((service) => {
-      return service.getToken(req).then((result) => {
+      return service.getConsumer(req).then((result) => {
         handleResult(result)
       }).catch(() => handleResult(null))
     })

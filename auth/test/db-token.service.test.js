@@ -30,7 +30,7 @@ describe('Db Token service', () => {
         return res[key]
       }
     }
-    return service.getToken(req).then((token) => {
+    return service.getConsumer(req).then((token) => {
       expect(token).to.deep.equal({
         '_id': token['_id'],
         'hashed_token': encryptedToken,
@@ -49,7 +49,7 @@ describe('Db Token service', () => {
         return res[key]
       }
     }
-    return service.getToken(req).then((token) => {
+    return service.getConsumer(req).then((token) => {
       expect(token).to.equal(null)
     })
   })

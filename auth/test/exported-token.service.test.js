@@ -17,7 +17,7 @@ describe('Exported Token Service', () => {
       }
     }
 
-    return service.getToken(req).then((token) => {
+    return service.getConsumer(req).then((token) => {
       expect(token).to.equal(null)
     })
   })
@@ -36,7 +36,7 @@ describe('Exported Token Service', () => {
       }
     }
 
-    return service.getToken(req).then((token) => {
+    return service.getConsumer(req).then((token) => {
       expect(token).to.equal(null)
     })
   })
@@ -55,7 +55,7 @@ describe('Exported Token Service', () => {
       }
     }
 
-    return service.getToken(req).then((token) => {
+    return service.getConsumer(req).then((token) => {
       expect(token).to.equal(null)
     })
   })
@@ -75,7 +75,7 @@ describe('Exported Token Service', () => {
       }
     }
 
-    return service.getToken(req).then((token) => {
+    return service.getConsumer(req).then((token) => {
       expect(token).to.deep.equal({
         _id: 'test',
         name: 'test',

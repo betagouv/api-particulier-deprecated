@@ -2,7 +2,7 @@ module.exports = function ExportedTokenService (options) {
   this.initialize = function () {
     return Promise.resolve(this)
   }
-  this.getToken = function (req) {
+  this.getConsumer = function (req) {
     const id = req.get('X-User-Id')
     const name = req.get('X-User-Name')
     let scopes = req.get('X-User-Scopes')
