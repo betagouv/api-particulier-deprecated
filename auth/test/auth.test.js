@@ -18,7 +18,7 @@ describe('Auth service', () => {
           initialize () {
             return Promise.resolve(this)
           }
-          getToken () {
+          getConsumer () {
             return Promise.resolve(null)
           }
         },
@@ -83,7 +83,7 @@ describe('Auth service', () => {
             initialize () {
               return Promise.resolve(this)
             }
-            getToken () {
+            getConsumer () {
               return Promise.resolve(consumer)
             }
           }
@@ -114,7 +114,7 @@ describe('Auth service', () => {
             initialize () {
               return Promise.resolve(this)
             }
-            getToken () {
+            getConsumer () {
               return Promise.resolve(null)
             }
           }
@@ -151,7 +151,7 @@ describe('Auth service', () => {
             initialize () {
               return Promise.resolve(this)
             }
-            getToken () {
+            getConsumer () {
               return Promise.resolve(consumer)
             }
           }
@@ -182,7 +182,7 @@ describe('Auth service', () => {
             initialize () {
               return Promise.resolve(this)
             }
-            getToken () {
+            getConsumer () {
               return Promise.resolve(undefined)
             }
           }
