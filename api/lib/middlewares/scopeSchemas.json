@@ -103,13 +103,6 @@
       }
     },
     "required": [
-      "declarant1",
-      "declarant2",
-      "dateEtablissement",
-      "nombreParts",
-      "situationFamille",
-      "nombrePersonnesCharge",
-      "foyerFiscal",
       "anneeImpots",
       "anneeRevenus"
     ]
