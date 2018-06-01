@@ -1,42 +1,67 @@
-# Api-particulier
+# Api Particulier
+
 [![CircleCI](https://circleci.com/gh/sgmap/api-particulier.svg?style=svg)](https://circleci.com/gh/sgmap/api-particulier)
 [![Coverage Status](https://coveralls.io/repos/github/sgmap/api-particulier/badge.svg?branch=tokenAsConf)](https://coveralls.io/github/sgmap/api-particulier?branch=tokenAsConf)
 
-## Intégrateur
+## Intégrer Api Particulier
 
 Cette partie s'adresse aux développeurs souhaitant intégrer l'API.
 
 Voici quelques liens utiles :
 
- * [API PARTICULIER](https://apiparticulier.sgmap.fr)
- * [La documentation](https://apiparticulier.sgmap.fr/docs) qui est permet de
- tester l'API en live : il vous faudra un Token ainsi que des identifiants
- valides (les votres ?)
- * [L'environnement de test](https://apiparticulier-mock.sgmap.fr/api/ping) et
- sa [documentation exécutable](https://apiparticulier-mock.sgmap.fr/docs) dans
- laquelle il est possible d'utiliser tous les ids et token possibles.
+ * [API PARTICULIER](https://api.gouv.fr/api/api-particulier.html)
+ * [La documentation](https://betagouv.github.io/api-particulier-slate/) qui est permet de tester l'API en live : il
+ vous faudra un Token ainsi que des identifiants valides (les votres ?)
 
+## Development dependencies
 
-## Pré-requis
+- Node 8.11.2
 
-* [node.js](http://nodejs.org)
-* [mongodb](http://www.mongodb.com)
-* [openssl](http://www.openssl.org)
+## Install
+
+### Dependencies setup
+
+Install node v8.11.2 with nvm:
+
+```bash
+nvm install v8.11.2
+nvm alias default v8.11.2
+nvm use v8.11.2
+```
+
+> Note that version v6.14.2 is still used in production.
+
+### Npm dependencies setup
+
+```bash
+npm install
+```
+
+### Tests
+
+```bash
+npm run test
+```
+
+### Run the server locally
+
+```bash
+npm run start
+```
+
+## Related projects
+
+- [api-particulier-ansible](https://gitlab.incubateur.net/pkn/api-particulier-monitoring-ansible)
+- [monitoring-ansible](https://gitlab.incubateur.net/pkn/api-particulier-monitoring-ansible)
+- [signup.api.gouv.fr](https://github.com/betagouv/signup.api.gouv.fr)
+- [signup.api.gouv.fr-oauth](https://github.com/betagouv/signup.api.gouv.fr-oauth)
+- [signup.api.gouv.fr-back](https://github.com/betagouv/signup.api.gouv.fr-back)
+- [svair-mock](https://github.com/betagouv/svair-mock)
+- [api-caf](https://github.com/betagouv/api-caf)
+- [api-avis-imposition](https://github.com/betagouv/api-avis-imposition)
+
+## Misc
 
 Créer un certificat auto-signé :
 `cafSslCertificate: './cert/bourse.sgmap.fr.bundle.crt',
 cafSslKey: './cert/bourse.sgmap.fr.key'` Voir par exemple : https://devcenter.heroku.com/articles/ssl-certificate-self
-
-
-## Installation des modules
-
-    `npm install`
-
-## Tests
-
-    lancer mongodb
-    `npm run test`
-
-## Lancer le serveur
-
-    `npm run start`
