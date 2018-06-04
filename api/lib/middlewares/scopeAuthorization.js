@@ -15,6 +15,7 @@ const dataDefinitionByScope = {
 }
 
 module.exports = function (req, res, next) {
+  const detail = []
   for (let scope of req.consumer.scopes) {
     for (let dataDefinition of dataDefinitionByScope[scope] || []) {
       const data = Object.assign({}, res.data)
@@ -22,8 +23,9 @@ module.exports = function (req, res, next) {
         res.data = data
         return next()
       }
+      detail.push(validators[dataDefinition].errors)
     }
   }
 
-  return next(new StandardError('Your scopes are invalid. You are not authorized to access this resource.', {code: 403}))
+  return next(new StandardError('Your scopes are invalid. You are not authorized to access this resource.', {code: 403, detail: detail}))
 }
