@@ -23,7 +23,7 @@ module.exports = function (req, res, next) {
         res.data = data
         return next()
       }
-      detail.push(validators[dataDefinition])
+      detail.push(validators[dataDefinition].errors)
     }
   }
 
