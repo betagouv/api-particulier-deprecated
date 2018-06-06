@@ -57,7 +57,7 @@ function ImpotController (options) {
     var numeroFiscal = options.numeroFiscal
     var referenceAvis = options.referenceAvis
     if (!numeroFiscal || !referenceAvis) {
-      return next(new StandardError('Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.', {code: 400, scope: 'dgfip'}))
+      return next(new StandardError('Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.', {code: 400}))
     } else {
       svair(options.svairHost)(numeroFiscal, referenceAvis, function (err) {
         sendDataFromSvair(err, 'pong', next, res)
