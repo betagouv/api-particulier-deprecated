@@ -66,6 +66,7 @@ npm run start
 - [kong-delegateAuth](https://github.com/pknoth/kong-delegateAuth)
 - [api-caf](https://github.com/betagouv/api-caf)
 - [api-avis-imposition](https://github.com/betagouv/api-avis-imposition)
+- [api-stats-elk](https://github.com/betagouv/api-stats-elk)
 
 ## Misc
 
