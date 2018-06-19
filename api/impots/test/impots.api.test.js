@@ -5,157 +5,158 @@ describe('Impots API', function () {
   const api = server.api
 
   describe('When getting the svair', () => {
-    describe('When working with json', () => {
-      describe('without numeroFiscal', () => {
-        it('replies 400', () => {
-          return api()
-            .get('/api/impots/svair')
-            .set('Accept', '*/*')
-            .query({ referenceAvis: 'toto' })
-            .expect('content-type', /json/)
-            .expect(400)
-        })
-        it('replies 403 if invalid scope', () => {
-          return api()
-            .get('/api/impots/svair')
-            .set('Accept', '*/*')
-            .set('X-Api-Key', 'cnafQuotientFamilial')
-            .query({ referenceAvis: 'toto' })
-            .expect('content-type', /json/)
-            .expect(403)
-        })
+    describe('With headers X-User-Id X-User-Name X-User-Scopes', () => {
+      it('replies 403 if invalid scope', () => {
+        return api()
+          .get('/api/impots/svair')
+          .set('Accept', '*/*')
+          .set('X-User-Id', 'test')
+          .set('X-User-Name', 'test')
+          .set('X-User-Scopes', 'cnaf_quotient_familial')
+          .query({ referenceAvis: 'toto' })
+          .expect('content-type', /json/)
+          .expect(403)
       })
 
-      describe('without referenceAvis', () => {
-        it('replies 400', () => {
-          return api()
-            .get('/api/impots/svair')
-            .set('Accept', '*/*')
-            .query({ numeroFiscal: 'toto' })
-            .expect('content-type', /json/)
-            .expect(400)
-        })
-      })
-    })
+      describe('with dgfip_avis_imposition scope', () => {
+        describe('When working with json', () => {
+          describe('without numeroFiscal', () => {
+            it('replies 400', () => {
+              return api()
+                .get('/api/impots/svair')
+                .set('Accept', '*/*')
+                .set('X-User-Id', 'test')
+                .set('X-User-Name', 'test')
+                .set('X-User-Scopes', 'dgfip_avis_imposition')
+                .query({ referenceAvis: 'toto' })
+                .expect('content-type', /json/)
+                .expect(400)
+            })
 
-    describe('When working with xml', () => {
-      describe('without numeroFiscal', () => {
-        it('replies 400', () => {
-          return api()
-            .get('/api/impots/svair')
-            .set('Accept', 'application/xml')
-            .query({ referenceAvis: 'toto' })
-            .expect('content-type', /xml/)
-            .expect(400)
+            describe('without referenceAvis', () => {
+              it('replies 400', () => {
+                return api()
+                  .get('/api/impots/svair')
+                  .set('Accept', '*/*')
+                  .set('X-User-Id', 'test')
+                  .set('X-User-Name', 'test')
+                  .set('X-User-Scopes', 'dgfip_avis_imposition')
+                  .query({ numeroFiscal: 'toto' })
+                  .expect('content-type', /json/)
+                  .expect(400)
+              })
+            })
+          })
         })
-      })
 
-      describe('without referenceAvis', () => {
-        it('replies 400', () => {
-          return api()
-            .get('/api/impots/svair')
-            .set('Accept', 'application/xml')
-            .query({ numeroFiscal: 'toto' })
-            .expect('content-type', /xml/)
-            .expect(400)
-        })
-      })
-    })
+        describe('When working with xml', () => {
+          describe('without numeroFiscal', () => {
+            it('replies 400', () => {
+              return api()
+                .get('/api/impots/svair')
+                .set('Accept', 'application/xml')
+                .set('X-User-Id', 'test')
+                .set('X-User-Name', 'test')
+                .set('X-User-Scopes', 'dgfip_avis_imposition')
+                .query({ referenceAvis: 'toto' })
+                .expect('content-type', /xml/)
+                .expect(400)
+            })
+          })
 
-    describe('with a incorrect token', () => {
-      describe('when getting the svair', () => {
-        it('replies 403', function () {
-          return api()
-            .get('/api/impots/svair')
-            .set('X-API-Key', 'token-nok')
-            .expect(401)
+          describe('without referenceAvis', () => {
+            it('replies 400', () => {
+              return api()
+                .get('/api/impots/svair')
+                .set('Accept', 'application/xml')
+                .set('X-User-Id', 'test')
+                .set('X-User-Name', 'test')
+                .set('X-User-Scopes', 'dgfip_avis_imposition')
+                .query({ numeroFiscal: 'toto' })
+                .expect('content-type', /xml/)
+                .expect(400)
+            })
+          })
         })
       })
     })
   })
 
-  describe('When getting the adress', () => {
-    describe('When working with json', () => {
-      describe('without numeroFiscal', () => {
-        it('replies 400', () => {
-          return api()
-            .get('/api/impots/adress')
-            .set('Accept', '*/*')
-            .query({ referenceAvis: 'toto' })
-            .expect('content-type', /json/)
-            .expect(400)
-        })
+  describe('When getting /api/impots/adress', () => {
+    describe('With headers X-User-Id X-User-Name X-User-Scopes', () => {
+      it('replies 403 if invalid scope', () => {
+        return api()
+          .get('/api/impots/adress')
+          .set('Accept', '*/*')
+          .set('X-User-Id', 'test')
+          .set('X-User-Name', 'test')
+          .set('X-User-Scopes', 'cnaf_quotient_familial')
+          .query({ referenceAvis: 'toto' })
+          .expect('content-type', /json/)
+          .expect(403)
       })
 
-      describe('without referenceAvis', () => {
-        it('replies 400', () => {
-          return api()
-            .get('/api/impots/adress')
-            .set('Accept', '*/*')
-            .query({ numeroFiscal: 'toto' })
-            .expect('content-type', /json/)
-            .expect(400)
+      describe('with dgfip_avis_imposition scope', () => {
+        describe('When working with json', () => {
+          describe('without numeroFiscal', () => {
+            it('replies 400', () => {
+              return api()
+                .get('/api/impots/adress')
+                .set('Accept', '*/*')
+                .set('X-User-Id', 'test')
+                .set('X-User-Name', 'test')
+                .set('X-User-Scopes', 'dgfip_avis_imposition')
+                .query({ referenceAvis: 'toto' })
+                .expect('content-type', /json/)
+                .expect(400)
+            })
+          })
+
+          describe('without referenceAvis', () => {
+            it('replies 400', () => {
+              return api()
+                .get('/api/impots/adress')
+                .set('Accept', '*/*')
+                .set('X-User-Id', 'test')
+                .set('X-User-Name', 'test')
+                .set('X-User-Scopes', 'dgfip_avis_imposition')
+                .query({ numeroFiscal: 'toto' })
+                .expect('content-type', /json/)
+                .expect(400)
+            })
+          })
+
+          describe('When working with xml', () => {
+            describe('without numeroFiscal', () => {
+              it('replies 400', () => {
+                return api()
+                  .get('/api/impots/adress')
+                  .set('Accept', 'application/xml')
+                  .set('X-User-Id', 'test')
+                  .set('X-User-Name', 'test')
+                  .set('X-User-Scopes', 'dgfip_avis_imposition')
+                  .query({ referenceAvis: 'toto' })
+                  .expect('content-type', /xml/)
+                  .expect(400)
+              })
+            })
+
+            describe('without referenceAvis', () => {
+              it('replies 400', () => {
+                return api()
+                  .get('/api/impots/adress')
+                  .set('Accept', 'application/xml')
+                  .set('X-User-Id', 'test')
+                  .set('X-User-Name', 'test')
+                  .set('X-User-Scopes', 'dgfip_avis_imposition')
+                  .query({ numeroFiscal: 'toto' })
+                  .expect('content-type', /xml/)
+                  .expect(400)
+              })
+            })
+          })
         })
       })
     })
-
-    describe('When working with xml', () => {
-      describe('without numeroFiscal', () => {
-        it('replies 400', () => {
-          return api()
-            .get('/api/impots/adress')
-            .set('Accept', 'application/xml')
-            .query({ referenceAvis: 'toto' })
-            .expect('content-type', /xml/)
-            .expect(400)
-        })
-      })
-
-      describe('without referenceAvis', () => {
-        it('replies 400', () => {
-          return api()
-            .get('/api/impots/adress')
-            .set('Accept', 'application/xml')
-            .query({ numeroFiscal: 'toto' })
-            .expect('content-type', /xml/)
-            .expect(400)
-        })
-      })
-    })
-
-    describe('with a incorrect token', () => {
-      describe('when getting the adress', () => {
-        it('replies 403', function () {
-          return api()
-            .get('/api/impots/adress')
-            .set('X-API-Key', 'token-nok')
-            .expect(401)
-        })
-      })
-    })
-
-    // replies 500 TODO use nok to stub external requests
-    //
-    //     describe('without impots scope', () => {
-    //       describe('when getting the adress', () => {
-    //         it('replies 403', function () {
-    //           return api()
-    //             .get('/api/impots/adress')
-    //             .query({numeroFiscal: '12', referenceAvis: '15'})
-    //             .set('X-API-Key', 'caf')
-    //             .expect(403)
-    //         })
-    //       })
-    //
-    //       describe('when getting the svair', () => {
-    //         it('replies 403', function () {
-    //           return api()
-    //             .get('/api/impots/svair')
-    //             .query({numeroFiscal: '12', referenceAvis: '15'})
-    //             .set('X-API-Key', 'caf')
-    //             .expect(403)
-    //         })
-    //       })
-    //     })
   })
 })

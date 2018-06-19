@@ -6,7 +6,6 @@ module.exports = {
   outgoingHttpMaxSockets: 5,
   appname: 'api-particulier',
   mongoDbUrl: 'mongodb://localhost:27017/api-particulier',
-  tokenService: 'db',
   franceConnectHost: 'fcp.integ01.dev-franceconnect.fr',
   cafHost: 'https://pep-test.caf.fr',
   svairHost: 'https://cfsmsp.impots.gouv.fr',
