@@ -4,7 +4,7 @@ const sinon = require('sinon')
 describe('Auth service', () => {
   describe('Exported Auth', () => {
     const Auth = require('../auth')
-    const service = new Auth({tokenService: 'exported'})
+    const service = new Auth()
 
     it('should not let pass if there is no X-User-Id header', () => {
       const req = {
