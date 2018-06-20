@@ -36,6 +36,11 @@ nvm use v8.11.2
 ```bash
 npm install
 ```
+### Update repo submodules
+```
+git submodule init
+git submodule update --recursive
+```
 
 ### Tests
 
