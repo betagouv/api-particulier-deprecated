@@ -6,5 +6,8 @@ machine:
     version: 6
 
 test:
+  pre:
+    - git submodule init
+    - git submodule update --recursive
   post:
     - cat ./coverage/lcov.info | coveralls --verbose

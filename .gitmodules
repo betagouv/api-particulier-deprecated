@@ -1,0 +1,3 @@
+[submodule "api/lib"]
+	path = api/lib
+	url = git@github.com:betagouv/api-particulier-lib.git
