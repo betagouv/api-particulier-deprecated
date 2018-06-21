@@ -16,55 +16,65 @@ describe('CAF API', function () {
   })
 
   describe('When getting CAF informations', () => {
-    describe('Without query parameters', () => {
-      it('replies a 400', () => {
-        return api()
-          .get('/api/caf/famille')
-          .set('Accept', '*/*')
-          .expect(400)
-      })
-
+    describe('With headers X-User-Id X-User-Name X-User-Scopes', () => {
       it('replies a 403 if invalid scope', () => {
         return api()
           .get('/api/caf/famille')
-          .set('x-api-key', 'impots')
           .set('Accept', '*/*')
+          .set('X-User-Id', 'test')
+          .set('X-User-Name', 'test')
+          .set('X-User-Scopes', 'dgfip_avis_imposition')
           .expect(403)
       })
-    })
 
-    describe('With query parameters', (done) => {
-      it('replies 200', () => {
-        return api()
-          .get('/api/caf/famille')
-          .query(fakeQuery)
-          .expect(200)
-      })
-
-      it('replies the good json response', () => {
-        return api()
-          .get('/api/caf/famille')
-          .query(fakeQuery)
-          .then((res) => {
-            expect(res.body).to.deep.equal(fakeResponse)
+      describe('with cnaf_attestation_droits scope', () => {
+        describe('Without query parameters', () => {
+          it('replies a 400', () => {
+            return api()
+              .get('/api/caf/famille')
+              .set('Accept', '*/*')
+              .set('X-User-Id', 'test')
+              .set('X-User-Name', 'test')
+              .set('X-User-Scopes', 'cnaf_attestation_droits')
+              .expect(400)
           })
-      })
+        })
 
-      it('replies as xml when asked', () => {
-        return api()
-          .get('/api/caf/famille')
-          .query(fakeQuery)
-          .set('Accept', 'application/xml')
-          .expect('content-type', /xml/)
-      })
+        describe('With query parameters', (done) => {
+          it('replies 200', () => {
+            return api()
+              .get('/api/caf/famille')
+              .set('Accept', '*/*')
+              .set('X-User-Id', 'test')
+              .set('X-User-Name', 'test')
+              .set('X-User-Scopes', 'cnaf_attestation_droits')
+              .query(fakeQuery)
+              .expect(200)
+          })
 
-      describe('without the caf scope', () => {
-        it('replies a 403', () => {
-          return api()
-            .get('/api/caf/famille')
-            .set('x-api-key', 'impots')
-            .query(fakeQuery)
-            .expect(403)
+          it('replies the good json response', () => {
+            return api()
+              .get('/api/caf/famille')
+              .set('Accept', '*/*')
+              .set('X-User-Id', 'test')
+              .set('X-User-Name', 'test')
+              .set('X-User-Scopes', 'cnaf_attestation_droits')
+              .query(fakeQuery)
+              .then((res) => {
+                expect(res.body).to.deep.equal(fakeResponse)
+              })
+          })
+
+          it('replies as xml when asked', () => {
+            return api()
+              .get('/api/caf/famille')
+              .set('Accept', 'application/xml')
+              .set('X-User-Id', 'test')
+              .set('X-User-Name', 'test')
+              .set('X-User-Scopes', 'cnaf_attestation_droits')
+              .query(fakeQuery)
+              .expect('content-type', /xml/)
+          })
         })
       })
     })

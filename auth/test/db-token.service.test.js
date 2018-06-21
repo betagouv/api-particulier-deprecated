@@ -22,7 +22,7 @@ describe('Db Token service', () => {
 
   it('gets a token when the token exists', () => {
     const encryptedToken = crypto.createHash('sha512').update('test-token').digest('hex')
-    return service.getToken('test-token').then((token) => {
+    return service.getConsumer({ token: 'test-token' }).then((token) => {
       expect(token).to.deep.equal({
         '_id': token['_id'],
         'hashed_token': encryptedToken,
@@ -33,7 +33,7 @@ describe('Db Token service', () => {
   })
 
   it('gets null when the token does not exists', () => {
-    return service.getToken('bad-token').then((token) => {
+    return service.getConsumer({ token: 'bad-token' }).then((token) => {
       expect(token).to.equal(null)
     })
   })

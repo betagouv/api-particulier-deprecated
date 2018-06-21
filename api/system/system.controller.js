@@ -34,7 +34,8 @@ class SystemController {
         next(new StandardError('Token not found', {code: 404}))
       }
     } else {
-      return this.dbTokenService.getToken(req.query['token']).then((result) => {
+      const token = req.query.token
+      return this.dbTokenService.getConsumer({ token }).then((result) => {
         if (result) {
           res.data = result
           next()
