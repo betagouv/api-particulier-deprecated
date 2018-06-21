@@ -15,8 +15,7 @@ class DbTokenService {
     })
   }
 
-  getConsumer (req) {
-    let token = req.get('X-API-Key')
+  getConsumer ({ token }) {
     // set defaults
     if (token === null || typeof token === 'undefined') {
       token = ''
