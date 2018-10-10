@@ -63,6 +63,7 @@ npm run start
 - [api-particulier-slate](https://github.com/betagouv/api-particulier-slate)
 - [api-particulier-web](https://github.com/betagouv/api-particulier-web)
 - [api-particulier-auth](https://github.com/betagouv/api-particulier-auth)
+- [api-particulier-lib](https://github.com/betagouv/api-particulier-lib)
 - [signup.api.gouv.fr](https://github.com/betagouv/signup.api.gouv.fr)
 - [signup.api.gouv.fr-oauth](https://github.com/betagouv/signup.api.gouv.fr-oauth)
 - [signup.api.gouv.fr-back](https://github.com/betagouv/signup.api.gouv.fr-back)
