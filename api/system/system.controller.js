@@ -1,9 +1,6 @@
 'use strict'
 
 const StandardError = require('standard-error')
-const fs = require('fs')
-const path = require('path')
-const definition = fs.readFileSync(path.join(__dirname, '../../swagger.yaml'))
 const DbTokenService = require('../../auth/db-tokens.service')
 
 class SystemController {
@@ -15,10 +12,6 @@ class SystemController {
   ping (req, res, next) {
     res.data = 'pong'
     return next()
-  }
-
-  swagger (req, res) {
-    return res.send(definition)
   }
 
   introspect (req, res, next) {
