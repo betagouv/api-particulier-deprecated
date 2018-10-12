@@ -38,7 +38,6 @@ throng(NB_WORKERS, function (id) {
     cafSslCertificate: nconf.get('cafSslCertificate'),
     cafSslKey: nconf.get('cafSslKey'),
     mongoDbUrl: nconf.get('mongoDbUrl'),
-    mockIntrospect: nconf.get('mockIntrospect'),
     cafPingParams: {
       numeroAllocataire: nconf.get('numeroAllocataire'),
       codePostal: nconf.get('codePostal')
