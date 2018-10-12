@@ -15,28 +15,15 @@ class SystemController {
   }
 
   introspect (req, res, next) {
-    if (this.options.mockIntrospect) {
-      if (req.query['token'] === 'test-token') {
-        res.data = {
-          '_id': 'test-token',
-          'name': 'test-token',
-          'email': 'test@test.test'
-        }
+    const token = req.query.token
+    return this.dbTokenService.getConsumer({ token }).then((result) => {
+      if (result) {
+        res.data = result
         next()
       } else {
         next(new StandardError('Token not found', {code: 404}))
       }
-    } else {
-      const token = req.query.token
-      return this.dbTokenService.getConsumer({ token }).then((result) => {
-        if (result) {
-          res.data = result
-          next()
-        } else {
-          next(new StandardError('Token not found', {code: 404}))
-        }
-      })
-    }
+    })
   }
 }
 

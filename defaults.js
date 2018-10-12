@@ -1,7 +1,6 @@
 module.exports = {
   PORT: 3004,
   nbWorkers: 1,
-  mockIntrospect: false,
   cafStub: false,
   outgoingHttpMaxSockets: 5,
   appname: 'api-particulier',
