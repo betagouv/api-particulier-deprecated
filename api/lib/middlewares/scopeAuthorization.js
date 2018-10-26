@@ -5,11 +5,14 @@ const schemas = require('./scopeSchemas')
 const validators = {
   impotsSvair: new Ajv({ removeAdditional: true }).compile(schemas.impotsSvair),
   impotsAdresse: new Ajv({ removeAdditional: true }).compile(schemas.impotsAdresse),
+  dgfipAdresse:  new Ajv({ removeAdditional: true }).compile(schemas.dgfipAdresse),
   cafFamille: new Ajv({ removeAdditional: true }).compile(schemas.cafFamille),
   cafQuotientFamilial: new Ajv({ removeAdditional: true }).compile(schemas.cafQuotientFamilial)
 }
+
 const dataDefinitionByScope = {
   dgfip_avis_imposition: ['impotsSvair', 'impotsAdresse'],
+  dgfip_adresse: ['dgfipAdresse'],
   cnaf_attestation_droits: ['cafFamille'],
   cnaf_quotient_familial: ['cafQuotientFamilial']
 }

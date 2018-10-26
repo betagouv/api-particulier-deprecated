@@ -307,6 +307,80 @@
     ]
 
   },
+  "dgfipAdresse": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "declarant1": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "nom": {
+            "type": "string"
+          },
+          "nomNaissance": {
+            "type": ["string", "null"]
+          },
+          "prenoms": {
+            "type": "string"
+          },
+          "dateNaissance": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nom",
+          "prenoms",
+          "dateNaissance"
+        ]
+      },
+      "declarant2": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "nom": {
+            "type": "string"
+          },
+          "nomNaissance": {
+            "type": ["string", "null"]
+          },
+          "prenoms": {
+            "type": "string"
+          },
+          "dateNaissance": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nom",
+          "prenoms",
+          "dateNaissance"
+        ]
+      },
+      "foyerFiscal": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "annee": {
+            "type": "integer"
+          },
+          "adresse": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "annee",
+          "adresse"
+        ]
+      },
+      "anneeImpots": {
+        "type": "string"
+      },
+      "anneeRevenus": {
+        "type": "string"
+      }
+    }
+  },
   "cafQuotientFamilial": {
     "type": "object",
     "additionalProperties": false,
