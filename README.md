@@ -59,7 +59,6 @@ npm run start
 - [api-particulier-ansible](https://gitlab.incubateur.net/pkn/api-particulier-ansible)
 - [api-particulier-monitoring-ansible](https://gitlab.incubateur.net/pkn/api-particulier-monitoring-ansible)
 - [api-particulier-courtier-ansible](https://gitlab.incubateur.net/pkn/api-particulier-courtier-ansible)
-- [api-particulier-admin](https://github.com/betagouv/api-particulier-admin)
 - [api-particulier-slate](https://github.com/betagouv/api-particulier-slate)
 - [api-particulier-web](https://github.com/betagouv/api-particulier-web)
 - [api-particulier-auth](https://github.com/betagouv/api-particulier-auth)

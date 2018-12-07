@@ -5,7 +5,7 @@ const schemas = require('./scopeSchemas')
 const validators = {
   dgfipAvisDImposition: new Ajv({ removeAdditional: true }).compile(schemas.dgfipAvisDImposition),
   dgfipBanAdresse: new Ajv({ removeAdditional: true }).compile(schemas.dgfipBanAdresse),
-  dgfipAdresse:  new Ajv({ removeAdditional: true }).compile(schemas.dgfipAdresse),
+  dgfipAdresse: new Ajv({ removeAdditional: true }).compile(schemas.dgfipAdresse),
   cafFamille: new Ajv({ removeAdditional: true }).compile(schemas.cafFamille),
   cafQuotientFamilial: new Ajv({ removeAdditional: true }).compile(schemas.cafQuotientFamilial)
 }
