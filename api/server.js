@@ -32,7 +32,6 @@ function Server (options) {
   app.set('cafHost', options.cafHost)
   app.set('cafSslCertificate', options.cafSslCertificate)
   app.set('cafSslKey', options.cafSslKey)
-  app.set('mongoDbUrl', options.mongoDbUrl)
   app.set('banBaseUrl', options.ban.baseUrl)
   app.disable('x-powered-by')
   app.use(express.static('public'))
