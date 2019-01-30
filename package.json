@@ -8,16 +8,16 @@
     "url": "https://github.com/sgmap/api-particulier"
   },
   "scripts": {
-    "test": "istanbul cover --print details _mocha -- -R spec auth/test/** api/test/** api/*/test/** --recursive && npm run test-style",
+    "test": "istanbul cover --print details _mocha -- -R spec auth/test/** api/test/** api/*/test/** --recursive && npm run test-style && npm audit",
     "test-style": "eslint --ignore-path .gitignore api/ auth/ bin/*",
-    "start": "node --prof ./bin/www"
+    "start": "node ./bin/www"
   },
   "pre-commit": "test-style",
   "pre-push": "test",
   "author": "SGMAP",
   "devDependencies": {
     "chai": "^3.5.0",
-    "coveralls": "^2.13.0",
+    "coveralls": "^3.0.2",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-chai-friendly": "^0.3.6",
@@ -27,7 +27,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "istanbul": "^0.4.5",
-    "mocha": "^3.3.0",
+    "mocha": "^5.2.0",
     "nock": "^9.0.13",
     "node-mocks-http": "^1.4.4",
     "pre-commit": "^1.2.2",
@@ -53,11 +53,10 @@
     "js2xmlparser": "1.0.0",
     "nconf": "^0.8.4",
     "raven": "^1.2.1",
-    "request": "^2.55.0",
+    "request": "^2.88.0",
     "standard-error": "^1.1.0",
-    "string": "^3.1.1",
     "superagent": "^3.5.2",
-    "svair-api": "^0.6.0",
+    "svair-api": "^0.6.1",
     "throng": "^4.0.0",
     "url-assembler": "^1.2.7"
   }

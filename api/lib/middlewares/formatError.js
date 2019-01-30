@@ -1,5 +1,4 @@
 'use strict'
-const S = require('string')
 const StandardError = require('standard-error')
 const http = require('http')
 const js2xmlparser = require('js2xmlparser')
@@ -9,7 +8,7 @@ module.exports = function (err, req, res, next) {
   if (err.code) {
     if (err instanceof StandardError) {
       let error = {
-        error: S(http.STATUS_CODES[err.code]).underscore().s,
+        error: http.STATUS_CODES[err.code].toLowerCase().split(' ').join('_'),
         reason: err.message,
         message: err.message
       }
