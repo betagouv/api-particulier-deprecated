@@ -20,10 +20,7 @@ module.exports = function () {
       dsn: ''
     },
     numeroAllocataire: '1234567',
-    codePostal: '75009',
-    ban: {
-      baseUrl: 'http://adresse.data.gouv.local'
-    }
+    codePostal: '75009'
   }
   var serverPort = process.env['SERVER_PORT_TEST']
   if (serverPort) {
