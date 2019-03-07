@@ -57,7 +57,6 @@
     "standard-error": "^1.1.0",
     "superagent": "^3.5.2",
     "svair-api": "^0.6.1",
-    "throng": "^4.0.0",
-    "url-assembler": "^1.2.7"
+    "throng": "^4.0.0"
   }
 }

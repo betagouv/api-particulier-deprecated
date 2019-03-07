@@ -3,7 +3,6 @@ const middleware = require('../../../lib/middlewares/scopeAuthorization')
 const sinon = require('sinon')
 
 const fakeResponses = require('./fakeResponses')
-const impotsAdresseResponse = fakeResponses.impotsAdresseResponse
 const impotsSvairResponse = fakeResponses.impotsSvairResponse
 const cafFamilleResponse = fakeResponses.cafFamilleResponse
 const cafQuotientFamilialResponse = fakeResponses.cafQuotientFamilialResponse
@@ -53,43 +52,6 @@ describe('Middleware : scopeAuthorization', () => {
 
       expect(next.getCall(0).args.length).to.equal(0)
       expect(res.data).to.deep.equal(impotsSvairResponse)
-    })
-
-    it('should not let pass dgfip svair request if there is no scope "dgfip"', () => {
-      const req = {
-        consumer: {
-          scopes: []
-        }
-      }
-      const next = sinon.spy()
-
-      middleware(req, res, next)
-
-      expect(next.getCall(0).args[0].code).to.eq(403)
-    })
-  })
-
-  describe('the user requests the impots/adresse endpoint', () => {
-    const res = {
-      data: impotsAdresseResponse
-    }
-
-    it('should let pass dgfip adresse data', () => {
-      const consumer = {
-        _id: 'test',
-        name: 'test',
-        email: 'test@test.test',
-        scopes: ['dgfip_avis_imposition']
-      }
-      const req = {
-        consumer: consumer
-      }
-      const next = sinon.spy()
-
-      middleware(req, res, next)
-
-      expect(next.getCall(0).args.length).to.equal(0)
-      expect(res.data).to.deep.equal(impotsAdresseResponse)
     })
 
     it('should not let pass dgfip svair request if there is no scope "dgfip"', () => {

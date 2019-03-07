@@ -50,9 +50,6 @@ throng(NB_WORKERS, function (id) {
     raven: {
       activate: nconf.get('raven:activate'),
       dsn: nconf.get('raven:dsn')
-    },
-    ban: {
-      baseUrl: nconf.get('ban:baseUrl')
     }
   })
 

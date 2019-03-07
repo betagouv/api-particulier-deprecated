@@ -19,14 +19,6 @@ module.exports = function (options) {
     scopeAuthorization,
     format
   )
-  router.get(
-    '/adress',
-    auth.canAccessApi,
-    impotsController.adress,
-    impotsController.authorize,
-    scopeAuthorization,
-    format
-  )
 
   return router
 }

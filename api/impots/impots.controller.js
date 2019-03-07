@@ -2,25 +2,9 @@
 
 const svair = require('svair-api')
 const StandardError = require('standard-error')
-const SvairBanService = require('./../ban/svairBan.service')
 
 function ImpotController (options) {
   options = options || {}
-  var svairBanService = new SvairBanService(options)
-
-  this.adress = function (req, res, next) {
-    var numeroFiscal = formatNumeroFiscal(req.query.numeroFiscal)
-    var referenceAvis = formatReferenceAvis(req.query.referenceAvis)
-    if (!numeroFiscal || !referenceAvis) {
-      return next(new StandardError('Les paramètres numeroFiscal et referenceAvis doivent être fournis dans la requête.', {code: 400, scope: 'dgfip'}))
-    } else {
-      svairBanService.getAdress(numeroFiscal, referenceAvis, (err, data) => {
-        if (err) return next(err)
-        res.data = data
-        return next()
-      })
-    }
-  }
 
   function sendDataFromSvair (err, result, next, res) {
     if (err && err.message === 'Invalid credentials') {
