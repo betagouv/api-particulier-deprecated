@@ -42,7 +42,7 @@ describe('Middleware : scopeAuthorization', () => {
         consumer: consumer
       }
       const next = sinon.spy()
-      const responseWithAdditionalData = Object.assign({}, impotsSvairResponse)
+      const responseWithAdditionalData = JSON.parse(JSON.stringify(impotsSvairResponse))
       responseWithAdditionalData['more'] = true
       responseWithAdditionalData.declarant1['more'] = true
       const resWithAdditionalData = Object.assign({}, res)
@@ -119,6 +119,48 @@ describe('Middleware : scopeAuthorization', () => {
       middleware(req, res, next)
 
       expect(next.getCall(0).args[0].code).to.eq(403)
+    })
+  })
+
+  describe('the user requests the caf/famille endpoint with multiple scopes', () => {
+    const res = {
+      data: cafFamilleResponse
+    }
+
+    it('should let pass cnaf_attestation_droits request with dgfip scopes', () => {
+      const consumer = {
+        _id: 'test',
+        name: 'test',
+        email: 'test@test.test',
+        scopes: ['dgfip_avis_imposition', 'dgfip_adresse', 'cnaf_attestation_droits']
+      }
+      const req = {
+        consumer: consumer
+      }
+      const next = sinon.spy()
+
+      middleware(req, res, next)
+
+      expect(next.getCall(0).args.length).to.equal(0)
+      expect(res.data).to.deep.equal(cafFamilleResponse)
+    })
+
+    it('should let pass cnaf_attestation_droits request with cnaf_quotient_familial', () => {
+      const consumer = {
+        _id: 'test',
+        name: 'test',
+        email: 'test@test.test',
+        scopes: ['cnaf_quotient_familial', 'cnaf_attestation_droits']
+      }
+      const req = {
+        consumer: consumer
+      }
+      const next = sinon.spy()
+
+      middleware(req, res, next)
+
+      expect(next.getCall(0).args.length).to.equal(0)
+      expect(res.data).to.deep.equal(cafFamilleResponse)
     })
   })
 })
