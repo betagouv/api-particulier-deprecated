@@ -1,24 +1,29 @@
 const StandardError = require('standard-error')
-const Ajv = require('ajv')
-const schemas = require('./scopeSchemas')
-
-const validatorsByScope = {
-  dgfip_avis_imposition: new Ajv({ removeAdditional: true }).compile(schemas.dgfipAvisDImposition),
-  dgfip_adresse: new Ajv({ removeAdditional: true }).compile(schemas.dgfipAdresse),
-  cnaf_attestation_droits: new Ajv({ removeAdditional: true }).compile(schemas.cafFamille),
-  cnaf_quotient_familial: new Ajv({ removeAdditional: true }).compile(schemas.cafQuotientFamilial)
-}
+const scopeToProperties = require('./scopeToProperties')
+const _ = require('lodash')
+const pickExtended = require('../utils/pickExtended')
 
 module.exports = function (req, res, next) {
-  const detail = []
-  for (let scope of req.consumer.scopes) {
-    const data = Object.assign({}, res.data)
-    if (validatorsByScope[scope](data)) {
-      res.data = data
-      return next()
-    }
-    detail.push(validatorsByScope[scope].errors)
+  const authorizedScopes = Object.keys(scopeToProperties)
+
+  const filteringScopes = _.intersection(authorizedScopes, req.consumer.scopes)
+
+  if (filteringScopes.length < 1) {
+    return next(new StandardError('Your scopes are invalid. You are not authorized to access this resource.', {code: 403}))
   }
 
-  return next(new StandardError('Your scopes are invalid. You are not authorized to access this resource.', {code: 403, detail: detail}))
+  const propertiesToReturn = _(filteringScopes)
+    // ['dgfip_avis_imposition', 'dgfip_adresse']
+    .map(scope => scopeToProperties[scope])
+    // [['nombreParts', ..., 'revenuFiscalReference'], ['nombreParts']]
+    .flatten()
+    // ['nombreParts', ..., 'revenuFiscalReference', 'nombreParts']
+    .uniq()
+    // ['nombreParts', ..., 'revenuFiscalReference']
+    .value()
+
+  // This will return the properties in res.data listed in the propertiesToReturn array
+  res.data = pickExtended(res.data, propertiesToReturn)
+
+  next()
 }
