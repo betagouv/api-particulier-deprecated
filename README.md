@@ -1,7 +1,7 @@
 # Api Particulier
 
-[![CircleCI](https://circleci.com/gh/sgmap/api-particulier.svg?style=svg)](https://circleci.com/gh/sgmap/api-particulier)
-[![Coverage Status](https://coveralls.io/repos/github/sgmap/api-particulier/badge.svg?branch=tokenAsConf)](https://coveralls.io/github/sgmap/api-particulier?branch=tokenAsConf)
+[![CircleCI](https://circleci.com/gh/betagouv/api-particulier.svg?style=svg)](https://circleci.com/gh/betagouv/api-particulier)
+[![Coverage Status](https://coveralls.io/repos/github/betagouv/api-particulier/badge.svg?branch=tokenAsConf)](https://coveralls.io/github/betagouv/api-particulier?branch=tokenAsConf)
 
 ## Intégrer Api Particulier
 
@@ -10,8 +10,7 @@ Cette partie s'adresse aux développeurs souhaitant intégrer l'API.
 Voici quelques liens utiles :
 
  * [API PARTICULIER](https://api.gouv.fr/api/api-particulier.html)
- * [La documentation](https://betagouv.github.io/api-particulier-slate/) qui est permet de tester l'API en live : il
- vous faudra un Token ainsi que des identifiants valides (les votres ?)
+ * [La documentation](https://api.gouv.fr/api/api-particulier.html#doc_tech) qui permet de tester l'API en live
 
 ## Development dependencies
 
@@ -56,19 +55,16 @@ npm run start
 
 ## Related projects
 
-- [api-particulier-ansible](https://gitlab.incubateur.net/pkn/api-particulier-ansible)
-- [api-particulier-monitoring-ansible](https://gitlab.incubateur.net/pkn/api-particulier-monitoring-ansible)
-- [api-particulier-courtier-ansible](https://gitlab.incubateur.net/pkn/api-particulier-courtier-ansible)
-- [api-particulier-slate](https://github.com/betagouv/api-particulier-slate)
+- [api-particulier-ansible](https://gitlab.incubateur.net/beta.gouv.fr/api-particulier-ansible)
+- [signup-ansible](https://gitlab.incubateur.net/beta.gouv.fr/signup-ansible)
 - [api-particulier-web](https://github.com/betagouv/api-particulier-web)
 - [api-particulier-auth](https://github.com/betagouv/api-particulier-auth)
 - [api-particulier-lib](https://github.com/betagouv/api-particulier-lib)
-- [signup.api.gouv.fr](https://github.com/betagouv/signup.api.gouv.fr)
-- [signup.api.gouv.fr-oauth](https://github.com/betagouv/signup.api.gouv.fr-oauth)
-- [signup.api.gouv.fr-back](https://github.com/betagouv/signup.api.gouv.fr-back)
-- [signup.api.gouv.fr-docker](https://github.com/betagouv/signup.api.gouv.fr-docker)
+- [signup-front](https://github.com/betagouv/signup-front)
+- [api-auth](https://github.com/betagouv/api-auth)
+- [signup-back](https://github.com/betagouv/signup-back)
 - [svair-mock](https://github.com/betagouv/svair-mock)
-- [kong-delegateAuth](https://github.com/pknoth/kong-delegateAuth)
+- [kong-delegateAuth](https://github.com/betagouv/kong-delegateAuth)
 - [api-caf](https://github.com/betagouv/api-caf)
 - [api-avis-imposition](https://github.com/betagouv/api-avis-imposition)
 - [api-stats-elk](https://github.com/betagouv/api-stats-elk)
