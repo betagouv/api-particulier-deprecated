@@ -6,8 +6,6 @@ const fakeResponses = defaultfakeResponses.concat(antsFakeResponses)
 const { ClientError } = require('api-caf/lib/client')
 const fs = require('fs')
 
-
-
 function CafController (options) {
   options = options || {}
 
