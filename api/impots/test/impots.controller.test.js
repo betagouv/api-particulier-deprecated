@@ -105,11 +105,11 @@ describe('Impots Controller', function () {
         done()
       })
 
-      describe('when there is space in the nuemro fiscal', () => {
+      describe('when there are spaces in the numero fiscal', () => {
         it('remove the space', (done) => {
           // given
           var res = {}
-          var req = {query: {numeroFiscal: '3578788848 943a', referenceAvis: 'titi'}}
+          var req = {query: {numeroFiscal: '35787 88 848 943a', referenceAvis: 'titi'}}
           var controller = new ImpotController()
 
           // when

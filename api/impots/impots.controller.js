@@ -18,11 +18,11 @@ function ImpotController (options) {
   }
 
   function formatNumeroFiscal (numeroFiscal) {
-    return (numeroFiscal || '').replace(' ', '').substring(0, 13)
+    return (numeroFiscal || '').replace(/ /g, '').substring(0, 13)
   }
 
   function formatReferenceAvis (referenceAvis) {
-    return (referenceAvis || '').replace(' ', '')
+    return (referenceAvis || '').replace(/ /g, '')
   }
 
   this.svair = function (req, res, next) {
