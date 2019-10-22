@@ -35,7 +35,7 @@
     "proxyquire": "^1.4.0",
     "sinon": "^2.3.6",
     "sinon-chai": "^2.11.0",
-    "supertest": "^3.0.0"
+    "supertest": "^4.0.2"
   },
   "dependencies": {
     "api-caf": "^0.2.1",
@@ -54,7 +54,7 @@
     "raven": "^1.2.1",
     "request": "^2.88.0",
     "standard-error": "^1.1.0",
-    "superagent": "^3.5.2",
+    "superagent": "^5.1.0",
     "svair-api": "^0.6.1",
     "throng": "^4.0.0"
   }
