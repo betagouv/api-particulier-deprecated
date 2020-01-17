@@ -40,6 +40,7 @@
   "dependencies": {
     "api-caf": "^0.2.1",
     "async": "^2.3.0",
+    "axios": "^0.19.1",
     "blocked": "^1.2.1",
     "body-parser": "^1.12.4",
     "bunyan": "^1.8.12",
