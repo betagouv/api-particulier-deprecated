@@ -8,7 +8,7 @@
     "url": "https://github.com/sgmap/api-particulier"
   },
   "scripts": {
-    "test": "istanbul cover --print details _mocha -- -R spec auth/test/** api/test/** api/*/test/** --recursive && npm run test-style && npm audit",
+    "test": "nyc mocha -R spec auth/test/** api/test/** api/*/test/** --recursive && npm run test-style && npm audit",
     "test-style": "eslint --ignore-path .gitignore api/ auth/ bin/*",
     "start": "node ./bin/www"
   },
@@ -27,10 +27,10 @@
     "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
-    "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
     "nock": "^9.0.13",
     "node-mocks-http": "^1.4.4",
+    "nyc": "^15.0.0",
     "pre-commit": "^1.2.2",
     "pre-push": "^0.1.1",
     "proxyquire": "^1.4.0",
