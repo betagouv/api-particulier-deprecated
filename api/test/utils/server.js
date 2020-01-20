@@ -1,47 +1,48 @@
-const path = require('path')
-var supertest = require('supertest')
-var nock = require('nock')
+const path = require("path");
+var supertest = require("supertest");
+var nock = require("nock");
 
-var Server = require('../../server')
+var Server = require("../../server");
 
-module.exports = function () {
-  var server
+module.exports = function() {
+  var server;
   var options = {
-    appname: 'api-particulier-test',
+    appname: "api-particulier-test",
     cafStub: true,
-    cafHost: 'https://pep-test.caf.fr',
-    svairHost: 'https://cfsmsp.impots.gouv.fr',
-    cafSslCertificate: path.join(__dirname, '../resources/server.crt'),
-    cafSslKey: path.join(__dirname, '../resources/server.key'),
-    cafPingParams: { codePostal: '99148', numeroAllocataire: '0000354' },
-    tokensPath: path.join(__dirname, 'tokens'),
+    cafHost: "https://pep-test.caf.fr",
+    svairHost: "https://cfsmsp.impots.gouv.fr",
+    supdataHost: "http://194.57.7.166/supdata/api/rest.php",
+    supdataApiKey: "3841b13fa8032ed3c31d160d3437a76a",
+    cafSslCertificate: path.join(__dirname, "../resources/server.crt"),
+    cafSslKey: path.join(__dirname, "../resources/server.key"),
+    cafPingParams: { codePostal: "99148", numeroAllocataire: "0000354" },
+    tokensPath: path.join(__dirname, "tokens"),
     raven: {
       activate: false,
-      dsn: ''
+      dsn: ""
     },
-    numeroAllocataire: '1234567',
-    codePostal: '75009'
-  }
-  var serverPort = process.env['SERVER_PORT_TEST']
+    numeroAllocataire: "1234567",
+    codePostal: "75009"
+  };
+  var serverPort = process.env["SERVER_PORT_TEST"];
   if (serverPort) {
-    options.port = serverPort
+    options.port = serverPort;
   }
 
-  nock.enableNetConnect('localhost')
+  nock.enableNetConnect("localhost");
 
-  beforeEach((done) => {
-    server = new Server(options)
-    server.start(done)
-  })
-  afterEach((done) => {
-    server.stop(done)
-  })
+  beforeEach(done => {
+    server = new Server(options);
+    server.start(done);
+  });
+  afterEach(done => {
+    server.stop(done);
+  });
 
-  var api = function () {
-    return supertest
-      .agent('http://localhost:' + server.getPort())
-  }
+  var api = function() {
+    return supertest.agent("http://localhost:" + server.getPort());
+  };
   return {
     api: api
-  }
-}
+  };
+};
