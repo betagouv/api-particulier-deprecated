@@ -1,77 +1,77 @@
 #!/usr/bin/env node
 // vi: ft=javascript
 
-var nconf = require("../api/lib/utils/nconf");
-var Server = require("../api/server");
-var http = require("http");
-var url = require("url");
-var blocked = require("blocked");
-var throng = require("throng");
-const logging = require("../api/lib/logging");
+var nconf = require('../api/lib/utils/nconf')
+var Server = require('../api/server')
+var http = require('http')
+var url = require('url')
+var blocked = require('blocked')
+var throng = require('throng')
+const logging = require('../api/lib/logging')
 
-var NB_WORKERS = nconf.get("nbWorkers");
+var NB_WORKERS = nconf.get('nbWorkers')
 
-throng(NB_WORKERS, function(id) {
-  const logger = logging.createLogger(nconf, id);
+throng(NB_WORKERS, function (id) {
+  const logger = logging.createLogger(nconf, id)
 
   blocked(ms => {
-    logger.debug("BLOCKED for %dms!", ms);
-  });
+    logger.debug('BLOCKED for %dms!', ms)
+  })
 
-  var mhttp = require("http-measuring-client").create();
-  mhttp.mixin(http);
-  mhttp.on("stat", function(parsed, stats) {
-    if (url.format(parsed).includes(nconf.get("es:host"))) {
-      return;
+  var mhttp = require('http-measuring-client').create()
+  mhttp.mixin(http)
+  mhttp.on('stat', function (parsed, stats) {
+    if (url.format(parsed).includes(nconf.get('es:host'))) {
+      return
     }
     logger.info(
       {
         parsedUri: parsed,
         stats: stats
       },
-      "%s %s took %d/%dms (%d)",
-      stats.method || "GET",
+      '%s %s took %d/%dms (%d)',
+      stats.method || 'GET',
       url.format(parsed),
       stats.connectionTime,
       stats.totalTime,
       stats.statusCode
-    );
-  });
+    )
+  })
 
   var server = new Server({
-    port: nconf.get("PORT"),
-    cafHost: nconf.get("cafHost"),
-    svairHost: nconf.get("svairHost"),
-    supdataHost: nconf.get("supdataHost"),
-    supdataApiKey: nconf.get("supdataApiKey"),
-    cafStub: nconf.get("cafStub"),
-    cafSslCertificate: nconf.get("cafSslCertificate"),
-    cafSslKey: nconf.get("cafSslKey"),
+    port: nconf.get('PORT'),
+    cafHost: nconf.get('cafHost'),
+    svairHost: nconf.get('svairHost'),
+    supdataHost: nconf.get('supdataHost'),
+    supdataApiKey: nconf.get('supdataApiKey'),
+    cafStub: nconf.get('cafStub'),
+    cafSslCertificate: nconf.get('cafSslCertificate'),
+    cafSslKey: nconf.get('cafSslKey'),
     cafPingParams: {
-      numeroAllocataire: nconf.get("numeroAllocataire"),
-      codePostal: nconf.get("codePostal")
+      numeroAllocataire: nconf.get('numeroAllocataire'),
+      codePostal: nconf.get('codePostal')
     },
     logger: logger,
-    numeroFiscal: nconf.get("numeroFiscal"),
-    referenceAvis: nconf.get("referenceAvis"),
-    codePostal: nconf.get("codePostal"),
-    numeroAllocataire: nconf.get("numeroAllocataire"),
+    numeroFiscal: nconf.get('numeroFiscal'),
+    referenceAvis: nconf.get('referenceAvis'),
+    codePostal: nconf.get('codePostal'),
+    numeroAllocataire: nconf.get('numeroAllocataire'),
     nconf: nconf,
     raven: {
-      activate: nconf.get("raven:activate"),
-      dsn: nconf.get("raven:dsn")
+      activate: nconf.get('raven:activate'),
+      dsn: nconf.get('raven:dsn')
     }
-  });
+  })
 
-  server.start(function(err) {
+  server.start(function (err) {
     if (err) {
       logger.fatal(
         { error: err },
-        "cannot recover from previous errors. shutting down now. error was",
+        'cannot recover from previous errors. shutting down now. error was',
         err.stack
-      );
-      setTimeout(process.exit.bind(null, 99), 10);
+      )
+      setTimeout(process.exit.bind(null, 99), 10)
     }
-    logger.info("Sever successfully started.");
-  });
-});
+    logger.info('Sever successfully started.')
+  })
+})
