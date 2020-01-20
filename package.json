@@ -8,7 +8,7 @@
     "url": "https://github.com/sgmap/api-particulier"
   },
   "scripts": {
-    "test": "nyc mocha -R spec auth/test/** api/test/** api/*/test/** --recursive && npm run test-style && npm audit",
+    "test": "nyc --reporter=lcov mocha -R spec auth/test/** api/test/** api/*/test/** --recursive && npm run test-style && npm audit",
     "test-style": "eslint --ignore-path .gitignore api/ auth/ bin/*",
     "start": "node ./bin/www"
   },
