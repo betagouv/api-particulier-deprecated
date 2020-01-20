@@ -4,3 +4,4 @@ cert
 *.log
 *.swp
 *.orig
+.nyc_output
