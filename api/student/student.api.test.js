@@ -6,13 +6,13 @@ describe('Etudiant API', function () {
   const api = server.api
   const validIne = 'fakeIne'
   const invalidIne = 'invalidIne'
-  const apiKey = '3841b13fa8032ed3c31d160d3437a76a'
+  const apiKey = 'georges-moustaki'
 
-  nock('http://194.57.7.166/supdata/api/rest.php')
+  nock('http://sup.data/api/rest.php')
     .get('/ping')
     .reply(200, 'pong')
 
-  nock('http://194.57.7.166/supdata/api/rest.php', {
+  nock('http://sup.data/api/rest.php', {
     reqHeader: {
       'X-API-KEY': apiKey
     }
@@ -50,7 +50,7 @@ describe('Etudiant API', function () {
         }
       ]
     })
-  nock('http://194.57.7.166/supdata/api/rest.php', {
+  nock('http://sup.data/api/rest.php', {
     reqHeader: {
       'X-API-KEY': apiKey
     }

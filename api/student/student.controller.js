@@ -15,19 +15,7 @@ class StudentController {
   }
 
   authorize (req, res, next) {
-    if (req.authType === 'FranceConnect') {
-      if (this.consumerMatch(req, res)) {
-        return next()
-      } else {
-        return next(
-          new StandardError('You are forbidden to access this resource', {
-            code: 403
-          })
-        )
-      }
-    } else {
-      return next()
-    }
+    return next()
   }
 
   async ping (req, res, next) {
