@@ -51,8 +51,8 @@ class StudentController {
           }
         }
       )
-
-      return res.json(student)
+      res.data = student
+      return next()
     } catch (error) {
       return next(
         new StandardError(error.message, {

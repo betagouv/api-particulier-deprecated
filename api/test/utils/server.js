@@ -31,11 +31,11 @@ module.exports = function () {
 
   nock.enableNetConnect('localhost')
 
-  beforeEach(done => {
+  before(done => {
     server = new Server(options)
     server.start(done)
   })
-  afterEach(done => {
+  after(done => {
     server.stop(done)
   })
 

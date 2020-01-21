@@ -57,9 +57,17 @@
     "annee",
     "mois"
   ],
-  "cnaf_quotient_familial": [
-    "quotientFamilial",
-    "annee",
-    "mois"
+  "cnaf_quotient_familial": ["quotientFamilial", "annee", "mois"],
+  "mesri_statut_etudiant": [
+    "ine",
+    "nomFamille",
+    "prenom",
+    "inscriptions[].dateDebutInscription",
+    "inscriptions[].dateFinInscription",
+    "inscriptions[].statut",
+    "inscriptions[].etablissement.uai",
+    "inscriptions[].etablissement.codePostal",
+    "inscriptions[].etablissement.codeCommune",
+    "inscriptions[].etablissement.codeRegion"
   ]
 }
