@@ -14,7 +14,7 @@ var NB_WORKERS = nconf.get('nbWorkers')
 throng(NB_WORKERS, function (id) {
   const logger = logging.createLogger(nconf, id)
 
-  blocked((ms) => {
+  blocked(ms => {
     logger.debug('BLOCKED for %dms!', ms)
   })
 
@@ -24,16 +24,26 @@ throng(NB_WORKERS, function (id) {
     if (url.format(parsed).includes(nconf.get('es:host'))) {
       return
     }
-    logger.info({
-      parsedUri: parsed,
-      stats: stats
-    }, '%s %s took %d/%dms (%d)', stats.method || 'GET', url.format(parsed), stats.connectionTime, stats.totalTime, stats.statusCode)
+    logger.info(
+      {
+        parsedUri: parsed,
+        stats: stats
+      },
+      '%s %s took %d/%dms (%d)',
+      stats.method || 'GET',
+      url.format(parsed),
+      stats.connectionTime,
+      stats.totalTime,
+      stats.statusCode
+    )
   })
 
   var server = new Server({
     port: nconf.get('PORT'),
     cafHost: nconf.get('cafHost'),
     svairHost: nconf.get('svairHost'),
+    supdataHost: nconf.get('supdataHost'),
+    supdataApiKey: nconf.get('supdataApiKey'),
     cafStub: nconf.get('cafStub'),
     cafSslCertificate: nconf.get('cafSslCertificate'),
     cafSslKey: nconf.get('cafSslKey'),
@@ -55,7 +65,11 @@ throng(NB_WORKERS, function (id) {
 
   server.start(function (err) {
     if (err) {
-      logger.fatal({error: err}, 'cannot recover from previous errors. shutting down now. error was', err.stack)
+      logger.fatal(
+        { error: err },
+        'cannot recover from previous errors. shutting down now. error was',
+        err.stack
+      )
       setTimeout(process.exit.bind(null, 99), 10)
     }
     logger.info('Sever successfully started.')

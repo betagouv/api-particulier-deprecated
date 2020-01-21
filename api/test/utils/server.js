@@ -11,6 +11,8 @@ module.exports = function () {
     cafStub: true,
     cafHost: 'https://pep-test.caf.fr',
     svairHost: 'https://cfsmsp.impots.gouv.fr',
+    supdataHost: 'http://sup.data/api/rest.php',
+    supdataApiKey: 'georges-moustaki',
     cafSslCertificate: path.join(__dirname, '../resources/server.crt'),
     cafSslKey: path.join(__dirname, '../resources/server.key'),
     cafPingParams: { codePostal: '99148', numeroAllocataire: '0000354' },
@@ -29,17 +31,16 @@ module.exports = function () {
 
   nock.enableNetConnect('localhost')
 
-  beforeEach((done) => {
+  before(done => {
     server = new Server(options)
     server.start(done)
   })
-  afterEach((done) => {
+  after(done => {
     server.stop(done)
   })
 
   var api = function () {
-    return supertest
-      .agent('http://localhost:' + server.getPort())
+    return supertest.agent('http://localhost:' + server.getPort())
   }
   return {
     api: api

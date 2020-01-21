@@ -7,6 +7,8 @@ module.exports = {
   franceConnectHost: 'fcp.integ01.dev-franceconnect.fr',
   cafHost: 'https://pep-test.caf.fr',
   svairHost: 'https://cfsmsp.impots.gouv.fr',
+  supdataHost: 'http://194.57.7.166/supdata/api/rest.php',
+  supdataApiKey: '3841b13fa8032ed3c31d160d3437a76a',
   cafSslCertificate: './cert/bourse.sgmap.fr.bundle.crt',
   cafSslKey: './cert/bourse.sgmap.fr.key',
   log: {

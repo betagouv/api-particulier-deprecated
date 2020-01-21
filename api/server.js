@@ -32,6 +32,8 @@ function Server (options) {
   app.set('cafHost', options.cafHost)
   app.set('cafSslCertificate', options.cafSslCertificate)
   app.set('cafSslKey', options.cafSslKey)
+  app.set('supdataHost', options.supdataHost)
+  app.set('supdataApiKey', options.supdataApiKey)
   app.disable('x-powered-by')
   app.use(express.static('public'))
   app.use(bodyParser.json())
@@ -45,13 +47,16 @@ function Server (options) {
   }
   app.use(cors(corsOptions))
 
-  app.use(expressBunyanLogger({
-    name: 'requests',
-    logger: logger,
-    excludes: loggerProperties.excludes,
-    includesFn: loggerProperties.includesFn,
-    format: '":remote-address :incoming :method HTTP/:http-version :status-code :res-headers[content-length] :referer :user-agent[family] :user-agent[major].:user-agent[minor] :user-agent[os] :response-time ms";'
-  }))
+  app.use(
+    expressBunyanLogger({
+      name: 'requests',
+      logger: logger,
+      excludes: loggerProperties.excludes,
+      includesFn: loggerProperties.includesFn,
+      format:
+        '":remote-address :incoming :method HTTP/:http-version :status-code :res-headers[content-length] :referer :user-agent[family] :user-agent[major].:user-agent[minor] :user-agent[os] :response-time ms";'
+    })
+  )
 
   app.use((req, res, next) => {
     req.logger = logger
@@ -72,7 +77,7 @@ function Server (options) {
   if (options.staticPath) app.use(express.static(options.staticPath))
 
   app.use(function notFound (req, res, next) {
-    next(new StandardError('no route for URL ' + req.url, {code: 404}))
+    next(new StandardError('no route for URL ' + req.url, { code: 404 }))
   })
 
   app.use(errorScopeAuthorization)
@@ -86,31 +91,41 @@ function Server (options) {
   this.start = function (onStarted) {
     server.listen(app.get('port'), function (error) {
       if (error) {
-        logger.error({error: error}, 'Got error while starting server')
+        logger.error({ error: error }, 'Got error while starting server')
         return onStarted(error)
       }
       self.port = server.address().port
       app.set('port', self.port)
-      logger.info({
-        event: 'server_started',
-        port: self.port
-      }, 'Server listening on port', self.port)
+      logger.info(
+        {
+          event: 'server_started',
+          port: self.port
+        },
+        'Server listening on port',
+        self.port
+      )
       onStarted()
     })
   }
 
   this.stop = function (onStopped) {
-    logger.info({
-      event: 'server_stopping'
-    }, 'Stopping server')
+    logger.info(
+      {
+        event: 'server_stopping'
+      },
+      'Stopping server'
+    )
     server.close(function (error) {
       if (error) {
-        logger.error({error: error}, 'Got error while stopping server')
+        logger.error({ error: error }, 'Got error while stopping server')
         return onStopped(error)
       }
-      logger.info({
-        event: 'server_stopped'
-      }, 'server stopped')
+      logger.info(
+        {
+          event: 'server_stopped'
+        },
+        'server stopped'
+      )
       onStopped()
     })
   }
