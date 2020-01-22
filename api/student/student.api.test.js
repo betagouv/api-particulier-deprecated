@@ -60,11 +60,25 @@ describe('Etudiant API', function () {
         .get('/api/etudiant/ping')
         .expect(503)
     })
+
+    it('returns a 503 on timeout', () => {
+      mock.onGet().timeout()
+      return api()
+        .get('/api/etudiant/ping')
+        .expect(503)
+        .expect({
+          error: 'service_unavailable',
+          message: 'timeout of 3000ms exceeded',
+          reason: 'timeout of 3000ms exceeded'
+        })
+    })
   })
 
   describe('Student search endpoint', () => {
     it('replies a 200 for a valid ine', () => {
-      mock.onGet('http://sup.data/api/rest.php/etudiantParIne').reply(200, fakeResponseData)
+      mock
+        .onGet('http://sup.data/api/rest.php/etudiantParIne')
+        .reply(200, fakeResponseData)
       return api()
         .get(`/api/etudiant?ine=${validIne}`)
         .set('Accept', '*/*')
@@ -87,7 +101,9 @@ describe('Etudiant API', function () {
     })
 
     it('hides the out-of-scope data', () => {
-      mock.onGet('http://sup.data/api/rest.php/etudiantParIne').reply(200, fakeResponseData)
+      mock
+        .onGet('http://sup.data/api/rest.php/etudiantParIne')
+        .reply(200, fakeResponseData)
       return api()
         .get(`/api/etudiant?ine=${validIne}`)
         .set('Accept', '*/*')
@@ -96,6 +112,33 @@ describe('Etudiant API', function () {
         .set('X-User-Scopes', 'dgfip_avis_imposition')
         .expect(200)
         .expect({})
+    })
+
+    it('returns a 503 on network error', () => {
+      mock.onGet('http://sup.data/api/rest.php/etudiantParIne').networkError()
+      return api()
+        .get(`/api/etudiant?ine=${invalidIne}`)
+        .set('Accept', '*/*')
+        .set('X-User-Id', 'test')
+        .set('X-User-Name', 'test')
+        .set('X-User-Scopes', 'mesri_statut_etudiant')
+        .expect(503)
+    })
+
+    it('returns a 503 on timeout', () => {
+      mock.onGet().timeout()
+      return api()
+        .get(`/api/etudiant?ine=${invalidIne}`)
+        .set('Accept', '*/*')
+        .set('X-User-Id', 'test')
+        .set('X-User-Name', 'test')
+        .set('X-User-Scopes', 'mesri_statut_etudiant')
+        .expect(503)
+        .expect({
+          error: 'service_unavailable',
+          message: 'timeout of 3000ms exceeded',
+          reason: 'timeout of 3000ms exceeded'
+        })
     })
   })
 })
