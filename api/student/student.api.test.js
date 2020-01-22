@@ -1,8 +1,3 @@
-const sinonChai = require('sinon-chai')
-const chai = require('chai')
-chai.use(sinonChai)
-chai.should()
-const expect = chai.expect
 const serverTest = require('../test/utils/server')
 const nock = require('nock')
 
@@ -83,18 +78,15 @@ describe('Etudiant API', function () {
   })
 
   describe('Student search endpoint', () => {
-    it('replies a 200 for a valid ine', (done) => {
-      api()
+    it('replies a 200 for a valid ine', () => {
+      return api()
         .get(`/api/etudiant?ine=${validIne}`)
         .set('Accept', '*/*')
         .set('X-User-Id', 'test')
         .set('X-User-Name', 'test')
         .set('X-User-Scopes', 'mesri_statut_etudiant')
         .expect(200)
-        .end((req, res) => {
-          expect(res.body).to.deep.equal(fakeResponseData)
-          done()
-        })
+        .expect(fakeResponseData)
     })
 
     it('replies a 404 for an invalid ine', () => {
@@ -107,18 +99,15 @@ describe('Etudiant API', function () {
         .expect(404)
     })
 
-    it('hides the out-of-scope data', (done) => {
-      api()
+    it('hides the out-of-scope data', () => {
+      return api()
         .get(`/api/etudiant?ine=${validIne}`)
         .set('Accept', '*/*')
         .set('X-User-Id', 'test')
         .set('X-User-Name', 'test')
         .set('X-User-Scopes', 'dgfip_avis_imposition')
         .expect(200)
-        .end((req, res) => {
-          expect(res.body).to.deep.equal({})
-          done()
-        })
+        .expect({})
     })
   })
 })
