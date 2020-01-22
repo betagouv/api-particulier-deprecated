@@ -20,9 +20,14 @@ class StudentController {
 
   async ping (req, res, next) {
     try {
-      await axios.get(`${this.baseUrl}/ping`)
+      await axios.get(
+        `${this.baseUrl}/ping`
+      )
       return res.send('pong')
     } catch (error) {
+      if (!error.response) {
+        return next(new StandardError(error.message, {code: 503, scope: 'etudiant'}))
+      }
       return next(
         new StandardError(error.message, { code: 500, scope: 'etudiant' })
       )

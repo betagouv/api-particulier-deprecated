@@ -1,12 +1,13 @@
 const serverTest = require('../test/utils/server')
-const nock = require('nock')
+const axios = require('axios')
+const MockAdapter = require('axios-mock-adapter')
 
 describe('Etudiant API', function () {
+  let mock
   const server = serverTest()
   const api = server.api
   const validIne = 'fakeIne'
   const invalidIne = 'invalidIne'
-  const apiKey = 'georges-moustaki'
   const fakeResponseData = {
     ine: '0102014544Z',
     nomFamille: 'GARCIA',
@@ -37,48 +38,33 @@ describe('Etudiant API', function () {
     ]
   }
 
-  this.beforeEach(() => {
-    nock('http://sup.data/api/rest.php')
-      .get('/ping')
-      .reply(200, 'pong')
+  beforeEach(() => {
+    mock = new MockAdapter(axios)
+  })
 
-    nock('http://sup.data/api/rest.php', {
-      reqHeader: {
-        'X-API-KEY': apiKey
-      }
-    })
-      .get('/etudiantParIne')
-      .query({
-        INE: validIne
-      })
-      .reply(200, fakeResponseData)
-
-    nock('http://sup.data/api/rest.php', {
-      reqHeader: {
-        'X-API-KEY': apiKey
-      }
-    })
-      .get('/etudiantParIne')
-      .query({
-        INE: invalidIne
-      })
-      .reply(404, {
-        message: 'rest_student_not_found',
-        uid: '5e25cc78797ca_0000',
-        details: 'rest_student_not_found'
-      })
+  afterEach(() => {
+    mock.reset()
   })
 
   describe('Ping', () => {
     it('replies a 200', () => {
+      mock.onGet('http://sup.data/api/rest.php/ping').reply(200, 'pong')
       return api()
         .get('/api/etudiant/ping')
         .expect(200)
+    })
+
+    it('replies a 503 when supdata cannot be reached', () => {
+      mock.onGet().networkError()
+      return api()
+        .get('/api/etudiant/ping')
+        .expect(503)
     })
   })
 
   describe('Student search endpoint', () => {
     it('replies a 200 for a valid ine', () => {
+      mock.onGet('http://sup.data/api/rest.php/etudiantParIne').reply(200, fakeResponseData)
       return api()
         .get(`/api/etudiant?ine=${validIne}`)
         .set('Accept', '*/*')
@@ -90,6 +76,7 @@ describe('Etudiant API', function () {
     })
 
     it('replies a 404 for an invalid ine', () => {
+      mock.onGet('http://sup.data/api/rest.php/etudiantParIne').reply(404)
       return api()
         .get(`/api/etudiant?ine=${invalidIne}`)
         .set('Accept', '*/*')
@@ -100,6 +87,7 @@ describe('Etudiant API', function () {
     })
 
     it('hides the out-of-scope data', () => {
+      mock.onGet('http://sup.data/api/rest.php/etudiantParIne').reply(200, fakeResponseData)
       return api()
         .get(`/api/etudiant?ine=${validIne}`)
         .set('Accept', '*/*')
