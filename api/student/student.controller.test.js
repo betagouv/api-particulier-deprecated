@@ -36,7 +36,7 @@ describe('Student Controller', () => {
       studentController.ping(req, res, function (err) {
         // then
         expect(err).to.deep.equal(
-          new StandardError('Network Error', { code: 500, scope: 'etudiant' })
+          new StandardError('Network Error', { code: 503, scope: 'etudiant' })
         )
         done()
       })

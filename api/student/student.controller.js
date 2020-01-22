@@ -20,9 +20,14 @@ class StudentController {
 
   async ping (req, res, next) {
     try {
-      await axios.get(`${this.baseUrl}/ping`)
+      await axios.get(
+        `${this.baseUrl}/ping`, {timeout: 3000}
+      )
       return res.send('pong')
     } catch (error) {
+      if (!error.response) {
+        return next(new StandardError(error.message, {code: 503, scope: 'etudiant'}))
+      }
       return next(
         new StandardError(error.message, { code: 500, scope: 'etudiant' })
       )
@@ -48,12 +53,16 @@ class StudentController {
           },
           headers: {
             'X-API-Key': this.apiKey
-          }
+          },
+          timeout: 3000
         }
       )
       res.data = student
       return next()
     } catch (error) {
+      if (!error.response) {
+        return next(new StandardError(error.message, {code: 503, scope: 'etudiant'}))
+      }
       return next(
         new StandardError(error.message, {
           code: error.response.status,
